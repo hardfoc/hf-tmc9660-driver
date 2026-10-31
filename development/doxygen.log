@@ -1,5 +1,5 @@
-warning: ignoring unsupported tag 'PAGE_OUTLINE_PANEL' at line 1718, file /tmp/doxyfile.03FEyY
-warning: Tag 'DOT_TRANSPARENT' at line 2741 of file '/tmp/doxyfile.03FEyY' has become obsolete.
+warning: ignoring unsupported tag 'PAGE_OUTLINE_PANEL' at line 1718, file /tmp/doxyfile.8WcT8R
+warning: Tag 'DOT_TRANSPARENT' at line 2741 of file '/tmp/doxyfile.8WcT8R' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode/tmc9660_param_mode_tmcl.hpp:4715: warning: unbalanced grouping commands
 /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode/tmc9660_param_mode_tmcl.hpp:4774: warning: unbalanced grouping commands
@@ -18,9 +18,9 @@ Searching INPUT for files to process...
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/src
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/src/bootloader
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc
+Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/bootloader
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/register_mode
-Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode
 Searching for files in directory /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/examples/esp32/main
 Reading and parsing tag files
 Parsing files

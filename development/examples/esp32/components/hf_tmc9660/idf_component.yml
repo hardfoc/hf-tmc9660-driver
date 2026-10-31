@@ -10,9 +10,9 @@ description: |
   and both parameter mode and register mode interfaces.
 
 url: "https://www.analog.com/en/products/tmc9660.html"
-repository: "https://github.com/N3b3x/hf-tmc9660-driver.git"
-documentation: "https://github.com/N3b3x/hf-tmc9660-driver/blob/main/README.md"
-issues: "https://github.com/N3b3x/hf-tmc9660-driver/issues"
+repository: "https://github.com/hardfoc/hf-tmc9660-driver.git"
+documentation: "https://github.com/hardfoc/hf-tmc9660-driver/blob/main/README.md"
+issues: "https://github.com/hardfoc/hf-tmc9660-driver/issues"
 
 license: "GPL-3.0"
 maintainers:
