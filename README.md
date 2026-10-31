@@ -12,15 +12,15 @@ This branch contains the versioned documentation for this repository.
 
 ## Access
 
-- **Latest**: [https://N3b3x.github.io/hf-tmc9660-driver/](https://N3b3x.github.io/hf-tmc9660-driver/)
-- **All Versions**: [https://N3b3x.github.io/hf-tmc9660-driver/version_selector.html](https://N3b3x.github.io/hf-tmc9660-driver/version_selector.html)
+- **Latest**: [https://hardfoc.github.io/hf-tmc9660-driver/](https://hardfoc.github.io/hf-tmc9660-driver/)
+- **All Versions**: [https://hardfoc.github.io/hf-tmc9660-driver/version_selector.html](https://hardfoc.github.io/hf-tmc9660-driver/version_selector.html)
 
 ## Current Version
 
 - **Version**: development
 - **Type**: development
-- **Deployed**: 2026-08-31T01:00:26Z
-- **Commit**: 6c3959c71517d5eb783861861e0e87e5d71d585c
+- **Deployed**: 2026-10-31T08:30:33Z
+- **Commit**: f9ccfb1dee54b298b833a60e0bd45f45c8257a3f
 
 ---
 
