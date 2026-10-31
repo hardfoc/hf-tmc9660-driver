@@ -211,7 +211,7 @@ seo:
   name: "HardFOC TMC9660 Driver"
   description: >
     Hardware-Agnostic TMC9660 Motor Controller Driver with FOC control, telemetry, and TMCL scripting support
-  url: "https://n3b3x.github.io/hf-tmc9660-driver"
+  url: "https://hardfoc.github.io/hf-tmc9660-driver"
   twitter:
     card: "summary_large_image"
     site: "@n3b3x"

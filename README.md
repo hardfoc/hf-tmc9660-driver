@@ -11,8 +11,8 @@ permalink: /
 
 [![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![CI](https://github.com/N3b3x/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml/badge.svg?branch=main)](https://github.com/N3b3x/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://n3b3x.github.io/hf-tmc9660-driver/)
+[![CI](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml/badge.svg?branch=main)](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://hardfoc.github.io/hf-tmc9660-driver/)
 
 ## 📚 Table of Contents
 1. [Overview](#-overview)
@@ -28,7 +28,7 @@ permalink: /
 
 ## 📦 Overview
 
-> **📖 [📚🌐 Live Complete Documentation](https://n3b3x.github.io/hf-tmc9660-driver/)** - 
+> **📖 [📚🌐 Live Complete Documentation](https://hardfoc.github.io/hf-tmc9660-driver/)** - 
 > Interactive guides, examples, and step-by-step tutorials
 
 **HF-TMC9660** is a portable C++20 driver for the **Trinamic TMC9660** motor controller IC. The TMC9660 is a sophisticated motor driver supporting BLDC, stepper, and DC motors with advanced Field-Oriented Control (FOC), comprehensive telemetry, and TMCL scripting capabilities. The driver provides hardware-agnostic communication interfaces, allowing it to run on any platform (ESP32, STM32, etc.) with SPI or UART.
