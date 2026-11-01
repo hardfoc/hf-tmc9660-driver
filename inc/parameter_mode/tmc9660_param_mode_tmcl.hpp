@@ -25,6 +25,7 @@
 
 // clang-format off
 #pragma once
+#include <cstddef>
 #include <cstdint>
 
 /**
@@ -574,6 +575,29 @@ inline const char* to_string(GlobalParamBank3 p) {
     }
 }
 #undef GLOBAL_PARAM_BANK3_LIST
+
+/**
+ * @brief Compile-time bank of each global-parameter enum (SGP/GGP MOTOR/BANK field).
+ *
+ * Global parameters live in banks 0, 2 and 3 (reference manual Tables 43–45); axis
+ * parameters (::Parameters) use SAP/GAP and are never addressed with a bank. Driver APIs that
+ * take one of these enums deduce the bank from the type, so a GlobalParamBank0 id cannot be
+ * sent with bank 2, and an axis id cannot be sent with SGP/GGP at all.
+ */
+template <typename E> inline constexpr bool kIsGlobalParamBank = false;
+template <> inline constexpr bool kIsGlobalParamBank<GlobalParamBank0> = true;
+template <> inline constexpr bool kIsGlobalParamBank<GlobalParamBank2> = true;
+template <> inline constexpr bool kIsGlobalParamBank<GlobalParamBank3> = true;
+
+/// Concept form of kIsGlobalParamBank.
+template <typename E>
+concept IsGlobalParamBank = kIsGlobalParamBank<E>;
+
+/// Bank number of a global-parameter enum type.
+template <typename E> inline constexpr std::uint8_t kGlobalBankOf = 0xFF;
+template <> inline constexpr std::uint8_t kGlobalBankOf<GlobalParamBank0> = 0;
+template <> inline constexpr std::uint8_t kGlobalBankOf<GlobalParamBank2> = 2;
+template <> inline constexpr std::uint8_t kGlobalBankOf<GlobalParamBank3> = 3;
 
 /////////////////////////////////////////////
 //    ╔═╗╔╗╔╦ ╦╔╦╗╔═╗╦═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗   //
@@ -3973,6 +3997,10 @@ inline const char* to_string(TemperatureProtection e) {
 /**
  * @brief Parameters for configuring heartbeat monitoring.
  *
+ * @warning These are **global bank-0** parameters (SGP/GGP), not axis parameters, and are not
+ * part of ::Parameters. Prefer GlobalParamBank0::HEARTBEAT_MONITORING_CONFIG / _TIMEOUT, which
+ * the driver APIs bind to bank 0 automatically.
+ *
  * The heartbeat monitor checks for regular communication on UART and/or SPI. If no datagram is received within
  * the configured timeout, the system initiates a motor shutdown (behavior defined by DRIVE_FAULT_BEHAVIOUR).
  * The status flag HEARTBEAT_STOPPED is raised.
@@ -4567,6 +4595,10 @@ inline const char* to_string(StepDirStepDividerShift e) {
 //--------------------------------------
 /**
  * @brief Parameters for configuring hibernation (low-power) and wakeup behavior.
+ *
+ * @warning These are **global bank-0** parameters (SGP/GGP), not axis parameters, and are not
+ * part of ::Parameters. Prefer GlobalParamBank0::WAKE_PIN_CONTROL_ENABLE /
+ * GO_TO_TIMEOUT_POWER_DOWN_STATE.
  *
  * The TMC9660 can be sent to a low-power hibernation state using WAKE_PIN_CONTROL_ENABLE or GO_TO_TIMEOUT_POWER_DOWN_STATE.
  * - WAKE_PIN_CONTROL_ENABLE enables the WAKE pin for entering/exiting power-down state.
@@ -5272,9 +5304,11 @@ enum class Parameters : uint16_t {
     // Temperature protection
     TEMPERATURE_PROTECTION_LIST(X)
     
-    // Heartbeat monitoring
-    HEARTBEAT_MONITORING_LIST(X)
-    
+    // Heartbeat monitoring (ids 3/4) and hibernation/wake-up (ids 10/11) are GLOBAL bank-0
+    // parameters (SGP/GGP), not axis parameters. Listing them here aliased them onto
+    // MOTOR_PWM_FREQUENCY / COMMUTATION_MODE (3/4) and two other axis ids, so a SAP of
+    // "HEARTBEAT_MONITORING_TIMEOUT" wrote the commutation mode. Use GlobalParamBank0.
+
     // Brake chopper settings
     BRAKE_CHOPPER_LIST(X)
     
@@ -5286,9 +5320,6 @@ enum class Parameters : uint16_t {
     
     // STEP/DIR interface
     STEP_DIR_LIST(X)
-    
-    // Hibernation & wakeup
-    HIBERNATION_WAKEUP_LIST(X)
     
     // System status and supply monitoring
     SYSTEM_STATUS_SUPPLY_LIST(X)
@@ -5336,12 +5367,10 @@ inline const char* to_string(Parameters param) {
     FAULT_HANDLING_LIST(X)
     IIT_MONITOR_LIST(X)
     TEMPERATURE_PROTECTION_LIST(X)
-    HEARTBEAT_MONITORING_LIST(X)
     BRAKE_CHOPPER_LIST(X)
     MECHANICAL_BRAKE_LIST(X)
     REFERENCE_SEARCH_LIST(X)
     STEP_DIR_LIST(X)
-    HIBERNATION_WAKEUP_LIST(X)
     SYSTEM_STATUS_SUPPLY_LIST(X)
     INTERNAL_MEASUREMENT_LIST(X)
     COMBINED_DIAGNOSTIC_VALUES_LIST(X)
@@ -5350,6 +5379,56 @@ inline const char* to_string(Parameters param) {
     
     return "UNKNOWN_PARAM";
 }
+
+namespace detail {
+/// Every axis parameter number in ::Parameters, in list order (compile-time bank check input).
+inline constexpr std::uint16_t kAxisParameterIds[] = {
+    #define X(NAME, VALUE, DOC) static_cast<std::uint16_t>(VALUE),
+    GATE_DRIVER_LIST(X)
+    OVERCURRENT_PROTECTION_LIST(X)
+    UNDERVOLTAGE_PROTECTION_LIST(X)
+    VGS_SHORT_PROTECTION_LIST(X)
+    MOTOR_CONFIG_LIST(X)
+    ADC_CONFIG_LIST(X)
+    FEEDBACK_SENSOR_CONFIG_LIST(X)
+    TORQUE_FLUX_CONTROL_LIST(X)
+    VELOCITY_CONTROL_LIST(X)
+    POSITION_CONTROL_LIST(X)
+    RAMPER_STOP_CONFIG_LIST(X)
+    BIQUAD_FILTER_LIST(X)
+    FAULT_HANDLING_LIST(X)
+    IIT_MONITOR_LIST(X)
+    TEMPERATURE_PROTECTION_LIST(X)
+    BRAKE_CHOPPER_LIST(X)
+    MECHANICAL_BRAKE_LIST(X)
+    REFERENCE_SEARCH_LIST(X)
+    STEP_DIR_LIST(X)
+    SYSTEM_STATUS_SUPPLY_LIST(X)
+    INTERNAL_MEASUREMENT_LIST(X)
+    COMBINED_DIAGNOSTIC_VALUES_LIST(X)
+    ERRORS_AND_FLAGS_LIST(X)
+    #undef X
+};
+
+/// True when no two entries of kAxisParameterIds share a parameter number.
+constexpr bool axisParameterIdsUnique() noexcept {
+    constexpr std::size_t n = sizeof(kAxisParameterIds) / sizeof(kAxisParameterIds[0]);
+    for (std::size_t i = 0; i < n; ++i) {
+        for (std::size_t j = i + 1; j < n; ++j) {
+            if (kAxisParameterIds[i] == kAxisParameterIds[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+} // namespace detail
+
+// A duplicate number means a list that does not belong to the axis bank was added to
+// ::Parameters (the heartbeat/hibernation lists did exactly that), or a transcription error.
+static_assert(detail::axisParameterIdsUnique(),
+              "tmcl::Parameters contains duplicate axis parameter numbers; global (SGP/GGP) "
+              "parameters belong in GlobalParamBank0/2/3, not in Parameters");
 
 /* ───────────── Clean-up (optional but tidy) ───────────── */
 // Undefine all parameter-section X-macros to avoid polluting the global namespace.
