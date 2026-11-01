@@ -1,5 +1,5 @@
-warning: ignoring unsupported tag 'PAGE_OUTLINE_PANEL' at line 1718, file /tmp/doxyfile.8J2Lmy
-warning: Tag 'DOT_TRANSPARENT' at line 2741 of file '/tmp/doxyfile.8J2Lmy' has become obsolete.
+warning: ignoring unsupported tag 'PAGE_OUTLINE_PANEL' at line 1718, file /tmp/doxyfile.3M357L
+warning: Tag 'DOT_TRANSPARENT' at line 2741 of file '/tmp/doxyfile.3M357L' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode/tmc9660_param_mode_tmcl.hpp:4715: warning: unbalanced grouping commands
 /home/runner/work/hf-tmc9660-driver/hf-tmc9660-driver/inc/parameter_mode/tmc9660_param_mode_tmcl.hpp:4774: warning: unbalanced grouping commands
