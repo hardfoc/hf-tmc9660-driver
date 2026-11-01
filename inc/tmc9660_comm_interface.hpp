@@ -76,6 +76,7 @@
  * @copyright Copyright (c) 2024-2025 HardFOC. All rights reserved.
  */
 #pragma once
+#include <algorithm>
 #include <array>
 #include <cstdarg>
 #include <cstdint>
@@ -179,6 +180,93 @@ enum class SPIStatus : uint8_t {
   FIRST_CMD = 0x0C,      ///< First command after initialization
   NOT_READY = 0xF0,      ///< System busy, resend datagram
 };
+
+/**
+ * @brief Timing of the parameter-mode SPI request/reply handshake.
+ *
+ * @details What the vendor documents (TMC9660 Parameter Mode Reference Manual Rev. 0, section
+ * "Serial-Peripheral Interface", Tables 3–5; TMC9660 datasheet "SPI Peripheral — Electrical
+ * Characteristics"; both PDFs are in `docs/datasheet/`):
+ *
+ * - The reply to a 64-bit request is clocked out during the **next** SPI datagram.
+ * - `SPI_STATUS_NOT_READY` (0xF0) in byte 0 means the chip is still processing. The manual
+ *   says the reply in that datagram is not the reply to the processed command, the command
+ *   in that datagram is ignored, and the datagram should simply be re-sent until the status
+ *   goes away.
+ * - The only inter-datagram timing that is specified is CS_ high time tCSH ≥ 4 × T_CLK
+ *   (about 100 ns at the 40 MHz system clock) and fSCK ≤ 10 MHz. No minimum processing time or
+ *   turnaround time for a TMCL request is given.
+ *
+ * The protocol therefore needs **no blind delay**: the ready indication is the NOT_READY status,
+ * and polling it is the documented way to wait. The defaults below follow that rule: no frame
+ * gap, then re-send with a short exponential back-off (@ref pollIntervalUs doubling up to
+ * @ref pollIntervalMaxUs) for at most @ref maxPolls re-sends. With the defaults the worst-case
+ * wait is 20+40+80+160 + 56×200 µs ≈ 11.5 ms, the same order as the previous fixed 50 × 200 µs
+ * budget, which is only acceptable from thread context.
+ *
+ * @ref frameGapUs is kept for buses or firmware revisions that need a settle time between the
+ * request and the next datagram; set it from a measurement (see the `tmcl_timing` example),
+ * not from a guess. Releases before 1.1.0 hard-coded 1000 µs here (see @ref legacy()).
+ */
+struct TmclSpiTiming {
+  /// Wait between the request datagram and the datagram that clocks out its reply [µs].
+  uint32_t frameGapUs = 0;
+  /// First wait before re-sending a datagram that came back NOT_READY / not yet valid [µs].
+  uint32_t pollIntervalUs = 20;
+  /// Upper bound for the doubling back-off between re-sends [µs].
+  uint32_t pollIntervalMaxUs = 200;
+  /// Maximum number of re-sends of one datagram before the access fails.
+  uint16_t maxPolls = 60;
+  /// Treat a reply whose echoed operation (byte 2) differs from the request as not valid yet.
+  /// GetVersion (136) and Boot (242) are exempt because they reply in other formats.
+  bool verifyReplyOpcode = true;
+
+  /// Wait before re-send number @p attempt (0-based) [µs].
+  [[nodiscard]] constexpr uint32_t pollWaitUs(uint16_t attempt) const noexcept {
+    uint32_t step = pollIntervalUs;
+    for (uint16_t i = 0; i < attempt && step < pollIntervalMaxUs; ++i) {
+      step *= 2U;
+    }
+    return (step > pollIntervalMaxUs) ? pollIntervalMaxUs : step;
+  }
+
+  /// Worst-case accumulated poll wait for one datagram with this configuration [µs].
+  [[nodiscard]] constexpr uint32_t worstCasePollWaitUs() const noexcept {
+    uint32_t total = 0;
+    for (uint16_t i = 0; i < maxPolls; ++i) {
+      total += pollWaitUs(i);
+    }
+    return total;
+  }
+
+  /// Settings of releases before 1.1.0: 1000 µs gap, fixed 200 µs × 50 polls, no echo check.
+  [[nodiscard]] static constexpr TmclSpiTiming legacy() noexcept {
+    TmclSpiTiming t{};
+    t.frameGapUs = 1000;
+    t.pollIntervalUs = 200;
+    t.pollIntervalMaxUs = 200;
+    t.maxPolls = 50;
+    t.verifyReplyOpcode = false;
+    return t;
+  }
+};
+
+/**
+ * @brief Counters for the SPI TMCL transport (diagnostics and the `tmcl_timing` example).
+ */
+struct TmclSpiStats {
+  uint32_t accesses = 0;     ///< Logical TMCL accesses (single, or one batch element).
+  uint32_t frames = 0;       ///< 64-bit SPI datagrams clocked, re-sends included.
+  uint32_t notReady = 0;     ///< Datagrams answered with NOT_READY (0xF0) and re-sent.
+  uint32_t staleReplies = 0; ///< Replies with 0x00 status, bad checksum or wrong opcode echo.
+  uint32_t recoveries = 0;   ///< Batch elements re-issued as a single access after a stale reply.
+  uint32_t failures = 0;     ///< Accesses that ran out of polls or hit a bus error.
+};
+
+/// @brief True if the SPI reply to @p opcode echoes the opcode in byte 2.
+[[nodiscard]] constexpr bool tmclReplyEchoesOpcode(uint8_t opcode) noexcept {
+  return opcode != 136U /* GetVersion */ && opcode != 242U /* Boot */;
+}
 
 /**
  * @brief Calculate 8-bit checksum using sum of bytes method.
@@ -511,6 +599,48 @@ struct TMCLFrame {
 };
 
 /**
+ * @brief How a received 8-byte SPI datagram relates to the request it should answer.
+ */
+enum class TmclSpiRxClass : uint8_t {
+  NOT_READY, ///< Status 0xF0: chip busy, the datagram just sent was ignored — re-send it.
+  VALID,     ///< Well-formed reply to the expected request.
+  STALE,     ///< Not a usable reply (0x00 status, bad checksum, FIRST_CMD, wrong opcode echo).
+};
+
+/**
+ * @brief Classify a received SPI datagram as the reply to a request with @p expected_opcode.
+ *
+ * @param rx              Received datagram.
+ * @param expected_opcode Opcode of the request whose reply @p rx should carry.
+ * @param verify_opcode   Require byte 2 to echo @p expected_opcode (see
+ *                        @ref TmclSpiTiming::verifyReplyOpcode).
+ *
+ * Opcodes that do not echo (see @ref tmclReplyEchoesOpcode) and bootloader SESSION_START (0x13)
+ * replies are passed through as VALID unless NOT_READY, because their reply format is not
+ * a checksummed TMCL reply; @ref TMCLReply::fromSpi decodes them.
+ */
+[[nodiscard]] constexpr TmclSpiRxClass classifyTmclSpiReply(std::span<const uint8_t, 8> rx,
+                                                            uint8_t expected_opcode,
+                                                            bool verify_opcode) noexcept {
+  if (rx[0] == static_cast<uint8_t>(SPIStatus::NOT_READY)) {
+    return TmclSpiRxClass::NOT_READY;
+  }
+  if (!tmclReplyEchoesOpcode(expected_opcode) || rx[0] == 0x13U) {
+    return TmclSpiRxClass::VALID;
+  }
+  if (rx[0] != static_cast<uint8_t>(SPIStatus::OK)) {
+    return TmclSpiRxClass::STALE;
+  }
+  if (tmclChecksum(rx.data(), 7) != rx[7]) {
+    return TmclSpiRxClass::STALE;
+  }
+  if (verify_opcode && rx[2] != expected_opcode) {
+    return TmclSpiRxClass::STALE;
+  }
+  return TmclSpiRxClass::VALID;
+}
+
+/**
  * @brief SPI status codes as per TMC9660 Parameter Mode.
  *
  * Table 4: SPI status codes:
@@ -686,45 +816,59 @@ public:
   }
 
   /**
-   * @brief Set maximum number of retries for SPI_STATUS_NOT_READY responses.
-   *
-   * When a command receives SPI_STATUS_NOT_READY (0xF0), the system will
-   * automatically retry the command up to the specified number of times.
-   *
-   * @param max_retries Maximum number of retry attempts (0 = no retries, only original attempt)
-   * @note Setting to 0 disables retry logic entirely
+   * @brief Set the SPI TMCL handshake timing (gap, poll back-off, poll budget, echo check).
+   * @param timing New timing; see @ref TmclSpiTiming for what each field means and where the
+   *               defaults come from. Takes effect on the next access.
+   * @note Has no effect on UART transports.
+   */
+  void setTmclTiming(const TmclSpiTiming& timing) noexcept {
+    tmclTiming_ = timing;
+  }
+
+  /** @brief Current SPI TMCL handshake timing. */
+  [[nodiscard]] const TmclSpiTiming& tmclTiming() const noexcept {
+    return tmclTiming_;
+  }
+
+  /** @brief Transport counters since construction or the last @ref resetTmclStats(). */
+  [[nodiscard]] const TmclSpiStats& tmclStats() const noexcept {
+    return tmclStats_;
+  }
+
+  /** @brief Reset the transport counters. */
+  void resetTmclStats() noexcept {
+    tmclStats_ = TmclSpiStats{};
+  }
+
+  /**
+   * @brief Set the maximum number of re-sends while the reply is not ready.
+   * @param max_retries Re-sends per datagram (0 = fail on the first NOT_READY).
+   * @note Kept for compatibility; equivalent to setting @ref TmclSpiTiming::maxPolls.
    */
   void setSpiRetryMaxCount(uint8_t max_retries) noexcept {
-    spiRetryMaxCount_ = max_retries;
+    tmclTiming_.maxPolls = max_retries;
   }
 
-  /**
-   * @brief Get current maximum retry count for SPI_STATUS_NOT_READY.
-   * @return Current maximum retry count
-   */
+  /** @brief Current re-send budget (@ref TmclSpiTiming::maxPolls, saturated to 255). */
   uint8_t getSpiRetryMaxCount() const noexcept {
-    return spiRetryMaxCount_;
+    return (tmclTiming_.maxPolls > 255U) ? uint8_t{255}
+                                         : static_cast<uint8_t>(tmclTiming_.maxPolls);
   }
 
   /**
-   * @brief Set delay interval between retry attempts for SPI_STATUS_NOT_READY.
-   *
-   * When retrying a command due to SPI_STATUS_NOT_READY, wait this many
-   * microseconds before retrying.
-   *
-   * @param interval_us Delay in microseconds between retry attempts
-   * @note Typical values: 10-1000 microseconds for SPI communication
+   * @brief Set a fixed wait between re-sends while the reply is not ready.
+   * @param interval_us Wait in microseconds.
+   * @note Kept for compatibility: sets both @ref TmclSpiTiming::pollIntervalUs and
+   *       @ref TmclSpiTiming::pollIntervalMaxUs, which disables the back-off.
    */
   void setSpiRetryInterval(uint32_t interval_us) noexcept {
-    spiRetryIntervalUs_ = interval_us;
+    tmclTiming_.pollIntervalUs = interval_us;
+    tmclTiming_.pollIntervalMaxUs = interval_us;
   }
 
-  /**
-   * @brief Get current retry interval for SPI_STATUS_NOT_READY.
-   * @return Current retry interval in microseconds
-   */
+  /** @brief First re-send wait (@ref TmclSpiTiming::pollIntervalUs). */
   uint32_t getSpiRetryInterval() const noexcept {
-    return spiRetryIntervalUs_;
+    return tmclTiming_.pollIntervalUs;
   }
 
 protected:
@@ -743,26 +887,17 @@ protected:
   bool pinActiveLevels_[4];
 
   /**
-   * @brief Maximum number of retries for SPI_STATUS_NOT_READY responses.
+   * @brief SPI handshake timing.
    *
-   * When a command receives SPI_STATUS_NOT_READY (0xF0), the system will
-   * automatically retry the command up to this many times.
-   * Default: 3 retries
+   * Parameter-mode SPI is serviced by chip firmware; with the FOC engine running it can
+   * withhold a reply for several ms (GIM4305 bench), so the default poll budget is about
+   * 11.5 ms. That bound is only acceptable from thread context, never from an ISR or a
+   * high-priority control task — lower @ref TmclSpiTiming::maxPolls there.
    */
-  /* Parameter-mode SPI is serviced by chip firmware; with the FOC engine running it can
-   * withhold a reply for several ms. The stock 3×100 µs budget starved the reply on the
-   * GIM4305 bench even once frames were delivered intact, so budget 50×200 µs = 10 ms
-   * bounded worst case. Only safe from thread context, never from an ISR. */
-  uint8_t spiRetryMaxCount_ = 50;
+  TmclSpiTiming tmclTiming_{};
 
-  /**
-   * @brief Delay interval in microseconds between retry attempts.
-   *
-   * When retrying a command due to SPI_STATUS_NOT_READY, wait this many
-   * microseconds before retrying.
-   * Default: 100us (0.1ms) - fine-grained for fast SPI communication
-   */
-  uint32_t spiRetryIntervalUs_ = 200;
+  /** @brief Transport counters (see @ref tmclStats()). */
+  TmclSpiStats tmclStats_{};
 
   /**
    * @brief Debug logging function for detailed debugging information.
@@ -947,6 +1082,9 @@ public:
     return static_cast<Derived*>(this)->gpioRead(pin, signal);
   }
 
+  /// Opcode of the reply-request datagram (`FF 00 00 00 00 00 00 FF`); see @ref transferTMCL().
+  static constexpr uint8_t kReplyRequestOpcode = 0xFFU;
+
   /**
    * @brief Exchange one TMCL datagram over SPI using the two-transaction reply protocol.
    *
@@ -955,20 +1093,22 @@ public:
    * request therefore costs two 8-byte transactions:
    *
    * 1. **Transaction 1** clocks out @p tx. The bytes received back belong to whatever
-   *    command preceded it, and are surfaced through @p first_reply.
+   *    command preceded it, and are surfaced through @p first_reply. If they carry
+   *    `NOT_READY`, the chip ignored @p tx (reference manual, SPI section), so @p tx is
+   *    re-sent; this cannot duplicate a write because the ignored copy was never executed.
    * 2. **Transaction 2** clocks a *reply-request* frame to shift out the reply to @p tx.
    *    Unless @p second_command is supplied this is opcode `0xFF` with all other fields
    *    zero (wire bytes `FF 00 .. 00 FF`), matching ADI's `tmc9660_param_sendCommand_SPI`.
    *
-   * The two transactions are separated by a fixed gap so the on-chip TMCL parser can latch
-   * transaction 1 before transaction 2 begins shifting. When @c Derived exposes
-   * @c hostSpiTransferTMCLPair() that primitive is used so the gap is honoured inside a
-   * single bus reservation (required on shared buses); otherwise the gap is a plain delay
-   * between two independent transfers.
+   * Between the two transactions the driver waits @ref TmclSpiTiming::frameGapUs (default
+   * 0 µs: the vendor documents no processing time, only the NOT_READY handshake). Transaction 2
+   * is then re-sent with a doubling back-off while the reply is NOT_READY or not yet valid
+   * (status 0x00, bad checksum, or — with @ref TmclSpiTiming::verifyReplyOpcode — an opcode
+   * echo that does not match @p tx), at most @ref TmclSpiTiming::maxPolls times.
    *
-   * Transaction 2 is retried while the slave reports a not-yet-ready reply — see
-   * @ref setSpiRetryMaxCount() and @ref setSpiRetryInterval() for the bound. Only the
-   * reply-request frame is re-sent, never @p tx, so retries cannot duplicate a write.
+   * When @c Derived exposes @c hostSpiTransferTMCLPair() that primitive clocks both
+   * transactions inside a single bus reservation (required on shared buses where a peer may
+   * re-program the SPI mode between the frames) and receives the gap as an argument.
    *
    * @param tx           TMCL command frame to transmit.
    * @param reply        Receives the reply to @p tx (parsed with @p tx opcode/type context,
@@ -976,9 +1116,12 @@ public:
    * @param first_reply  Optional out-param capturing the reply carried by transaction 1,
    *                     i.e. the answer to the *previous* command. Pass @c nullptr to drop it.
    * @param second_command Optional frame to use in place of the `0xFF` reply-request, letting
-   *                     a caller pipeline the next command into transaction 2.
-   * @return true if a well-formed reply to @p tx was parsed; false on bus error, on checksum
-   *         failure, or when the reply was still not ready after the retry budget.
+   *                     a caller pipeline the next command into transaction 2. Prefer
+   *                     @ref transferTMCLBatch(), which also collects that command's reply.
+   *                     A transaction 2 that comes back with a stale (not NOT_READY) reply is
+   *                     re-sent, so @p second_command must be idempotent.
+   * @return true if a well-formed reply to @p tx was parsed; false on bus error, or when the
+   *         reply was still not ready or not valid after the poll budget.
    *
    * @warning Do not substitute an all-zero frame for the `0xFF` reply-request. The chip parses
    *          opcode 0 as a real (invalid) command and queues a checksum-error reply while the
@@ -987,125 +1130,240 @@ public:
    */
   bool transferTMCL(const TMCLFrame& tx, TMCLReply& reply, uint8_t /*address*/,
                     TMCLReply* first_reply, const TMCLFrame* second_command) noexcept {
-    std::array<uint8_t, 8> tx_buf, rx_buf;
-    std::array<uint8_t, 8> tx2_buf, rx1_buf;
+    ++this->tmclStats_.accesses;
+    return exchangeSingle(tx, reply, first_reply, second_command);
+  }
+
+  /**
+   * @brief Pipelined batch: @p requests.size() TMCL accesses in N + 1 SPI datagrams.
+   *
+   * @details Datagram *k* carries request *k* and clocks out the reply to request *k* − 1;
+   * the last datagram is the reply-request `0xFF` that clocks out the reply to request
+   * N − 1. Compared with N calls of @ref transferTMCL() this saves N − 1 datagrams and
+   * N − 1 handshakes. Correctness rules:
+   *
+   * - **First element:** the reply carried by datagram 0 belongs to whatever preceded the
+   *   batch and is discarded.
+   * - **Last element:** its reply is collected with the trailing reply-request datagram.
+   * - **NOT_READY:** the datagram just sent was ignored by the chip and is re-sent after the
+   *   back-off; no request is skipped or duplicated.
+   * - **Stale reply** (status 0x00, bad checksum, wrong opcode echo): it is not known whether
+   *   the request in that datagram was executed. The previous request is re-issued as a
+   *   single @ref transferTMCL() and the pipeline restarts at the current request, which may
+   *   therefore execute twice. Only pass **idempotent** requests (SAP/GAP/SGP/GGP, RamDebug
+   *   reads). @ref TmclSpiStats::recoveries counts these events.
+   *
+   * @param requests  Frames to send, in order.
+   * @param replies   Receives one reply per request (same index). Must be at least as long
+   *                  as @p requests.
+   * @param address   UART-only module address; ignored here (signature parity).
+   * @param completed Optional: number of leading elements whose reply is valid when the
+   *                  function returns (equals @p requests.size() on success).
+   * @return true if every request got a well-formed reply. Each reply still carries its own
+   *         TMCL status; check @ref TMCLReply::isOK() per element.
+   */
+  bool transferTMCLBatch(std::span<const TMCLFrame> requests, std::span<TMCLReply> replies,
+                         uint8_t /*address*/, size_t* completed = nullptr) noexcept {
+    const size_t n = requests.size();
+    if (completed != nullptr) {
+      *completed = 0;
+    }
+    if (replies.size() < n) {
+      return false;
+    }
+    if (n == 0) {
+      return true;
+    }
+    this->tmclStats_.accesses += static_cast<uint32_t>(n);
+    const TmclSpiTiming& timing = this->tmclTiming_;
+    TMCLFrame reply_request{};
+    reply_request.opcode = kReplyRequestOpcode;
+
+    size_t k = 0;        // datagram index: request k, or the reply-request when k == n
+    bool discard = true; // datagram k's reply is not needed (k == 0, or after a recovery)
+    while (k <= n) {
+      std::array<uint8_t, 8> tx_buf{};
+      std::array<uint8_t, 8> rx_buf{};
+      (k < n ? requests[k] : reply_request).toSpi(tx_buf);
+      if (!discard && timing.frameGapUs > 0U) {
+        this->delayUs(timing.frameGapUs);
+      }
+      if (!sendUntilAccepted(tx_buf, rx_buf)) {
+        return false;
+      }
+      if (!discard) {
+        const TMCLFrame& prev = requests[k - 1];
+        if (classifyTmclSpiReply(rx_buf, prev.opcode, timing.verifyReplyOpcode) ==
+            TmclSpiRxClass::VALID) {
+          (void)TMCLReply::fromSpi(rx_buf, replies[k - 1], prev.opcode, prev.type);
+        } else {
+          ++this->tmclStats_.staleReplies;
+          ++this->tmclStats_.recoveries;
+          if (!exchangeSingle(prev, replies[k - 1], nullptr, nullptr)) {
+            return false;
+          }
+          if (completed != nullptr) {
+            *completed = k;
+          }
+          if (k == n) {
+            break;
+          }
+          discard = true; // the chip now holds the reply-request's reply; re-send request k
+          continue;
+        }
+        if (completed != nullptr) {
+          *completed = k;
+        }
+      }
+      discard = false;
+      ++k;
+    }
+    return true;
+  }
+
+private:
+  /// One datagram, counted.
+  bool sendFrame(std::array<uint8_t, 8>& tx, std::array<uint8_t, 8>& rx) noexcept {
+    ++this->tmclStats_.frames;
+    return spiTransferTMCL(tx, rx);
+  }
+
+  /// Send @p tx and re-send it while the chip answers NOT_READY (which means it ignored @p tx).
+  bool sendUntilAccepted(std::array<uint8_t, 8>& tx, std::array<uint8_t, 8>& rx) noexcept {
+    const TmclSpiTiming& timing = this->tmclTiming_;
+    for (uint16_t polls = 0;; ++polls) {
+      if (!sendFrame(tx, rx)) {
+        ++this->tmclStats_.failures;
+        return false;
+      }
+      if (rx[0] != static_cast<uint8_t>(SPIStatus::NOT_READY)) {
+        return true;
+      }
+      ++this->tmclStats_.notReady;
+      if (polls >= timing.maxPolls) {
+        ++this->tmclStats_.failures;
+        TMC9660_LOG_DEBUG(*static_cast<Derived*>(this), 1, "SPI_TMCL",
+                          "NOT_READY: re-send budget (%u) exhausted", timing.maxPolls);
+        return false;
+      }
+      this->delayUs(timing.pollWaitUs(polls));
+    }
+  }
+
+  /// Body of @ref transferTMCL() without the access counter (also used for batch recovery).
+  bool exchangeSingle(const TMCLFrame& tx, TMCLReply& reply, TMCLReply* first_reply,
+                      const TMCLFrame* second_command) noexcept {
+    const TmclSpiTiming& timing = this->tmclTiming_;
+    std::array<uint8_t, 8> tx_buf{};
+    std::array<uint8_t, 8> rx1_buf{};
+    std::array<uint8_t, 8> tx2_buf{};
+    std::array<uint8_t, 8> rx_buf{};
     tx.toSpi(tx_buf);
 
-    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL", "[TMCL TX 1 ] %02X %02X %02X %02X %02X %02X %02X %02X",
-                      tx_buf[0], tx_buf[1], tx_buf[2], tx_buf[3], tx_buf[4], tx_buf[5], tx_buf[6],
-                      tx_buf[7]);
-
-    /* Opcode 0xFF, not 0x00 — see the @warning on this method. */
+    /* Opcode 0xFF, not 0x00 — see the @warning on transferTMCL(). */
     TMCLFrame cmd2{};
-    cmd2.opcode = 0xFFu;
+    cmd2.opcode = kReplyRequestOpcode;
     if (second_command != nullptr) {
       cmd2 = *second_command;
     }
     cmd2.toSpi(tx2_buf);
 
-    /* Prefer hostSpiTransferTMCLPair when Derived provides it (STM32 shared-bus
-     * TransferChain). Gap must be long enough for the TMCL parser to latch cmd1
-     * before cmd2 clocks the reply — 300 µs was marginal at 1 MHz on Mid. */
-    constexpr uint32_t kTmclPairGapUs = 1000U;
-    bool pair_ok = false;
+    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL",
+                               "[TMCL TX 1 ] %02X %02X %02X %02X %02X %02X %02X %02X", tx_buf[0],
+                               tx_buf[1], tx_buf[2], tx_buf[3], tx_buf[4], tx_buf[5], tx_buf[6],
+                               tx_buf[7]);
+
+    // Transactions 1 and 2. Transaction 1 is re-sent while it comes back NOT_READY.
     if constexpr (requires(Derived& d, std::array<uint8_t, 8>& a, uint32_t g) {
                     d.hostSpiTransferTMCLPair(a, a, a, a, g);
                   }) {
-      pair_ok = static_cast<Derived*>(this)->hostSpiTransferTMCLPair(
-          tx_buf, rx1_buf, tx2_buf, rx_buf, kTmclPairGapUs);
-    } else {
-      if (!spiTransferTMCL(tx_buf, rx1_buf)) {
-        return false;
-      }
-      static_cast<Derived*>(this)->delayUs(kTmclPairGapUs);
-      pair_ok = spiTransferTMCL(tx2_buf, rx_buf);
-    }
-    if (!pair_ok) {
-      return false;
-    }
-
-    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL", "[TMCL RX 1 ] %02X %02X %02X %02X %02X %02X %02X %02X",
-                      rx1_buf[0], rx1_buf[1], rx1_buf[2], rx1_buf[3], rx1_buf[4], rx1_buf[5],
-                      rx1_buf[6], rx1_buf[7]);
-    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL", "[TMCL TX 2 ] %02X %02X %02X %02X %02X %02X %02X %02X",
-                      tx2_buf[0], tx2_buf[1], tx2_buf[2], tx2_buf[3], tx2_buf[4], tx2_buf[5],
-                      tx2_buf[6], tx2_buf[7]);
-    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL", "[TMCL RX 2 ] %02X %02X %02X %02X %02X %02X %02X %02X",
-                      rx_buf[0], rx_buf[1], rx_buf[2], rx_buf[3], rx_buf[4], rx_buf[5], rx_buf[6],
-                      rx_buf[7]);
-
-    // Optionally capture first reply (this is the reply to the PREVIOUS command due to SPI delay)
-    if (first_reply) {
-      const bool first_parse_ok = TMCLReply::fromSpi(rx1_buf, *first_reply);
-      (void)first_parse_ok; // Only consumed by raw-frame logging, which is compiled out by default.
-      TMC9660_LOG_TMCL_RAW_FRAME(
-          *static_cast<Derived*>(this), 2, "SPI_TMCL",
-          "          └─> SPI_Status=0x%02X, TMCL_Status=0x%02X, Value=0x%08X (parse %s)",
-          static_cast<uint8_t>(first_reply->spi_status), first_reply->status, first_reply->value,
-          first_parse_ok ? "OK" : "failed");
-    }
-
-    // Two SPI statuses mean "reply not available yet" and are retryable by re-sending the
-    // reply-request frame only (never the command, so a write cannot be duplicated):
-    //   0xF0 NOT_READY      — slave explicitly reports busy.
-    //   0x00 CHECKSUM_ERROR — also the value seen for an all-zero read, which is what the
-    //                         firmware-serviced slave streams while the FOC engine has not
-    //                         queued the reply (GIM4305 bench: zeros under load, then valid).
-    tx_buf = tx2_buf;
-    uint8_t retry_count = 0;
-    while (true) {
-      SPIStatus spi_status = static_cast<SPIStatus>(rx_buf[0]);
-
-      if (spi_status == SPIStatus::NOT_READY ||
-          spi_status == SPIStatus::CHECKSUM_ERROR) {
-        if (retry_count < this->spiRetryMaxCount_) {
-          retry_count++;
-          TMC9660_LOG_TMCL_RAW_FRAME(
-              *static_cast<Derived*>(this), 2, "SPI_TMCL",
-              "⚠️  Reply not ready (SPI status 0x%02X), retrying (attempt %u/%u) after %u us",
-              static_cast<unsigned>(rx_buf[0]), retry_count, this->spiRetryMaxCount_ + 1,
-              this->spiRetryIntervalUs_);
-          this->delayUs(this->spiRetryIntervalUs_);
-          TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL",
-                            "[TMCL TX 2 ] %02X %02X %02X %02X %02X %02X %02X %02X (retry)",
-                            tx_buf[0], tx_buf[1], tx_buf[2], tx_buf[3], tx_buf[4], tx_buf[5],
-                            tx_buf[6], tx_buf[7]);
-          if (!spiTransferTMCL(tx_buf, rx_buf))
-            return false;
-          TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL",
-                            "[TMCL RX 2 ] %02X %02X %02X %02X %02X %02X %02X %02X", rx_buf[0],
-                            rx_buf[1], rx_buf[2], rx_buf[3], rx_buf[4], rx_buf[5], rx_buf[6],
-                            rx_buf[7]);
-          continue;
-        } else {
-          TMC9660_LOG_DEBUG(*static_cast<Derived*>(this), 1, "SPI_TMCL",
-                            "❌ SPI_STATUS_NOT_READY: Max retries (%u) exceeded",
-                            this->spiRetryMaxCount_);
-          if (tmclChecksum(rx_buf.data(), 7) != rx_buf[7]) {
-            TMC9660_LOG_DEBUG(*static_cast<Derived*>(this), 1, "SPI_TMCL", "⚠️  Checksum error in NOT_READY response");
-            return false;
-          }
-          std::copy(rx_buf.begin(), rx_buf.end(), reply.rawBytes.begin());
-          reply.spi_status = SPIStatus::NOT_READY;
-          reply.status = rx_buf[1];
-          reply.opcode = rx_buf[2];
-          reply.value = (static_cast<uint32_t>(rx_buf[3]) << 24) |
-                        (static_cast<uint32_t>(rx_buf[4]) << 16) |
-                        (static_cast<uint32_t>(rx_buf[5]) << 8) | static_cast<uint32_t>(rx_buf[6]);
+      for (uint16_t polls = 0;; ++polls) {
+        this->tmclStats_.frames += 2U;
+        if (!static_cast<Derived*>(this)->hostSpiTransferTMCLPair(tx_buf, rx1_buf, tx2_buf, rx_buf,
+                                                                  timing.frameGapUs)) {
+          ++this->tmclStats_.failures;
           return false;
         }
+        if (rx1_buf[0] != static_cast<uint8_t>(SPIStatus::NOT_READY)) {
+          break;
+        }
+        ++this->tmclStats_.notReady;
+        if (polls >= timing.maxPolls) {
+          ++this->tmclStats_.failures;
+          return false;
+        }
+        this->delayUs(timing.pollWaitUs(polls));
       }
+    } else {
+      if (!sendUntilAccepted(tx_buf, rx1_buf)) {
+        return false;
+      }
+      if (timing.frameGapUs > 0U) {
+        this->delayUs(timing.frameGapUs);
+      }
+      if (!sendFrame(tx2_buf, rx_buf)) {
+        ++this->tmclStats_.failures;
+        return false;
+      }
+    }
 
-      break;
+    TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL",
+                               "[TMCL RX 1 ] %02X %02X %02X %02X %02X %02X %02X %02X", rx1_buf[0],
+                               rx1_buf[1], rx1_buf[2], rx1_buf[3], rx1_buf[4], rx1_buf[5],
+                               rx1_buf[6], rx1_buf[7]);
+
+    // Optionally capture first reply (this is the reply to the PREVIOUS command due to SPI delay)
+    if (first_reply != nullptr) {
+      (void)TMCLReply::fromSpi(rx1_buf, *first_reply);
+    }
+
+    // Poll transaction 2 until it carries a valid reply to tx. Only the reply-request (or the
+    // caller's second_command) is re-sent, never tx, so a write cannot be duplicated.
+    for (uint16_t polls = 0;; ++polls) {
+      TMC9660_LOG_TMCL_RAW_FRAME(*static_cast<Derived*>(this), 2, "SPI_TMCL",
+                                 "[TMCL RX 2 ] %02X %02X %02X %02X %02X %02X %02X %02X", rx_buf[0],
+                                 rx_buf[1], rx_buf[2], rx_buf[3], rx_buf[4], rx_buf[5], rx_buf[6],
+                                 rx_buf[7]);
+      const TmclSpiRxClass cls = classifyTmclSpiReply(rx_buf, tx.opcode, timing.verifyReplyOpcode);
+      if (cls == TmclSpiRxClass::VALID) {
+        break;
+      }
+      if (cls == TmclSpiRxClass::NOT_READY) {
+        ++this->tmclStats_.notReady;
+      } else {
+        ++this->tmclStats_.staleReplies;
+      }
+      // A well-formed reply that echoes the reply-request opcode means the chip has already
+      // answered transaction 2 itself, so the reply to tx was consumed by an earlier (stale)
+      // datagram and will not arrive: fail now instead of polling out the whole budget.
+      const bool reply_lost =
+          cls == TmclSpiRxClass::STALE && second_command == nullptr &&
+          tx.opcode != kReplyRequestOpcode && rx_buf[0] == static_cast<uint8_t>(SPIStatus::OK) &&
+          rx_buf[2] == kReplyRequestOpcode && tmclChecksum(rx_buf.data(), 7) == rx_buf[7];
+      if (reply_lost || polls >= timing.maxPolls) {
+        ++this->tmclStats_.failures;
+        TMC9660_LOG_DEBUG(*static_cast<Derived*>(this), 1, "SPI_TMCL",
+                          "No valid reply after %u re-sends (last SPI status 0x%02X%s)",
+                          static_cast<unsigned>(polls), static_cast<unsigned>(rx_buf[0]),
+                          reply_lost ? ", reply lost" : "");
+        std::copy(rx_buf.begin(), rx_buf.end(), reply.rawBytes.begin());
+        reply.spi_status = static_cast<SPIStatus>(rx_buf[0]);
+        reply.status = rx_buf[1];
+        reply.opcode = rx_buf[2];
+        reply.value = (static_cast<uint32_t>(rx_buf[3]) << 24) |
+                      (static_cast<uint32_t>(rx_buf[4]) << 16) |
+                      (static_cast<uint32_t>(rx_buf[5]) << 8) | static_cast<uint32_t>(rx_buf[6]);
+        return false;
+      }
+      this->delayUs(timing.pollWaitUs(polls));
+      if (!sendFrame(tx2_buf, rx_buf)) {
+        ++this->tmclStats_.failures;
+        return false;
+      }
     }
 
     // Parse reply with command context (for handling special reply formats like GetVersion string)
-    bool parse_ok = TMCLReply::fromSpi(rx_buf, reply, tx.opcode, tx.type);
-    if (!parse_ok && static_cast<SPIStatus>(rx_buf[0]) == SPIStatus::NOT_READY) {
-      // This shouldn't happen due to retry logic, but handle it just in case
-      TMC9660_LOG_DEBUG(*static_cast<Derived*>(this), 1, "SPI_TMCL", "⚠️  Unexpected NOT_READY after retry loop");
-    }
-    return parse_ok;
+    return TMCLReply::fromSpi(rx_buf, reply, tx.opcode, tx.type);
   }
 
 protected:
@@ -1258,6 +1516,37 @@ public:
       return false;
     // Parse reply with command context (for handling special reply formats like GetVersion string)
     return TMCLReply::fromUart(frame, address, reply, tx.opcode, tx.type);
+  }
+
+  /**
+   * @brief Batch counterpart of @ref transferTMCL() for API parity with the SPI transport.
+   *
+   * UART TMCL is strictly request/reply, so there is nothing to pipeline: the requests are
+   * sent one after the other and the batch stops at the first transport failure.
+   *
+   * @param requests  Frames to send, in order.
+   * @param replies   One reply per request (same index); at least as long as @p requests.
+   * @param address   Module address.
+   * @param completed Optional: number of leading elements with a valid reply.
+   * @return true if every request got a well-formed reply.
+   */
+  bool transferTMCLBatch(std::span<const TMCLFrame> requests, std::span<TMCLReply> replies,
+                         uint8_t address, size_t* completed = nullptr) noexcept {
+    if (completed != nullptr) {
+      *completed = 0;
+    }
+    if (replies.size() < requests.size()) {
+      return false;
+    }
+    for (size_t i = 0; i < requests.size(); ++i) {
+      if (!transferTMCL(requests[i], replies[i], address, nullptr, nullptr)) {
+        return false;
+      }
+      if (completed != nullptr) {
+        *completed = i + 1;
+      }
+    }
+    return true;
   }
 
 protected:
