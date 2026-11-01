@@ -515,7 +515,7 @@ bool test_bldc_velocity_control() noexcept {
     std::vector<int16_t> velocity_targets = {0, 100, 500, 1000, 2000, -500, -1000};
 
     for (auto target : velocity_targets) {
-        if (!driver->velocityControl.setTargetVelocity(target)) {
+        if (!driver->velocityControl.setTargetVelocityRaw(target)) {
             ESP_LOGE(TAG, "Failed to set velocity target %d", target);
             return false;
         }
@@ -528,7 +528,7 @@ bool test_bldc_velocity_control() noexcept {
     // Test 2: Test velocity ramping
     ESP_LOGI(TAG, "Testing velocity ramping...");
     for (int16_t vel = 0; vel <= 1000; vel += 100) {
-        if (!driver->velocityControl.setTargetVelocity(vel)) {
+        if (!driver->velocityControl.setTargetVelocityRaw(vel)) {
             ESP_LOGE(TAG, "Failed to set velocity target %d during ramping", vel);
             return false;
         }
@@ -697,7 +697,7 @@ bool test_bldc_telemetry_monitoring() noexcept {
     log_telemetry_data(*driver, "Initial state");
 
     // Test 2: Read telemetry during motor operation
-    if (driver->velocityControl.setTargetVelocity(TEST_VELOCITY_TARGET)) {
+    if (driver->velocityControl.setTargetVelocityRaw(TEST_VELOCITY_TARGET)) {
         ESP_LOGI(TAG, "Motor started for telemetry monitoring");
         
         for (int i = 0; i < 5; ++i) {
@@ -749,7 +749,7 @@ bool test_bldc_performance_benchmarks() noexcept {
 
     // Test 1: Command response time
     uint64_t start_time = esp_timer_get_time();
-    bool result = driver->velocityControl.setTargetVelocity(TEST_VELOCITY_TARGET);
+    bool result = driver->velocityControl.setTargetVelocityRaw(TEST_VELOCITY_TARGET);
     uint64_t end_time = esp_timer_get_time();
     uint64_t response_time = end_time - start_time;
 
@@ -875,7 +875,7 @@ bool test_bldc_edge_cases() noexcept {
     // Test 4: Extreme velocity targets
     std::vector<int16_t> extreme_velocities = {32767, -32768, 0};
     for (auto vel : extreme_velocities) {
-        if (driver->velocityControl.setTargetVelocity(vel)) {
+        if (driver->velocityControl.setTargetVelocityRaw(vel)) {
             ESP_LOGI(TAG, "Successfully set extreme velocity target: %d", vel);
         } else {
             ESP_LOGW(TAG, "Failed to set extreme velocity target: %d", vel);
@@ -951,7 +951,7 @@ bool test_bldc_startup_shutdown_procedures() noexcept {
     ESP_LOGI(TAG, "Startup sequence completed successfully");
 
     // Test 2: Motor operation
-    if (driver->velocityControl.setTargetVelocity(TEST_VELOCITY_TARGET)) {
+    if (driver->velocityControl.setTargetVelocityRaw(TEST_VELOCITY_TARGET)) {
         ESP_LOGI(TAG, "Motor started successfully");
         vTaskDelay(pdMS_TO_TICKS(2000));
     }
@@ -964,7 +964,7 @@ bool test_bldc_startup_shutdown_procedures() noexcept {
     ESP_LOGI(TAG, "Motor stopped");
 
     // Step 2: Reset to safe state
-    if (driver->velocityControl.setTargetVelocity(0)) {
+    if (driver->velocityControl.setTargetVelocityRaw(0)) {
         ESP_LOGI(TAG, "Velocity target reset to zero");
     }
 
