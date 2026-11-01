@@ -254,7 +254,7 @@ bool test_stepper_foc_position_control() noexcept {
     std::vector<int32_t> position_targets = {0, 100, 500, 1000, 2000, -500, -1000};
 
     for (auto target : position_targets) {
-        if (!driver->positionControl.setTargetPosition(target)) {
+        if (!driver->positionControl.setTargetPositionRaw(target)) {
             ESP_LOGE(TAG, "Failed to set position target %d", target);
             return false;
         }
@@ -388,7 +388,7 @@ bool test_stepper_position_control() noexcept {
     std::vector<int32_t> position_targets = {0, 100, 500, 1000, 2000, -500, -1000, 0};
 
     for (auto target : position_targets) {
-        if (!driver->positionControl.setTargetPosition(target)) {
+        if (!driver->positionControl.setTargetPositionRaw(target)) {
             ESP_LOGE(TAG, "Failed to set position target %d", target);
             return false;
         }
@@ -401,7 +401,7 @@ bool test_stepper_position_control() noexcept {
     // Test 2: Test position ramping
     ESP_LOGI(TAG, "Testing position ramping...");
     for (int32_t pos = 0; pos <= 1000; pos += 100) {
-        if (!driver->positionControl.setTargetPosition(pos)) {
+        if (!driver->positionControl.setTargetPositionRaw(pos)) {
             ESP_LOGE(TAG, "Failed to set position target %d during ramping", pos);
             return false;
         }
@@ -457,7 +457,7 @@ bool test_stepper_velocity_control() noexcept {
     std::vector<int16_t> velocity_targets = {0, 100, 500, 1000, 2000, -500, -1000};
 
     for (auto target : velocity_targets) {
-        if (!driver->velocityControl.setTargetVelocity(target)) {
+        if (!driver->velocityControl.setTargetVelocityRaw(target)) {
             ESP_LOGE(TAG, "Failed to set velocity target %d", target);
             return false;
         }
@@ -470,7 +470,7 @@ bool test_stepper_velocity_control() noexcept {
     // Test 2: Test velocity ramping
     ESP_LOGI(TAG, "Testing velocity ramping...");
     for (int16_t vel = 0; vel <= 1000; vel += 100) {
-        if (!driver->velocityControl.setTargetVelocity(vel)) {
+        if (!driver->velocityControl.setTargetVelocityRaw(vel)) {
             ESP_LOGE(TAG, "Failed to set velocity target %d during ramping", vel);
             return false;
         }
@@ -526,7 +526,7 @@ bool test_stepper_current_control() noexcept {
     ESP_LOGI(TAG, "Current loop gains configured");
 
     // Test 3: Test current control during operation
-    if (driver->velocityControl.setTargetVelocity(500)) {
+    if (driver->velocityControl.setTargetVelocityRaw(500)) {
         ESP_LOGI(TAG, "Motor started for current control testing");
         vTaskDelay(pdMS_TO_TICKS(1000));
         driver->velocityControl.stop();
@@ -567,7 +567,7 @@ bool test_stepper_stall_detection() noexcept {
     ESP_LOGI(TAG, "Stall detection parameters configured");
 
     // Test 2: Test stall detection during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for stall detection testing");
         
         // Simulate stall detection monitoring
@@ -612,7 +612,7 @@ bool test_stepper_telemetry_monitoring() noexcept {
     log_stepper_telemetry_data(*driver, "Initial state");
 
     // Test 2: Read telemetry during motor operation
-    if (driver->velocityControl.setTargetVelocity(TEST_VELOCITY_TARGET)) {
+    if (driver->velocityControl.setTargetVelocityRaw(TEST_VELOCITY_TARGET)) {
         ESP_LOGI(TAG, "Motor started for telemetry monitoring");
         
         for (int i = 0; i < 5; ++i) {
@@ -663,7 +663,7 @@ bool test_stepper_performance_benchmarks() noexcept {
 
     // Test 1: Command response time
     uint64_t start_time = esp_timer_get_time();
-    bool result = driver->positionControl.setTargetPosition(TEST_POSITION_TARGET);
+    bool result = driver->positionControl.setTargetPositionRaw(TEST_POSITION_TARGET);
     uint64_t end_time = esp_timer_get_time();
     uint64_t response_time = end_time - start_time;
 
@@ -739,7 +739,7 @@ bool test_stepper_error_handling() noexcept {
     }
 
     // Test 4: Invalid position targets
-    if (driver->positionControl.setTargetPosition(INT32_MAX)) {
+    if (driver->positionControl.setTargetPositionRaw(INT32_MAX)) {
         ESP_LOGW(TAG, "Unexpected success with extreme position target");
     } else {
         ESP_LOGI(TAG, "Correctly rejected extreme position target");
@@ -780,7 +780,7 @@ bool test_stepper_edge_cases() noexcept {
     // Test 3: Extreme position targets
     std::vector<int32_t> extreme_positions = {INT32_MAX, INT32_MIN, 0};
     for (auto pos : extreme_positions) {
-        if (driver->positionControl.setTargetPosition(pos)) {
+        if (driver->positionControl.setTargetPositionRaw(pos)) {
             ESP_LOGI(TAG, "Successfully set extreme position target: %d", pos);
         } else {
             ESP_LOGW(TAG, "Failed to set extreme position target: %d", pos);
@@ -790,7 +790,7 @@ bool test_stepper_edge_cases() noexcept {
     // Test 4: Extreme velocity targets
     std::vector<int16_t> extreme_velocities = {INT16_MAX, INT16_MIN, 0};
     for (auto vel : extreme_velocities) {
-        if (driver->velocityControl.setTargetVelocity(vel)) {
+        if (driver->velocityControl.setTargetVelocityRaw(vel)) {
             ESP_LOGI(TAG, "Successfully set extreme velocity target: %d", vel);
         } else {
             ESP_LOGW(TAG, "Failed to set extreme velocity target: %d", vel);
@@ -873,7 +873,7 @@ bool test_stepper_startup_shutdown_procedures() noexcept {
     ESP_LOGI(TAG, "Startup sequence completed successfully");
 
     // Test 2: Motor operation
-    if (driver->positionControl.setTargetPosition(TEST_POSITION_TARGET)) {
+    if (driver->positionControl.setTargetPositionRaw(TEST_POSITION_TARGET)) {
         ESP_LOGI(TAG, "Motor started successfully");
         vTaskDelay(pdMS_TO_TICKS(2000));
     }
@@ -886,7 +886,7 @@ bool test_stepper_startup_shutdown_procedures() noexcept {
     ESP_LOGI(TAG, "Motor stopped");
 
     // Step 2: Reset to safe state
-    if (driver->positionControl.setTargetPosition(0)) {
+    if (driver->positionControl.setTargetPositionRaw(0)) {
         ESP_LOGI(TAG, "Position target reset to zero");
     }
 
