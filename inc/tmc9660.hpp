@@ -4875,21 +4875,28 @@ public:
    * If no communication occurs before timeout expires, the chip faults or
    * disables motor outputs.
    *
-   * Refer to Parameters #10 & #11 in Global Bank 0 (Table 43).
-   * See datasheet page 89 for details.
+   * Global bank 0 parameters 3 (`HEARTBEAT_MONITORING_CONFIG`) and 4
+   * (`HEARTBEAT_MONITORING_TIMEOUT`), written with SGP — never with SAP, where ids 3/4 are
+   * MOTOR_PWM_FREQUENCY / COMMUTATION_MODE (Parameter Mode Reference Manual, global
+   * parameters bank 0). The watchdog only sees datagrams on the interface(s) it monitors, so
+   * it must be armed for the interface the host actually uses: SPI on SPI-connected boards
+   * such as Vortex V1.
    */
   struct Heartbeat {
-    /** @brief Enable the heartbeat monitor and set timeout.
+    /** @brief Arm or disarm the heartbeat monitor on an explicit interface.
      *
-     * @param mode ENABLE or DISABLE the watchdog
-     * @param timeout_ms Timeout in milliseconds
-     * @return true if both values written successfully
+     * @param mode Interface(s) to monitor, or DISABLED.
+     * @param timeout_ms Timeout in milliseconds (1 … 2^32−1).
+     * @return true if both values were written successfully.
      *
-     * - Parameters:
-     *   - `HEARTBEAT_MONITORING_CONFIG`
-     *   - `HEARTBEAT_MONITORING_TIMEOUT`
+     * The timeout is written before the interface, so arming never runs with a stale
+     * timeout. Both writes go to global bank 0.
      */
     bool configure(tmc9660::tmcl::HeartbeatMonitoringConfig mode, uint32_t timeout_ms) noexcept;
+
+    /** @brief Interface value matching the driver's own transport: SPI_INTERFACE for an
+     *  SPI CommType, TMCL_UART_INTERFACE for UART. */
+    [[nodiscard]] tmc9660::tmcl::HeartbeatMonitoringConfig transportInterface() const noexcept;
 
     //-------------------------------------------------------------------------
     // Auto-Configuration
@@ -4911,11 +4918,21 @@ public:
        * Typical values: 500-5000ms (default: 1000ms)
        */
       std::optional<uint32_t> timeoutMs; //!< Heartbeat timeout [ms] (optional, default: 1000ms)
+
+      /** @brief Interface the watchdog monitors when enabled (optional).
+       *
+       * Default: the transport this driver instance talks over (transportInterface()), i.e.
+       * SPI_INTERFACE on SPI boards. Releases before 1.1.0 always armed TMCL_UART_INTERFACE,
+       * which on an SPI board never sees traffic. Set TMCL_UART_AND_SPI_INTERFACE to watch
+       * both. Ignored when @ref enable is false.
+       */
+      std::optional<tmc9660::tmcl::HeartbeatMonitoringConfig> interface;
     };
 
-    /** @brief Auto-configure heartbeat parameters.
+    /** @brief Configure heartbeat monitoring from a HeartbeatConfig.
      *
-     * Configures heartbeat monitoring based on high-level requirements.
+     * Disabled unless @c enable is set. When enabled, the monitored interface is
+     * @c interface if given, otherwise the driver's own transport (no guessing).
      *
      * @param config Heartbeat configuration (see HeartbeatConfig)
      * @return true if configuration succeeded, false otherwise

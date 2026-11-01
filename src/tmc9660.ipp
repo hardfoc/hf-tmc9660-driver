@@ -5609,17 +5609,25 @@ bool TMC9660<CommType>::Heartbeat::configure(tmc9660::tmcl::HeartbeatMonitoringC
 //-------------------------------------------------------------------------
 
 template <typename CommType>
+tmc9660::tmcl::HeartbeatMonitoringConfig
+TMC9660<CommType>::Heartbeat::transportInterface() const noexcept {
+  return (driver.comm_.mode() == CommMode::SPI)
+             ? tmc9660::tmcl::HeartbeatMonitoringConfig::SPI_INTERFACE
+             : tmc9660::tmcl::HeartbeatMonitoringConfig::TMCL_UART_INTERFACE;
+}
+
+template <typename CommType>
 bool TMC9660<CommType>::Heartbeat::configureAuto(const HeartbeatConfig& config) noexcept {
   constexpr bool DEFAULT_ENABLE = false;
   constexpr uint32_t DEFAULT_TIMEOUT_MS = 1000;
 
-  bool enable = config.enable.value_or(DEFAULT_ENABLE);
-  uint32_t timeout = config.timeoutMs.value_or(DEFAULT_TIMEOUT_MS);
+  const bool enable = config.enable.value_or(DEFAULT_ENABLE);
+  const uint32_t timeout = config.timeoutMs.value_or(DEFAULT_TIMEOUT_MS);
 
-  // HeartbeatMonitoringConfig: DISABLED, TMCL_UART_INTERFACE, SPI_INTERFACE
-  // For simple enable/disable, use TMCL_UART_INTERFACE when enabled (most common)
-  tmc9660::tmcl::HeartbeatMonitoringConfig mode =
-      enable ? tmc9660::tmcl::HeartbeatMonitoringConfig::TMCL_UART_INTERFACE
+  // Explicit interface, defaulting to the transport this driver talks over. Arming the UART
+  // watchdog on an SPI board (the pre-1.1.0 behaviour) monitors an idle interface.
+  const tmc9660::tmcl::HeartbeatMonitoringConfig mode =
+      enable ? config.interface.value_or(transportInterface())
              : tmc9660::tmcl::HeartbeatMonitoringConfig::DISABLED;
 
   return configure(mode, timeout);
@@ -5726,10 +5734,12 @@ bool TMC9660<CommType>::Globals::getHostAddress(uint8_t& address) noexcept {
 template <typename CommType>
 bool TMC9660<CommType>::Globals::configureHeartbeat(tmc9660::tmcl::HeartbeatMonitoringConfig iface,
                                           uint32_t timeout_ms) noexcept {
-  bool ok = writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_CONFIG,
-                       static_cast<uint32_t>(iface));
-  ok &= writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_TIMEOUT, timeout_ms);
-  return ok;
+  // Timeout first, so the watchdog is never armed with a stale timeout.
+  if (!writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_TIMEOUT, timeout_ms)) {
+    return false;
+  }
+  return writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_CONFIG,
+                    static_cast<uint32_t>(iface));
 }
 template <typename CommType>
 bool TMC9660<CommType>::Globals::getHeartbeat(tmc9660::tmcl::HeartbeatMonitoringConfig& iface,
