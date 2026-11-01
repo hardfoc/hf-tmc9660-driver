@@ -5413,7 +5413,7 @@ bool TMC9660<CommType>::NvmStorage::recallFromFlash() noexcept {
   if (!driver.sendCommand(tmc9660::tmcl::Op::FactoryDefault, 0, 0, 0, nullptr))
     return false;
   // Give the controller some time to process and then check status flag
-  comm_.delayMs(50);
+  driver.comm_.delayMs(50);
   uint32_t flags = 0;
   if (!driver.telemetry.getGeneralStatusFlags(flags))
     return false;
