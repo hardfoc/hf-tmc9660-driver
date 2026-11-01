@@ -5525,36 +5525,192 @@ bool TMC9660<CommType>::Script::getMaxBreakpointCount(uint32_t& count) noexcept 
 //**                  SUBSYSTEM: RamDebug                                **//
 //***************************************************************************
 
+// Encoding per Parameter Mode Reference Manual Table 16: the RAMDebug sub-command goes in
+// TYPE, its first argument in MOTOR/BANK (4 bits on the wire) and its second in VALUE.
+
 template <typename CommType>
-bool TMC9660<CommType>::RamDebug::init(uint32_t sampleCount) noexcept {
-  bool ok = true;
-  // Initialize/reset RAM debug
-  ok &= driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 0, 0, 0, nullptr);
-  // Set number of samples to capture
-  ok &= driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 1, 0, sampleCount, nullptr);
+bool TMC9660<CommType>::RamDebug::cmd(tmc9660::tmcl::RamDebugType type, uint8_t motor,
+                                      uint32_t value, uint32_t* reply) noexcept {
+  return driver.sendCommand(tmc9660::tmcl::Op::RamDebug, static_cast<uint16_t>(type), motor,
+                            value, reply);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::reset() noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::INITIALISE_RESET, 0, 0);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setSampleCount(uint32_t totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_SAMPLE_COUNT, 0, totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setPrescaler(uint32_t prescaler) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_PRESCALER, 0, prescaler);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::addChannel(const Channel& channel) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_CHANNEL, static_cast<uint8_t>(channel.type),
+             channel.address());
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setTriggerChannel(const Channel& channel) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_TRIGGER_CHANNEL, static_cast<uint8_t>(channel.type),
+             channel.address());
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setTriggerMaskShift(uint32_t mask, uint8_t shift) noexcept {
+  if (shift > 15U) {
+    return false; // MOTOR/BANK is a 4-bit field in both SPI and UART frames.
+  }
+  return cmd(tmc9660::tmcl::RamDebugType::SET_TRIGGER_MASK_SHIFT, shift, mask);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::enableTrigger(TriggerType type, uint32_t threshold) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::ENABLE_TRIGGER, static_cast<uint8_t>(type), threshold);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getState(tmc9660::tmcl::RamDebugState& state) noexcept {
+  uint32_t raw = 0;
+  if (!cmd(tmc9660::tmcl::RamDebugType::GET_STATE, 0, 0, &raw)) {
+    return false;
+  }
+  if (raw > static_cast<uint32_t>(tmc9660::tmcl::RamDebugState::PRETRIGGER)) {
+    return false; // Not a Table 17 state.
+  }
+  state = static_cast<tmc9660::tmcl::RamDebugState>(raw);
+  return true;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::readSample(uint32_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::READ_SAMPLE, 0, index, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::readSamples(uint32_t first, std::span<uint32_t> out,
+                                              size_t* read) noexcept {
+  if (read != nullptr) {
+    *read = 0;
+  }
+  constexpr size_t kChunk = detail::kBatchChunk;
+  std::array<TMCLFrame, kChunk> frames{};
+  std::array<TMCLReply, kChunk> replies{};
+  size_t total = 0;
+  while (total < out.size()) {
+    const size_t n = std::min(kChunk, out.size() - total);
+    for (size_t i = 0; i < n; ++i) {
+      frames[i] = TMCLFrame{};
+      frames[i].opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::RamDebug);
+      frames[i].type = static_cast<uint16_t>(tmc9660::tmcl::RamDebugType::READ_SAMPLE);
+      frames[i].value = first + static_cast<uint32_t>(total + i);
+    }
+    size_t done = 0;
+    const bool transport_ok = driver.sendCommandBatch(
+        std::span<const TMCLFrame>(frames.data(), n), std::span<TMCLReply>(replies.data(), n),
+        &done);
+    for (size_t i = 0; i < done; ++i) {
+      if (!replies[i].isOK()) {
+        return false; // past the captured data, or not COMPLETE yet
+      }
+      out[total] = replies[i].value;
+      ++total;
+      if (read != nullptr) {
+        *read = total;
+      }
+    }
+    if (!transport_ok || done < n) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getInfo(Info kind, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_INFO, 0, static_cast<uint32_t>(kind), &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getChannelType(uint8_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_CHANNEL_TYPE, index, 0, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getChannelAddress(uint8_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_CHANNEL_ADDRESS, index, 0, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setPretriggerCount(uint32_t totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_PRETRIGGER_COUNT, 0, totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getPretriggerCount(uint32_t& totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_PRETRIGGER_COUNT, 0, 0, &totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::configure(const CaptureConfig& config) noexcept {
+  const size_t channels = config.channelCount;
+  if (channels == 0U || channels > kMaxChannels || config.samplesPerChannel == 0U ||
+      config.pretriggerSamplesPerChannel > config.samplesPerChannel ||
+      config.trigger.shift > 15U) {
+    return false;
+  }
+  const uint32_t total = config.samplesPerChannel * static_cast<uint32_t>(channels);
+  const uint32_t pretrigger =
+      config.pretriggerSamplesPerChannel * static_cast<uint32_t>(channels);
+  bool ok = reset();
+  ok = ok && setSampleCount(total);
+  ok = ok && setPrescaler(config.prescaler);
+  for (size_t i = 0; ok && i < channels; ++i) {
+    ok = addChannel(config.channels[i]);
+  }
+  ok = ok && setPretriggerCount(pretrigger);
+  if (ok && config.trigger.type != TriggerType::UNCONDITIONAL) {
+    ok = setTriggerMaskShift(config.trigger.mask, config.trigger.shift);
+    ok = ok && setTriggerChannel(config.trigger.source);
+  }
   return ok;
 }
 
 template <typename CommType>
+bool TMC9660<CommType>::RamDebug::start(const Trigger& trigger) noexcept {
+  return enableTrigger(trigger.type, trigger.threshold);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::init(uint32_t sampleCount) noexcept {
+  return reset() && setSampleCount(sampleCount);
+}
+
+template <typename CommType>
 bool TMC9660<CommType>::RamDebug::startCapture() noexcept {
-  return driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 6, 0, 0, nullptr);
+  return enableTrigger(TriggerType::UNCONDITIONAL, 0);
 }
 
 template <typename CommType>
 bool TMC9660<CommType>::RamDebug::readData(uint32_t index, uint32_t& data) noexcept {
-  // Use ReadMem command to read memory at given index (assuming index is an
-  // address in the debug buffer)
-  return driver.sendCommand(tmc9660::tmcl::Op::ReadMem, 0, 0, index, &data);
+  return readSample(index, data);
 }
 
 template <typename CommType>
 bool TMC9660<CommType>::RamDebug::getStatus(bool& isRunning) noexcept {
-  uint32_t state = 0;
-  if (!driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 8, 0, 0, &state)) {
+  tmc9660::tmcl::RamDebugState state{};
+  if (!getState(state)) {
     return false;
   }
-  // Interpret state: assume 0 = Idle, non-zero = Running
-  isRunning = (state != 0);
+  isRunning = state == tmc9660::tmcl::RamDebugState::TRIGGER ||
+              state == tmc9660::tmcl::RamDebugState::CAPTURE ||
+              state == tmc9660::tmcl::RamDebugState::PRETRIGGER;
   return true;
 }
 

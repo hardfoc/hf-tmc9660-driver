@@ -4784,37 +4784,158 @@ public:
   /** @brief Subsystem for debug and data logging features
    */
   struct RamDebug {
-    /** @brief Initialize and configure the RAMDebug feature (data logging).
+    /// Maximum number of capture channels (reference manual: "up to four channels").
+    static constexpr size_t kMaxChannels = 4;
+
+    /** @brief Capture/trigger channel source (MOTOR/BANK field of types 4 and 5, Table 16). */
+    enum class ChannelType : uint8_t {
+      DISABLED = 0,         ///< Channel off.
+      AXIS_PARAMETER = 1,   ///< Axis parameter (GAP number) of one motor.
+      GLOBAL_PARAMETER = 3, ///< Global parameter of one bank. (verify against datasheet: the
+                            ///< TMC9660 manual lists 3; generic PyTrinamic code uses 8.)
+    };
+
+    /** @brief Trigger condition (MOTOR/BANK field of type 7, Table 16). */
+    enum class TriggerType : uint8_t {
+      UNCONDITIONAL = 0,
+      RISING_EDGE_SIGNED = 1,
+      FALLING_EDGE_SIGNED = 2,
+      DUAL_EDGE_SIGNED = 3,
+      RISING_EDGE_UNSIGNED = 4,
+      FALLING_EDGE_UNSIGNED = 5,
+      DUAL_EDGE_UNSIGNED = 6,
+    };
+
+    /** @brief Selector for GET_INFO (VALUE field of type 10, Table 16). */
+    enum class Info : uint8_t {
+      MAX_CHANNELS = 0,      ///< Number of channels.
+      BUFFER_SIZE = 1,       ///< Buffer size in samples.
+      FREQUENCY = 2,         ///< RAMDebug base frequency [Hz] (≤ 25 kHz, Table 15).
+      CAPTURED_SAMPLES = 3,  ///< Samples captured so far.
+      TRIGGER_PRESCALER = 4, ///< Prescaler value at the trigger event.
+    };
+
+    /** @brief One capture or trigger source.
      *
-     * This sends a command to initialize the RAM debug system and reset any
-     * previous configurations.
-     * @param sample_count Number of samples to collect in the buffer.
-     * @return true if the RAM debug was initialized properly.
+     * Encoded as the VALUE of types 4/5: `motor_or_bank << 24 | (number & 0xFFF)` with the
+     * channel type in MOTOR/BANK (reference manual Table 16 and "Set Up the Channels"). */
+    struct Channel {
+      ChannelType type = ChannelType::DISABLED;
+      uint8_t motorOrBank = 0; ///< Motor index (axis) or bank number (global).
+      uint16_t number = 0;     ///< Parameter number (12 bit).
+
+      /// Axis parameter source.
+      static constexpr Channel axis(tmc9660::tmcl::Parameters p, uint8_t motor = 0) noexcept {
+        return Channel{ChannelType::AXIS_PARAMETER, motor, static_cast<uint16_t>(p)};
+      }
+      /// Global parameter source; the bank follows from the enum type.
+      template <typename BankEnum>
+        requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+      static constexpr Channel global(BankEnum p) noexcept {
+        return Channel{ChannelType::GLOBAL_PARAMETER, tmc9660::tmcl::kGlobalBankOf<BankEnum>,
+                       static_cast<uint16_t>(p)};
+      }
+      /// VALUE field for SET_CHANNEL / SET_TRIGGER_CHANNEL.
+      [[nodiscard]] constexpr uint32_t address() const noexcept {
+        return (static_cast<uint32_t>(motorOrBank) << 24) |
+               (static_cast<uint32_t>(number) & 0xFFFU);
+      }
+    };
+
+    /** @brief Trigger setup (types 5, 6 and 7). */
+    struct Trigger {
+      Channel source{}; ///< Trigger channel (ignored if UNCONDITIONAL).
+      TriggerType type = TriggerType::UNCONDITIONAL;
+      uint32_t threshold = 0;      ///< Compared after mask/shift.
+      uint32_t mask = 0xFFFFFFFFU; ///< Applied to the trigger value before compare.
+      uint8_t shift = 0;           ///< Right shift after the mask (0…15, see below).
+    };
+
+    /** @brief Full capture configuration for configure().
+     *
+     * Sample counts are **per channel**; the driver multiplies by the channel count because
+     * the chip expects totals ("not per-channel", types 1 and 13). */
+    struct CaptureConfig {
+      std::array<Channel, kMaxChannels> channels{}; ///< First @ref channelCount are used.
+      size_t channelCount = 0;
+      uint32_t samplesPerChannel = 0;
+      uint32_t pretriggerSamplesPerChannel = 0;
+      uint32_t prescaler = 0; ///< f_sample = f_RAMDebug / (prescaler + 1).
+      Trigger trigger{};
+    };
+
+    //--- Table 16 commands, one per type code -------------------------------------------
+    /** @brief Type 0: reset RAMDebug and enter IDLE. */
+    bool reset() noexcept;
+    /** @brief Type 1: total number of samples to collect (all channels). */
+    bool setSampleCount(uint32_t totalSamples) noexcept;
+    /** @brief Type 3: sampling divider (f = f_RAMDebug / (prescaler + 1)). */
+    bool setPrescaler(uint32_t prescaler) noexcept;
+    /** @brief Type 4: append a capture channel (channel number = call order). State must be IDLE.
      */
+    bool addChannel(const Channel& channel) noexcept;
+    /** @brief Type 5: trigger source. */
+    bool setTriggerChannel(const Channel& channel) noexcept;
+    /** @brief Type 6: trigger mask (VALUE) and shift (MOTOR/BANK).
+     *
+     * The shift travels in the 4-bit MOTOR/BANK field of the frame, so only 0…15 can be
+     * encoded; larger shifts are rejected (verify against datasheet whether the firmware
+     * reads more bits). */
+    bool setTriggerMaskShift(uint32_t mask, uint8_t shift) noexcept;
+    /** @brief Type 7: arm the trigger, which starts the measurement. */
+    bool enableTrigger(TriggerType type, uint32_t threshold) noexcept;
+    /** @brief Type 8: current state (Table 17). */
+    bool getState(tmc9660::tmcl::RamDebugState& state) noexcept;
+    /** @brief Type 9: one sample. Samples are interleaved by channel: index i is channel
+     *  i % channels, sample i / channels. The index travels in VALUE (the 4-bit MOTOR/BANK
+     *  field cannot hold up to 4096 indices; matches PyTrinamic's RAMDebug.get_samples —
+     *  verify against datasheet, whose table lists MOTOR/BANK). */
+    bool readSample(uint32_t index, uint32_t& value) noexcept;
+    /** @brief Type 9, pipelined: read @p out.size() consecutive samples starting at @p first.
+     *  @param[out] read Samples actually read (stops at the first non-OK reply, which the
+     *              chip returns past the captured count).
+     *  @return true if all requested samples were read. */
+    bool readSamples(uint32_t first, std::span<uint32_t> out, size_t* read = nullptr) noexcept;
+    /** @brief Type 10: general information. */
+    bool getInfo(Info kind, uint32_t& value) noexcept;
+    /** @brief Type 11: channel type of configured channel @p index (index in MOTOR/BANK). */
+    bool getChannelType(uint8_t index, uint32_t& value) noexcept;
+    /** @brief Type 12: channel address of configured channel @p index (index in MOTOR/BANK). */
+    bool getChannelAddress(uint8_t index, uint32_t& value) noexcept;
+    /** @brief Type 13: total pretrigger samples (all channels). */
+    bool setPretriggerCount(uint32_t totalSamples) noexcept;
+    /** @brief Type 14: total pretrigger samples (all channels). */
+    bool getPretriggerCount(uint32_t& totalSamples) noexcept;
+
+    //--- High-level sequence ------------------------------------------------------------
+    /** @brief Reset and configure a capture without arming it.
+     *
+     * Sends, in the vendor order (PyTrinamic RAMDebug.start_measurement): reset (0), sample
+     * count (1), prescaler (3), channels (4), pretrigger count (13), and for a conditional
+     * trigger mask/shift (6) and trigger channel (5). Arm with start().
+     * @return false on an invalid config (no channels, too many channels, zero samples,
+     *         pretrigger > samples, shift > 15) or a TMCL error. */
+    bool configure(const CaptureConfig& config) noexcept;
+    /** @brief Arm the trigger configured by configure() (type 7). */
+    bool start(const Trigger& trigger) noexcept;
+
+    //--- Compatibility (pre-1.1.0 names, corrected) ------------------------------------
+    /** @brief Reset and set the total sample count (types 0 and 1). */
     bool init(uint32_t sample_count) noexcept;
-
-    /** @brief Start capturing data using RAMDebug.
-     * @return true if the capture started successfully.
-     */
+    /** @brief Start an unconditional capture (type 7, UNCONDITIONAL). Earlier releases sent
+     *  type 6 (SET_TRIGGER_MASK_SHIFT) here, which never started a capture. */
     bool startCapture() noexcept;
-
-    /** @brief Read a captured sample from RAMDebug buffer.
-     * @param index Sample index to read (0-based).
-     * @param[out] data Variable to store the 32-bit sample data.
-     * @return true if the data was read successfully.
-     */
+    /** @brief Read one sample (type 9). Earlier releases sent opcode ReadMem instead. */
     bool readData(uint32_t index, uint32_t& data) noexcept;
-
-    /** @brief Get the current state of the RAM debug engine.
-     * @param[out] is_running Will be set to true if capture is ongoing, false if
-     * stopped or idle.
-     * @return true if the status was retrieved successfully.
-     */
+    /** @brief True while PRETRIGGER, TRIGGER or CAPTURE; false in IDLE and COMPLETE.
+     *  Earlier releases reported COMPLETE (3) as running. */
     bool getStatus(bool& is_running) noexcept;
 
   private:
     friend class TMC9660;
     explicit RamDebug(TMC9660& parent) noexcept : driver(parent) {}
+    bool cmd(tmc9660::tmcl::RamDebugType type, uint8_t motor, uint32_t value,
+             uint32_t* reply = nullptr) noexcept;
     TMC9660& driver;
   } ramDebug{*this};
 
