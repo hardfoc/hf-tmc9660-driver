@@ -43,6 +43,12 @@ Main driver class for TMC9660 motor controller.
 | `writeGlobalParameter()` | `bool writeGlobalParameter(GlobalParamBankVariant id, uint8_t bank, uint32_t value)` | [`inc/tmc9660.hpp#L320`](../inc/tmc9660.hpp#L320) |
 | `readGlobalParameter()` | `bool readGlobalParameter(GlobalParamBankVariant id, uint8_t bank, uint32_t& value)` | [`inc/tmc9660.hpp#L330`](../inc/tmc9660.hpp#L330) |
 | `sendCommand()` | `bool sendCommand(tmcl::Op opcode, uint16_t type = 0, uint8_t motor = 0, uint32_t value = 0, uint32_t* reply = nullptr)` | [`inc/tmc9660.hpp#L334`](../inc/tmc9660.hpp#L334) |
+| `readGlobal()` / `writeGlobal()` | `bool readGlobal(BankEnum id, uint32_t& value)` — bank deduced from `GlobalParamBank0/2/3`; the overloads taking `tmcl::Parameters` are deleted | See source |
+| `readParameters()` / `writeParameters()` | `bool readParameters(std::span<ParameterAccess> items)` — pipelined GAP/SAP batch | See source |
+| `readGlobalParameters()` / `writeGlobalParameters()` | `bool readGlobalParameters(std::span<GlobalParameterAccess> items)` — pipelined GGP/SGP batch, bank from the enum type | See source |
+| `sendCommandBatch()` | `bool sendCommandBatch(std::span<const TMCLFrame> rq, std::span<TMCLReply> rp, size_t* completed = nullptr)` | See source |
+
+See [Timing and Throughput](timing_and_throughput.md) for the cost of each access and the batch rules.
 
 ### Enums
 
@@ -185,7 +191,11 @@ SPI communication interface base class.
 
 | Method | Signature | Location |
 |--------|-----------|----------|
-| `spiTransfer()` | `bool spiTransfer(std::array<uint8_t,8>& tx, std::array<uint8_t,8>& rx)` | See source |
+| `spiTransferTMCL()` | `bool spiTransferTMCL(std::array<uint8_t,8>& tx, std::array<uint8_t,8>& rx)` (implemented by the platform) | See source |
+| `transferTMCL()` | One access: request, NOT_READY-polled reply-request | See source |
+| `transferTMCLBatch()` | N accesses in N + 1 datagrams (idempotent requests only) | See source |
+| `setTmclTiming()` / `tmclTiming()` | `TmclSpiTiming`: `frameGapUs`, `pollIntervalUs`, `pollIntervalMaxUs`, `maxPolls`, `verifyReplyOpcode`; `TmclSpiTiming::legacy()` | See source |
+| `tmclStats()` / `resetTmclStats()` | `TmclSpiStats`: frames, NOT_READY re-sends, stale replies, recoveries, failures | See source |
 
 ### UartCommInterface
 

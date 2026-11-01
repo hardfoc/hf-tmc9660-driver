@@ -4919,7 +4919,7 @@ public:
     /** @brief Arm the trigger configured by configure() (type 7). */
     bool start(const Trigger& trigger) noexcept;
 
-    //--- Compatibility (pre-1.1.0 names, corrected) ------------------------------------
+    //--- Compatibility (names from releases up to 1.0.0, corrected) ------------------------------------
     /** @brief Reset and set the total sample count (types 0 and 1). */
     bool init(uint32_t sample_count) noexcept;
     /** @brief Start an unconditional capture (type 7, UNCONDITIONAL). Earlier releases sent
@@ -5043,7 +5043,7 @@ public:
       /** @brief Interface the watchdog monitors when enabled (optional).
        *
        * Default: the transport this driver instance talks over (transportInterface()), i.e.
-       * SPI_INTERFACE on SPI boards. Releases before 1.1.0 always armed TMCL_UART_INTERFACE,
+       * SPI_INTERFACE on SPI boards. Releases up to 1.0.0 always armed TMCL_UART_INTERFACE,
        * which on an SPI board never sees traffic. Set TMCL_UART_AND_SPI_INTERFACE to watch
        * both. Ignored when @ref enable is false.
        */

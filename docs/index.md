@@ -35,6 +35,7 @@ Welcome! This directory contains step-by-step guides for installing, building, a
 
 8. **[🚀 Bootloader Initialization](special_feature_bootloader.md)** – Critical bootloader setup guide
 9. **[📡 Communication Protocols](special_feature_protocols.md)** – Detailed protocol specifications
+9. **[⏱️ Timing and Throughput](timing_and_throughput.md)** – Cost of one TMCL access, timing configuration, pipelined batches
 
 ### **Troubleshooting**
 

@@ -221,8 +221,16 @@ while (received < 9) {
 
 **Issue**: SPI returns `SPI_STATUS=OK` (0xFF) but `TMCL_STATUS=REPLY_INVALID_CMD` (0x02) on the second of two SPI TMCL transactions, often only when verbose logging is *off*. The retry loop for `SPI_STATUS_NOT_READY` does not catch it because the chip already considers the SPI byte-level transfer complete.
 
-**Solution**:
-- Add a deterministic post-transfer delay in `spiTransferTMCL` (~150 µs is enough on a Vortex V1 / ESP32-C6 reference). The two-transaction TMCL pattern (TX1 = command, TX2 = NO_OP) needs the chip enough time between transactions to load the previous parameter-mode command into its TMCL parser; back-to-back SPI bursts at >=1 MHz starve it. UART TMCL (9 bytes / 115200 = ~780 µs / frame) already paces the chip at the wire level and does not need this delay (see [Platform Integration](platform_integration.md)).
+**Cause**: The request datagram reached the chip while it was still busy and came back
+`SPI_STATUS_NOT_READY`. Per the reference manual the command in a NOT_READY datagram is
+ignored. Releases up to 1.0.0 did not check the status of the request datagram, so the request
+was dropped and the following reply-request returned the reply to the previous reply-request
+(status 2, invalid command).
+
+**Solution**: Fixed in the driver. `transferTMCL()` re-sends a request that comes back
+NOT_READY, checks that the reply echoes the request's opcode, and fails instead of returning a
+reply that belongs to another datagram. A post-transfer delay in `spiTransferTMCL` is no
+longer needed. See [Timing and Throughput](timing_and_throughput.md).
 
 ## Optional SPI wire-level TMCL logging
 

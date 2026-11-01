@@ -5786,7 +5786,7 @@ bool TMC9660<CommType>::Heartbeat::configureAuto(const HeartbeatConfig& config) 
   const uint32_t timeout = config.timeoutMs.value_or(DEFAULT_TIMEOUT_MS);
 
   // Explicit interface, defaulting to the transport this driver talks over. Arming the UART
-  // watchdog on an SPI board (the pre-1.1.0 behaviour) monitors an idle interface.
+  // watchdog on an SPI board (the behaviour up to 1.0.0) monitors an idle interface.
   const tmc9660::tmcl::HeartbeatMonitoringConfig mode =
       enable ? config.interface.value_or(transportInterface())
              : tmc9660::tmcl::HeartbeatMonitoringConfig::DISABLED;

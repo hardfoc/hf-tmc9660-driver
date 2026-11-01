@@ -206,7 +206,7 @@ enum class SPIStatus : uint8_t {
  *
  * @ref frameGapUs is kept for buses or firmware revisions that need a settle time between the
  * request and the next datagram; set it from a measurement (see the `tmcl_timing` example),
- * not from a guess. Releases before 1.1.0 hard-coded 1000 µs here (see @ref legacy()).
+ * not from a guess. Releases up to 1.0.0 hard-coded 1000 µs here (see @ref legacy()).
  */
 struct TmclSpiTiming {
   /// Wait between the request datagram and the datagram that clocks out its reply [µs].
@@ -239,7 +239,7 @@ struct TmclSpiTiming {
     return total;
   }
 
-  /// Settings of releases before 1.1.0: 1000 µs gap, fixed 200 µs × 50 polls, no echo check.
+  /// Settings of releases up to 1.0.0: 1000 µs gap, fixed 200 µs × 50 polls, no echo check.
   [[nodiscard]] static constexpr TmclSpiTiming legacy() noexcept {
     TmclSpiTiming t{};
     t.frameGapUs = 1000;

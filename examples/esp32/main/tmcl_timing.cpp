@@ -51,7 +51,7 @@ constexpr uint32_t kSpiClockHz = 1000000;
 constexpr size_t kSingleIterations = 2000;
 /// Batches per profile and batch size.
 constexpr size_t kBatchIterations = 500;
-/// Frame gaps swept (us). The first profile is the pre-1.1.0 legacy timing.
+/// Frame gaps swept (us). The first profile is the legacy timing of releases up to 1.0.0.
 constexpr std::array<uint32_t, 8> kGapSweepUs = {1000, 500, 250, 100, 50, 25, 10, 0};
 
 using Driver = TMC9660<Esp32Tmc9660SpiBus>;
@@ -236,7 +236,7 @@ void timingTask(void*) {
   ESP_LOGI(TAG, "SPI clock %" PRIu32 " Hz, %u single reads and %u batches per profile", kSpiClockHz,
            static_cast<unsigned>(kSingleIterations), static_cast<unsigned>(kBatchIterations));
 
-  runProfile(drv, *bus, TmclSpiTiming::legacy(), "legacy (pre-1.1.0)");
+  runProfile(drv, *bus, TmclSpiTiming::legacy(), "legacy (up to 1.0.0)");
   for (uint32_t gap : kGapSweepUs) {
     TmclSpiTiming t{};
     t.frameGapUs = gap;
