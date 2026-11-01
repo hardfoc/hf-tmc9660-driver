@@ -713,6 +713,8 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   tx.motor = motor;
   tx.value = value;
 
+#ifndef TMC9660_DISABLE_DEBUG_LOGGING
+  // Per-access name lookup and formatting; compiled out with TMC9660_DISABLE_DEBUG_LOGGING.
   // Debug logging for TMCL frame assembly
   const char* opName = tmc9660::tmcl::to_string(static_cast<tmc9660::tmcl::Op>(tx.opcode));
 
@@ -740,6 +742,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   TMC9660_LOG_DEBUG(comm_, 3, "TMC9660",
                     "[TMCL TX] %s (Op=0x%02X), Type=%s, Motor=0x%02X, Value=0x%08X", opName,
                     tx.opcode, typeStr, tx.motor, tx.value);
+#endif
 
   TMCLReply rep{};
   if (!comm_.transferTMCL(tx, rep, address_, nullptr, nullptr)) {
@@ -751,6 +754,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   if (out_tmcl_status)
     *out_tmcl_status = static_cast<tmc9660::tmcl::ReplyCode>(rep.status);
 
+#ifndef TMC9660_DISABLE_DEBUG_LOGGING
   // Debug logging for TMCL reply with decoded status and opcode
   // Note: SPI response format: byte0=SPI_STATUS, byte1=TMCL_STATUS, byte2=OPCODE, byte3-6=VALUE,
   // byte7=CHECKSUM
@@ -761,6 +765,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
       comm_, 3, "TMC9660",
       "[TMCL RX] %s (SPI_Status=0x%02X, TMCL_Status=0x%02X), Op=%s (0x%02X), Value=0x%08X",
       statusName, static_cast<uint8_t>(rep.spi_status), rep.status, rxOpName, rep.opcode, rep.value);
+#endif
 
   // Special handling for GetVersion command (Type=0 returns string format)
   if (opcode == tmc9660::tmcl::Op::GetVersion && type == 0) {
