@@ -394,17 +394,29 @@ public:
    */
   [[nodiscard]] bool readGlobal(uint16_t parameterId, uint8_t bank, uint32_t& value) noexcept;
 
-  /** @brief Same as readGlobal(uint16_t, …) using an axis parameter ID as the GGP TYPE field. */
-  [[nodiscard]] bool readGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t& value) noexcept {
-    return readGlobal(static_cast<uint16_t>(id), bank, value);
-  }
-
   /** @brief Write a global parameter via TMCL SGP. */
   [[nodiscard]] bool writeGlobal(uint16_t parameterId, uint8_t bank, uint32_t value) noexcept;
 
-  /** @brief Same as writeGlobal(uint16_t, …) using an axis parameter ID as the SGP TYPE field. */
-  [[nodiscard]] bool writeGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t value) noexcept {
-    return writeGlobal(static_cast<uint16_t>(id), bank, value);
+  /** @brief Axis parameter ids are not global parameter ids (removed; was a bank-aliasing trap).
+   *  Use readParameter() for axis parameters or a GlobalParamBank0/2/3 id for globals. */
+  bool readGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t& value) = delete;
+
+  /** @brief Axis parameter ids are not global parameter ids (removed; was a bank-aliasing trap).
+   *  Use writeParameter() for axis parameters or a GlobalParamBank0/2/3 id for globals. */
+  bool writeGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t value) = delete;
+
+  /** @brief Read a global parameter; the bank (0, 2 or 3) follows from the enum type. */
+  template <typename BankEnum>
+    requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+  [[nodiscard]] bool readGlobal(BankEnum id, uint32_t& value) noexcept {
+    return readGlobal(static_cast<uint16_t>(id), tmc9660::tmcl::kGlobalBankOf<BankEnum>, value);
+  }
+
+  /** @brief Write a global parameter; the bank (0, 2 or 3) follows from the enum type. */
+  template <typename BankEnum>
+    requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+  [[nodiscard]] bool writeGlobal(BankEnum id, uint32_t value) noexcept {
+    return writeGlobal(static_cast<uint16_t>(id), tmc9660::tmcl::kGlobalBankOf<BankEnum>, value);
   }
 
   // Variant type for global parameter banks (can be index or any bank enum)
@@ -413,23 +425,91 @@ public:
                    tmc9660::tmcl::GlobalParamBank3>;
 
   /** @brief Set (write) a global parameter on the TMC9660.
-   * @param id Global parameter ID number.
-   * @param bank Bank number for global parameter (can be Bank1, Bank2, or Bank3 enum).
+   * @param id Global parameter ID: a raw number, or a GlobalParamBank0/2/3 enum value.
+   * @param bank Bank number (0, 2 or 3). When @p id is a bank enum, @p bank must be that
+   *             enum's bank; a mismatch is rejected without touching the chip.
    * @param value 32-bit value to write.
-   * @return true if successfully written, false if an error occurred.
+   * @return true if successfully written, false if an error occurred or the bank mismatched.
    */
   [[nodiscard]] bool writeGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                           uint32_t value) noexcept;
 
   /** @brief Read a global parameter from the TMC9660.
-   * @param id Global parameter ID number.
-   * @param bank Bank number or index associated with the parameter (can be Bank1, Bank2, or Bank3
-   * enum).
+   * @param id Global parameter ID: a raw number, or a GlobalParamBank0/2/3 enum value.
+   * @param bank Bank number (0, 2 or 3). When @p id is a bank enum, @p bank must be that
+   *             enum's bank; a mismatch is rejected without touching the chip.
    * @param[out] value Reference to store the read 32-bit value.
-   * @return true if read successfully, false on error.
+   * @return true if read successfully, false on error or bank mismatch.
    */
   [[nodiscard]] bool readGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                          uint32_t& value) noexcept;
+
+  //--------------------------------------------------------------------------
+  // Batched (pipelined) parameter access
+  //--------------------------------------------------------------------------
+
+  /** @brief One element of a batched axis-parameter access (SAP/GAP). */
+  struct ParameterAccess {
+    tmc9660::tmcl::Parameters id{}; ///< Axis parameter.
+    uint32_t value = 0;             ///< Write: value to set. Read: value read back.
+    uint8_t motor = 0;              ///< Axis index.
+    tmc9660::tmcl::ReplyCode status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR; ///< TMCL status.
+    [[nodiscard]] bool ok() const noexcept {
+      return status == tmc9660::tmcl::ReplyCode::REPLY_OK;
+    }
+  };
+
+  /** @brief One element of a batched global-parameter access (SGP/GGP).
+   *
+   * Constructed only from a GlobalParamBank0/2/3 id, so the bank always matches the id. An
+   * axis tmcl::Parameters id does not convert (compile error), which keeps axis and global
+   * ids on their own banks. */
+  struct GlobalParameterAccess {
+    uint16_t id = 0;    ///< Global parameter number.
+    uint8_t bank = 0;   ///< Bank deduced from the enum type.
+    uint32_t value = 0; ///< Write: value to set. Read: value read back.
+    tmc9660::tmcl::ReplyCode status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR; ///< TMCL status.
+
+    template <typename BankEnum>
+      requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+    constexpr GlobalParameterAccess(BankEnum p,
+                                    uint32_t v = 0) noexcept // NOLINT(google-explicit-constructor)
+        : id(static_cast<uint16_t>(p)), bank(tmc9660::tmcl::kGlobalBankOf<BankEnum>), value(v) {}
+    GlobalParameterAccess(tmc9660::tmcl::Parameters, uint32_t = 0) = delete;
+    [[nodiscard]] bool ok() const noexcept {
+      return status == tmc9660::tmcl::ReplyCode::REPLY_OK;
+    }
+  };
+
+  /** @brief Read several axis parameters in one pipelined batch (GAP).
+   *
+   * On SPI, N reads cost N + 1 datagrams instead of 2N, and only one handshake wait per
+   * element (see SpiCommInterface::transferTMCLBatch and docs "Timing and throughput").
+   * Results land in each element's @c value and @c status, in order.
+   * @return true if every element was answered with REPLY_OK.
+   */
+  [[nodiscard]] bool readParameters(std::span<ParameterAccess> items) noexcept;
+
+  /** @brief Write several axis parameters in one pipelined batch (SAP). Same rules as
+   *  readParameters(); each element's @c status reports its own result. SAP is idempotent,
+   *  which the batch recovery path relies on. */
+  [[nodiscard]] bool writeParameters(std::span<ParameterAccess> items) noexcept;
+
+  /** @brief Read several global parameters in one pipelined batch (GGP). */
+  [[nodiscard]] bool readGlobalParameters(std::span<GlobalParameterAccess> items) noexcept;
+
+  /** @brief Write several global parameters in one pipelined batch (SGP). */
+  [[nodiscard]] bool writeGlobalParameters(std::span<GlobalParameterAccess> items) noexcept;
+
+  /** @brief Send raw TMCL frames as one pipelined batch.
+   *
+   * Lower-level form of the helpers above. Every request must be idempotent (see
+   * SpiCommInterface::transferTMCLBatch). Replies keep their TMCL status.
+   * @param[out] completed Optional: leading elements with a valid reply.
+   * @return true if every request got a well-formed reply (regardless of TMCL status). */
+  [[nodiscard]] bool sendCommandBatch(std::span<const TMCLFrame> requests,
+                                      std::span<TMCLReply> replies,
+                                      size_t* completed = nullptr) noexcept;
 
   /// Send a TMCL command. Optionally return the 32-bit reply value.
   /// When @p out_tmcl_status is non-null: set from the TMCL status byte after a successful
@@ -5101,6 +5181,10 @@ public:
   // PRIVATE MEMBERS
   //==================================================
 private:
+  /// Chunked driver for the batch helpers: build frames, run sendCommandBatch(), store results.
+  template <typename Item, typename MakeFrame, typename Store>
+  bool runBatch(std::span<Item> items, MakeFrame make_frame, Store store) noexcept;
+
   CommType& comm_; ///< Communication interface (transport) for
                                ///< sending/receiving data.
   uint8_t address_;            ///< Module address (0-127). Used primarily for UART

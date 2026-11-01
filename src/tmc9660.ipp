@@ -481,9 +481,33 @@ bool TMC9660<CommType>::readParameter(tmc9660::tmcl::Parameters id, uint32_t& va
  * @param value Parameter value to write
  * @return true if parameter was written successfully
  */
+namespace detail {
+/// Bank that @p id implies (0/2/3 for a bank enum, 0xFF for a raw number: any bank allowed).
+inline uint8_t impliedGlobalBank(
+    const std::variant<uint8_t, tmc9660::tmcl::GlobalParamBank0, tmc9660::tmcl::GlobalParamBank2,
+                       tmc9660::tmcl::GlobalParamBank3>& id) noexcept {
+  return std::visit(
+      [](auto&& arg) -> uint8_t {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (tmc9660::tmcl::IsGlobalParamBank<T>) {
+          return tmc9660::tmcl::kGlobalBankOf<T>;
+        } else {
+          return 0xFFU;
+        }
+      },
+      id);
+}
+} // namespace detail
+
 template <typename CommType>
 bool TMC9660<CommType>::writeGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                    uint32_t value) noexcept {
+  const uint8_t implied = detail::impliedGlobalBank(id);
+  if (implied != 0xFFU && implied != bank) {
+    TMC9660_LOG_DEBUG(comm_, 1, "TMC9660", "SGP rejected: id belongs to bank %u, not bank %u",
+                      static_cast<unsigned>(implied), static_cast<unsigned>(bank));
+    return false;
+  }
   uint16_t paramId =
       std::visit([](auto&& arg) -> uint16_t { return static_cast<uint16_t>(arg); }, id);
   return this->sendCommand(tmc9660::tmcl::Op::SGP, paramId, bank, value, nullptr);
@@ -504,9 +528,149 @@ bool TMC9660<CommType>::writeGlobalParameter(GlobalParamBankVariant id, uint8_t 
 template <typename CommType>
 bool TMC9660<CommType>::readGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                   uint32_t& value) noexcept {
+  const uint8_t implied = detail::impliedGlobalBank(id);
+  if (implied != 0xFFU && implied != bank) {
+    TMC9660_LOG_DEBUG(comm_, 1, "TMC9660", "GGP rejected: id belongs to bank %u, not bank %u",
+                      static_cast<unsigned>(implied), static_cast<unsigned>(bank));
+    return false;
+  }
   uint16_t paramId =
       std::visit([](auto&& arg) -> uint16_t { return static_cast<uint16_t>(arg); }, id);
   return this->sendCommand(tmc9660::tmcl::Op::GGP, paramId, bank, 0, &value);
+}
+
+//--------------------------------------------------------------------------
+// Batched (pipelined) parameter access
+//--------------------------------------------------------------------------
+
+template <typename CommType>
+bool TMC9660<CommType>::sendCommandBatch(std::span<const TMCLFrame> requests,
+                                         std::span<TMCLReply> replies,
+                                         size_t* completed) noexcept {
+  if constexpr (requires(CommType& c, std::span<const TMCLFrame> rq, std::span<TMCLReply> rp,
+                         uint8_t a, size_t* n) { c.transferTMCLBatch(rq, rp, a, n); }) {
+    return comm_.transferTMCLBatch(requests, replies, address_, completed);
+  } else {
+    // Transport without a batch primitive: plain request/reply loop.
+    if (completed != nullptr) {
+      *completed = 0;
+    }
+    if (replies.size() < requests.size()) {
+      return false;
+    }
+    for (size_t i = 0; i < requests.size(); ++i) {
+      if (!comm_.transferTMCL(requests[i], replies[i], address_, nullptr, nullptr)) {
+        return false;
+      }
+      if (completed != nullptr) {
+        *completed = i + 1;
+      }
+    }
+    return true;
+  }
+}
+
+namespace detail {
+/// Frames per pipelined chunk; bounds stack use of the batch helpers (2 × 16 × ~24 B).
+inline constexpr size_t kBatchChunk = 16;
+} // namespace detail
+
+template <typename CommType>
+template <typename Item, typename MakeFrame, typename Store>
+bool TMC9660<CommType>::runBatch(std::span<Item> items, MakeFrame make_frame,
+                                 Store store) noexcept {
+  bool all_ok = true;
+  std::array<TMCLFrame, detail::kBatchChunk> frames{};
+  std::array<TMCLReply, detail::kBatchChunk> replies{};
+  for (size_t base = 0; base < items.size(); base += detail::kBatchChunk) {
+    const size_t n = std::min(detail::kBatchChunk, items.size() - base);
+    for (size_t i = 0; i < n; ++i) {
+      frames[i] = make_frame(items[base + i]);
+    }
+    size_t done = 0;
+    const bool transport_ok =
+        sendCommandBatch(std::span<const TMCLFrame>(frames.data(), n),
+                         std::span<TMCLReply>(replies.data(), n), &done);
+    for (size_t i = 0; i < n; ++i) {
+      Item& item = items[base + i];
+      if (i < done) {
+        item.status = static_cast<tmc9660::tmcl::ReplyCode>(replies[i].status);
+        if (replies[i].isOK()) {
+          store(item, replies[i].value);
+        } else {
+          all_ok = false;
+        }
+      } else {
+        item.status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR;
+        all_ok = false;
+      }
+    }
+    if (!transport_ok) {
+      for (size_t i = base + n; i < items.size(); ++i) {
+        items[i].status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR;
+      }
+      return false;
+    }
+  }
+  return all_ok;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::readParameters(std::span<ParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const ParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::GAP);
+        f.type = static_cast<uint16_t>(a.id);
+        f.motor = a.motor;
+        return f;
+      },
+      [](ParameterAccess& a, uint32_t v) { a.value = v; });
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::writeParameters(std::span<ParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const ParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::SAP);
+        f.type = static_cast<uint16_t>(a.id);
+        f.motor = a.motor;
+        f.value = a.value;
+        return f;
+      },
+      [](ParameterAccess&, uint32_t) {});
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::readGlobalParameters(std::span<GlobalParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const GlobalParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::GGP);
+        f.type = a.id;
+        f.motor = a.bank;
+        return f;
+      },
+      [](GlobalParameterAccess& a, uint32_t v) { a.value = v; });
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::writeGlobalParameters(std::span<GlobalParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const GlobalParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::SGP);
+        f.type = a.id;
+        f.motor = a.bank;
+        f.value = a.value;
+        return f;
+      },
+      [](GlobalParameterAccess&, uint32_t) {});
 }
 
 template <typename CommType>
