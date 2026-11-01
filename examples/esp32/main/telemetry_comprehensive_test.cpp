@@ -153,7 +153,7 @@ bool test_telemetry_temperature_monitoring() noexcept {
     log_telemetry_data(*driver, "Idle state");
 
     // Test 2: Monitor temperature during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for temperature monitoring");
         
         for (int i = 0; i < 10; ++i) {
@@ -207,7 +207,7 @@ bool test_telemetry_current_monitoring() noexcept {
     log_telemetry_data(*driver, "Idle state");
 
     // Test 2: Monitor current during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for current monitoring");
         
         for (int i = 0; i < 10; ++i) {
@@ -247,7 +247,7 @@ bool test_telemetry_voltage_monitoring() noexcept {
     log_telemetry_data(*driver, "Idle state");
 
     // Test 2: Monitor voltage during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for voltage monitoring");
         
         for (int i = 0; i < 10; ++i) {
@@ -298,7 +298,7 @@ bool test_telemetry_position_monitoring() noexcept {
     log_telemetry_data(*driver, "Initial position");
 
     // Test 2: Monitor position during movement
-    if (driver->positionControl.setTargetPosition(1000)) {
+    if (driver->positionControl.setTargetPositionRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for position monitoring");
         
         for (int i = 0; i < 10; ++i) {
@@ -344,7 +344,7 @@ bool test_telemetry_velocity_monitoring() noexcept {
     log_telemetry_data(*driver, "Initial velocity");
 
     // Test 2: Monitor velocity during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for velocity monitoring");
         
         for (int i = 0; i < 10; ++i) {
@@ -379,7 +379,7 @@ bool test_telemetry_status_monitoring() noexcept {
     log_telemetry_data(*driver, "System status check");
 
     // Test 2: Monitor status during operation
-    if (driver->velocityControl.setTargetVelocity(1000)) {
+    if (driver->velocityControl.setTargetVelocityRaw(1000)) {
         ESP_LOGI(TAG, "Motor started for status monitoring");
         
         for (int i = 0; i < 5; ++i) {
