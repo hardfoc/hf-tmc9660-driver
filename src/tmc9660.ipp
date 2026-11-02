@@ -481,9 +481,33 @@ bool TMC9660<CommType>::readParameter(tmc9660::tmcl::Parameters id, uint32_t& va
  * @param value Parameter value to write
  * @return true if parameter was written successfully
  */
+namespace detail {
+/// Bank that @p id implies (0/2/3 for a bank enum, 0xFF for a raw number: any bank allowed).
+inline uint8_t impliedGlobalBank(
+    const std::variant<uint8_t, tmc9660::tmcl::GlobalParamBank0, tmc9660::tmcl::GlobalParamBank2,
+                       tmc9660::tmcl::GlobalParamBank3>& id) noexcept {
+  return std::visit(
+      [](auto&& arg) -> uint8_t {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (tmc9660::tmcl::IsGlobalParamBank<T>) {
+          return tmc9660::tmcl::kGlobalBankOf<T>;
+        } else {
+          return 0xFFU;
+        }
+      },
+      id);
+}
+} // namespace detail
+
 template <typename CommType>
 bool TMC9660<CommType>::writeGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                    uint32_t value) noexcept {
+  const uint8_t implied = detail::impliedGlobalBank(id);
+  if (implied != 0xFFU && implied != bank) {
+    TMC9660_LOG_DEBUG(comm_, 1, "TMC9660", "SGP rejected: id belongs to bank %u, not bank %u",
+                      static_cast<unsigned>(implied), static_cast<unsigned>(bank));
+    return false;
+  }
   uint16_t paramId =
       std::visit([](auto&& arg) -> uint16_t { return static_cast<uint16_t>(arg); }, id);
   return this->sendCommand(tmc9660::tmcl::Op::SGP, paramId, bank, value, nullptr);
@@ -504,9 +528,149 @@ bool TMC9660<CommType>::writeGlobalParameter(GlobalParamBankVariant id, uint8_t 
 template <typename CommType>
 bool TMC9660<CommType>::readGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                   uint32_t& value) noexcept {
+  const uint8_t implied = detail::impliedGlobalBank(id);
+  if (implied != 0xFFU && implied != bank) {
+    TMC9660_LOG_DEBUG(comm_, 1, "TMC9660", "GGP rejected: id belongs to bank %u, not bank %u",
+                      static_cast<unsigned>(implied), static_cast<unsigned>(bank));
+    return false;
+  }
   uint16_t paramId =
       std::visit([](auto&& arg) -> uint16_t { return static_cast<uint16_t>(arg); }, id);
   return this->sendCommand(tmc9660::tmcl::Op::GGP, paramId, bank, 0, &value);
+}
+
+//--------------------------------------------------------------------------
+// Batched (pipelined) parameter access
+//--------------------------------------------------------------------------
+
+template <typename CommType>
+bool TMC9660<CommType>::sendCommandBatch(std::span<const TMCLFrame> requests,
+                                         std::span<TMCLReply> replies,
+                                         size_t* completed) noexcept {
+  if constexpr (requires(CommType& c, std::span<const TMCLFrame> rq, std::span<TMCLReply> rp,
+                         uint8_t a, size_t* n) { c.transferTMCLBatch(rq, rp, a, n); }) {
+    return comm_.transferTMCLBatch(requests, replies, address_, completed);
+  } else {
+    // Transport without a batch primitive: plain request/reply loop.
+    if (completed != nullptr) {
+      *completed = 0;
+    }
+    if (replies.size() < requests.size()) {
+      return false;
+    }
+    for (size_t i = 0; i < requests.size(); ++i) {
+      if (!comm_.transferTMCL(requests[i], replies[i], address_, nullptr, nullptr)) {
+        return false;
+      }
+      if (completed != nullptr) {
+        *completed = i + 1;
+      }
+    }
+    return true;
+  }
+}
+
+namespace detail {
+/// Frames per pipelined chunk; bounds stack use of the batch helpers (2 × 16 × ~24 B).
+inline constexpr size_t kBatchChunk = 16;
+} // namespace detail
+
+template <typename CommType>
+template <typename Item, typename MakeFrame, typename Store>
+bool TMC9660<CommType>::runBatch(std::span<Item> items, MakeFrame make_frame,
+                                 Store store) noexcept {
+  bool all_ok = true;
+  std::array<TMCLFrame, detail::kBatchChunk> frames{};
+  std::array<TMCLReply, detail::kBatchChunk> replies{};
+  for (size_t base = 0; base < items.size(); base += detail::kBatchChunk) {
+    const size_t n = std::min(detail::kBatchChunk, items.size() - base);
+    for (size_t i = 0; i < n; ++i) {
+      frames[i] = make_frame(items[base + i]);
+    }
+    size_t done = 0;
+    const bool transport_ok =
+        sendCommandBatch(std::span<const TMCLFrame>(frames.data(), n),
+                         std::span<TMCLReply>(replies.data(), n), &done);
+    for (size_t i = 0; i < n; ++i) {
+      Item& item = items[base + i];
+      if (i < done) {
+        item.status = static_cast<tmc9660::tmcl::ReplyCode>(replies[i].status);
+        if (replies[i].isOK()) {
+          store(item, replies[i].value);
+        } else {
+          all_ok = false;
+        }
+      } else {
+        item.status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR;
+        all_ok = false;
+      }
+    }
+    if (!transport_ok) {
+      for (size_t i = base + n; i < items.size(); ++i) {
+        items[i].status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR;
+      }
+      return false;
+    }
+  }
+  return all_ok;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::readParameters(std::span<ParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const ParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::GAP);
+        f.type = static_cast<uint16_t>(a.id);
+        f.motor = a.motor;
+        return f;
+      },
+      [](ParameterAccess& a, uint32_t v) { a.value = v; });
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::writeParameters(std::span<ParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const ParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::SAP);
+        f.type = static_cast<uint16_t>(a.id);
+        f.motor = a.motor;
+        f.value = a.value;
+        return f;
+      },
+      [](ParameterAccess&, uint32_t) {});
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::readGlobalParameters(std::span<GlobalParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const GlobalParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::GGP);
+        f.type = a.id;
+        f.motor = a.bank;
+        return f;
+      },
+      [](GlobalParameterAccess& a, uint32_t v) { a.value = v; });
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::writeGlobalParameters(std::span<GlobalParameterAccess> items) noexcept {
+  return runBatch(
+      items,
+      [](const GlobalParameterAccess& a) {
+        TMCLFrame f{};
+        f.opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::SGP);
+        f.type = a.id;
+        f.motor = a.bank;
+        f.value = a.value;
+        return f;
+      },
+      [](GlobalParameterAccess&, uint32_t) {});
 }
 
 template <typename CommType>
@@ -549,6 +713,8 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   tx.motor = motor;
   tx.value = value;
 
+#ifndef TMC9660_DISABLE_DEBUG_LOGGING
+  // Per-access name lookup and formatting; compiled out with TMC9660_DISABLE_DEBUG_LOGGING.
   // Debug logging for TMCL frame assembly
   const char* opName = tmc9660::tmcl::to_string(static_cast<tmc9660::tmcl::Op>(tx.opcode));
 
@@ -576,6 +742,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   TMC9660_LOG_DEBUG(comm_, 3, "TMC9660",
                     "[TMCL TX] %s (Op=0x%02X), Type=%s, Motor=0x%02X, Value=0x%08X", opName,
                     tx.opcode, typeStr, tx.motor, tx.value);
+#endif
 
   TMCLReply rep{};
   if (!comm_.transferTMCL(tx, rep, address_, nullptr, nullptr)) {
@@ -587,6 +754,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
   if (out_tmcl_status)
     *out_tmcl_status = static_cast<tmc9660::tmcl::ReplyCode>(rep.status);
 
+#ifndef TMC9660_DISABLE_DEBUG_LOGGING
   // Debug logging for TMCL reply with decoded status and opcode
   // Note: SPI response format: byte0=SPI_STATUS, byte1=TMCL_STATUS, byte2=OPCODE, byte3-6=VALUE,
   // byte7=CHECKSUM
@@ -597,6 +765,7 @@ bool TMC9660<CommType>::sendCommand(tmc9660::tmcl::Op opcode, uint16_t type, uin
       comm_, 3, "TMC9660",
       "[TMCL RX] %s (SPI_Status=0x%02X, TMCL_Status=0x%02X), Op=%s (0x%02X), Value=0x%08X",
       statusName, static_cast<uint8_t>(rep.spi_status), rep.status, rxOpName, rep.opcode, rep.value);
+#endif
 
   // Special handling for GetVersion command (Type=0 returns string format)
   if (opcode == tmc9660::tmcl::Op::GetVersion && type == 0) {
@@ -5361,36 +5530,192 @@ bool TMC9660<CommType>::Script::getMaxBreakpointCount(uint32_t& count) noexcept 
 //**                  SUBSYSTEM: RamDebug                                **//
 //***************************************************************************
 
+// Encoding per Parameter Mode Reference Manual Table 16: the RAMDebug sub-command goes in
+// TYPE, its first argument in MOTOR/BANK (4 bits on the wire) and its second in VALUE.
+
 template <typename CommType>
-bool TMC9660<CommType>::RamDebug::init(uint32_t sampleCount) noexcept {
-  bool ok = true;
-  // Initialize/reset RAM debug
-  ok &= driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 0, 0, 0, nullptr);
-  // Set number of samples to capture
-  ok &= driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 1, 0, sampleCount, nullptr);
+bool TMC9660<CommType>::RamDebug::cmd(tmc9660::tmcl::RamDebugType type, uint8_t motor,
+                                      uint32_t value, uint32_t* reply) noexcept {
+  return driver.sendCommand(tmc9660::tmcl::Op::RamDebug, static_cast<uint16_t>(type), motor,
+                            value, reply);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::reset() noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::INITIALISE_RESET, 0, 0);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setSampleCount(uint32_t totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_SAMPLE_COUNT, 0, totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setPrescaler(uint32_t prescaler) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_PRESCALER, 0, prescaler);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::addChannel(const Channel& channel) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_CHANNEL, static_cast<uint8_t>(channel.type),
+             channel.address());
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setTriggerChannel(const Channel& channel) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_TRIGGER_CHANNEL, static_cast<uint8_t>(channel.type),
+             channel.address());
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setTriggerMaskShift(uint32_t mask, uint8_t shift) noexcept {
+  if (shift > 15U) {
+    return false; // MOTOR/BANK is a 4-bit field in both SPI and UART frames.
+  }
+  return cmd(tmc9660::tmcl::RamDebugType::SET_TRIGGER_MASK_SHIFT, shift, mask);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::enableTrigger(TriggerType type, uint32_t threshold) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::ENABLE_TRIGGER, static_cast<uint8_t>(type), threshold);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getState(tmc9660::tmcl::RamDebugState& state) noexcept {
+  uint32_t raw = 0;
+  if (!cmd(tmc9660::tmcl::RamDebugType::GET_STATE, 0, 0, &raw)) {
+    return false;
+  }
+  if (raw > static_cast<uint32_t>(tmc9660::tmcl::RamDebugState::PRETRIGGER)) {
+    return false; // Not a Table 17 state.
+  }
+  state = static_cast<tmc9660::tmcl::RamDebugState>(raw);
+  return true;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::readSample(uint32_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::READ_SAMPLE, 0, index, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::readSamples(uint32_t first, std::span<uint32_t> out,
+                                              size_t* read) noexcept {
+  if (read != nullptr) {
+    *read = 0;
+  }
+  constexpr size_t kChunk = detail::kBatchChunk;
+  std::array<TMCLFrame, kChunk> frames{};
+  std::array<TMCLReply, kChunk> replies{};
+  size_t total = 0;
+  while (total < out.size()) {
+    const size_t n = std::min(kChunk, out.size() - total);
+    for (size_t i = 0; i < n; ++i) {
+      frames[i] = TMCLFrame{};
+      frames[i].opcode = static_cast<uint8_t>(tmc9660::tmcl::Op::RamDebug);
+      frames[i].type = static_cast<uint16_t>(tmc9660::tmcl::RamDebugType::READ_SAMPLE);
+      frames[i].value = first + static_cast<uint32_t>(total + i);
+    }
+    size_t done = 0;
+    const bool transport_ok = driver.sendCommandBatch(
+        std::span<const TMCLFrame>(frames.data(), n), std::span<TMCLReply>(replies.data(), n),
+        &done);
+    for (size_t i = 0; i < done; ++i) {
+      if (!replies[i].isOK()) {
+        return false; // past the captured data, or not COMPLETE yet
+      }
+      out[total] = replies[i].value;
+      ++total;
+      if (read != nullptr) {
+        *read = total;
+      }
+    }
+    if (!transport_ok || done < n) {
+      return false;
+    }
+  }
+  return true;
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getInfo(Info kind, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_INFO, 0, static_cast<uint32_t>(kind), &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getChannelType(uint8_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_CHANNEL_TYPE, index, 0, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getChannelAddress(uint8_t index, uint32_t& value) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_CHANNEL_ADDRESS, index, 0, &value);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::setPretriggerCount(uint32_t totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::SET_PRETRIGGER_COUNT, 0, totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::getPretriggerCount(uint32_t& totalSamples) noexcept {
+  return cmd(tmc9660::tmcl::RamDebugType::GET_PRETRIGGER_COUNT, 0, 0, &totalSamples);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::configure(const CaptureConfig& config) noexcept {
+  const size_t channels = config.channelCount;
+  if (channels == 0U || channels > kMaxChannels || config.samplesPerChannel == 0U ||
+      config.pretriggerSamplesPerChannel > config.samplesPerChannel ||
+      config.trigger.shift > 15U) {
+    return false;
+  }
+  const uint32_t total = config.samplesPerChannel * static_cast<uint32_t>(channels);
+  const uint32_t pretrigger =
+      config.pretriggerSamplesPerChannel * static_cast<uint32_t>(channels);
+  bool ok = reset();
+  ok = ok && setSampleCount(total);
+  ok = ok && setPrescaler(config.prescaler);
+  for (size_t i = 0; ok && i < channels; ++i) {
+    ok = addChannel(config.channels[i]);
+  }
+  ok = ok && setPretriggerCount(pretrigger);
+  if (ok && config.trigger.type != TriggerType::UNCONDITIONAL) {
+    ok = setTriggerMaskShift(config.trigger.mask, config.trigger.shift);
+    ok = ok && setTriggerChannel(config.trigger.source);
+  }
   return ok;
 }
 
 template <typename CommType>
+bool TMC9660<CommType>::RamDebug::start(const Trigger& trigger) noexcept {
+  return enableTrigger(trigger.type, trigger.threshold);
+}
+
+template <typename CommType>
+bool TMC9660<CommType>::RamDebug::init(uint32_t sampleCount) noexcept {
+  return reset() && setSampleCount(sampleCount);
+}
+
+template <typename CommType>
 bool TMC9660<CommType>::RamDebug::startCapture() noexcept {
-  return driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 6, 0, 0, nullptr);
+  return enableTrigger(TriggerType::UNCONDITIONAL, 0);
 }
 
 template <typename CommType>
 bool TMC9660<CommType>::RamDebug::readData(uint32_t index, uint32_t& data) noexcept {
-  // Use ReadMem command to read memory at given index (assuming index is an
-  // address in the debug buffer)
-  return driver.sendCommand(tmc9660::tmcl::Op::ReadMem, 0, 0, index, &data);
+  return readSample(index, data);
 }
 
 template <typename CommType>
 bool TMC9660<CommType>::RamDebug::getStatus(bool& isRunning) noexcept {
-  uint32_t state = 0;
-  if (!driver.sendCommand(tmc9660::tmcl::Op::RamDebug, 8, 0, 0, &state)) {
+  tmc9660::tmcl::RamDebugState state{};
+  if (!getState(state)) {
     return false;
   }
-  // Interpret state: assume 0 = Idle, non-zero = Running
-  isRunning = (state != 0);
+  isRunning = state == tmc9660::tmcl::RamDebugState::TRIGGER ||
+              state == tmc9660::tmcl::RamDebugState::CAPTURE ||
+              state == tmc9660::tmcl::RamDebugState::PRETRIGGER;
   return true;
 }
 
@@ -5445,17 +5770,25 @@ bool TMC9660<CommType>::Heartbeat::configure(tmc9660::tmcl::HeartbeatMonitoringC
 //-------------------------------------------------------------------------
 
 template <typename CommType>
+tmc9660::tmcl::HeartbeatMonitoringConfig
+TMC9660<CommType>::Heartbeat::transportInterface() const noexcept {
+  return (driver.comm_.mode() == CommMode::SPI)
+             ? tmc9660::tmcl::HeartbeatMonitoringConfig::SPI_INTERFACE
+             : tmc9660::tmcl::HeartbeatMonitoringConfig::TMCL_UART_INTERFACE;
+}
+
+template <typename CommType>
 bool TMC9660<CommType>::Heartbeat::configureAuto(const HeartbeatConfig& config) noexcept {
   constexpr bool DEFAULT_ENABLE = false;
   constexpr uint32_t DEFAULT_TIMEOUT_MS = 1000;
 
-  bool enable = config.enable.value_or(DEFAULT_ENABLE);
-  uint32_t timeout = config.timeoutMs.value_or(DEFAULT_TIMEOUT_MS);
+  const bool enable = config.enable.value_or(DEFAULT_ENABLE);
+  const uint32_t timeout = config.timeoutMs.value_or(DEFAULT_TIMEOUT_MS);
 
-  // HeartbeatMonitoringConfig: DISABLED, TMCL_UART_INTERFACE, SPI_INTERFACE
-  // For simple enable/disable, use TMCL_UART_INTERFACE when enabled (most common)
-  tmc9660::tmcl::HeartbeatMonitoringConfig mode =
-      enable ? tmc9660::tmcl::HeartbeatMonitoringConfig::TMCL_UART_INTERFACE
+  // Explicit interface, defaulting to the transport this driver talks over. Arming the UART
+  // watchdog on an SPI board (the behaviour up to 1.0.0) monitors an idle interface.
+  const tmc9660::tmcl::HeartbeatMonitoringConfig mode =
+      enable ? config.interface.value_or(transportInterface())
              : tmc9660::tmcl::HeartbeatMonitoringConfig::DISABLED;
 
   return configure(mode, timeout);
@@ -5562,10 +5895,12 @@ bool TMC9660<CommType>::Globals::getHostAddress(uint8_t& address) noexcept {
 template <typename CommType>
 bool TMC9660<CommType>::Globals::configureHeartbeat(tmc9660::tmcl::HeartbeatMonitoringConfig iface,
                                           uint32_t timeout_ms) noexcept {
-  bool ok = writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_CONFIG,
-                       static_cast<uint32_t>(iface));
-  ok &= writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_TIMEOUT, timeout_ms);
-  return ok;
+  // Timeout first, so the watchdog is never armed with a stale timeout.
+  if (!writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_TIMEOUT, timeout_ms)) {
+    return false;
+  }
+  return writeBank0(tmc9660::tmcl::GlobalParamBank0::HEARTBEAT_MONITORING_CONFIG,
+                    static_cast<uint32_t>(iface));
 }
 template <typename CommType>
 bool TMC9660<CommType>::Globals::getHeartbeat(tmc9660::tmcl::HeartbeatMonitoringConfig& iface,

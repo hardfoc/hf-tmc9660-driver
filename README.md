@@ -20,11 +20,12 @@ permalink: /
 3. [Quick Start](#-quick-start)
 4. [Installation](#-installation)
 5. [API Reference](#-api-reference)
-6. [Examples](#-examples)
-7. [Documentation](#-documentation)
-8. [References](#-references)
-9. [Contributing](#-contributing)
-10. [License](#-license)
+6. [Timing and Throughput](docs/timing_and_throughput.md)
+7. [Examples](#-examples)
+8. [Documentation](#-documentation)
+9. [References](#-references)
+10. [Contributing](#-contributing)
+11. [License](#-license)
 
 ## 📦 Overview
 
@@ -111,6 +112,24 @@ For detailed installation instructions, see [docs/installation.md](docs/installa
 
 For complete API documentation, see [docs/api_reference.md](docs/api_reference.md)
 and [docs/units_and_diagnostics.md](docs/units_and_diagnostics.md).
+
+## ⏱️ Timing and Throughput
+
+One TMCL access over SPI is two 64-bit datagrams: the request, then a reply-request that
+clocks out its reply. The vendor documents no processing time, only a NOT_READY (0xF0) status
+meaning "busy, this datagram was ignored, send it again". The driver therefore polls that
+status with a short back-off instead of waiting a fixed 1000 µs as releases up to 1.0.0 did,
+and `readParameters()` / `readGlobalParameters()` (and the write forms) pipeline N accesses
+into N + 1 datagrams.
+
+| Derived cost at 10 MHz SPI (T_f ≈ 20 µs per datagram) | Up to 1.0.0 + hf-core handler | Now |
+|---|---:|---:|
+| One access (chip keeps up) | ≈ 1.24 ms | ≈ 40 µs |
+| Six accesses | ≈ 7.4 ms | ≈ 140 µs (pipelined) |
+
+These figures are derived, not measured. The `tmcl_timing` ESP32 example measures them on
+hardware. Configuration (`TmclSpiTiming`), the batch rules and the full table are in
+[docs/timing_and_throughput.md](docs/timing_and_throughput.md).
 
 ## 📊 Examples
 

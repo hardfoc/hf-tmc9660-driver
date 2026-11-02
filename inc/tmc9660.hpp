@@ -394,17 +394,29 @@ public:
    */
   [[nodiscard]] bool readGlobal(uint16_t parameterId, uint8_t bank, uint32_t& value) noexcept;
 
-  /** @brief Same as readGlobal(uint16_t, …) using an axis parameter ID as the GGP TYPE field. */
-  [[nodiscard]] bool readGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t& value) noexcept {
-    return readGlobal(static_cast<uint16_t>(id), bank, value);
-  }
-
   /** @brief Write a global parameter via TMCL SGP. */
   [[nodiscard]] bool writeGlobal(uint16_t parameterId, uint8_t bank, uint32_t value) noexcept;
 
-  /** @brief Same as writeGlobal(uint16_t, …) using an axis parameter ID as the SGP TYPE field. */
-  [[nodiscard]] bool writeGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t value) noexcept {
-    return writeGlobal(static_cast<uint16_t>(id), bank, value);
+  /** @brief Axis parameter ids are not global parameter ids (removed; was a bank-aliasing trap).
+   *  Use readParameter() for axis parameters or a GlobalParamBank0/2/3 id for globals. */
+  bool readGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t& value) = delete;
+
+  /** @brief Axis parameter ids are not global parameter ids (removed; was a bank-aliasing trap).
+   *  Use writeParameter() for axis parameters or a GlobalParamBank0/2/3 id for globals. */
+  bool writeGlobal(tmc9660::tmcl::Parameters id, uint8_t bank, uint32_t value) = delete;
+
+  /** @brief Read a global parameter; the bank (0, 2 or 3) follows from the enum type. */
+  template <typename BankEnum>
+    requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+  [[nodiscard]] bool readGlobal(BankEnum id, uint32_t& value) noexcept {
+    return readGlobal(static_cast<uint16_t>(id), tmc9660::tmcl::kGlobalBankOf<BankEnum>, value);
+  }
+
+  /** @brief Write a global parameter; the bank (0, 2 or 3) follows from the enum type. */
+  template <typename BankEnum>
+    requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+  [[nodiscard]] bool writeGlobal(BankEnum id, uint32_t value) noexcept {
+    return writeGlobal(static_cast<uint16_t>(id), tmc9660::tmcl::kGlobalBankOf<BankEnum>, value);
   }
 
   // Variant type for global parameter banks (can be index or any bank enum)
@@ -413,23 +425,91 @@ public:
                    tmc9660::tmcl::GlobalParamBank3>;
 
   /** @brief Set (write) a global parameter on the TMC9660.
-   * @param id Global parameter ID number.
-   * @param bank Bank number for global parameter (can be Bank1, Bank2, or Bank3 enum).
+   * @param id Global parameter ID: a raw number, or a GlobalParamBank0/2/3 enum value.
+   * @param bank Bank number (0, 2 or 3). When @p id is a bank enum, @p bank must be that
+   *             enum's bank; a mismatch is rejected without touching the chip.
    * @param value 32-bit value to write.
-   * @return true if successfully written, false if an error occurred.
+   * @return true if successfully written, false if an error occurred or the bank mismatched.
    */
   [[nodiscard]] bool writeGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                           uint32_t value) noexcept;
 
   /** @brief Read a global parameter from the TMC9660.
-   * @param id Global parameter ID number.
-   * @param bank Bank number or index associated with the parameter (can be Bank1, Bank2, or Bank3
-   * enum).
+   * @param id Global parameter ID: a raw number, or a GlobalParamBank0/2/3 enum value.
+   * @param bank Bank number (0, 2 or 3). When @p id is a bank enum, @p bank must be that
+   *             enum's bank; a mismatch is rejected without touching the chip.
    * @param[out] value Reference to store the read 32-bit value.
-   * @return true if read successfully, false on error.
+   * @return true if read successfully, false on error or bank mismatch.
    */
   [[nodiscard]] bool readGlobalParameter(GlobalParamBankVariant id, uint8_t bank,
                                          uint32_t& value) noexcept;
+
+  //--------------------------------------------------------------------------
+  // Batched (pipelined) parameter access
+  //--------------------------------------------------------------------------
+
+  /** @brief One element of a batched axis-parameter access (SAP/GAP). */
+  struct ParameterAccess {
+    tmc9660::tmcl::Parameters id{}; ///< Axis parameter.
+    uint32_t value = 0;             ///< Write: value to set. Read: value read back.
+    uint8_t motor = 0;              ///< Axis index.
+    tmc9660::tmcl::ReplyCode status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR; ///< TMCL status.
+    [[nodiscard]] bool ok() const noexcept {
+      return status == tmc9660::tmcl::ReplyCode::REPLY_OK;
+    }
+  };
+
+  /** @brief One element of a batched global-parameter access (SGP/GGP).
+   *
+   * Constructed only from a GlobalParamBank0/2/3 id, so the bank always matches the id. An
+   * axis tmcl::Parameters id does not convert (compile error), which keeps axis and global
+   * ids on their own banks. */
+  struct GlobalParameterAccess {
+    uint16_t id = 0;    ///< Global parameter number.
+    uint8_t bank = 0;   ///< Bank deduced from the enum type.
+    uint32_t value = 0; ///< Write: value to set. Read: value read back.
+    tmc9660::tmcl::ReplyCode status = tmc9660::tmcl::ReplyCode::REPLY_CHKERR; ///< TMCL status.
+
+    template <typename BankEnum>
+      requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+    constexpr GlobalParameterAccess(BankEnum p,
+                                    uint32_t v = 0) noexcept // NOLINT(google-explicit-constructor)
+        : id(static_cast<uint16_t>(p)), bank(tmc9660::tmcl::kGlobalBankOf<BankEnum>), value(v) {}
+    GlobalParameterAccess(tmc9660::tmcl::Parameters, uint32_t = 0) = delete;
+    [[nodiscard]] bool ok() const noexcept {
+      return status == tmc9660::tmcl::ReplyCode::REPLY_OK;
+    }
+  };
+
+  /** @brief Read several axis parameters in one pipelined batch (GAP).
+   *
+   * On SPI, N reads cost N + 1 datagrams instead of 2N, and only one handshake wait per
+   * element (see SpiCommInterface::transferTMCLBatch and docs "Timing and throughput").
+   * Results land in each element's @c value and @c status, in order.
+   * @return true if every element was answered with REPLY_OK.
+   */
+  [[nodiscard]] bool readParameters(std::span<ParameterAccess> items) noexcept;
+
+  /** @brief Write several axis parameters in one pipelined batch (SAP). Same rules as
+   *  readParameters(); each element's @c status reports its own result. SAP is idempotent,
+   *  which the batch recovery path relies on. */
+  [[nodiscard]] bool writeParameters(std::span<ParameterAccess> items) noexcept;
+
+  /** @brief Read several global parameters in one pipelined batch (GGP). */
+  [[nodiscard]] bool readGlobalParameters(std::span<GlobalParameterAccess> items) noexcept;
+
+  /** @brief Write several global parameters in one pipelined batch (SGP). */
+  [[nodiscard]] bool writeGlobalParameters(std::span<GlobalParameterAccess> items) noexcept;
+
+  /** @brief Send raw TMCL frames as one pipelined batch.
+   *
+   * Lower-level form of the helpers above. Every request must be idempotent (see
+   * SpiCommInterface::transferTMCLBatch). Replies keep their TMCL status.
+   * @param[out] completed Optional: leading elements with a valid reply.
+   * @return true if every request got a well-formed reply (regardless of TMCL status). */
+  [[nodiscard]] bool sendCommandBatch(std::span<const TMCLFrame> requests,
+                                      std::span<TMCLReply> replies,
+                                      size_t* completed = nullptr) noexcept;
 
   /// Send a TMCL command. Optionally return the 32-bit reply value.
   /// When @p out_tmcl_status is non-null: set from the TMCL status byte after a successful
@@ -4704,37 +4784,158 @@ public:
   /** @brief Subsystem for debug and data logging features
    */
   struct RamDebug {
-    /** @brief Initialize and configure the RAMDebug feature (data logging).
+    /// Maximum number of capture channels (reference manual: "up to four channels").
+    static constexpr size_t kMaxChannels = 4;
+
+    /** @brief Capture/trigger channel source (MOTOR/BANK field of types 4 and 5, Table 16). */
+    enum class ChannelType : uint8_t {
+      DISABLED = 0,         ///< Channel off.
+      AXIS_PARAMETER = 1,   ///< Axis parameter (GAP number) of one motor.
+      GLOBAL_PARAMETER = 3, ///< Global parameter of one bank. (verify against datasheet: the
+                            ///< TMC9660 manual lists 3; generic PyTrinamic code uses 8.)
+    };
+
+    /** @brief Trigger condition (MOTOR/BANK field of type 7, Table 16). */
+    enum class TriggerType : uint8_t {
+      UNCONDITIONAL = 0,
+      RISING_EDGE_SIGNED = 1,
+      FALLING_EDGE_SIGNED = 2,
+      DUAL_EDGE_SIGNED = 3,
+      RISING_EDGE_UNSIGNED = 4,
+      FALLING_EDGE_UNSIGNED = 5,
+      DUAL_EDGE_UNSIGNED = 6,
+    };
+
+    /** @brief Selector for GET_INFO (VALUE field of type 10, Table 16). */
+    enum class Info : uint8_t {
+      MAX_CHANNELS = 0,      ///< Number of channels.
+      BUFFER_SIZE = 1,       ///< Buffer size in samples.
+      FREQUENCY = 2,         ///< RAMDebug base frequency [Hz] (≤ 25 kHz, Table 15).
+      CAPTURED_SAMPLES = 3,  ///< Samples captured so far.
+      TRIGGER_PRESCALER = 4, ///< Prescaler value at the trigger event.
+    };
+
+    /** @brief One capture or trigger source.
      *
-     * This sends a command to initialize the RAM debug system and reset any
-     * previous configurations.
-     * @param sample_count Number of samples to collect in the buffer.
-     * @return true if the RAM debug was initialized properly.
+     * Encoded as the VALUE of types 4/5: `motor_or_bank << 24 | (number & 0xFFF)` with the
+     * channel type in MOTOR/BANK (reference manual Table 16 and "Set Up the Channels"). */
+    struct Channel {
+      ChannelType type = ChannelType::DISABLED;
+      uint8_t motorOrBank = 0; ///< Motor index (axis) or bank number (global).
+      uint16_t number = 0;     ///< Parameter number (12 bit).
+
+      /// Axis parameter source.
+      static constexpr Channel axis(tmc9660::tmcl::Parameters p, uint8_t motor = 0) noexcept {
+        return Channel{ChannelType::AXIS_PARAMETER, motor, static_cast<uint16_t>(p)};
+      }
+      /// Global parameter source; the bank follows from the enum type.
+      template <typename BankEnum>
+        requires tmc9660::tmcl::IsGlobalParamBank<BankEnum>
+      static constexpr Channel global(BankEnum p) noexcept {
+        return Channel{ChannelType::GLOBAL_PARAMETER, tmc9660::tmcl::kGlobalBankOf<BankEnum>,
+                       static_cast<uint16_t>(p)};
+      }
+      /// VALUE field for SET_CHANNEL / SET_TRIGGER_CHANNEL.
+      [[nodiscard]] constexpr uint32_t address() const noexcept {
+        return (static_cast<uint32_t>(motorOrBank) << 24) |
+               (static_cast<uint32_t>(number) & 0xFFFU);
+      }
+    };
+
+    /** @brief Trigger setup (types 5, 6 and 7). */
+    struct Trigger {
+      Channel source{}; ///< Trigger channel (ignored if UNCONDITIONAL).
+      TriggerType type = TriggerType::UNCONDITIONAL;
+      uint32_t threshold = 0;      ///< Compared after mask/shift.
+      uint32_t mask = 0xFFFFFFFFU; ///< Applied to the trigger value before compare.
+      uint8_t shift = 0;           ///< Right shift after the mask (0…15, see below).
+    };
+
+    /** @brief Full capture configuration for configure().
+     *
+     * Sample counts are **per channel**; the driver multiplies by the channel count because
+     * the chip expects totals ("not per-channel", types 1 and 13). */
+    struct CaptureConfig {
+      std::array<Channel, kMaxChannels> channels{}; ///< First @ref channelCount are used.
+      size_t channelCount = 0;
+      uint32_t samplesPerChannel = 0;
+      uint32_t pretriggerSamplesPerChannel = 0;
+      uint32_t prescaler = 0; ///< f_sample = f_RAMDebug / (prescaler + 1).
+      Trigger trigger{};
+    };
+
+    //--- Table 16 commands, one per type code -------------------------------------------
+    /** @brief Type 0: reset RAMDebug and enter IDLE. */
+    bool reset() noexcept;
+    /** @brief Type 1: total number of samples to collect (all channels). */
+    bool setSampleCount(uint32_t totalSamples) noexcept;
+    /** @brief Type 3: sampling divider (f = f_RAMDebug / (prescaler + 1)). */
+    bool setPrescaler(uint32_t prescaler) noexcept;
+    /** @brief Type 4: append a capture channel (channel number = call order). State must be IDLE.
      */
+    bool addChannel(const Channel& channel) noexcept;
+    /** @brief Type 5: trigger source. */
+    bool setTriggerChannel(const Channel& channel) noexcept;
+    /** @brief Type 6: trigger mask (VALUE) and shift (MOTOR/BANK).
+     *
+     * The shift travels in the 4-bit MOTOR/BANK field of the frame, so only 0…15 can be
+     * encoded; larger shifts are rejected (verify against datasheet whether the firmware
+     * reads more bits). */
+    bool setTriggerMaskShift(uint32_t mask, uint8_t shift) noexcept;
+    /** @brief Type 7: arm the trigger, which starts the measurement. */
+    bool enableTrigger(TriggerType type, uint32_t threshold) noexcept;
+    /** @brief Type 8: current state (Table 17). */
+    bool getState(tmc9660::tmcl::RamDebugState& state) noexcept;
+    /** @brief Type 9: one sample. Samples are interleaved by channel: index i is channel
+     *  i % channels, sample i / channels. The index travels in VALUE (the 4-bit MOTOR/BANK
+     *  field cannot hold up to 4096 indices; matches PyTrinamic's RAMDebug.get_samples —
+     *  verify against datasheet, whose table lists MOTOR/BANK). */
+    bool readSample(uint32_t index, uint32_t& value) noexcept;
+    /** @brief Type 9, pipelined: read @p out.size() consecutive samples starting at @p first.
+     *  @param[out] read Samples actually read (stops at the first non-OK reply, which the
+     *              chip returns past the captured count).
+     *  @return true if all requested samples were read. */
+    bool readSamples(uint32_t first, std::span<uint32_t> out, size_t* read = nullptr) noexcept;
+    /** @brief Type 10: general information. */
+    bool getInfo(Info kind, uint32_t& value) noexcept;
+    /** @brief Type 11: channel type of configured channel @p index (index in MOTOR/BANK). */
+    bool getChannelType(uint8_t index, uint32_t& value) noexcept;
+    /** @brief Type 12: channel address of configured channel @p index (index in MOTOR/BANK). */
+    bool getChannelAddress(uint8_t index, uint32_t& value) noexcept;
+    /** @brief Type 13: total pretrigger samples (all channels). */
+    bool setPretriggerCount(uint32_t totalSamples) noexcept;
+    /** @brief Type 14: total pretrigger samples (all channels). */
+    bool getPretriggerCount(uint32_t& totalSamples) noexcept;
+
+    //--- High-level sequence ------------------------------------------------------------
+    /** @brief Reset and configure a capture without arming it.
+     *
+     * Sends, in the vendor order (PyTrinamic RAMDebug.start_measurement): reset (0), sample
+     * count (1), prescaler (3), channels (4), pretrigger count (13), and for a conditional
+     * trigger mask/shift (6) and trigger channel (5). Arm with start().
+     * @return false on an invalid config (no channels, too many channels, zero samples,
+     *         pretrigger > samples, shift > 15) or a TMCL error. */
+    bool configure(const CaptureConfig& config) noexcept;
+    /** @brief Arm the trigger configured by configure() (type 7). */
+    bool start(const Trigger& trigger) noexcept;
+
+    //--- Compatibility (names from releases up to 1.0.0, corrected) ------------------------------------
+    /** @brief Reset and set the total sample count (types 0 and 1). */
     bool init(uint32_t sample_count) noexcept;
-
-    /** @brief Start capturing data using RAMDebug.
-     * @return true if the capture started successfully.
-     */
+    /** @brief Start an unconditional capture (type 7, UNCONDITIONAL). Earlier releases sent
+     *  type 6 (SET_TRIGGER_MASK_SHIFT) here, which never started a capture. */
     bool startCapture() noexcept;
-
-    /** @brief Read a captured sample from RAMDebug buffer.
-     * @param index Sample index to read (0-based).
-     * @param[out] data Variable to store the 32-bit sample data.
-     * @return true if the data was read successfully.
-     */
+    /** @brief Read one sample (type 9). Earlier releases sent opcode ReadMem instead. */
     bool readData(uint32_t index, uint32_t& data) noexcept;
-
-    /** @brief Get the current state of the RAM debug engine.
-     * @param[out] is_running Will be set to true if capture is ongoing, false if
-     * stopped or idle.
-     * @return true if the status was retrieved successfully.
-     */
+    /** @brief True while PRETRIGGER, TRIGGER or CAPTURE; false in IDLE and COMPLETE.
+     *  Earlier releases reported COMPLETE (3) as running. */
     bool getStatus(bool& is_running) noexcept;
 
   private:
     friend class TMC9660;
     explicit RamDebug(TMC9660& parent) noexcept : driver(parent) {}
+    bool cmd(tmc9660::tmcl::RamDebugType type, uint8_t motor, uint32_t value,
+             uint32_t* reply = nullptr) noexcept;
     TMC9660& driver;
   } ramDebug{*this};
 
@@ -4795,21 +4996,28 @@ public:
    * If no communication occurs before timeout expires, the chip faults or
    * disables motor outputs.
    *
-   * Refer to Parameters #10 & #11 in Global Bank 0 (Table 43).
-   * See datasheet page 89 for details.
+   * Global bank 0 parameters 3 (`HEARTBEAT_MONITORING_CONFIG`) and 4
+   * (`HEARTBEAT_MONITORING_TIMEOUT`), written with SGP — never with SAP, where ids 3/4 are
+   * MOTOR_PWM_FREQUENCY / COMMUTATION_MODE (Parameter Mode Reference Manual, global
+   * parameters bank 0). The watchdog only sees datagrams on the interface(s) it monitors, so
+   * it must be armed for the interface the host actually uses: SPI on SPI-connected boards
+   * such as Vortex V1.
    */
   struct Heartbeat {
-    /** @brief Enable the heartbeat monitor and set timeout.
+    /** @brief Arm or disarm the heartbeat monitor on an explicit interface.
      *
-     * @param mode ENABLE or DISABLE the watchdog
-     * @param timeout_ms Timeout in milliseconds
-     * @return true if both values written successfully
+     * @param mode Interface(s) to monitor, or DISABLED.
+     * @param timeout_ms Timeout in milliseconds (1 … 2^32−1).
+     * @return true if both values were written successfully.
      *
-     * - Parameters:
-     *   - `HEARTBEAT_MONITORING_CONFIG`
-     *   - `HEARTBEAT_MONITORING_TIMEOUT`
+     * The timeout is written before the interface, so arming never runs with a stale
+     * timeout. Both writes go to global bank 0.
      */
     bool configure(tmc9660::tmcl::HeartbeatMonitoringConfig mode, uint32_t timeout_ms) noexcept;
+
+    /** @brief Interface value matching the driver's own transport: SPI_INTERFACE for an
+     *  SPI CommType, TMCL_UART_INTERFACE for UART. */
+    [[nodiscard]] tmc9660::tmcl::HeartbeatMonitoringConfig transportInterface() const noexcept;
 
     //-------------------------------------------------------------------------
     // Auto-Configuration
@@ -4831,11 +5039,21 @@ public:
        * Typical values: 500-5000ms (default: 1000ms)
        */
       std::optional<uint32_t> timeoutMs; //!< Heartbeat timeout [ms] (optional, default: 1000ms)
+
+      /** @brief Interface the watchdog monitors when enabled (optional).
+       *
+       * Default: the transport this driver instance talks over (transportInterface()), i.e.
+       * SPI_INTERFACE on SPI boards. Releases up to 1.0.0 always armed TMCL_UART_INTERFACE,
+       * which on an SPI board never sees traffic. Set TMCL_UART_AND_SPI_INTERFACE to watch
+       * both. Ignored when @ref enable is false.
+       */
+      std::optional<tmc9660::tmcl::HeartbeatMonitoringConfig> interface;
     };
 
-    /** @brief Auto-configure heartbeat parameters.
+    /** @brief Configure heartbeat monitoring from a HeartbeatConfig.
      *
-     * Configures heartbeat monitoring based on high-level requirements.
+     * Disabled unless @c enable is set. When enabled, the monitored interface is
+     * @c interface if given, otherwise the driver's own transport (no guessing).
      *
      * @param config Heartbeat configuration (see HeartbeatConfig)
      * @return true if configuration succeeded, false otherwise
@@ -5101,6 +5319,10 @@ public:
   // PRIVATE MEMBERS
   //==================================================
 private:
+  /// Chunked driver for the batch helpers: build frames, run sendCommandBatch(), store results.
+  template <typename Item, typename MakeFrame, typename Store>
+  bool runBatch(std::span<Item> items, MakeFrame make_frame, Store store) noexcept;
+
   CommType& comm_; ///< Communication interface (transport) for
                                ///< sending/receiving data.
   uint8_t address_;            ///< Module address (0-127). Used primarily for UART
