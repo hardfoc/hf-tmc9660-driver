@@ -83,12 +83,12 @@ Batched reads:
 
 ```cpp
 using Drv = tmc9660::TMC9660<MySpi>;
-Drv::ParameterAccess rd[] = {{tmcl::Parameters::ACTUAL_VELOCITY},
+Drv::ParameterAccess rd[] = { {tmcl::Parameters::ACTUAL_VELOCITY},
                              {tmcl::Parameters::ACTUAL_POSITION},
                              {tmcl::Parameters::GENERAL_STATUS_FLAGS}};
 if (driver.readParameters(rd)) { /* rd[i].value, rd[i].status */ }
 
-Drv::GlobalParameterAccess g[] = {{tmcl::GlobalParamBank0::MAIN_LOOPS}}; // bank 0 from the type
+Drv::GlobalParameterAccess g[] = { {tmcl::GlobalParamBank0::MAIN_LOOPS} }; // bank 0 from the type
 (void)driver.readGlobalParameters(g);
 ```
 
