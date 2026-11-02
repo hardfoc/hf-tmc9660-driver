@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['i2c_0',['i2c',['../structtmc9660_1_1_bootloader_config.html#abefc8ea5bab1aa769bcc311689414180',1,'tmc9660::BootloaderConfig']]],
+  ['i2c_5fconfig_1',['I2C_CONFIG',['../namespacetmc9660_1_1bootaddr.html#aa420786bd9803420d43e52bf39ca5de8',1,'tmc9660::bootaddr']]],
+  ['i2c_5feeprom_2',['i2c_eeprom',['../structtmc9660_1_1_bootloader_features.html#abaeb490ba2c6547fbbe42492071d1f74',1,'tmc9660::BootloaderFeatures']]],
+  ['i2tcontinuouscurrent1_5fa_3',['i2tContinuousCurrent1_A',['../structtmc9660_1_1_t_m_c9660_1_1_protection_1_1_protection_config.html#a97ccdde1c5508f8255c294ff8f06c53f',1,'tmc9660::TMC9660::Protection::ProtectionConfig']]],
+  ['i2tcontinuouscurrent2_5fa_4',['i2tContinuousCurrent2_A',['../structtmc9660_1_1_t_m_c9660_1_1_protection_1_1_protection_config.html#a9cc67119ba46d33e8c537f5526db1f19',1,'tmc9660::TMC9660::Protection::ProtectionConfig']]],
+  ['i2ttimeconstant1_5fms_5',['i2tTimeConstant1_ms',['../structtmc9660_1_1_t_m_c9660_1_1_protection_1_1_protection_config.html#aadea67f9f118dfa12524f2f3c45315bf',1,'tmc9660::TMC9660::Protection::ProtectionConfig']]],
+  ['i2ttimeconstant2_5fms_6',['i2tTimeConstant2_ms',['../structtmc9660_1_1_t_m_c9660_1_1_protection_1_1_protection_config.html#a7f4dbf54a5def00eceb5c39994867db1',1,'tmc9660::TMC9660::Protection::ProtectionConfig']]],
+  ['i_5fux_7',['i_ux',['../structtmc9660_1_1diagnostics_1_1_motor_snapshot.html#a65e43c251f97df77b8e19c36c82bd066',1,'tmc9660::diagnostics::MotorSnapshot']]],
+  ['i_5fv_8',['i_v',['../structtmc9660_1_1diagnostics_1_1_motor_snapshot.html#a60f77be215a5931088460166aea3c19c',1,'tmc9660::diagnostics::MotorSnapshot']]],
+  ['i_5fwy_9',['i_wy',['../structtmc9660_1_1diagnostics_1_1_motor_snapshot.html#a6d01d795ffdef087054ff85ee26ccf72',1,'tmc9660::diagnostics::MotorSnapshot']]],
+  ['id_10',['id',['../structtmc9660_1_1_t_m_c9660_1_1_global_parameter_access.html#a76a9a6087ba5d2271f839545c5ed865e',1,'tmc9660::TMC9660::GlobalParameterAccess::id'],['../structtmc9660_1_1_t_m_c9660_1_1_parameter_access.html#ac8acfaede992eb43069a0ee57b5534b0',1,'tmc9660::TMC9660::ParameterAccess::id']]],
+  ['idlepwmbehavior_11',['idlePwmBehavior',['../structtmc9660_1_1_t_m_c9660_1_1_motor_config_1_1_motor_profile.html#a9c639fab7e9ecc56bdf5eb12244bc22c',1,'tmc9660::TMC9660::MotorConfig::MotorProfile']]],
+  ['initdelay_12',['initDelay',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_abn_config.html#a082e66b126c9337bc0c71fc1c2de6ab2',1,'tmc9660::TMC9660::FeedbackSense::AbnConfig']]],
+  ['initmethod_13',['initmethod',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_spi_encoder_config.html#ae2b8d9fa2ce864b7e5fc0132af5f67ae',1,'tmc9660::TMC9660::FeedbackSense::SpiEncoderConfig::initMethod'],['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_abn_config.html#a328b53fdcafc3089a56583605379d857',1,'tmc9660::TMC9660::FeedbackSense::AbnConfig::initMethod']]],
+  ['initopenloopcurrent_5fma_14',['initOpenloopCurrent_mA',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_abn_config.html#a33911131c075615c7d3f88252c886199',1,'tmc9660::TMC9660::FeedbackSense::AbnConfig']]],
+  ['initvelocity_15',['initVelocity',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_abn_config.html#a493c8cde7ec50ea1524b4d7a1026c40b',1,'tmc9660::TMC9660::FeedbackSense::AbnConfig']]],
+  ['inormalization_16',['inormalization',['../structtmc9660_1_1_t_m_c9660_1_1_torque_flux_control_1_1_torque_flux_config.html#a17a4e7507198336b8ee06cf4dc865769',1,'tmc9660::TMC9660::TorqueFluxControl::TorqueFluxConfig::iNormalization'],['../structtmc9660_1_1_t_m_c9660_1_1_velocity_control_1_1_velocity_config.html#ab50be99da36fcb95f2f619b71ee97463',1,'tmc9660::TMC9660::VelocityControl::VelocityConfig::iNormalization'],['../structtmc9660_1_1_t_m_c9660_1_1_position_control_1_1_position_config.html#a6d7e8e4527e5405f077d2d1a00551534',1,'tmc9660::TMC9660::PositionControl::PositionConfig::iNormalization']]],
+  ['interface_17',['interface',['../structtmc9660_1_1_t_m_c9660_1_1_heartbeat_1_1_heartbeat_config.html#a51f76b63e9e3a2d1dff04b82f3f1f5f4',1,'tmc9660::TMC9660::Heartbeat::HeartbeatConfig']]],
+  ['inverthomeswitch_18',['invertHomeSwitch',['../structtmc9660_1_1_t_m_c9660_1_1_stop_events_1_1_stop_events_config.html#ac132a3d9d93f258dec0d1d9f9323b104',1,'tmc9660::TMC9660::StopEvents::StopEventsConfig']]],
+  ['invertleftswitch_19',['invertLeftSwitch',['../structtmc9660_1_1_t_m_c9660_1_1_stop_events_1_1_stop_events_config.html#a5f651409d26a33fac141cd5a7f39d012',1,'tmc9660::TMC9660::StopEvents::StopEventsConfig']]],
+  ['invertoutput_20',['invertOutput',['../structtmc9660_1_1_t_m_c9660_1_1_brake_1_1_brake_config.html#abe0cb7d418582f50f79408313f9949ee',1,'tmc9660::TMC9660::Brake::BrakeConfig']]],
+  ['invertrightswitch_21',['invertRightSwitch',['../structtmc9660_1_1_t_m_c9660_1_1_stop_events_1_1_stop_events_config.html#abe7ac20a8b33d544f590fdfa4a810aaf',1,'tmc9660::TMC9660::StopEvents::StopEventsConfig']]],
+  ['iq_5fma_22',['iq_ma',['../structtmc9660_1_1diagnostics_1_1_motor_snapshot.html#aca5c715e57c414acf61355acbe79b294',1,'tmc9660::diagnostics::MotorSnapshot']]],
+  ['issuccess_23',['isSuccess',['../structtmc9660_1_1_otp_burn_result.html#aadbd564e6b295d073c656deebd81f4a6',1,'tmc9660::OtpBurnResult']]]
+];

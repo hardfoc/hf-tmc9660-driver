@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['ldo_0',['ldo',['../structtmc9660_1_1_bootloader_config.html#a93abba7117a2d00cedef2a5a2237d4cd',1,'tmc9660::BootloaderConfig']]],
+  ['ldo1_5fready_1',['LDO1_READY',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s.html#a45fe5049c38d828f2d264af816381209',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS']]],
+  ['ldo1_5fready_5fena_5ff_2',['LDO1_READY_ENA_F',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___i_n_t___e_n_a_b_l_e.html#a9eb346de3774bdca1795076795ecec5d',1,'tmc9660::register_mode::SYS_CTRL::FAULT_INT_ENABLE']]],
+  ['ldo1_5fready_5fltc_3',['LDO1_READY_LTC',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s___l_a_t_c_h_e_d.html#aa7b22cdadb71beecbe585c74c3bfc4d1',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS_LATCHED']]],
+  ['ldo2_5fready_4',['LDO2_READY',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s.html#a84e20ed8105317057ccda9ad53de1dc4',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS']]],
+  ['ldo2_5fready_5fena_5ff_5',['LDO2_READY_ENA_F',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___i_n_t___e_n_a_b_l_e.html#ad446fabd5c1bb2d6664ffffae164c72c',1,'tmc9660::register_mode::SYS_CTRL::FAULT_INT_ENABLE']]],
+  ['ldo2_5fready_5fltc_6',['LDO2_READY_LTC',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s___l_a_t_c_h_e_d.html#a1bec19f448101102091169b37517db30',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS_LATCHED']]],
+  ['ldo_5fconfig_7',['LDO_CONFIG',['../namespacetmc9660_1_1bootaddr.html#ada1347e27d64170e884265aec7811582',1,'tmc9660::bootaddr']]],
+  ['ldo_5fshort_5ffault_8',['ldo_short_fault',['../structtmc9660_1_1_l_d_o_config.html#a12b0b1cbc1dc1858c9504584fab6d4f0',1,'tmc9660::LDOConfig']]],
+  ['ldoext1_5fshort_9',['LDOEXT1_SHORT',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s.html#a45fd17f5b724460a83ae472213f947ee',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS']]],
+  ['ldoext1_5fshort_5fena_5ff_10',['LDOEXT1_SHORT_ENA_F',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___i_n_t___e_n_a_b_l_e.html#a82338f2d0d7f0958e51d8a2532fe7e1b',1,'tmc9660::register_mode::SYS_CTRL::FAULT_INT_ENABLE']]],
+  ['ldoext1_5fshort_5fltc_11',['LDOEXT1_SHORT_LTC',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s___l_a_t_c_h_e_d.html#a99b8d1374e73f167114562b92c4f7493',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS_LATCHED']]],
+  ['ldoext2_5fshort_12',['LDOEXT2_SHORT',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s.html#af323fee4c535550c941c3e01f59aadcb',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS']]],
+  ['ldoext2_5fshort_5fena_5ff_13',['LDOEXT2_SHORT_ENA_F',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___i_n_t___e_n_a_b_l_e.html#a9501b8767c28bd461924cc682c5eb121',1,'tmc9660::register_mode::SYS_CTRL::FAULT_INT_ENABLE']]],
+  ['ldoext2_5fshort_5fltc_14',['LDOEXT2_SHORT_LTC',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s___l_a_t_c_h_e_d.html#a02242c51c15008450049b36bd7e80df0',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS_LATCHED']]],
+  ['ldoext_5ftsd_15',['LDOEXT_TSD',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s.html#ab32cd328d2a5ad090c0fe5a127191a01',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS']]],
+  ['ldoext_5ftsd_5fena_5ff_16',['LDOEXT_TSD_ENA_F',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___i_n_t___e_n_a_b_l_e.html#ab1c35dbbd936837b1bfba8e5b67e75ae',1,'tmc9660::register_mode::SYS_CTRL::FAULT_INT_ENABLE']]],
+  ['ldoext_5ftsd_5fltc_17',['LDOEXT_TSD_LTC',['../structtmc9660_1_1register__mode_1_1_s_y_s___c_t_r_l_1_1_f_a_u_l_t___s_t_a_t_u_s___l_a_t_c_h_e_d.html#abdd5d26aa3af75919b75ac77a83aa7f9',1,'tmc9660::register_mode::SYS_CTRL::FAULT_STATUS_LATCHED']]],
+  ['loopdownsampling_18',['loopdownsampling',['../structtmc9660_1_1_t_m_c9660_1_1_velocity_control_1_1_velocity_config.html#a583398227fc89612088f3dc6e34be12a',1,'tmc9660::TMC9660::VelocityControl::VelocityConfig::loopDownsampling'],['../structtmc9660_1_1_t_m_c9660_1_1_position_control_1_1_position_config.html#a78596059504cf903c77d5e404816cdec',1,'tmc9660::TMC9660::PositionControl::PositionConfig::loopDownsampling']]],
+  ['lutcorrection_19',['lutCorrection',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_spi_encoder_config.html#a704ce3e074f651a767314b4c0916d33d',1,'tmc9660::TMC9660::FeedbackSense::SpiEncoderConfig']]],
+  ['lutshiftfactor_20',['lutShiftFactor',['../structtmc9660_1_1_t_m_c9660_1_1_feedback_sense_1_1_spi_encoder_config.html#a42a7fca2ef011ef7096f1e3d0f9fdc2e',1,'tmc9660::TMC9660::FeedbackSense::SpiEncoderConfig']]]
+];
