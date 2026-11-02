@@ -1,120 +1,74 @@
----
-layout: default
-title: "⚡ Quick Start"
-description: "Get up and running with the TMC9660 driver in minutes"
-nav_order: 2
-parent: "📚 Documentation"
-permalink: /docs/quickstart/
----
+# Quickstart
 
-# Quick Start
+Spin a BLDC motor from your MCU: wire six signals, write a small port class, call five driver functions.
 
-This guide will get you up and running with the TMC9660 driver in just a few steps.
+!!! warning "Before you power the motor"
+    Use a current-limited supply for the first run and keep the motor free to turn. The example commands
+    1000 RPM as soon as the chip is up.
 
-## Prerequisites
+## 1. Wire it
 
-- [Driver installed](installation.md)
-- [Hardware wired](hardware_setup.md)
-- Communication interface implemented (see [Platform Integration](platform_integration.md))
+| MCU | TMC9660 | Notes |
+| --- | --- | --- |
+| SPI SCLK, MOSI, MISO, CS | SPI0_SCK, SPI0_MOSI, SPI0_MISO, SPI0_CS0 | SPI mode 3, up to 10 MHz; start at 1 MHz |
+| GPIO out | RST | Reset; the driver pulses it in `bootloaderInit()` |
+| GPIO out | DRV_EN | Enables the gate driver outputs |
+| GPIO out | WAKE | Wakes the chip from hibernation |
+| GPIO in | FAULTN | Open drain: pull it up |
+| GND | GND | Common ground between the MCU and the motor supply |
 
-## Minimal Example
+The [Hardware](hardware.md) page has the full pin list, the evaluation-kit headers and the electrical limits.
 
-Here's a complete working example using the unit-aware API:
+## 2. Add the driver
 
-```cpp
-#include "inc/tmc9660.hpp"
+Add the repository as a submodule and link the `hf_tmc9660` CMake target (or include `inc/` and build with
+C++20). [Installation](installation.md) covers CMake and ESP-IDF.
 
-// 1. Implement your communication interface (see platform_integration.md)
-class MySPI : public tmc9660::SpiCommInterface<MySPI> {
-    // ... implement spiTransferTMCL(), gpioSet() ...
-};
-
-int main() {
-    namespace tmcl  = tmc9660::tmcl;
-    namespace units = tmc9660::units;
-
-    MySPI spi;
-    tmc9660::TMC9660<MySPI> driver(spi);
-
-    // 2. CRITICAL: Initialize bootloader for Parameter Mode.
-    tmc9660::BootloaderConfig cfg{};
-    cfg.boot.boot_mode           = tmc9660::bootcfg::BootMode::Parameter;
-    cfg.boot.start_motor_control = true;
-    if (driver.bootloaderInit(&cfg) !=
-        tmc9660::TMC9660<MySPI>::BootloaderInitResult::Success) {
-        return -1;
-    }
-
-    // 3. Configure motor (type, pole pairs, PWM).
-    driver.motorConfig.setType(tmcl::MotorType::BLDC_MOTOR, 7);
-    driver.motorConfig.setPWMFrequency(25000);
-
-    // 4. Acquire a MotorContext live from the chip; reuse for all unit work.
-    const units::MotorContext ctx = driver.getMotorContext();
-
-    // 5. Command 1000 RPM in engineering units.
-    driver.velocityControl.setTargetVelocityRpm(1000.0, ctx);
-
-    // 6. Periodic diagnostic.
-    tmc9660::diagnostics::MotorSummary s;
-    driver.diagnostics.summary(s, ctx);
-    return 0;
-}
+```bash
+git submodule add https://github.com/hardfoc/hf-tmc9660-driver.git external/hf-tmc9660-driver
 ```
 
-> See [Units & Diagnostics](units_and_diagnostics.md) for the full type-safe
-> conversion surface (`VelocityUnit`, `PositionUnit`, `AccelerationUnit`,
-> `AngleUnit`) and the `MotorSummary` / `MotorSnapshot` structures.
+## 3. Write the port
 
-## Step-by-Step Explanation
+The port is the only platform code. It moves bytes over SPI, sets and reads the four control pins and waits.
+Replace the four `platform_*` calls with your SDK's.
 
-### Step 1: Implement Communication Interface
-
-You must implement either `SpiCommInterface` or `UartCommInterface` for your platform. See [Platform Integration](platform_integration.md) for detailed examples.
-
-### Step 2: Create Driver Instance
-
-```cpp
-tmc9660::TMC9660 driver(spi);
+```cpp title="my_spi.hpp"
+--8<-- "tests/docs/my_spi.hpp:port"
 ```
 
-The driver takes a reference to your communication interface.
+The constructor arguments are the physical level of RST, DRV_EN, WAKE and FAULTN when each is active. Get them
+from your schematic: inverters and level shifters change them. [Porting](porting.md) explains each method and
+shows the UART variant.
 
-### Step 3: Initialize Bootloader
+## 4. Spin the motor
 
-**This step is CRITICAL!** The TMC9660 must be configured for Parameter Mode before any motor control will work.
-
-```cpp
-tmc9660::BootloaderConfig cfg{};
-cfg.boot.boot_mode = tmc9660::bootcfg::BootMode::Parameter;
-cfg.boot.start_motor_control = true;
-
-auto result = driver.bootloaderInit(&cfg);
+```cpp title="main.cpp"
+--8<-- "tests/docs/quickstart.cpp:quickstart"
 ```
 
-See [Bootloader Initialization](special_feature_bootloader.md) for complete details.
+What each step does:
 
-### Step 4: Configure Motor
+1. `bootloaderInit()` resets the chip, sends the bootloader configuration and starts the motor-control firmware
+   in parameter mode. Nothing else works until it returns `Success`.
+2. `setType()` and `setPWMFrequency()` tell the chip what it drives. Use the pole-pair count from the motor's
+   datasheet.
+3. `getMotorContext()` reads the settings the unit conversions need (pole pairs, sensor, scaling) from the chip.
+4. `setTargetVelocityRpm()` converts RPM to the chip's internal unit and writes the target velocity.
 
-```cpp
-driver.motorConfig.setType(tmc9660::tmcl::MotorType::BLDC_MOTOR, 7);
-```
+This example is built by the host CI, so it compiles against the current headers.
 
-Set the motor type and pole pairs. Supported types:
-- `BLDC_MOTOR` - Brushless DC motor
-- `STEPPER_MOTOR` - Stepper motor
-- `DC_MOTOR` - Brushed DC motor
+## If it does not work
 
-### Step 5: Control Motor
+| Symptom | First thing to check |
+| --- | --- |
+| `bootloaderInit()` returns `Failure` | SPI mode 3, CS held low for the whole 8-byte frame, RST active level |
+| Every reply is `0x00` or `0xFF` | MISO wiring, a common ground, the chip's supply |
+| Motor hums but does not turn | Pole pairs, phase wiring, commutation mode and feedback ([API guide](api-guide.md#configure-the-motor)) |
+| FAULTN stays active | Supply under-voltage, gate-driver fault ([Troubleshooting](troubleshooting.md)) |
 
-```cpp
-driver.focControl.setTargetVelocity(1000); // Set target velocity
-```
+## Next
 
-## Next Steps
-
-- **[Hardware Setup](hardware_setup.md)** - Complete wiring guide
-- **[Platform Integration](platform_integration.md)** - Implement communication interface
-- **[Bootloader Initialization](special_feature_bootloader.md)** - Critical bootloader setup
-- **[Examples](examples.md)** - More detailed examples
-
+- [API guide](api-guide.md): configure feedback and control loops, read telemetry, handle errors.
+- [Examples](examples.md): complete ESP32 test applications for BLDC, stepper, DC and telemetry.
+- [Bootloader](bootloader.md): every boot option, including encoders and step/dir.

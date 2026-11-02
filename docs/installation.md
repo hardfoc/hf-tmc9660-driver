@@ -1,132 +1,69 @@
----
-layout: default
-title: "🛠️ Installation"
-description: "Installation and integration instructions for the TMC9660 driver"
-nav_order: 1
-parent: "📚 Documentation"
-permalink: /docs/installation/
----
-
 # Installation
 
-This guide covers how to obtain and integrate the HF-TMC9660 driver into your project.
+Add the driver to a CMake or ESP-IDF project. It is a header-mostly C++20 library with no dependencies.
 
-## Prerequisites
+## Requirements
 
-- **C++20 compatible compiler** (GCC 10+, Clang 11+, or MSVC 2019+)
-- **Git** (for cloning)
-- **CMake** (optional, for building examples)
+- A C++20 compiler: GCC 10+, Clang 12+ or a current MSVC.
+- No RTOS, heap or exceptions: every call is `noexcept` and returns `bool` or a result enum.
 
-## Obtaining the Source
+## Get the source
 
-### Option 1: Git Clone
-
-```bash
-git clone https://github.com/n3b3x/hf-tmc9660-driver.git
-cd hf-tmc9660-driver
-```
-
-### Option 2: Git Submodule (Recommended)
+A git submodule keeps the driver pinned to a version you chose:
 
 ```bash
-# From your project root
-git submodule add https://github.com/n3b3x/hf-tmc9660-driver.git external/hf-tmc9660
-cd external/hf-tmc9660
-git submodule update --init --recursive
+git submodule add https://github.com/hardfoc/hf-tmc9660-driver.git external/hf-tmc9660-driver
+git submodule update --init external/hf-tmc9660-driver
 ```
 
-### Option 3: Download ZIP
+Only `inc/`, `src/`, `cmake/` and `CMakeLists.txt` are needed to build. The examples have their own submodule
+(`examples/esp32/scripts`); you do not need it to use the driver.
 
-Download the ZIP file from GitHub and extract it to your project.
-
-## Integration Methods
-
-### Manual Integration
-
-1. **Copy the driver files** to your project:
-   - `inc/` directory (header files)
-   - `src/` directory (source files, if any)
-
-2. **Add include path** to your build system:
-   ```cpp
-   #include "inc/tmc9660.hpp"
-   ```
-
-3. **Enable C++20** in your compiler:
-   - GCC/Clang: `-std=c++20`
-   - MSVC: `/std:c++20`
-
-### CMake Integration
-
-If your project uses CMake:
+## CMake
 
 ```cmake
-# Add the driver as a subdirectory
 add_subdirectory(external/hf-tmc9660-driver)
-
-# Link to your target
-target_link_libraries(your_target PRIVATE hf_tmc9660_driver)
-
-# Enable C++20
-set_target_properties(your_target PROPERTIES
-    CXX_STANDARD 20
-    CXX_STANDARD_REQUIRED ON
-)
+target_link_libraries(my_app PRIVATE hf_tmc9660)
 ```
 
-### ESP-IDF Component
+The `hf_tmc9660` target carries the include directories and requires C++20 (`cxx_std_20`), so your target does
+not need to set either.
 
-For ESP-IDF projects:
+| Option | Default | Effect |
+| --- | --- | --- |
+| `HF_TMC9660_ENABLE_WARNINGS` | `OFF` | `-Wall -Wextra -Wpedantic` on the driver sources |
+| `HF_TMC9660_BUILD_TESTS` | `OFF` | Builds the host unit tests in `tests/` ([Testing and CI](testing.md)) |
 
-1. **Add as component**:
-   ```bash
-   # In your project's components directory
-   git submodule add https://github.com/n3b3x/hf-tmc9660-driver.git hf-tmc9660
-   ```
+## ESP-IDF
 
-2. **Update CMakeLists.txt**:
-   ```cmake
-   idf_component_register(
-       INCLUDE_DIRS "inc"
-       PRIV_INCLUDE_DIRS "src"
-       REQUIRES driver
-   )
-   ```
+The ESP-IDF component wrapper is [`examples/esp32/components/hf_tmc9660/`](../examples/esp32/components/hf_tmc9660/CMakeLists.txt).
+Copy that folder into your project's `components/` (or point `EXTRA_COMPONENT_DIRS` at it) and set the
+`HF_TMC9660_ROOT` cache variable to the driver checkout; the wrapper stops with a clear message when the path is
+wrong. Your component then declares `REQUIRES hf_tmc9660`.
 
-## Building Examples
+## How the build is organised
 
-### ESP32 Examples
+| Layer | File | Role |
+| --- | --- | --- |
+| Settings | [`cmake/hf_tmc9660_build_settings.cmake`](../cmake/hf_tmc9660_build_settings.cmake) | Sources, include directories, version: the single source of truth |
+| Library | [`CMakeLists.txt`](../CMakeLists.txt) | Static library for host builds and CI |
+| ESP-IDF | [`examples/esp32/components/hf_tmc9660/CMakeLists.txt`](../examples/esp32/components/hf_tmc9660/CMakeLists.txt) | IDF component wrapper over the same settings |
 
-```bash
-cd examples/esp32
-idf.py build
-idf.py flash monitor
-```
-
-### Generic CMake Examples
-
-```bash
-mkdir build && cd build
-cmake ..
-make
-```
-
-## Verification
-
-After installation, verify your setup:
+The version is set once in the settings file and written into `tmc9660_version.h` at configure time. Read it at
+run time:
 
 ```cpp
-#include "inc/tmc9660.hpp"
-
-int main() {
-    // If this compiles, installation is successful
-    return 0;
-}
+const char* v = tmc9660::TMC9660<MySpi>::GetDriverVersion();   // "1.0.0"
 ```
 
-## Next Steps
+## Compile-time switches
 
-- **[Quick Start](quickstart.md)** - Get a minimal example running
-- **[Platform Integration](platform_integration.md)** - Implement the communication interface
-- **[Hardware Setup](hardware_setup.md)** - Wire your hardware
+| Define | Effect |
+| --- | --- |
+| `TMC9660_DISABLE_DEBUG_LOGGING` | Removes every `logDebug()` call and the parameter-name lookup behind it |
+| `TMC9660_LOG_TMCL_RAW_FRAMES=1` | Logs every raw SPI TMCL datagram (bring-up only; slow) |
 
+## Next
+
+[Quickstart](quickstart.md) wires the chip and spins a motor; [Porting](porting.md) writes the communication
+interface for your MCU.

@@ -1,15 +1,9 @@
----
-layout: default
-title: "📡 Communication Protocols"
-description: "Detailed protocol specifications for TMC9660"
-nav_order: 9
-parent: "📚 Documentation"
-permalink: /docs/special_feature_protocols/
----
+# Communication protocols
 
-# Communication Protocols
+The four frame formats the TMC9660 speaks (bootloader and TMCL, over SPI and UART), byte by byte, with their checksums.
 
-This guide covers the detailed communication protocols for the TMC9660, including bootloader and parameter mode (TMCL) protocols for both SPI and UART interfaces.
+You need this page to write a protocol analyser decoder or to debug a port at the wire level; the driver builds
+and checks every frame for you.
 
 ## Protocol Overview
 
@@ -99,8 +93,11 @@ Reply Format:
 - Reply Delay: Reply to command N is received when sending command N+1
 - Checksum: 8-bit checksum over first 7 bytes
 - Status: SPI status byte (0xFF = OK, 0xF0 = busy); TMCL status in byte 1 (e.g. 0x64 = decimal 100 = OK)
-- **Reply field alignment:** Byte 1 is the TMCL status; byte 2 echoes the TMCL opcode. Keep those as separate bytes—do not fold part of byte 2 into the TMCL status word, or host-side `isOK()` checks will mis-parse good replies.
-- **Host pacing:** At high SPI clock rates, leave enough time between the first 8-byte TMCL transfer (command) and the second (dummy / NO_OP) so the IC can accept the command before the reply is clocked. The reference `SpiCommInterface::transferTMCL` implementation inserts a short `delayUs` between those transfers; HAL adapters may add a small post-CS delay as well.
+- **Reply field alignment:** Byte 1 is the TMCL status; byte 2 echoes the TMCL opcode. Keep those as separate bytes—do
+  not fold part of byte 2 into the TMCL status word, or host-side `isOK()` checks will mis-parse good replies.
+- **Host pacing:** the chip answers `NOT_READY` (0xF0) while it is busy, and ignores the datagram that got that
+  answer. `SpiCommInterface::transferTMCL()` re-sends it with a back-off; ports add no delays. See [Timing and
+  throughput](timing.md).
 
 ### UART TMCL Protocol (72-bit / 9-byte)
 
@@ -169,16 +166,9 @@ uint8_t calculateChecksum(const uint8_t* data, size_t length) {
 
 **Issue**: Reply to command N comes during transaction N+1
 
-**Solution**: Always send a dummy frame (NO_OP) to receive the previous reply:
-
-```cpp
-// Send command
-spiTransfer(command_frame, dummy_rx);
-
-// Get reply by sending dummy frame
-uint8_t dummy[8] = {0};
-spiTransfer(dummy, reply_frame);
-```
+**Solution**: the driver follows every request with a reply-request datagram (`FF 00 00 00 00 00 00 FF`) and
+reads the reply from it, re-sending while the chip answers NOT_READY. Batches overlap the two: datagram *k*
+carries request *k* and the reply to request *k* - 1.
 
 ### UART Half-Duplex Timing
 
@@ -204,7 +194,7 @@ while (received < 9) {
 
 **Issue**: Checksum calculation mismatch
 
-**Solution**: 
+**Solution**:
 - Verify checksum algorithm matches specification
 - Check byte order (big-endian vs little-endian)
 - Ensure all bytes are included in calculation
@@ -214,12 +204,14 @@ while (received < 9) {
 **Issue**: TMCL checksum errors, bogus status codes, or flaky reads on UART
 
 **Solution**:
-- Confirm `uartReceiveTMCL` only returns success after **exactly nine** reply bytes (see [Platform Integration](platform_integration.md)).
+- Confirm `uartReceiveTMCL` only returns success after **exactly nine** reply bytes (see [Platform Integration](porting.md)).
 - Flush or drain stale RX data before starting bootloader or TMCL traffic if other code shares the same UART.
 
 ### SPI TMCL `REPLY_INVALID_CMD` on back-to-back transfers
 
-**Issue**: SPI returns `SPI_STATUS=OK` (0xFF) but `TMCL_STATUS=REPLY_INVALID_CMD` (0x02) on the second of two SPI TMCL transactions, often only when verbose logging is *off*. The retry loop for `SPI_STATUS_NOT_READY` does not catch it because the chip already considers the SPI byte-level transfer complete.
+**Issue**: SPI returns `SPI_STATUS=OK` (0xFF) but `TMCL_STATUS=REPLY_INVALID_CMD` (0x02) on the second of two SPI TMCL
+ transactions, often only when verbose logging is *off*. The retry loop for `SPI_STATUS_NOT_READY` does not catch it
+ because the chip already considers the SPI byte-level transfer complete.
 
 **Cause**: The request datagram reached the chip while it was still busy and came back
 `SPI_STATUS_NOT_READY`. Per the reference manual the command in a NOT_READY datagram is
@@ -230,15 +222,18 @@ was dropped and the following reply-request returned the reply to the previous r
 **Solution**: Fixed in the driver. `transferTMCL()` re-sends a request that comes back
 NOT_READY, checks that the reply echoes the request's opcode, and fails instead of returning a
 reply that belongs to another datagram. A post-transfer delay in `spiTransferTMCL` is no
-longer needed. See [Timing and Throughput](timing_and_throughput.md).
+longer needed. See [Timing and Throughput](timing.md).
 
 ## Optional SPI wire-level TMCL logging
 
-For bench bring-up, the driver can log each SPI TMCL transaction as hex TX/RX 8-byte frames. Define `TMC9660_LOG_TMCL_RAW_FRAMES` to `1` before including `tmc9660_comm_interface.hpp`, or add `-DTMC9660_LOG_TMCL_RAW_FRAMES=1` to your compile flags. Default is **0** (off) so normal runs are not flooded. Logging uses the comm adapter’s `debugLog` implementation.
+For bench bring-up, the driver can log each SPI TMCL transaction as hex TX/RX 8-byte frames. Define
+`TMC9660_LOG_TMCL_RAW_FRAMES` to `1` before including `tmc9660_comm_interface.hpp`, or add
+`-DTMC9660_LOG_TMCL_RAW_FRAMES=1` to your compile flags. Default is **0** (off) so normal runs are not flooded.
+Logging uses the comm adapter’s `debugLog` implementation.
 
 ## Next Steps
 
-- **[Platform Integration](platform_integration.md)** - Implement communication interface
-- **[Bootloader Initialization](special_feature_bootloader.md)** - Bootloader setup
+- **[Platform Integration](porting.md)** - Implement communication interface
+- **[Bootloader Initialization](bootloader.md)** - Bootloader setup
 - **[Troubleshooting](troubleshooting.md)** - Common issues and solutions
 

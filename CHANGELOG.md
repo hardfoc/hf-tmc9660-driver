@@ -53,10 +53,13 @@ code that used the affected API; together they call for a major version bump at 
 - `Heartbeat::HeartbeatConfig::interface` and `Heartbeat::transportInterface()`.
 - Host unit tests (`-DHF_TMC9660_BUILD_TESTS=ON`) with mock SPI/UART transports, and a CI workflow.
 - ESP32 example `tmcl_timing` (single vs pipelined access latency, gap sweep, histogram).
-- [Timing and Throughput](docs/timing_and_throughput.md) documentation.
+- Timing and throughput documentation (`docs/timing.md`).
 
 ### Changed
 
+- Documentation moved to the HardFOC MkDocs platform: new page set (quickstart, hardware, architecture, API
+  guide, porting, testing), code snippets compiled by the host build from `tests/docs/`, Doxygen under `/api/`,
+  versioned with mike. The Jekyll site files and the doxygen-awesome submodule are gone.
 - `setSpiRetryMaxCount()` / `setSpiRetryInterval()` now set `TmclSpiTiming::maxPolls` and a fixed
   poll interval. The default budget is 60 re-sends with a 20 → 200 µs back-off (about 11.5 ms).
 - With `TMC9660_DISABLE_DEBUG_LOGGING`, `sendCommand()` skips its per-access name lookup and

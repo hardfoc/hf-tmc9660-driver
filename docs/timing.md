@@ -1,13 +1,4 @@
----
-layout: default
-title: "⏱️ Timing and Throughput"
-description: "Cost of one TMCL access over SPI, how to configure it, and pipelined batches"
-nav_order: 9
-parent: "📚 Documentation"
-permalink: /docs/timing_and_throughput/
----
-
-# Timing and Throughput
+# Timing and throughput
 
 This page explains what one TMCL parameter access costs over SPI, which settings change it,
 and how pipelined batches cut the cost. It separates **what the vendor specifies**, **what is
@@ -31,7 +22,7 @@ So the protocol has a ready indication (NOT_READY) and no documented minimum del
 up to 1.0.0 nevertheless waited a fixed **1000 µs** between the request and the reply-request
 datagram, and ignored NOT_READY on the request datagram. That second point also explains the
 old "`REPLY_INVALID_CMD` on back-to-back transfers" symptom (see
-[Communication Protocols](special_feature_protocols.md)): a request that arrived while the
+[Communication Protocols](protocols.md)): a request that arrived while the
 chip was still busy was dropped, and the reply-request then returned the reply to the
 previous reply-request (status 2, invalid command).
 

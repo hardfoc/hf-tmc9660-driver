@@ -1,0 +1,14 @@
+{
+  "driver-layers": {
+    "title": "Three layers, one of them yours",
+    "alt": "Layer diagram: the application calls the hardware-agnostic TMC9660 driver and its subsystems, which use the SPI or UART communication interface, which calls the platform port you write, which drives the SPI bus and four control pins of the TMC9660.",
+    "description": "From top to bottom. Your application talks to one TMC9660<Comm> object, whose public members are the chip's subsystems (listed from inc/tmc9660.hpp). Each subsystem turns a call into TMCL parameter reads and writes. The communication interface (SpiCommInterface or UartCommInterface in inc/tmc9660_comm_interface.hpp) frames them, polls NOT_READY, pipelines batches and drives the control pins by name. The platform port is the only code you write: a class that moves bytes over SPI or UART, sets and reads four GPIOs and waits. Below it is the hardware.",
+    "profile": "overview",
+    "width": 1200,
+    "source": "docs/diagrams/figures/driver-layers.py",
+    "sources": [
+      "inc/tmc9660.hpp:TMC9660 members",
+      "inc/tmc9660_comm_interface.hpp:SpiCommInterface"
+    ]
+  }
+}

@@ -1,31 +1,23 @@
----
-layout: default
-title: "🔧 ESP32-C6 TMC9660 Comprehensive Test Suite"
-description: "Complete setup guide, hardware connections, and test execution instructions for ESP32-C6 TMC9660 motor driver testing with BLDC and Stepper motor boards"
-nav_order: 10
-parent: "📚 Documentation"
-permalink: /examples/esp32/
----
-
 # ESP32-C6 TMC9660 Comprehensive Test Suite
 
-This directory contains comprehensive test suites for the TMC9660 motor driver using the ESP32-C6 DevKit-M-1. The tests support both the **TMC9660-3PH-EVKIT** (BLDC motor board) and **TMC9660-STP-EVKIT** (Stepper motor board).
+This directory contains comprehensive test suites for the TMC9660 motor driver using the ESP32-C6 DevKit-M-1. The
+tests support both the **TMC9660-3PH-EVKIT** (BLDC motor board) and **TMC9660-STP-EVKIT** (Stepper motor board).
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Hardware Overview](#-hardware-overview)
-- [Pin Connections](#-pin-connections)
-- [Hardware Setup](#-hardware-setup)
+- [Hardware Overview](#hardware-overview)
+- [Pin Connections](#pin-connections)
+- [Hardware Setup](#hardware-setup)
   - [BLDC Motor Board Setup](#bldc-motor-board-setup-tmc9660-3ph-evkit)
   - [Stepper Motor Board Setup](#stepper-motor-board-setup-tmc9660-stp-evkit)
-- [Building the Tests](#-building-the-tests)
-- [Running the Tests](#-running-the-tests)
-- [Test Suites](#-test-suites)
-- [Troubleshooting](#-troubleshooting)
+- [Building the Tests](#building-the-tests)
+- [Running the Tests](#running-the-tests)
+- [Test Suites](#test-suites)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🔌 Hardware Overview
+## Hardware Overview
 
 ### ESP32-C6 DevKit-M-1
 
@@ -104,7 +96,7 @@ Evaluation kit for stepper motor control with reference switches and ABN encoder
 
 ---
 
-## 🔗 Pin Connections
+## Pin Connections
 
 ### SPI Communication Interface
 
@@ -144,7 +136,7 @@ GND                ───────> GND (Common ground)
 
 ---
 
-## 🛠️ Hardware Setup
+## Hardware Setup
 
 ### BLDC Motor Board Setup (TMC9660-3PH-EVKIT)
 
@@ -259,7 +251,7 @@ GND                ───────> GND (Common ground)
 
 ---
 
-## 🏗️ Building the Tests
+## Building the Tests
 
 ### Prerequisites
 
@@ -391,7 +383,7 @@ build-app-bldc_comprehensive_test-type-Release-target-esp32c6-idf-release_v5.5/
 
 ---
 
-## 🚀 Running the Tests
+## Running the Tests
 
 ### Flashing and Monitoring
 
@@ -497,7 +489,7 @@ This opens the ESP-IDF menuconfig where you can customize:
 
 ---
 
-## 📊 Test Suites
+## Test Suites
 
 ### BLDC Comprehensive Test (`BLDCComprehensiveTest.cpp`)
 
@@ -576,7 +568,7 @@ Tests for bootloader functionality:
 
 ---
 
-## ⚙️ Test Configuration
+## Test Configuration
 
 Each test suite supports enabling/disabling specific test categories via compile-time flags at the top of each test file:
 
@@ -592,7 +584,7 @@ Edit these flags to customize which tests run.
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -662,7 +654,8 @@ Edit these flags to customize which tests run.
 
 ### Debugging Tips
 
-1. **Enable Debug Logging**: The test suites enable DEBUG logging by default. Monitor serial output for detailed communication traces.
+1. **Enable Debug Logging**: The test suites enable DEBUG logging by default. Monitor serial output for detailed
+   communication traces.
 
 2. **Use GPIO14 Indicator**: Monitor GPIO14 with an oscilloscope to see test progression visually.
 
@@ -672,7 +665,7 @@ Edit these flags to customize which tests run.
 
 ---
 
-## 📸 Hardware Setup Photos
+## Hardware Setup Photos
 
 *Add photos of your actual hardware setup here:*
 - ESP32-C6 DevKit connected to TMC9660-3PH-EVKIT
@@ -682,7 +675,7 @@ Edit these flags to customize which tests run.
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **TMC9660 Datasheet**: [TMC9660.pdf](../Datasheet/tmc9660.pdf)
 - **TMC9660-3PH-EVKIT User Guide**: [tmc9660-3ph-eval-kit-ug.pdf](../Datasheet/tmc9660-3ph-eval-kit-ug.pdf)
@@ -691,13 +684,13 @@ Edit these flags to customize which tests run.
 
 ---
 
-## 📝 License
+## License
 
 Copyright (c) 2025 HardFOC. All rights reserved.
 
 ---
 
-## 👥 Contributing
+## Contributing
 
 Contributions are welcome! Please see the main repository's CONTRIBUTING.md for guidelines.
 

@@ -1,13 +1,7 @@
----
-layout: default
-title: "📐 Units & Diagnostics"
-description: "Strongly-typed engineering units, MotorContext, and diagnostic snapshots"
-nav_order: 8
-parent: "📚 Documentation"
-permalink: /docs/units_and_diagnostics/
----
+# Units and diagnostics
 
-# Units & Diagnostics
+How the driver converts the chip's internal units to RPM, degrees and amperes, and how to read a structured
+snapshot of the motor's state.
 
 The TMC9660 stores velocity, acceleration, position, and electrical angle in
 opaque **internal units** whose meaning depends on the active velocity-feedback
@@ -270,4 +264,4 @@ driver.diagnostics.snapshot(snap, ctx);
 ---
 
 **Navigation**
-⬅ [API Reference](api_reference.md) | [Examples](examples.md) ➡
+⬅ [API Reference](api-guide.md) | [Examples](examples.md) ➡
