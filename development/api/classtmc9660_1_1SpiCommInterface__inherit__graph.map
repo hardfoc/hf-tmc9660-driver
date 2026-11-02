@@ -1,5 +1,0 @@
-<map id="tmc9660::SpiCommInterface&lt; Derived &gt;" name="tmc9660::SpiCommInterface&lt; Derived &gt;">
-<area shape="rect" id="Node000001" title="CRTP&#45;based SPI implementation of TMC9660CommInterface." alt="" coords="5,93,213,133"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html" title="SPI status codes as per TMC9660 Parameter Mode." alt="" coords="15,5,203,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,59,112,93,107,93,107,59"/>
-</map>

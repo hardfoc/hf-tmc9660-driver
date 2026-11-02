@@ -1,5 +1,0 @@
-<map id="TMC9660::GateDriver::configurePowerStageProtection" name="TMC9660::GateDriver::configurePowerStageProtection">
-<area shape="rect" id="Node000001" title="Auto&#45;configure complete power stage based on physical properties." alt="" coords="5,5,239,45"/>
-<area shape="rect" id="Node000002" href="$TMC9660_8cpp.html#a38b2cde925e83d0cd01a78f7c818231e" title=" " alt="" coords="287,13,508,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,23,273,23,273,28,239,28"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="tmc9660::units::positionToCounts" name="tmc9660::units::positionToCounts">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,37,184,77"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#a04783bd76f1ffa1d0b851c8b5a3c896a" title=" " alt="" coords="232,5,411,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,42,218,37,219,42,185,47"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#a398630669856377531c8300b5d863258" title=" " alt="" coords="232,69,411,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,67,219,72,218,77,184,73"/>
-</map>

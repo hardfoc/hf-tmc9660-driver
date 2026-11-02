@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660::PositionControl::getActualPosition" name="tmc9660::TMC9660::PositionControl::getActualPosition">
-<area shape="rect" id="Node000001" title="Read actual position in raw chip counts." alt="" coords="305,5,513,45"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMC9660_1_1PositionControl.html#aa4894ddcb0bcfb4dc8c94186e70679e1" title="Convenience: read actual position in mechanical degrees." alt="" coords="5,5,257,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,28,258,28,258,23,292,23"/>
-</map>

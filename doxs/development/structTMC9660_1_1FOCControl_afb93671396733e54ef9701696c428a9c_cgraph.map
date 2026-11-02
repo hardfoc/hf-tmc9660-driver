@@ -1,8 +1,0 @@
-<map id="TMC9660::FOCControl::stop" name="TMC9660::FOCControl::stop">
-<area shape="rect" id="Node000001" title="Stop torque/flux control (SYSTEM_OFF)." alt="" coords="5,22,171,62"/>
-<area shape="rect" id="Node000002" href="$classTMC9660.html#a3bffdf8a19eb7e0a1bac933c85df7d94" title="Send a TMCL command. Optionally return the 32&#45;bit reply value." alt="" coords="219,29,408,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,39,205,39,205,45,171,45"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="277,31,269,21,273,11,288,5,313,3,345,7,357,16,354,20,343,11,313,8,289,10,277,15,274,20,281,27"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1tmcl.html#a358f3f7053b6b3249f91cbf69dcf5900" title=" " alt="" coords="456,29,637,55"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="408,39,442,39,442,45,408,45"/>
-</map>

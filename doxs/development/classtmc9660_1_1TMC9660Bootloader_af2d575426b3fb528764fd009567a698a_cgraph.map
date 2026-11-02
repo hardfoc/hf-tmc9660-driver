@@ -1,7 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader::otpBurn" name="tmc9660::TMC9660Bootloader::otpBurn">
-<area shape="rect" id="Node000001" title="Permanently burn data to OTP (One&#45;Time Programmable) memory." alt="" coords="5,37,224,77"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1OtpBurnResult.html#acfc3682f3c890f30be311f171cb3fc95" title="Create error result." alt="" coords="272,5,453,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,41,258,36,259,41,225,46"/>
-<area shape="rect" id="Node000003" href="$structtmc9660_1_1OtpBurnResult.html#a1b26653373a291782709c24af59d87a0" title="Create success result." alt="" coords="272,69,453,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,69,259,73,258,79,224,74"/>
-</map>

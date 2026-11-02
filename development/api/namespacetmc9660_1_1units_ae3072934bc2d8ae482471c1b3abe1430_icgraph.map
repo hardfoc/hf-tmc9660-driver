@@ -1,9 +1,0 @@
-<map id="tmc9660::units::angleToDegElec" name="tmc9660::units::angleToDegElec">
-<area shape="rect" id="Node000001" title=" " alt="" coords="547,31,777,56"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#ad700259a757245f7a1647bac12b1899d" title=" " alt="" coords="289,5,495,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="533,34,495,30,495,25,533,29"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#a2010ef8eae5cd7c9ac0a8cd55f442ecd" title=" " alt="" coords="285,55,499,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="533,57,499,60,499,55,533,52"/>
-<area shape="rect" id="Node000004" href="$structtmc9660_1_1TMC9660_1_1Diagnostics.html#a71ddddefacd8cf78bc685e159edf3669" title="Populate a full motor state snapshot." alt="" coords="5,47,237,87"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="271,70,237,70,237,65,271,65"/>
-</map>

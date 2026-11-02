@@ -1,9 +1,0 @@
-<map id="test_bootloader_clock_configuration" name="test_bootloader_clock_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,27,171,67"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a9db8abaed31536cf10bb344360322348" title=" " alt="" coords="219,35,389,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,45,205,45,205,50,171,50"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="442,5,583,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="389,33,428,27,429,32,390,38"/>
-<area shape="rect" id="Node000004" href="$BootloaderComprehensiveTest_8cpp.html#af62bce8b62712ed0df75da77ca6e37be" title=" " alt="" coords="437,55,588,95"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="390,56,424,61,424,66,389,61"/>
-</map>

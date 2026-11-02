@@ -1,5 +1,0 @@
-<map id="tmc9660::diagnostics::MotorSnapshot" name="tmc9660::diagnostics::MotorSnapshot">
-<area shape="rect" id="Node000001" title="Full read&#45;only state dump from the chip." alt="" coords="33,93,194,133"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1units_1_1MotorContext.html" title="Bundle of motor + feedback facts needed to interpret the chip&#39;s opaque internal units...." alt="" coords="5,5,221,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,44,116,93,111,93,111,44"/>
-</map>

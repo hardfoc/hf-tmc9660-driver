@@ -1,5 +1,0 @@
-<map id="TMCLReply::fromSpi" name="TMCLReply::fromSpi">
-<area shape="rect" id="Node000001" title="Decode and validate reply from SPI TMCL datagram." alt="" coords="5,5,159,31"/>
-<area shape="rect" id="Node000002" href="$TMC9660CommInterface_8hpp.html#aac0e84a72fe3c933f881e4083d280329" title="Calculate 8&#45;bit checksum using sum of bytes method." alt="" coords="207,5,325,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,15,193,15,193,21,159,21"/>
-</map>

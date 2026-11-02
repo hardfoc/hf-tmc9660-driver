@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660CommInterface::delayUs" name="tmc9660::TMC9660CommInterface::delayUs">
-<area shape="rect" id="Node000001" title="Delay execution for specified microseconds." alt="" coords="5,5,255,45"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660CommInterface.html#a90d5edfce05f1c44082697f85fc98a76" title="Delay execution for specified milliseconds." alt="" coords="303,5,552,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,23,289,23,289,28,255,28"/>
-</map>

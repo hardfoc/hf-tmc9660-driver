@@ -1,7 +1,0 @@
-var namespaceTMC9660_1_1ADC =
-[
-    [ "CSA_SETUP", "structTMC9660_1_1ADC_1_1CSA__SETUP.html", "structTMC9660_1_1ADC_1_1CSA__SETUP" ],
-    [ "SETUP", "structTMC9660_1_1ADC_1_1SETUP.html", "structTMC9660_1_1ADC_1_1SETUP" ],
-    [ "SRC_CONFIG", "structTMC9660_1_1ADC_1_1SRC__CONFIG.html", "structTMC9660_1_1ADC_1_1SRC__CONFIG" ],
-    [ "STATUS_FLAGS", "structTMC9660_1_1ADC_1_1STATUS__FLAGS.html", "structTMC9660_1_1ADC_1_1STATUS__FLAGS" ]
-];

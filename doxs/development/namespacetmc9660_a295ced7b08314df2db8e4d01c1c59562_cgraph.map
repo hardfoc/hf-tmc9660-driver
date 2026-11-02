@@ -1,5 +1,0 @@
-<map id="tmc9660::crc8Bootloader" name="tmc9660::crc8Bootloader">
-<area shape="rect" id="Node000001" title="CRC&#45;8 calculation for UART protocol (TMC9660 datasheet method)." alt="" coords="5,5,191,31"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660.html#ab78e7fde92e67e58a4dd1f442833e0f9" title="Helper function for CRC&#45;8 calculation (UART only)." alt="" coords="239,5,405,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,15,225,15,225,21,191,21"/>
-</map>

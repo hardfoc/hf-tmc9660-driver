@@ -1,8 +1,0 @@
-<map id="TMC9660::sendCommand" name="TMC9660::sendCommand">
-<area shape="rect" id="Node000001" title="Send a TMCL command. Optionally return the 32&#45;bit reply value." alt="" coords="285,35,475,60"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="426,25,423,21,415,17,380,13,352,15,337,20,334,26,342,33,338,36,329,26,334,16,351,10,380,8,417,12,427,17,431,22"/>
-<area shape="rect" id="Node000002" href="$classTMC9660.html#a8723d78a8385ab042a7ad7bc75b2ddbc" title="Exit parameter mode and return to bootloader mode." alt="" coords="5,5,237,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,38,233,33,234,28,272,32"/>
-<area shape="rect" id="Node000003" href="$structTMC9660_1_1TorqueFluxControl.html#affcc3c9ec8f633a7c255bdd43b029dba" title="Stop torque/flux control (SYSTEM_OFF)." alt="" coords="17,55,226,95"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="272,62,227,67,226,61,271,56"/>
-</map>

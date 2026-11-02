@@ -1,7 +1,0 @@
-<map id="Esp32Tmc9660SpiBus::gpioSet" name="Esp32Tmc9660SpiBus::gpioSet">
-<area shape="rect" id="Node000001" title="Set GPIO pin signal state for TMC9660 control pins." alt="" coords="5,37,171,77"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660SpiBus.html#ac5fb5090f4cfdd793169caf59457d2a9" title="Map TMC9660 control pins to ESP32 GPIO pins." alt="" coords="230,5,395,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,43,216,36,217,42,171,48"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#a21441dc2cf2945b0450bb7988ffd3284" title="Convert signal state to physical GPIO level." alt="" coords="219,69,407,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,66,205,71,205,77,170,72"/>
-</map>

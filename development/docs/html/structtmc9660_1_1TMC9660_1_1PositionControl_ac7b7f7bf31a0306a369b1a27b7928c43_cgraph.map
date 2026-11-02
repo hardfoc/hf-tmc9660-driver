@@ -1,9 +1,0 @@
-<map id="tmc9660::TMC9660::PositionControl::getActualPosition" name="tmc9660::TMC9660::PositionControl::getActualPosition">
-<area shape="rect" id="Node000001" title="Read actual position in any engineering unit." alt="" coords="5,37,213,77"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#a5dd2ed8985a528e099538f286e03cf93" title=" " alt="" coords="261,45,489,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,55,248,55,248,60,214,60"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#a04783bd76f1ffa1d0b851c8b5a3c896a" title=" " alt="" coords="537,5,716,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="475,42,524,36,524,41,476,47"/>
-<area shape="rect" id="Node000004" href="$namespacetmc9660_1_1units.html#a398630669856377531c8300b5d863258" title=" " alt="" coords="537,69,716,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="476,67,524,74,524,79,475,73"/>
-</map>

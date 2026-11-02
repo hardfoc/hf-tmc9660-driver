@@ -1,9 +1,0 @@
-<map id="test_bootloader_uart_interface" name="test_bootloader_uart_interface">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,27,163,67"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a9db8abaed31536cf10bb344360322348" title=" " alt="" coords="211,35,381,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,45,197,45,197,50,163,50"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="434,5,575,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,33,420,27,421,32,382,38"/>
-<area shape="rect" id="Node000004" href="$BootloaderComprehensiveTest_8cpp.html#af62bce8b62712ed0df75da77ca6e37be" title=" " alt="" coords="429,55,580,95"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="382,56,416,61,416,66,381,61"/>
-</map>

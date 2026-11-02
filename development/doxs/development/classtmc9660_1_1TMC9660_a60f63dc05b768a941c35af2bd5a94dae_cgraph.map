@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660::getMotorContext" name="tmc9660::TMC9660::getMotorContext">
-<area shape="rect" id="Node000001" title="Read a MotorContext (pole pairs, sensor selection, encoder CPR) live from the chip." alt="" coords="5,5,220,45"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660.html#aa7d5ffca1e329b72e979eb68750ad05f" title="Read an axis (motor&#45;specific) parameter from the TMC9660." alt="" coords="268,13,520,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,23,254,23,254,28,220,28"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="test_stepper_edge_cases" name="test_stepper_edge_cases">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,192,56"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="240,5,380,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,30,226,25,226,31,192,35"/>
-<area shape="rect" id="Node000004" href="$stepper__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="253,55,367,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,51,239,57,239,62,192,57"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="428,5,636,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,15,414,15,414,21,380,21"/>
-</map>

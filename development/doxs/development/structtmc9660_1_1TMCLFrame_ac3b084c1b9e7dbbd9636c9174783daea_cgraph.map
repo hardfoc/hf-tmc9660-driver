@@ -1,5 +1,0 @@
-<map id="tmc9660::TMCLFrame::toUart" name="tmc9660::TMCLFrame::toUart">
-<area shape="rect" id="Node000001" title="Serialize frame into 9&#45;byte UART buffer, including sync bit and checksum." alt="" coords="5,5,169,45"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660.html#a2fc16e5feffbef089c5c9660c62615d5" title="Calculate 8&#45;bit checksum using sum of bytes method." alt="" coords="217,13,401,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,23,204,23,204,28,170,28"/>
-</map>

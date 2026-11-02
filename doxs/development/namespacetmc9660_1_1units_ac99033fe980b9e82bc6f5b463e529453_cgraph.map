@@ -1,7 +1,0 @@
-<map id="tmc9660::units::convertAcceleration" name="tmc9660::units::convertAcceleration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,45,263,70"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#af3c3610c331c8ff255cdddfbb1fef2f7" title=" " alt="" coords="311,5,517,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,42,297,36,297,41,246,47"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#a4092825aee6f90040aff8535f488cda7" title=" " alt="" coords="311,69,517,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,67,297,73,297,79,245,73"/>
-</map>

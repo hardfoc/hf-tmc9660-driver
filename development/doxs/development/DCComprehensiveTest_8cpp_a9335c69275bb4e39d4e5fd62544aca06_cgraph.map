@@ -1,7 +1,0 @@
-<map id="test_dc_multi_device_operations" name="test_dc_multi_device_operations">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,165,45"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a193b30ef3686c5852a972b9995d3ee6e" title=" " alt="" coords="213,13,353,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,23,199,23,199,28,166,28"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="401,13,543,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="353,23,387,23,387,28,353,28"/>
-</map>

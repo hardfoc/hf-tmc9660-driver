@@ -1,9 +1,0 @@
-<map id="test_telemetry_performance_benchmarks" name="test_telemetry_performance_benchmarks">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,213,63"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="261,5,401,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,29,248,25,248,30,214,34"/>
-<area shape="rect" id="Node000004" href="$telemetry__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="274,55,389,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="214,52,261,57,260,62,214,57"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="449,5,657,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="401,15,436,15,436,21,401,21"/>
-</map>

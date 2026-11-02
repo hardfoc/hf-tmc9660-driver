@@ -1,9 +1,0 @@
-<map id="tmc9660::TMC9660::VelocityControl::setVelocityOffset" name="tmc9660::TMC9660::VelocityControl::setVelocityOffset">
-<area shape="rect" id="Node000001" title="Set velocity offset (feed&#45;forward bias) in any engineering unit." alt="" coords="5,37,213,77"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#a9ff7db1dbc63f4c50f06ddc70e8a6b72" title=" " alt="" coords="261,37,440,77"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,55,248,55,248,60,214,60"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#ab3222b808aefe03b5dba3c245e88836c" title="Convert a velocity from mech RPM (canonical) to any unit." alt="" coords="488,5,667,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="440,42,474,37,475,42,441,47"/>
-<area shape="rect" id="Node000004" href="$namespacetmc9660_1_1units.html#aaf30cfd1741f6d7ee5ee955b49d2bf83" title="Convert a velocity from any unit to mech RPM (intermediate canonical form)." alt="" coords="488,69,667,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="441,67,475,72,474,77,440,73"/>
-</map>

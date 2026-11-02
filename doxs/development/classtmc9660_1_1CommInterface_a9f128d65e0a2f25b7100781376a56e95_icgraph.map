@@ -1,6 +1,0 @@
-<map id="tmc9660::CommInterface::delayUs" name="tmc9660::CommInterface::delayUs">
-<area shape="rect" id="Node000001" title="Delay execution for specified microseconds." alt="" coords="261,29,449,69"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="397,18,382,11,355,8,332,10,317,15,312,21,315,28,310,30,307,20,314,10,331,5,355,3,384,6,399,13"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1SpiCommInterface.html#a6bfcfb6e669db97e2d12bd3b5b944a0c" title="Exchange one TMCL datagram over SPI using the two&#45;transaction reply protocol." alt="" coords="5,29,213,69"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="248,52,214,52,214,47,248,47"/>
-</map>

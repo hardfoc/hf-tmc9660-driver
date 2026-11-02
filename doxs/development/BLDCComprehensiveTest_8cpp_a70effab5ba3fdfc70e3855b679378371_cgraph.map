@@ -1,7 +1,0 @@
-<map id="create_test_driver" name="create_test_driver">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,145,56"/>
-<area shape="rect" id="Node000002" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="201,5,342,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,32,186,26,187,32,146,37"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a9139fa0d0c10a85938e971186348ca9c" title="Create and initialize UART communication interface." alt="" coords="193,55,349,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,49,180,53,179,59,145,55"/>
-</map>

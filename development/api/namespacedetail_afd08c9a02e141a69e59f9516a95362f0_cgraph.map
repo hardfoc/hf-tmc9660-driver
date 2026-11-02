@@ -1,9 +1,0 @@
-<map id="detail::tmc9660_require_step_dir" name="detail::tmc9660_require_step_dir">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,183,69"/>
-<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="51,30,49,20,55,10,71,5,94,3,121,6,135,13,133,18,119,11,94,8,72,10,59,15,54,21,56,28"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html#a19353276e3e4543d826a15cd6a714947" title="Public debug logging wrapper for external classes." alt="" coords="231,29,419,69"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,47,217,47,217,52,183,52"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347" title="Debug logging function for detailed debugging information." alt="" coords="467,29,655,69"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,47,453,47,453,52,419,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="517,30,514,20,521,10,537,5,561,3,588,6,603,13,601,18,587,11,561,8,538,10,524,15,519,21,522,28"/>
-</map>

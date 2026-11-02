@@ -1,5 +1,0 @@
-<map id="Esp32Tmc9660SpiBus::deinitialize" name="Esp32Tmc9660SpiBus::deinitialize">
-<area shape="rect" id="Node000001" title="Deinitialize the SPI interface." alt="" coords="237,5,403,45"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660SpiBus.html#a26c7b6c60df242ab54e15e981c3ca0bf" title="Destructor &#45; cleans up SPI resources." alt="" coords="5,5,189,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,28,190,28,190,23,223,23"/>
-</map>

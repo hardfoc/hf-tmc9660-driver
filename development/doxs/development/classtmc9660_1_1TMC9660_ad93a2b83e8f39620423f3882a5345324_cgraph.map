@@ -1,8 +1,0 @@
-<map id="tmc9660::TMC9660::GpioSetInactive" name="tmc9660::TMC9660::GpioSetInactive">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,212,69"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html#aa226476b93f630568efdfe1d25afbb97" title="Set GPIO pin to inactive state (convenience method)." alt="" coords="260,29,448,69"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,47,246,47,246,52,212,52"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#af4bc9c5c9fb503a452300b96dc5585e8" title="Set GPIO pin signal state (output control)." alt="" coords="496,29,684,69"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="448,47,482,47,482,52,448,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="546,30,544,20,551,10,566,5,590,3,617,6,632,13,630,18,616,11,590,8,567,10,554,15,549,21,551,28"/>
-</map>

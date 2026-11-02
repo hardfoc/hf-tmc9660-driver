@@ -1,7 +1,0 @@
-<map id="verify_stepper_configuration" name="verify_stepper_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="339,13,545,38"/>
-<area shape="rect" id="Node000002" href="$stepper__comprehensive__test_8cpp.html#a822185de7d516eb2fed415b13d810a3e" title=" " alt="" coords="140,5,291,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,28,291,28,291,23,325,23"/>
-<area shape="rect" id="Node000003" href="$stepper__comprehensive__test_8cpp.html#a630544a7f0a2cc40d8a7fefab7e2fe70" title=" " alt="" coords="5,13,92,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,28,92,28,92,23,126,23"/>
-</map>

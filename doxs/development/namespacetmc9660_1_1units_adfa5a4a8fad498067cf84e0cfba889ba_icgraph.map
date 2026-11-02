@@ -1,9 +1,0 @@
-<map id="tmc9660::units::convertVelocity" name="tmc9660::units::convertVelocity">
-<area shape="rect" id="Node000001" title="Convert a velocity between any two units." alt="" coords="285,77,513,102"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMC9660_1_1VelocityControl.html#a0dfc9ca605e51bea613e66ae3f9571e5" title="Read actual velocity in any engineering unit." alt="" coords="17,5,225,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="329,76,208,48,210,43,331,71"/>
-<area shape="rect" id="Node000003" href="$structtmc9660_1_1TMC9660_1_1Diagnostics.html#a71ddddefacd8cf78bc685e159edf3669" title="Populate a full motor state snapshot." alt="" coords="5,69,237,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,92,238,92,238,87,272,87"/>
-<area shape="rect" id="Node000004" href="$structtmc9660_1_1TMC9660_1_1Diagnostics.html#aad9b5d8e9a1ceeb30194a331e70e8a74" title="Populate a compact motor health summary." alt="" coords="5,133,237,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="331,108,210,136,208,131,329,103"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="test_telemetry_temperature_monitoring" name="test_telemetry_temperature_monitoring">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,212,63"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a193b30ef3686c5852a972b9995d3ee6e" title=" " alt="" coords="265,5,405,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,29,251,25,252,30,213,34"/>
-<area shape="rect" id="Node000004" href="$TelemetryComprehensiveTest_8cpp.html#a1747c1efdce438b256df6c7f22c9efba" title=" " alt="" coords="260,55,409,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="213,52,246,55,246,61,212,57"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="457,5,599,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,15,444,15,444,21,405,21"/>
-</map>

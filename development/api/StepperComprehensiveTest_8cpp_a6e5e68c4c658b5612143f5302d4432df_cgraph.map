@@ -1,7 +1,0 @@
-<map id="test_stepper_microstepping_configuration" name="test_stepper_microstepping_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,208,45"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a193b30ef3686c5852a972b9995d3ee6e" title=" " alt="" coords="256,13,396,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,23,242,23,242,28,208,28"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="444,13,585,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="396,23,430,23,430,28,396,28"/>
-</map>

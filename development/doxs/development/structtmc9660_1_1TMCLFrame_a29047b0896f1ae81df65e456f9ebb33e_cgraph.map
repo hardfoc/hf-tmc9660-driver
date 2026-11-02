@@ -1,7 +1,0 @@
-<map id="tmc9660::TMCLFrame::fromSpiChecked" name="tmc9660::TMCLFrame::fromSpiChecked">
-<area shape="rect" id="Node000001" title="Deserialize an SPI buffer with status and checksum validation." alt="" coords="5,5,169,45"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMCLReply.html#a2ebe3e98f016307c2c0ae1e8a6fb9494" title="Decode and validate reply from SPI TMCL datagram." alt="" coords="217,5,377,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,204,23,204,28,169,28"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660.html#a2fc16e5feffbef089c5c9660c62615d5" title="Calculate 8&#45;bit checksum using sum of bytes method." alt="" coords="425,13,609,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="378,23,412,23,412,28,378,28"/>
-</map>

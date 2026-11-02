@@ -1,9 +1,0 @@
-<map id="test_stepper_motor_type_configuration" name="test_stepper_motor_type_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,156,63"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a193b30ef3686c5852a972b9995d3ee6e" title=" " alt="" coords="237,5,377,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,32,223,25,224,30,157,38"/>
-<area shape="rect" id="Node000004" href="$StepperComprehensiveTest_8cpp.html#a6f1ca2b36d05af1667a32a8a4dfadc61" title=" " alt="" coords="204,55,411,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="157,49,191,52,190,58,156,54"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="459,5,600,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="377,15,445,15,445,21,377,21"/>
-</map>

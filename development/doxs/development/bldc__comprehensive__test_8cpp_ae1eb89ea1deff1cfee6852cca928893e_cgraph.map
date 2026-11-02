@@ -1,9 +1,0 @@
-<map id="test_bldc_error_handling" name="test_bldc_error_handling">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,188,56"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="236,5,376,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,30,222,25,222,31,188,35"/>
-<area shape="rect" id="Node000004" href="$bldc__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="249,55,363,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,51,235,57,234,62,188,56"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="424,5,632,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,15,410,15,410,21,376,21"/>
-</map>

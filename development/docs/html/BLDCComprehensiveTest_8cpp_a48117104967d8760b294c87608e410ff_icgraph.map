@@ -1,9 +1,0 @@
-<map id="configureBrakeForBLDC" name="configureBrakeForBLDC">
-<area shape="rect" id="Node000001" title=" " alt="" coords="640,13,815,38"/>
-<area shape="rect" id="Node000002" href="$BLDCComprehensiveTest_8cpp.html#aaa6256cb75ad3e8ab36a7b9b6942e58a" title=" " alt="" coords="373,13,592,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="626,28,592,28,592,23,626,23"/>
-<area shape="rect" id="Node000003" href="$BLDCComprehensiveTest_8cpp.html#a3ef29745e5282408e0a1de2a23f01b87" title=" " alt="" coords="140,5,325,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="360,28,326,28,326,23,360,23"/>
-<area shape="rect" id="Node000004" href="$BLDCComprehensiveTest_8cpp.html#a630544a7f0a2cc40d8a7fefab7e2fe70" title=" " alt="" coords="5,13,92,38"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,28,92,28,92,23,126,23"/>
-</map>

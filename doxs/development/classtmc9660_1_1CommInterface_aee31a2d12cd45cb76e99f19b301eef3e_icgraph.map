@@ -1,6 +1,0 @@
-<map id="tmc9660::CommInterface::mode" name="tmc9660::CommInterface::mode">
-<area shape="rect" id="Node000001" title="Get the underlying communication mode used by this interface." alt="" coords="300,29,488,69"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="439,18,423,11,394,8,368,10,353,15,347,21,350,28,345,30,342,20,350,10,367,5,394,3,425,5,441,13"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660.html#a46ff0298acd72a9c6d1bc504a3b9c0ce" title="Complete bootloader initialization and transition to parameter mode." alt="" coords="5,37,252,62"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="286,52,252,52,252,47,286,47"/>
-</map>

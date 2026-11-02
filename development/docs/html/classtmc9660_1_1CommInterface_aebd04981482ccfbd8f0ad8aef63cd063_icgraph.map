@@ -1,8 +1,0 @@
-<map id="tmc9660::CommInterface::delayMs" name="tmc9660::CommInterface::delayMs">
-<area shape="rect" id="Node000001" title="Delay execution for specified milliseconds." alt="" coords="291,37,479,77"/>
-<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="429,26,413,19,385,16,360,18,344,23,339,29,342,36,337,38,334,28,342,18,359,13,385,11,415,14,431,21"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMC9660_1_1CurrentSensing.html#ae079087dc0f47e7102be75dc8f770b36" title="Calibrate the ADC offsets for current measurement." alt="" coords="22,5,226,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="277,47,226,40,226,35,277,42"/>
-<area shape="rect" id="Node000003" href="$structtmc9660_1_1TMC9660_1_1NvmStorage.html#a495419129db98913185a51138b9a460b" title="Restore parameters previously saved to NVM." alt="" coords="5,69,243,109"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="277,73,243,77,243,72,277,68"/>
-</map>

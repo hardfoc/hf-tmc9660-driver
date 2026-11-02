@@ -1,6 +1,0 @@
-<map id="TMC9660::sendCommand" name="TMC9660::sendCommand">
-<area shape="rect" id="Node000001" title="Send a TMCL command. Optionally return the 32&#45;bit reply value." alt="" coords="5,29,195,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="62,31,54,21,58,11,74,5,100,3,133,7,145,16,142,20,131,11,100,8,75,10,62,15,59,20,66,27"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1tmcl.html#a358f3f7053b6b3249f91cbf69dcf5900" title=" " alt="" coords="243,29,424,55"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="195,39,229,39,229,45,195,45"/>
-</map>

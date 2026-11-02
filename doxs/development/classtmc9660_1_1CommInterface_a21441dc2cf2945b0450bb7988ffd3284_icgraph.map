@@ -1,7 +1,0 @@
-<map id="tmc9660::CommInterface::signalToGpioLevel" name="tmc9660::CommInterface::signalToGpioLevel">
-<area shape="rect" id="Node000001" title="Convert signal state to physical GPIO level." alt="" coords="227,37,415,77"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660SpiBus.html#a52979857e3356c482e6af8e9f0d4085d" title="Set GPIO pin signal state for TMC9660 control pins." alt="" coords="9,5,175,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,45,174,40,175,34,213,40"/>
-<area shape="rect" id="Node000003" href="$classEsp32Tmc9660UartBus.html#ab5169a47f100bb6cdcfb254f5f04a80f" title="Set GPIO pin signal state for TMC9660 control pins." alt="" coords="5,69,179,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,75,179,80,178,75,212,70"/>
-</map>

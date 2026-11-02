@@ -1,5 +1,0 @@
-<map id="UARTTMC9660CommInterface::uartSendTMCL" name="UARTTMC9660CommInterface::uartSendTMCL">
-<area shape="rect" id="Node000001" title="Send raw 9&#45;byte UART TMCL datagram for parameter mode communication." alt="" coords="272,5,491,45"/>
-<area shape="rect" id="Node000002" href="$classUARTTMC9660CommInterface.html#abe101342cba1bc6af49f15a13a30db84" title="Perform a full duplex TMCL transfer for parameter mode communication." alt="" coords="5,5,224,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,28,224,28,224,23,258,23"/>
-</map>

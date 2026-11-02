@@ -1,7 +1,0 @@
-<map id="tmc9660::TMC9660::enterBootloaderMode" name="tmc9660::TMC9660::enterBootloaderMode">
-<area shape="rect" id="Node000001" title="Exit parameter mode and return to bootloader mode." alt="" coords="5,5,303,31"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660.html#a3bffdf8a19eb7e0a1bac933c85df7d94" title="Send a TMCL command. Optionally return the 32&#45;bit reply value." alt="" coords="351,5,605,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="303,15,337,15,337,21,303,21"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1tmcl.html#a358f3f7053b6b3249f91cbf69dcf5900" title=" " alt="" coords="653,5,835,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="606,15,640,15,640,21,606,21"/>
-</map>

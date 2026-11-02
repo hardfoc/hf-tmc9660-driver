@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['v2_5f5_0',['V2_5',['../namespacetmc9660_1_1bootcfg.html#a6ffcd57a7508cb78984f0167caff7496aedc540e50f10c618159275a791847834',1,'tmc9660::bootcfg']]],
-  ['v3_5f3_1',['V3_3',['../namespacetmc9660_1_1bootcfg.html#a6ffcd57a7508cb78984f0167caff7496af869fb390f575744d7e1a3845efec815',1,'tmc9660::bootcfg']]],
-  ['v5_5f0_2',['V5_0',['../namespacetmc9660_1_1bootcfg.html#a6ffcd57a7508cb78984f0167caff7496aa4ab6982e01b0554d528038974fc1cc3',1,'tmc9660::bootcfg']]]
-];

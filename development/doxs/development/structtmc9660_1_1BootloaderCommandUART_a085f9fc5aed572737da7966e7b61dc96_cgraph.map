@@ -1,7 +1,0 @@
-<map id="tmc9660::BootloaderCommandUART::toBuffer" name="tmc9660::BootloaderCommandUART::toBuffer">
-<area shape="rect" id="Node000001" title="Serialize to 8&#45;byte buffer for UART transmission." alt="" coords="5,5,231,45"/>
-<area shape="rect" id="Node000002" href="$group__TMC9660__BootloaderUtils.html#ga295ced7b08314df2db8e4d01c1c59562" title="CRC&#45;8 calculation for UART protocol (TMC9660 datasheet method)." alt="" coords="279,13,464,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,23,265,23,265,28,231,28"/>
-<area shape="rect" id="Node000003" href="$group__TMC9660__BootloaderUtils.html#gab78e7fde92e67e58a4dd1f442833e0f9" title="Helper function for CRC&#45;8 calculation (UART only)." alt="" coords="512,13,679,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="465,23,498,23,498,28,465,28"/>
-</map>

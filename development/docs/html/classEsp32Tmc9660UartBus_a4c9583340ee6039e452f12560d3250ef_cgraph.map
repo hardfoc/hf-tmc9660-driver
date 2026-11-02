@@ -1,5 +1,0 @@
-<map id="Esp32Tmc9660UartBus::~Esp32Tmc9660UartBus" name="Esp32Tmc9660UartBus::~Esp32Tmc9660UartBus">
-<area shape="rect" id="Node000001" title="Destructor &#45; cleans up UART resources." alt="" coords="5,5,197,45"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660UartBus.html#a000dcf69437c2b7aa542e3a079755837" title="Deinitialize the UART interface." alt="" coords="245,5,419,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,23,231,23,231,28,197,28"/>
-</map>

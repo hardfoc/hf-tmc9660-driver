@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader::setBank" name="tmc9660::TMC9660Bootloader::setBank">
-<area shape="rect" id="Node000001" title="Select the target memory bank for subsequent operations." alt="" coords="272,5,491,45"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660Bootloader.html#acc3c2f5a0218c1b9f267559a46fcf87d" title="Select the target register bank using enum (overloaded)." alt="" coords="5,5,224,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,28,224,28,224,23,258,23"/>
-</map>

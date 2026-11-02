@@ -1,5 +1,0 @@
-<map id="calculateBootstrapCurrent_mA" name="calculateBootstrapCurrent_mA">
-<area shape="rect" id="Node000001" title="Estimate the bootstrap supply current a three&#45;phase power stage needs." alt="" coords="287,13,508,38"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMC9660_1_1GateDriver.html#ac6f8ddc1dc83b220c21ccd4c2da178b6" title="Auto&#45;configure complete power stage based on physical properties." alt="" coords="5,5,239,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,28,239,28,239,23,273,23"/>
-</map>

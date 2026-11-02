@@ -1,8 +1,0 @@
-<map id="tmc9660::TMC9660::FeedbackSense::configureAuto" name="tmc9660::TMC9660::FeedbackSense::configureAuto">
-<area shape="rect" id="Node000001" title="Auto&#45;configure SPI encoder feedback." alt="" coords="5,29,224,69"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html#a19353276e3e4543d826a15cd6a714947" title="Public debug logging wrapper for external classes." alt="" coords="272,29,460,69"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,47,258,47,258,52,224,52"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347" title="Debug logging function for detailed debugging information." alt="" coords="508,29,696,69"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="460,47,494,47,494,52,460,52"/>
-<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="558,30,556,20,563,10,578,5,602,3,629,6,644,13,642,18,628,11,602,8,579,10,566,15,561,21,563,28"/>
-</map>

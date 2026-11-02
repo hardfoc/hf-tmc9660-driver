@@ -1,5 +1,0 @@
-<map id="Esp32Tmc9660UartBus::initialize" name="Esp32Tmc9660UartBus::initialize">
-<area shape="rect" id="Node000001" title="Initialize the UART interface." alt="" coords="5,5,179,45"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660UartBus.html#a12abd626ef6a80f1a3253160b64970f1" title="Configure GPIO pins for TMC9660 control and status." alt="" coords="227,5,400,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,23,213,23,213,28,179,28"/>
-</map>

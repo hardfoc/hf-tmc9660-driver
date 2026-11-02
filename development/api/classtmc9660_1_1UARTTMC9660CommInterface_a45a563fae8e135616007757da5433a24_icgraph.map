@@ -1,5 +1,0 @@
-<map id="tmc9660::UARTTMC9660CommInterface::uartReceiveTMCL" name="tmc9660::UARTTMC9660CommInterface::uartReceiveTMCL">
-<area shape="rect" id="Node000001" title="Receive raw 9&#45;byte UART TMCL datagram for parameter mode communication." alt="" coords="280,5,507,45"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1UARTTMC9660CommInterface.html#adead1dc66c704f9c0cb1f7817e8a9703" title="Perform a full duplex TMCL transfer for parameter mode communication." alt="" coords="5,5,232,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,28,232,28,232,23,266,23"/>
-</map>

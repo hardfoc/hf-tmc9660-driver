@@ -1,9 +1,0 @@
-<map id="tmc9660::TMC9660::bootloaderInit" name="tmc9660::TMC9660::bootloaderInit">
-<area shape="rect" id="Node000001" title="Complete bootloader initialization and transition to parameter mode." alt="" coords="5,81,252,106"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e" title="Get the underlying communication mode used by this interface." alt="" coords="300,29,488,69"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="205,78,286,64,287,70,206,83"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#a8a4f28c5ca1491ca429bf737b16f5053" title="Perform a full duplex TMCL transfer for parameter mode communication." alt="" coords="300,117,488,157"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="206,103,287,117,286,122,205,109"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="345,30,342,20,350,10,367,5,394,3,425,5,441,13,439,18,423,11,394,8,368,10,353,15,347,21,350,28"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="345,118,342,108,350,98,367,93,394,91,425,93,441,101,439,106,423,99,394,96,368,98,353,103,347,109,350,116"/>
-</map>

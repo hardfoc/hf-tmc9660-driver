@@ -1,7 +1,0 @@
-<map id="verify_dc_configuration" name="verify_dc_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="339,13,512,38"/>
-<area shape="rect" id="Node000002" href="$DCComprehensiveTest_8cpp.html#a4adf33bfbc3a80552c7e7d94b113000b" title=" " alt="" coords="140,5,291,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,28,291,28,291,23,325,23"/>
-<area shape="rect" id="Node000003" href="$DCComprehensiveTest_8cpp.html#a630544a7f0a2cc40d8a7fefab7e2fe70" title=" " alt="" coords="5,13,92,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,28,92,28,92,23,126,23"/>
-</map>

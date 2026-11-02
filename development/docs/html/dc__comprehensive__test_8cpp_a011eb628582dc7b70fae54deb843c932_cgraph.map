@@ -1,9 +1,0 @@
-<map id="test_dc_protection_features" name="test_dc_protection_features">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,148,63"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="196,5,336,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,31,182,27,183,32,148,36"/>
-<area shape="rect" id="Node000004" href="$dc__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="209,55,323,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="148,50,195,56,194,61,148,55"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="384,5,592,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="336,15,370,15,370,21,336,21"/>
-</map>

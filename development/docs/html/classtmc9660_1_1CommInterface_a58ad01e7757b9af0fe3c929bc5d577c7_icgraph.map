@@ -1,5 +1,0 @@
-<map id="tmc9660::CommInterface::gpioSetActive" name="tmc9660::CommInterface::gpioSetActive">
-<area shape="rect" id="Node000001" title="Set GPIO pin to active state (convenience method)." alt="" coords="260,5,448,45"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1TMC9660.html#a987296986afe6d965a558a2ec5ccd6f5" title=" " alt="" coords="5,5,212,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="247,28,212,28,212,23,247,23"/>
-</map>

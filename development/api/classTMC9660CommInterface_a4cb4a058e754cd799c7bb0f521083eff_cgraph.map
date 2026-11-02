@@ -1,5 +1,0 @@
-<map id="TMC9660CommInterface::logDebug" name="TMC9660CommInterface::logDebug">
-<area shape="rect" id="Node000001" title="Public debug logging wrapper for external classes." alt="" coords="5,5,189,45"/>
-<area shape="rect" id="Node000002" href="$classTMC9660CommInterface.html#adacafc87cb2be98b1ad8bf9770b29642" title="Debug logging function for detailed debugging information." alt="" coords="237,5,421,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,23,223,23,223,28,190,28"/>
-</map>

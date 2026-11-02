@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader::getGitInfo" name="tmc9660::TMC9660Bootloader::getGitInfo">
-<area shape="rect" id="Node000001" title="Get Git version control information." alt="" coords="5,5,224,45"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1GitInfo.html#a329188344bd7284b2c94824385547e01" title="Parse from 32&#45;bit value." alt="" coords="272,13,479,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,23,258,23,258,28,224,28"/>
-</map>

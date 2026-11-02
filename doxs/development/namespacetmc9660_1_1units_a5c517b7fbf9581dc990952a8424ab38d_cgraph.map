@@ -1,7 +1,0 @@
-<map id="tmc9660::units::accelerationToInternal" name="tmc9660::units::accelerationToInternal">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,37,212,77"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#af3c3610c331c8ff255cdddfbb1fef2f7" title=" " alt="" coords="260,5,467,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,42,246,37,247,43,212,47"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#a4092825aee6f90040aff8535f488cda7" title=" " alt="" coords="260,69,467,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,68,247,72,246,77,212,73"/>
-</map>

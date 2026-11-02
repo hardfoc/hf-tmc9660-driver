@@ -1,9 +1,0 @@
-<map id="tmc9660::TMCLReply::fromUart" name="tmc9660::TMCLReply::fromUart">
-<area shape="rect" id="Node000001" title="Decode and validate reply from UART TMCL datagram." alt="" coords="269,69,429,109"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMCLFrame.html#a35caac4f744db2f8cff9c761a562823c" title="Deserialize a UART buffer with address and checksum validation." alt="" coords="31,5,195,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,68,187,48,188,43,263,63"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1UartCommInterface.html#ac1d97777f68b6e39562ef5d09591a7f6" title="Exchange one TMCL datagram over UART as a single request/response pair." alt="" coords="5,69,221,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="256,92,222,92,222,87,256,87"/>
-<area shape="rect" id="Node000004" href="$classEsp32Tmc9660UartBus.html#a6d0539e4b61dc91a1c314fbdac8b9699" title="Transfer TMCL frame over UART for parameter mode communication." alt="" coords="27,133,200,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="263,116,188,136,187,131,261,110"/>
-</map>

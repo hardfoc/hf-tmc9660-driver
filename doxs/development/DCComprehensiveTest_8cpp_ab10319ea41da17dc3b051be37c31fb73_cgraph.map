@@ -1,7 +1,0 @@
-<map id="test_dc_edge_cases" name="test_dc_edge_cases">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,157,31"/>
-<area shape="rect" id="Node000002" href="$BootloaderComprehensiveTest_8cpp.html#a193b30ef3686c5852a972b9995d3ee6e" title=" " alt="" coords="205,5,345,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,15,191,15,191,21,158,21"/>
-<area shape="rect" id="Node000003" href="$Esp32TMC9660Bus_8hpp.html#a6a65828a097e44c42edb1c62d89ee262" title="Create and initialize SPI communication interface." alt="" coords="393,5,535,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="345,15,379,15,379,21,345,21"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,124,56"/>
-<area shape="rect" id="Node000001" href="$structis__spi__interface.html" title=" " alt="" coords="175,5,338,31"/>
-<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="138,31,175,26,176,31,138,36"/>
-<area shape="rect" id="Node000002" href="$structis__uart__interface.html" title=" " alt="" coords="172,55,341,80"/>
-<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="138,50,172,54,171,59,137,55"/>
-</map>

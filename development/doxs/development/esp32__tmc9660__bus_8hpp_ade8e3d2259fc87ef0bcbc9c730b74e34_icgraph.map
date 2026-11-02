@@ -1,9 +1,0 @@
-<map id="CreateEsp32Tmc9660UartBus" name="CreateEsp32Tmc9660UartBus">
-<area shape="rect" id="Node000001" title="Create and initialize UART communication interface." alt="" coords="353,35,569,60"/>
-<area shape="rect" id="Node000002" href="$bldc__comprehensive__test_8cpp.html#a70effab5ba3fdfc70e3855b679378371" title=" " alt="" coords="153,5,293,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="344,36,293,29,293,24,345,30"/>
-<area shape="rect" id="Node000003" href="$bootloader__comprehensive__test_8cpp.html#ae8e1c382ddac4d748ec379afd1cea67d" title=" " alt="" coords="140,55,305,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="340,64,306,68,305,63,339,59"/>
-<area shape="rect" id="Node000004" href="$bootloader__comprehensive__test_8cpp.html#a630544a7f0a2cc40d8a7fefab7e2fe70" title=" " alt="" coords="5,63,92,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,78,92,78,92,73,126,73"/>
-</map>

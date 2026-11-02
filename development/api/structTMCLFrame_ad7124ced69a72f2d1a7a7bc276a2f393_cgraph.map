@@ -1,7 +1,0 @@
-<map id="TMCLFrame::fromUart" name="TMCLFrame::fromUart">
-<area shape="rect" id="Node000001" title="Deserialize a UART buffer with address and checksum validation." alt="" coords="5,5,172,31"/>
-<area shape="rect" id="Node000002" href="$structTMCLReply.html#a45b99aee319f854fc3ef8e02165413a5" title="Decode and validate reply from UART TMCL datagram." alt="" coords="220,5,381,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,15,206,15,206,21,172,21"/>
-<area shape="rect" id="Node000003" href="$TMC9660CommInterface_8hpp.html#aac0e84a72fe3c933f881e4083d280329" title="Calculate 8&#45;bit checksum using sum of bytes method." alt="" coords="429,5,548,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,15,415,15,415,21,382,21"/>
-</map>

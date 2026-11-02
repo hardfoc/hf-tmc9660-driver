@@ -1,7 +1,0 @@
-<map id="tmc9660::TMC9660::VelocityControl::setTargetVelocity" name="tmc9660::TMC9660::VelocityControl::setTargetVelocity">
-<area shape="rect" id="Node000001" title="Set target velocity in any engineering unit (canonical API)." alt="" coords="312,37,520,77"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1TMC9660_1_1VelocityControl.html#a6ab47443d6678a5045a4ddfd15817a94" title="Convenience: set target velocity in rad/s (mechanical)." alt="" coords="5,5,264,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,47,264,43,264,37,298,41"/>
-<area shape="rect" id="Node000003" href="$structtmc9660_1_1TMC9660_1_1VelocityControl.html#a68ee2c1dd6e3503803ce7a17a68bc6fe" title="Convenience: set target velocity in mechanical RPM." alt="" coords="25,69,244,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="298,73,244,80,244,74,298,68"/>
-</map>

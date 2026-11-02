@@ -1,9 +1,0 @@
-<map id="test_dc_startup_shutdown_procedures" name="test_dc_startup_shutdown_procedures">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,197,63"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="245,5,385,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,29,232,25,232,30,198,35"/>
-<area shape="rect" id="Node000004" href="$dc__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="258,55,373,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="198,51,244,57,244,62,198,57"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="433,5,641,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="385,15,420,15,420,21,385,21"/>
-</map>

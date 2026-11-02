@@ -1,7 +1,0 @@
-<map id="Esp32SPITMC9660CommInterface::gpioRead" name="Esp32SPITMC9660CommInterface::gpioRead">
-<area shape="rect" id="Node000001" title="Read GPIO pin level for TMC9660 status pins." alt="" coords="5,37,248,77"/>
-<area shape="rect" id="Node000002" href="$classEsp32SPITMC9660CommInterface.html#ae4355dcdbe73c9107c871b7bd0d8058c" title="Map TMC9660 control pins to ESP32 GPIO pins." alt="" coords="296,5,539,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,41,282,38,283,43,248,47"/>
-<area shape="rect" id="Node000003" href="$classtmc9660_1_1CommInterface.html#a266532d1fd3ce59fedd9ba725983d303" title="Convert physical GPIO level to signal state." alt="" coords="323,69,511,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,68,310,75,309,80,248,73"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="test_stepper_startup_shutdown_procedures" name="test_stepper_startup_shutdown_procedures">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,176,63"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="224,5,364,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,30,210,26,210,31,177,35"/>
-<area shape="rect" id="Node000004" href="$stepper__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="237,55,351,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,51,223,56,222,62,176,56"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="412,5,620,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="364,15,398,15,398,21,364,21"/>
-</map>

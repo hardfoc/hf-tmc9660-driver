@@ -1,5 +1,0 @@
-<map id="tmc9660::UartCommInterface&lt; Derived &gt;" name="tmc9660::UartCommInterface&lt; Derived &gt;">
-<area shape="rect" id="Node000001" title="CRTP&#45;based UART implementation of TMC9660CommInterface." alt="" coords="5,93,221,133"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html" title="SPI status codes as per TMC9660 Parameter Mode." alt="" coords="19,5,207,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,59,116,93,111,93,111,59"/>
-</map>

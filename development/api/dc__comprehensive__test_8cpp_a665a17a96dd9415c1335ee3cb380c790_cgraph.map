@@ -1,9 +1,0 @@
-<map id="test_dc_openloop_current_mode" name="test_dc_openloop_current_mode">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,239,56"/>
-<area shape="rect" id="Node000002" href="$bootloader__comprehensive__test_8cpp.html#a17c70b1902c13ec11ca1410da2842671" title=" " alt="" coords="287,5,427,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,28,272,24,273,30,239,33"/>
-<area shape="rect" id="Node000004" href="$dc__comprehensive__test_8cpp.html#af43032e01db4534397e54f650f60cde0" title=" " alt="" coords="299,55,414,80"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,53,286,57,285,63,239,58"/>
-<area shape="rect" id="Node000003" href="$esp32__tmc9660__bus_8hpp.html#adeea40d44b312d8739348358e618c1a8" title="Create and initialize SPI communication interface." alt="" coords="475,5,683,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="427,15,461,15,461,21,427,21"/>
-</map>

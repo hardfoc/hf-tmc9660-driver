@@ -1,9 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader::sendCommandUART" name="tmc9660::TMC9660Bootloader::sendCommandUART">
-<area shape="rect" id="Node000001" title="Send a bootloader command via UART interface." alt="" coords="5,45,224,85"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1BootloaderReplyUART.html#a41f97be3ddbdf4b8271fb167c404d46d" title="Deserialize from 8&#45;byte UART buffer." alt="" coords="285,5,479,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,46,271,39,271,45,224,52"/>
-<area shape="rect" id="Node000003" href="$namespaceanonymous__namespace_02tmc9660__bootloader_8cpp_03.html#accc7680b75ec6edd00c57c97f94e50f8" title=" " alt="" coords="272,69,492,139"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,78,259,83,258,89,224,84"/>
-<area shape="rect" id="Node000004" href="$namespaceanonymous__namespace_02tmc9660__bootloader_8cpp_03.html#a4d923adc25f307e7a31fdd6e7eaca3ac" title=" " alt="" coords="540,77,739,131"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="492,101,526,101,526,107,492,107"/>
-</map>

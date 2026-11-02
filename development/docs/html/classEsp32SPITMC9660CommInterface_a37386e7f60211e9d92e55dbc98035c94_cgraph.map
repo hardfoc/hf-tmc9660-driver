@@ -1,5 +1,0 @@
-<map id="Esp32SPITMC9660CommInterface::~Esp32SPITMC9660CommInterface" name="Esp32SPITMC9660CommInterface::~Esp32SPITMC9660CommInterface">
-<area shape="rect" id="Node000001" title="Destructor &#45; cleans up SPI resources." alt="" coords="5,5,268,45"/>
-<area shape="rect" id="Node000002" href="$classEsp32SPITMC9660CommInterface.html#a13ee9b5398b9057b4602276fc6cf3ffc" title="Deinitialize the SPI interface." alt="" coords="316,5,559,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,23,302,23,302,28,268,28"/>
-</map>

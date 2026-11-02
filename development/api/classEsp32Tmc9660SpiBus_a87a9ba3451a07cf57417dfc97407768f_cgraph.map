@@ -1,5 +1,0 @@
-<map id="Esp32Tmc9660SpiBus::initialize" name="Esp32Tmc9660SpiBus::initialize">
-<area shape="rect" id="Node000001" title="Initialize the SPI interface." alt="" coords="5,5,171,45"/>
-<area shape="rect" id="Node000002" href="$classEsp32Tmc9660SpiBus.html#a3b4028ba40a34f1706bf8ef3d669e1ed" title="Configure GPIO pins for TMC9660 control and status." alt="" coords="219,5,384,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,23,205,23,205,28,171,28"/>
-</map>

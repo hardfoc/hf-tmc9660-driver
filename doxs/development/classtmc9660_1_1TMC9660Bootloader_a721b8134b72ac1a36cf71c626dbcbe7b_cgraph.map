@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader::getFeatures" name="tmc9660::TMC9660Bootloader::getFeatures">
-<area shape="rect" id="Node000001" title="Get available feature flags." alt="" coords="5,5,224,45"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1BootloaderFeatures.html#a0b979b0c98d4d866200a2e33a7634041" title="Parse from 32&#45;bit value." alt="" coords="272,5,487,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,23,258,23,258,28,224,28"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="tmc9660::TMC9660::Diagnostics::summary" name="tmc9660::TMC9660::Diagnostics::summary">
-<area shape="rect" id="Node000001" title="Populate a compact motor health summary." alt="" coords="5,37,237,77"/>
-<area shape="rect" id="Node000002" href="$namespacetmc9660_1_1units.html#adfa5a4a8fad498067cf84e0cfba889ba" title="Convert a velocity between any two units." alt="" coords="285,45,513,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,55,272,55,272,60,237,60"/>
-<area shape="rect" id="Node000003" href="$namespacetmc9660_1_1units.html#ab3222b808aefe03b5dba3c245e88836c" title="Convert a velocity from mech RPM (canonical) to any unit." alt="" coords="561,5,740,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="499,42,548,36,548,41,500,47"/>
-<area shape="rect" id="Node000004" href="$namespacetmc9660_1_1units.html#aaf30cfd1741f6d7ee5ee955b49d2bf83" title="Convert a velocity from any unit to mech RPM (intermediate canonical form)." alt="" coords="561,69,740,109"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="500,67,548,74,548,79,499,73"/>
-</map>

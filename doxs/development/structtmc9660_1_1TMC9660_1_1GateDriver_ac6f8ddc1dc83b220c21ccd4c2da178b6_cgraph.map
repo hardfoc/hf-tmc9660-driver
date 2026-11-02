@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660::GateDriver::configurePowerStageProtection" name="tmc9660::TMC9660::GateDriver::configurePowerStageProtection">
-<area shape="rect" id="Node000001" title="Auto&#45;configure complete power stage based on physical properties." alt="" coords="5,5,239,45"/>
-<area shape="rect" id="Node000002" href="$tmc9660_8ipp.html#a5225d603ff487aed35f572cd94cb713b" title="Estimate the bootstrap supply current a three&#45;phase power stage needs." alt="" coords="287,13,508,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,23,273,23,273,28,239,28"/>
-</map>

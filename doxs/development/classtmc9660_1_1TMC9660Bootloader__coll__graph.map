@@ -1,5 +1,0 @@
-<map id="tmc9660::TMC9660Bootloader" name="tmc9660::TMC9660Bootloader">
-<area shape="rect" id="Node000001" title="Main TMC9660 bootloader interface class." alt="" coords="5,93,224,119"/>
-<area shape="rect" id="Node000002" href="$classtmc9660_1_1CommInterface.html" title="SPI status codes as per TMC9660 Parameter Mode." alt="" coords="21,5,209,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,45,117,93,112,93,112,45"/>
-</map>

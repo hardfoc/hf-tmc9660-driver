@@ -1,9 +1,0 @@
-<map id="get_uart_driver" name="get_uart_driver">
-<area shape="rect" id="Node000001" title=" " alt="" coords="335,35,456,60"/>
-<area shape="rect" id="Node000002" href="$dc__comprehensive__test_8cpp.html#a70effab5ba3fdfc70e3855b679378371" title=" " alt="" coords="143,5,283,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="321,38,283,32,284,27,321,33"/>
-<area shape="rect" id="Node000003" href="$dc__comprehensive__test_8cpp.html#a5543384880a7aed83f82ecb0c272683e" title=" " alt="" coords="140,55,287,95"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="321,61,288,67,287,61,321,56"/>
-<area shape="rect" id="Node000004" href="$dc__comprehensive__test_8cpp.html#a630544a7f0a2cc40d8a7fefab7e2fe70" title=" " alt="" coords="5,63,92,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="126,78,92,78,92,73,126,73"/>
-</map>

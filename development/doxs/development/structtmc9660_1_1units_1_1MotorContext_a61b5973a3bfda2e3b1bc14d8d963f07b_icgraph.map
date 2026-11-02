@@ -1,7 +1,0 @@
-<map id="tmc9660::units::MotorContext::cpr" name="tmc9660::units::MotorContext::cpr">
-<area shape="rect" id="Node000001" title=" " alt="" coords="269,45,513,70"/>
-<area shape="rect" id="Node000002" href="$structtmc9660_1_1units_1_1MotorContext.html#a3dbdbce86f9f320e4083c09ea1f1b292" title=" " alt="" coords="5,5,221,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,46,221,40,222,35,268,40"/>
-<area shape="rect" id="Node000003" href="$structtmc9660_1_1units_1_1MotorContext.html#a8349cd5f34c2791c03edfece864d546a" title="True when the context can produce meaningful unit conversions." alt="" coords="5,69,221,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,74,222,80,221,74,267,69"/>
-</map>
