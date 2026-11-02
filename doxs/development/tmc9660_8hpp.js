@@ -1,6 +1,8 @@
 var tmc9660_8hpp =
 [
     [ "tmc9660::TMC9660< CommType >::DeviceCapabilities", "structtmc9660_1_1TMC9660_1_1DeviceCapabilities.html", "structtmc9660_1_1TMC9660_1_1DeviceCapabilities" ],
+    [ "tmc9660::TMC9660< CommType >::ParameterAccess", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html", "structtmc9660_1_1TMC9660_1_1ParameterAccess" ],
+    [ "tmc9660::TMC9660< CommType >::GlobalParameterAccess", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess" ],
     [ "tmc9660::TMC9660< CommType >::MotorConfig::MotorProfile", "structtmc9660_1_1TMC9660_1_1MotorConfig_1_1MotorProfile.html", "structtmc9660_1_1TMC9660_1_1MotorConfig_1_1MotorProfile" ],
     [ "tmc9660::TMC9660< CommType >::CurrentSensing", "structtmc9660_1_1TMC9660_1_1CurrentSensing.html", "structtmc9660_1_1TMC9660_1_1CurrentSensing" ],
     [ "tmc9660::TMC9660< CommType >::CurrentSensing::AutoConfig", "structtmc9660_1_1TMC9660_1_1CurrentSensing_1_1AutoConfig.html", "structtmc9660_1_1TMC9660_1_1CurrentSensing_1_1AutoConfig" ],
@@ -32,6 +34,9 @@ var tmc9660_8hpp =
     [ "tmc9660::TMC9660< CommType >::Protection::ProtectionConfig", "structtmc9660_1_1TMC9660_1_1Protection_1_1ProtectionConfig.html", "structtmc9660_1_1TMC9660_1_1Protection_1_1ProtectionConfig" ],
     [ "tmc9660::TMC9660< CommType >::Script", "structtmc9660_1_1TMC9660_1_1Script.html", "structtmc9660_1_1TMC9660_1_1Script" ],
     [ "tmc9660::TMC9660< CommType >::RamDebug", "structtmc9660_1_1TMC9660_1_1RamDebug.html", "structtmc9660_1_1TMC9660_1_1RamDebug" ],
+    [ "tmc9660::TMC9660< CommType >::RamDebug::Channel", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel" ],
+    [ "tmc9660::TMC9660< CommType >::RamDebug::Trigger", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger" ],
+    [ "tmc9660::TMC9660< CommType >::RamDebug::CaptureConfig", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig" ],
     [ "tmc9660::TMC9660< CommType >::NvmStorage", "structtmc9660_1_1TMC9660_1_1NvmStorage.html", "structtmc9660_1_1TMC9660_1_1NvmStorage" ],
     [ "tmc9660::TMC9660< CommType >::Heartbeat", "structtmc9660_1_1TMC9660_1_1Heartbeat.html", "structtmc9660_1_1TMC9660_1_1Heartbeat" ],
     [ "tmc9660::TMC9660< CommType >::Heartbeat::HeartbeatConfig", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig.html", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig" ],

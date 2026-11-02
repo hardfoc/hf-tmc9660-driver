@@ -95,38 +95,57 @@ $(function(){initNavTree('namespacedetail.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">detail Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Write a global parameter value using TMCL SGP command.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0" id="r_afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &gt; </td></tr>
-<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afd08c9a02e141a69e59f9516a95362f0">tmc9660_require_step_dir</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &amp;driver, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">where</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a9fd6aea92de57ae4426fc3fb97e0a16b" id="r_a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fd6aea92de57ae4426fc3fb97e0a16b">impliedGlobalBank</a> (const std::variant&lt; uint8_t, <a class="el" href="namespacetmc9660_1_1tmcl.html#aa2ec9e126f5220bb4f43740d9db18052">tmc9660::tmcl::GlobalParamBank0</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#aedbe16bb9f3a44665534abf03fd5e65b">tmc9660::tmcl::GlobalParamBank2</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#a9e6cd6c6f87c8446516e25c86ef077f3">tmc9660::tmcl::GlobalParamBank3</a> &gt; &amp;id) noexcept</td></tr>
+<tr class="memdesc:a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bank that <code>id</code> implies (0/2/3 for a bank enum, 0xFF for a raw number: any bank allowed).  <br /></td></tr>
+<tr class="separator:a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0" id="r_afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplParams" colspan="2">template&lt;typename Driver &gt; </td></tr>
+<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afd08c9a02e141a69e59f9516a95362f0">tmc9660_require_step_dir</a> (Driver &amp;driver, const char *where) noexcept</td></tr>
 <tr class="separator:afd08c9a02e141a69e59f9516a95362f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a88909a306ff06541521f64480069480b" id="r_a88909a306ff06541521f64480069480b"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88909a306ff06541521f64480069480b">kBatchChunk</a> = 16</td></tr>
+<tr class="memdesc:a88909a306ff06541521f64480069480b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frames per pipelined chunk; bounds stack use of the batch helpers (2 × 16 × ~24 B).  <br /></td></tr>
+<tr class="separator:a88909a306ff06541521f64480069480b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afd08c9a02e141a69e59f9516a95362f0" name="afd08c9a02e141a69e59f9516a95362f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd08c9a02e141a69e59f9516a95362f0">&#9670;&#160;</a></span>tmc9660_require_step_dir()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Write a global parameter value using TMCL SGP command. </p>
+<p>Sends a Set Global Parameter (SGP) command to configure module-wide settings such as communication parameters, GPIO configuration, and system settings. Global parameters affect the entire TMC9660 module, not just motor control.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Global parameter identifier (supports multiple parameter types) </td></tr>
+    <tr><td class="paramname">bank</td><td>Parameter bank (0=module, 2=user, 3=system) </td></tr>
+    <tr><td class="paramname">value</td><td>Parameter value to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if parameter was written successfully </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a9fd6aea92de57ae4426fc3fb97e0a16b" name="a9fd6aea92de57ae4426fc3fb97e0a16b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fd6aea92de57ae4426fc3fb97e0a16b">&#9670;&#160;</a></span>impliedGlobalBank()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> detail::tmc9660_require_step_dir </td>
+          <td class="memname">uint8_t detail::impliedGlobalBank </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>driver</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const std::variant&lt; uint8_t, <a class="el" href="namespacetmc9660_1_1tmcl.html#aa2ec9e126f5220bb4f43740d9db18052">tmc9660::tmcl::GlobalParamBank0</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#aedbe16bb9f3a44665534abf03fd5e65b">tmc9660::tmcl::GlobalParamBank2</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#a9e6cd6c6f87c8446516e25c86ef077f3">tmc9660::tmcl::GlobalParamBank3</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *</td>          <td class="paramname"><span class="paramname"><em>where</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -135,6 +154,64 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Bank that <code>id</code> implies (0/2/3 for a bank enum, 0xFF for a raw number: any bank allowed). </p>
+
+</div>
+</div>
+<a id="afd08c9a02e141a69e59f9516a95362f0" name="afd08c9a02e141a69e59f9516a95362f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd08c9a02e141a69e59f9516a95362f0">&#9670;&#160;</a></span>tmc9660_require_step_dir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Driver &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool detail::tmc9660_require_step_dir </td>
+          <td>(</td>
+          <td class="paramtype">Driver &amp;</td>          <td class="paramname"><span class="paramname"><em>driver</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>where</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a88909a306ff06541521f64480069480b" name="a88909a306ff06541521f64480069480b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88909a306ff06541521f64480069480b">&#9670;&#160;</a></span>kBatchChunk</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t detail::kBatchChunk = 16</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Frames per pipelined chunk; bounds stack use of the batch helpers (2 × 16 × ~24 B). </p>
 
 </div>
 </div>

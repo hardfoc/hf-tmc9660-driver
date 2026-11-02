@@ -110,40 +110,40 @@ $(function(){initNavTree('structtmc9660_1_1TMCLFrame.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac574431ff81107610e2c2a59c55627e7" id="r_ac574431ff81107610e2c2a59c55627e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac574431ff81107610e2c2a59c55627e7">toSpi</a> (std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; <a class="el" href="classtmc9660_1_1CommInterface.html">out</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:ac574431ff81107610e2c2a59c55627e7" id="r_ac574431ff81107610e2c2a59c55627e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac574431ff81107610e2c2a59c55627e7">toSpi</a> (std::span&lt; uint8_t, 8 &gt; out) const noexcept</td></tr>
 <tr class="memdesc:ac574431ff81107610e2c2a59c55627e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize frame into 8-byte SPI buffer.  <br /></td></tr>
 <tr class="separator:ac574431ff81107610e2c2a59c55627e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3b084c1b9e7dbbd9636c9174783daea" id="r_ac3b084c1b9e7dbbd9636c9174783daea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3b084c1b9e7dbbd9636c9174783daea">toUart</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">addr</a>, std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 9 &gt; <a class="el" href="classtmc9660_1_1CommInterface.html">out</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:ac3b084c1b9e7dbbd9636c9174783daea" id="r_ac3b084c1b9e7dbbd9636c9174783daea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3b084c1b9e7dbbd9636c9174783daea">toUart</a> (uint8_t addr, std::span&lt; uint8_t, 9 &gt; out) const noexcept</td></tr>
 <tr class="memdesc:ac3b084c1b9e7dbbd9636c9174783daea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize frame into 9-byte UART buffer, including sync bit and checksum.  <br /></td></tr>
 <tr class="separator:ac3b084c1b9e7dbbd9636c9174783daea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a05167773f6efe7c1a58b677e3a7470d5" id="r_a05167773f6efe7c1a58b677e3a7470d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05167773f6efe7c1a58b677e3a7470d5">fromSpi</a> (std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; <a class="el" href="classtmc9660_1_1CommInterface.html">in</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a05167773f6efe7c1a58b677e3a7470d5" id="r_a05167773f6efe7c1a58b677e3a7470d5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05167773f6efe7c1a58b677e3a7470d5">fromSpi</a> (std::span&lt; const uint8_t, 8 &gt; in) noexcept</td></tr>
 <tr class="memdesc:a05167773f6efe7c1a58b677e3a7470d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize an SPI buffer into a <a class="el" href="structtmc9660_1_1TMCLFrame.html" title="Frame structure for TMCL commands.">TMCLFrame</a> without status check.  <br /></td></tr>
 <tr class="separator:a05167773f6efe7c1a58b677e3a7470d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29047b0896f1ae81df65e456f9ebb33e" id="r_a29047b0896f1ae81df65e456f9ebb33e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29047b0896f1ae81df65e456f9ebb33e">fromSpiChecked</a> (std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; <a class="el" href="classtmc9660_1_1CommInterface.html">in</a>, <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">out_frame</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a29047b0896f1ae81df65e456f9ebb33e" id="r_a29047b0896f1ae81df65e456f9ebb33e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29047b0896f1ae81df65e456f9ebb33e">fromSpiChecked</a> (std::span&lt; const uint8_t, 8 &gt; in, <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;out_frame) noexcept</td></tr>
 <tr class="memdesc:a29047b0896f1ae81df65e456f9ebb33e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize an SPI buffer with status and checksum validation.  <br /></td></tr>
 <tr class="separator:a29047b0896f1ae81df65e456f9ebb33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35caac4f744db2f8cff9c761a562823c" id="r_a35caac4f744db2f8cff9c761a562823c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35caac4f744db2f8cff9c761a562823c">fromUart</a> (std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 9 &gt; <a class="el" href="classtmc9660_1_1CommInterface.html">in</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">expected_addr</a>, <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">out_frame</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a35caac4f744db2f8cff9c761a562823c" id="r_a35caac4f744db2f8cff9c761a562823c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35caac4f744db2f8cff9c761a562823c">fromUart</a> (std::span&lt; const uint8_t, 9 &gt; in, uint8_t expected_addr, <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;out_frame) noexcept</td></tr>
 <tr class="memdesc:a35caac4f744db2f8cff9c761a562823c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize a UART buffer with address and checksum validation.  <br /></td></tr>
 <tr class="separator:a35caac4f744db2f8cff9c761a562823c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59014467417c8e1d57d3bd3054c66a10" id="r_a59014467417c8e1d57d3bd3054c66a10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">constexpr</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59014467417c8e1d57d3bd3054c66a10">calculateChecksum</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">bytes</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">size_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">n</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a59014467417c8e1d57d3bd3054c66a10" id="r_a59014467417c8e1d57d3bd3054c66a10"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59014467417c8e1d57d3bd3054c66a10">calculateChecksum</a> (const uint8_t *bytes, size_t n) noexcept</td></tr>
 <tr class="memdesc:a59014467417c8e1d57d3bd3054c66a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate 8-bit checksum (sum of bytes).  <br /></td></tr>
 <tr class="separator:a59014467417c8e1d57d3bd3054c66a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab0d05fe06919f7ff63c616d535a676e6" id="r_ab0d05fe06919f7ff63c616d535a676e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d05fe06919f7ff63c616d535a676e6">opcode</a> = 0</td></tr>
+<tr class="memitem:ab0d05fe06919f7ff63c616d535a676e6" id="r_ab0d05fe06919f7ff63c616d535a676e6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d05fe06919f7ff63c616d535a676e6">opcode</a> = 0</td></tr>
 <tr class="memdesc:ab0d05fe06919f7ff63c616d535a676e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operation code field (BYTE 0, bits 0-7).  <br /></td></tr>
 <tr class="separator:ab0d05fe06919f7ff63c616d535a676e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79c94c6f7f629fa2c8f95988c5ece547" id="r_a79c94c6f7f629fa2c8f95988c5ece547"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c94c6f7f629fa2c8f95988c5ece547">type</a> = 0</td></tr>
+<tr class="memitem:a79c94c6f7f629fa2c8f95988c5ece547" id="r_a79c94c6f7f629fa2c8f95988c5ece547"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c94c6f7f629fa2c8f95988c5ece547">type</a> = 0</td></tr>
 <tr class="memdesc:a79c94c6f7f629fa2c8f95988c5ece547"><td class="mdescLeft">&#160;</td><td class="mdescRight">12-bit parameter / command type (see <code>toSpi</code> / <code>toUart</code>).  <br /></td></tr>
 <tr class="separator:a79c94c6f7f629fa2c8f95988c5ece547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bc52b61724f2e81249e0c125ff36860" id="r_a1bc52b61724f2e81249e0c125ff36860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc52b61724f2e81249e0c125ff36860">motor</a> = 0</td></tr>
+<tr class="memitem:a1bc52b61724f2e81249e0c125ff36860" id="r_a1bc52b61724f2e81249e0c125ff36860"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc52b61724f2e81249e0c125ff36860">motor</a> = 0</td></tr>
 <tr class="memdesc:a1bc52b61724f2e81249e0c125ff36860"><td class="mdescLeft">&#160;</td><td class="mdescRight">4-bit motor or bank index (packed with <code>type[11:8]</code> per transport).  <br /></td></tr>
 <tr class="separator:a1bc52b61724f2e81249e0c125ff36860"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac9ade7d8aa09f70c3ff008b4fdf970" id="r_a4ac9ade7d8aa09f70c3ff008b4fdf970"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ac9ade7d8aa09f70c3ff008b4fdf970">value</a> = 0</td></tr>
+<tr class="memitem:a4ac9ade7d8aa09f70c3ff008b4fdf970" id="r_a4ac9ade7d8aa09f70c3ff008b4fdf970"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ac9ade7d8aa09f70c3ff008b4fdf970">value</a> = 0</td></tr>
 <tr class="memdesc:a4ac9ade7d8aa09f70c3ff008b4fdf970"><td class="mdescLeft">&#160;</td><td class="mdescRight">32-bit data value (big-endian in bytes 3-6 on SPI, 4-7 on UART).  <br /></td></tr>
 <tr class="separator:a4ac9ade7d8aa09f70c3ff008b4fdf970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -161,14 +161,14 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">constexpr</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> tmc9660::TMCLFrame::calculateChecksum </td>
+          <td class="memname">static constexpr uint8_t tmc9660::TMCLFrame::calculateChecksum </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> *</td>          <td class="paramname"><span class="paramname"><em>bytes</em>, </span></td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>bytes</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -200,9 +200,9 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> tmc9660::TMCLFrame::fromSpi </td>
+          <td class="memname">static <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> tmc9660::TMCLFrame::fromSpi </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
+          <td class="paramtype">std::span&lt; const uint8_t, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -234,9 +234,9 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> tmc9660::TMCLFrame::fromSpiChecked </td>
+          <td class="memname">static bool tmc9660::TMCLFrame::fromSpiChecked </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em>, </span></td>
+          <td class="paramtype">std::span&lt; const uint8_t, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -273,14 +273,14 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> tmc9660::TMCLFrame::fromUart </td>
+          <td class="memname">static bool tmc9660::TMCLFrame::fromUart </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 9 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em>, </span></td>
+          <td class="paramtype">std::span&lt; const uint8_t, 9 &gt;</td>          <td class="paramname"><span class="paramname"><em>in</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>expected_addr</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>expected_addr</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -318,9 +318,9 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a> tmc9660::TMCLFrame::toSpi </td>
+          <td class="memname">void tmc9660::TMCLFrame::toSpi </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
+          <td class="paramtype">std::span&lt; uint8_t, 8 &gt;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -352,14 +352,14 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a> tmc9660::TMCLFrame::toUart </td>
+          <td class="memname">void tmc9660::TMCLFrame::toUart </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>addr</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>addr</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::span&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 9 &gt;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;) const</td>
+          <td class="paramtype">std::span&lt; uint8_t, 9 &gt;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;) const</td>
         </tr>
       </table>
   </td>
@@ -388,7 +388,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> tmc9660::TMCLFrame::motor = 0</td>
+          <td class="memname">uint8_t tmc9660::TMCLFrame::motor = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -404,7 +404,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> tmc9660::TMCLFrame::opcode = 0</td>
+          <td class="memname">uint8_t tmc9660::TMCLFrame::opcode = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -420,7 +420,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint16_t</a> tmc9660::TMCLFrame::type = 0</td>
+          <td class="memname">uint16_t tmc9660::TMCLFrame::type = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -436,7 +436,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> tmc9660::TMCLFrame::value = 0</td>
+          <td class="memname">uint32_t tmc9660::TMCLFrame::value = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -106,7 +106,8 @@ $(function(){initNavTree('tmc9660__comm__interface_8hpp.html',''); initResizable
 
 <p>Communication interfaces for TMC9660 Parameter Mode devices using TMCL protocol over SPI.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstdarg&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
@@ -119,6 +120,12 @@ $(function(){initNavTree('tmc9660__comm__interface_8hpp.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TmclSpiTiming.html">tmc9660::TmclSpiTiming</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timing of the parameter-mode SPI request/reply handshake.  <a href="structtmc9660_1_1TmclSpiTiming.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TmclSpiStats.html">tmc9660::TmclSpiStats</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counters for the SPI TMCL transport (diagnostics and the <code>tmcl_timing</code> example).  <a href="structtmc9660_1_1TmclSpiStats.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMCLReply.html">tmc9660::TMCLReply</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reply structure returned by TMCL command operations.  <a href="structtmc9660_1_1TMCLReply.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,12 +184,24 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aa6ed72b377a8d74c2505b89b77b8a505"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI status codes as per TMC9660 Parameter Mode specification.  <a href="namespacetmc9660.html#aa6ed72b377a8d74c2505b89b77b8a505">More...</a><br /></td></tr>
 <tr class="separator:aa6ed72b377a8d74c2505b89b77b8a505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dcc6495c83d8931b328c37df2faf77" id="r_ac8dcc6495c83d8931b328c37df2faf77"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77">tmc9660::TmclSpiRxClass</a> : uint8_t { <a class="el" href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77a9455b42e74acb2ec1c7292e54d28aff2">tmc9660::NOT_READY</a>
+, <a class="el" href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77ac9f1a6384b1c466d4612f513bd8e13ea">tmc9660::VALID</a>
+, <a class="el" href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77a4d855a061b3066dc14a3b12ed26b5456">tmc9660::STALE</a>
+ }</td></tr>
+<tr class="memdesc:ac8dcc6495c83d8931b328c37df2faf77"><td class="mdescLeft">&#160;</td><td class="mdescRight">How a received 8-byte SPI datagram relates to the request it should answer.  <a href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77">More...</a><br /></td></tr>
+<tr class="separator:ac8dcc6495c83d8931b328c37df2faf77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2fc16e5feffbef089c5c9660c62615d5" id="r_a2fc16e5feffbef089c5c9660c62615d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">static</a> <a class="el" href="classtmc9660_1_1CommInterface.html">constexpr</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#a2fc16e5feffbef089c5c9660c62615d5">tmc9660::tmclChecksum</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">bytes</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">size_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">n</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> start=0) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a02eb812709acadc0354dceecd9deef39" id="r_a02eb812709acadc0354dceecd9deef39"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#a02eb812709acadc0354dceecd9deef39">tmc9660::tmclReplyEchoesOpcode</a> (uint8_t opcode) noexcept</td></tr>
+<tr class="memdesc:a02eb812709acadc0354dceecd9deef39"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the SPI reply to <code>opcode</code> echoes the opcode in byte 2.  <br /></td></tr>
+<tr class="separator:a02eb812709acadc0354dceecd9deef39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc16e5feffbef089c5c9660c62615d5" id="r_a2fc16e5feffbef089c5c9660c62615d5"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#a2fc16e5feffbef089c5c9660c62615d5">tmc9660::tmclChecksum</a> (const uint8_t *bytes, size_t n, uint8_t start=0) noexcept</td></tr>
 <tr class="memdesc:a2fc16e5feffbef089c5c9660c62615d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate 8-bit checksum using sum of bytes method.  <br /></td></tr>
 <tr class="separator:a2fc16e5feffbef089c5c9660c62615d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e5cc6548ae14d784a97f6183c3f3fe" id="r_aa7e5cc6548ae14d784a97f6183c3f3fe"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77">TmclSpiRxClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#aa7e5cc6548ae14d784a97f6183c3f3fe">tmc9660::classifyTmclSpiReply</a> (std::span&lt; const uint8_t, 8 &gt; rx, uint8_t expected_opcode, bool verify_opcode) noexcept</td></tr>
+<tr class="memdesc:aa7e5cc6548ae14d784a97f6183c3f3fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classify a received SPI datagram as the reply to a request with <code>expected_opcode</code>.  <br /></td></tr>
+<tr class="separator:aa7e5cc6548ae14d784a97f6183c3f3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Communication interfaces for TMC9660 Parameter Mode devices using TMCL protocol over SPI. </p>

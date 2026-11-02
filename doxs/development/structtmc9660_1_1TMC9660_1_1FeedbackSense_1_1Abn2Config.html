@@ -108,21 +108,21 @@ $(function(){initNavTree('structtmc9660_1_1TMC9660_1_1FeedbackSense_1_1Abn2Confi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7e8379360f226aafdc5975d28bcaa0b0" id="r_a7e8379360f226aafdc5975d28bcaa0b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8379360f226aafdc5975d28bcaa0b0">countsPerRev</a></td></tr>
+<tr class="memitem:a7e8379360f226aafdc5975d28bcaa0b0" id="r_a7e8379360f226aafdc5975d28bcaa0b0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8379360f226aafdc5975d28bcaa0b0">countsPerRev</a></td></tr>
 <tr class="memdesc:a7e8379360f226aafdc5975d28bcaa0b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoder resolution in counts per revolution (CPR) [0-16777215].  <br /></td></tr>
 <tr class="separator:a7e8379360f226aafdc5975d28bcaa0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2354fa679ddb13bbd138f82e529184" id="r_a9e2354fa679ddb13bbd138f82e529184"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660_1_1tmcl.html#a4ea4e21a0bb5bc14e3e23f55fea8db41">tmc9660::tmcl::Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e2354fa679ddb13bbd138f82e529184">direction</a></td></tr>
 <tr class="memdesc:a9e2354fa679ddb13bbd138f82e529184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoder direction (default: NOT_INVERTED)  <br /></td></tr>
 <tr class="separator:a9e2354fa679ddb13bbd138f82e529184"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7b4a475a9c32c7eab35c28d9f6febbf" id="r_ac7b4a475a9c32c7eab35c28d9f6febbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7b4a475a9c32c7eab35c28d9f6febbf">gearRatio</a></td></tr>
+<tr class="memitem:ac7b4a475a9c32c7eab35c28d9f6febbf" id="r_ac7b4a475a9c32c7eab35c28d9f6febbf"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7b4a475a9c32c7eab35c28d9f6febbf">gearRatio</a></td></tr>
 <tr class="memdesc:ac7b4a475a9c32c7eab35c28d9f6febbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gear ratio between encoder and motor shaft [1-255] (default: 1, directly coupled)  <br /></td></tr>
 <tr class="separator:ac7b4a475a9c32c7eab35c28d9f6febbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab763aec6335f59a397dc52b7f92a234a" id="r_ab763aec6335f59a397dc52b7f92a234a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab763aec6335f59a397dc52b7f92a234a">enable</a> = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td></tr>
+<tr class="memitem:ab763aec6335f59a397dc52b7f92a234a" id="r_ab763aec6335f59a397dc52b7f92a234a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab763aec6335f59a397dc52b7f92a234a">enable</a> = true</td></tr>
 <tr class="memdesc:ab763aec6335f59a397dc52b7f92a234a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the ABN2 encoder (default: true)  <br /></td></tr>
 <tr class="separator:ab763aec6335f59a397dc52b7f92a234a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename CommType&gt;<br />
 struct tmc9660::TMC9660&lt; CommType &gt;::FeedbackSense::Abn2Config</div><p>Configuration structure for ABN2 (secondary) encoder auto-configuration. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a7e8379360f226aafdc5975d28bcaa0b0" name="a7e8379360f226aafdc5975d28bcaa0b0"></a>
@@ -131,10 +131,10 @@ struct tmc9660::TMC9660&lt; CommType &gt;::FeedbackSense::Abn2Config</div><p>Con
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::FeedbackSense::Abn2Config::countsPerRev</td>
+          <td class="memname">uint32_t <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::FeedbackSense::Abn2Config::countsPerRev</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -149,10 +149,10 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacetmc9660_1_1tmcl.html#a4ea4e21a0bb5bc14e3e23f55fea8db41">tmc9660::tmcl::Direction</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::FeedbackSense::Abn2Config::direction</td>
+          <td class="memname"><a class="el" href="namespacetmc9660_1_1tmcl.html#a4ea4e21a0bb5bc14e3e23f55fea8db41">tmc9660::tmcl::Direction</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::FeedbackSense::Abn2Config::direction</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -169,10 +169,10 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::FeedbackSense::Abn2Config::enable = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::FeedbackSense::Abn2Config::enable = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -187,10 +187,10 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::FeedbackSense::Abn2Config::gearRatio</td>
+          <td class="memname">uint8_t <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::FeedbackSense::Abn2Config::gearRatio</td>
         </tr>
       </table>
 </div><div class="memdoc">

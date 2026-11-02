@@ -10,6 +10,7 @@ var classtmc9660_1_1UartCommInterface =
     [ "operator=", "classtmc9660_1_1UartCommInterface.html#a7db5e19745946daebeca72110d209ba8", null ],
     [ "operator=", "classtmc9660_1_1UartCommInterface.html#ac5b4fc8513f3861c567c344536dd7abf", null ],
     [ "transferTMCL", "classtmc9660_1_1UartCommInterface.html#ac1d97777f68b6e39562ef5d09591a7f6", null ],
+    [ "transferTMCLBatch", "classtmc9660_1_1UartCommInterface.html#ab739f799281eb16a4e96418819e61681", null ],
     [ "uartReceiveTMCL", "classtmc9660_1_1UartCommInterface.html#a1c2915ad272a273c8f6870fcc409294f", null ],
     [ "uartSendTMCL", "classtmc9660_1_1UartCommInterface.html#a99ce29a16432eac75ccc237f534a5310", null ],
     [ "uartTransferBootloader", "classtmc9660_1_1UartCommInterface.html#adeb490a7000386f9c3dd3ff73bc9f6b1", null ]

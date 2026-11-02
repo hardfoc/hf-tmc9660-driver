@@ -11,6 +11,9 @@ var searchData=
   ['tmc9660bootloader_8',['TMC9660Bootloader',['../classtmc9660_1_1TMC9660Bootloader.html',1,'tmc9660']]],
   ['tmclframe_9',['TMCLFrame',['../structtmc9660_1_1TMCLFrame.html',1,'tmc9660']]],
   ['tmclreply_10',['TMCLReply',['../structtmc9660_1_1TMCLReply.html',1,'tmc9660']]],
-  ['torquefluxconfig_11',['TorqueFluxConfig',['../structtmc9660_1_1TMC9660_1_1TorqueFluxControl_1_1TorqueFluxConfig.html',1,'tmc9660::TMC9660::TorqueFluxControl']]],
-  ['torquefluxcontrol_12',['TorqueFluxControl',['../structtmc9660_1_1TMC9660_1_1TorqueFluxControl.html',1,'tmc9660::TMC9660']]]
+  ['tmclspistats_11',['TmclSpiStats',['../structtmc9660_1_1TmclSpiStats.html',1,'tmc9660']]],
+  ['tmclspitiming_12',['TmclSpiTiming',['../structtmc9660_1_1TmclSpiTiming.html',1,'tmc9660']]],
+  ['torquefluxconfig_13',['TorqueFluxConfig',['../structtmc9660_1_1TMC9660_1_1TorqueFluxControl_1_1TorqueFluxConfig.html',1,'tmc9660::TMC9660::TorqueFluxControl']]],
+  ['torquefluxcontrol_14',['TorqueFluxControl',['../structtmc9660_1_1TMC9660_1_1TorqueFluxControl.html',1,'tmc9660::TMC9660']]],
+  ['trigger_15',['Trigger',['../structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html',1,'tmc9660::TMC9660::RamDebug']]]
 ];
