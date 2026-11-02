@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 660" width="920" height="660"
+     role="img" aria-labelledby="t-proto d-proto">
+  <title id="t-proto">TMC9660 &#8212; protocol frame formats</title>
+  <desc id="d-proto">Four protocol frame diagrams for the TMC9660 motor controller: SPI bootloader (40-bit), UART bootloader (64-bit), SPI TMCL (64-bit), and UART TMCL (72-bit).</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      .panel    { fill: #ffffff; }
+      .frame    { fill: #f4f6f8; stroke: #1a365d; stroke-width: 1.5; }
+      .field-sync{fill: #ebf4ff; stroke: #2c5282; stroke-width: 1.2; }
+      .field-addr{fill: #f0fff4; stroke: #276749; stroke-width: 1.2; }
+      .field-cmd { fill: #fef5e7; stroke: #c05621; stroke-width: 1.2; }
+      .field-data{fill: #fff5f5; stroke: #c53030; stroke-width: 1.2; }
+      .field-crc { fill: #faf5ff; stroke: #6b46c1; stroke-width: 1.2; }
+      .field-stat{fill: #ebf4ff; stroke: #2c5282; stroke-width: 1.2; }
+      .head     { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 600; fill: #1a365d; text-anchor: middle; }
+      .title    { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: #1a365d; text-anchor: start; }
+      .small    { font-family: system-ui, sans-serif; font-size: 10px; fill: #4a5568; text-anchor: middle; }
+      .smallL   { font-family: system-ui, sans-serif; font-size: 10px; fill: #4a5568; text-anchor: start; }
+      .bit      { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 10px; fill: #1a202c; text-anchor: middle; }
+      .bit-off  { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 8px;  fill: #718096; text-anchor: middle; }
+      .legend   { font-family: system-ui, sans-serif; font-size: 11px; fill: #4a5568; }
+    ]]></style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="panel" width="920" height="660" rx="6"/>
+
+  <!-- Main heading -->
+  <text class="head" x="460" y="24">TMC9660 Protocol Frame Formats</text>
+
+  <!-- ============================================================ -->
+  <!-- 1. SPI Bootloader (40-bit / 5-byte)                          -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 40)">
+    <text class="title" x="0" y="14">1. SPI Bootloader (40-bit / 5-byte)</text>
+
+    <!-- Command frame background -->
+    <rect class="frame" x="0" y="22" width="370" height="34" rx="3"/>
+    <text class="smallL" x="4" y="36">CMD:</text>
+
+    <!-- CMD (1 byte = 60px) -->
+    <rect class="field-cmd" x="40" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="43">CMD</text>
+    <text class="small" x="70" y="66">8 bits</text>
+    <text class="bit" x="70" y="18">0</text>
+
+    <!-- VALUE (4 bytes = 240px) -->
+    <rect class="field-data" x="100" y="24" width="240" height="30" rx="2"/>
+    <text class="bit" x="220" y="43">VALUE (32)</text>
+    <text class="small" x="220" y="66">32 bits</text>
+    <text class="bit" x="100" y="18">1</text>
+    <text class="bit" x="340" y="18">4</text>
+
+    <!-- Reply frame background -->
+    <rect class="frame" x="400" y="22" width="370" height="34" rx="3"/>
+    <text class="smallL" x="404" y="36">REPLY:</text>
+
+    <!-- STATUS (1 byte) -->
+    <rect class="field-stat" x="440" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="470" y="43">STATUS</text>
+    <text class="small" x="470" y="66">8 bits</text>
+    <text class="bit" x="470" y="18">0</text>
+
+    <!-- VALUE (4 bytes) -->
+    <rect class="field-data" x="500" y="24" width="240" height="30" rx="2"/>
+    <text class="bit" x="620" y="43">VALUE (32)</text>
+    <text class="small" x="620" y="66">32 bits</text>
+    <text class="bit" x="500" y="18">1</text>
+    <text class="bit" x="740" y="18">4</text>
+
+    <!-- Note -->
+    <text class="smallL" x="0" y="80">&#9432; Reply to cmd N comes during transaction N+1 (send dummy to clock out)</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 2. UART Bootloader (64-bit / 8-byte)                         -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 180)">
+    <text class="title" x="0" y="14">2. UART Bootloader (64-bit / 8-byte)</text>
+
+    <!-- Command frame -->
+    <rect class="frame" x="0" y="22" width="530" height="34" rx="3"/>
+    <text class="smallL" x="4" y="36">CMD:</text>
+
+    <!-- SYNC 0x55 (1 byte) -->
+    <rect class="field-sync" x="40" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="43">0x55</text>
+    <text class="small" x="70" y="66">SYNC</text>
+    <text class="bit" x="70" y="18">0</text>
+
+    <!-- DEVADDR (1 byte) -->
+    <rect class="field-addr" x="100" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="130" y="43">DEVADDR</text>
+    <text class="small" x="130" y="66">8 bits</text>
+    <text class="bit" x="130" y="18">1</text>
+
+    <!-- CMD (1 byte) -->
+    <rect class="field-cmd" x="160" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="190" y="43">CMD</text>
+    <text class="small" x="190" y="66">8 bits</text>
+    <text class="bit" x="190" y="18">2</text>
+
+    <!-- VALUE (4 bytes) -->
+    <rect class="field-data" x="220" y="24" width="240" height="30" rx="2"/>
+    <text class="bit" x="340" y="43">VALUE (32)</text>
+    <text class="small" x="340" y="66">32 bits</text>
+    <text class="bit" x="220" y="18">3</text>
+    <text class="bit-off" x="460" y="11">6</text>
+
+    <!-- CRC8 (1 byte) -->
+    <rect class="field-crc" x="460" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="490" y="43">CRC8</text>
+    <text class="small" x="490" y="66">8 bits</text>
+    <text class="bit" x="490" y="18">7</text>
+
+    <!-- Reply frame -->
+    <rect class="frame" x="0" y="76" width="530" height="34" rx="3"/>
+    <text class="smallL" x="4" y="90">REPLY:</text>
+
+    <!-- SYNC 0x55 (1 byte) -->
+    <rect class="field-sync" x="40" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="97">0x55</text>
+    <text class="small" x="70" y="120">SYNC</text>
+    <text class="bit" x="70" y="72">0</text>
+
+    <!-- HOSTADDR (1 byte) -->
+    <rect class="field-addr" x="100" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="130" y="97">HOSTADDR</text>
+    <text class="small" x="130" y="120">8 bits</text>
+    <text class="bit" x="130" y="72">1</text>
+
+    <!-- STATUS (1 byte) -->
+    <rect class="field-stat" x="160" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="190" y="97">STATUS</text>
+    <text class="small" x="190" y="120">8 bits</text>
+    <text class="bit" x="190" y="72">2</text>
+
+    <!-- VALUE (4 bytes) -->
+    <rect class="field-data" x="220" y="78" width="240" height="30" rx="2"/>
+    <text class="bit" x="340" y="97">VALUE (32)</text>
+    <text class="small" x="340" y="120">32 bits</text>
+    <text class="bit" x="220" y="72">3</text>
+    <text class="bit-off" x="460" y="65">6</text>
+
+    <!-- CRC8 (1 byte) -->
+    <rect class="field-crc" x="460" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="490" y="97">CRC8</text>
+    <text class="small" x="490" y="120">8 bits</text>
+    <text class="bit" x="490" y="72">7</text>
+
+    <!-- Note -->
+    <text class="smallL" x="0" y="138">&#9432; Immediate reply, CRC-8 over first 7 bytes</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 3. SPI TMCL (64-bit / 8-byte)                                -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 340)">
+    <text class="title" x="0" y="14">3. SPI TMCL (64-bit / 8-byte)</text>
+
+    <!-- Command frame -->
+    <rect class="frame" x="0" y="22" width="530" height="34" rx="3"/>
+    <text class="smallL" x="4" y="36">CMD:</text>
+
+    <!-- Operation (1 byte) -->
+    <rect class="field-cmd" x="40" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="43">Operation</text>
+    <text class="small" x="70" y="66">8 bits</text>
+    <text class="bit" x="70" y="18">0</text>
+
+    <!-- Type (12 bits = 1.5 bytes ~ 90px) -->
+    <rect class="field-cmd" x="100" y="24" width="90" height="30" rx="2"/>
+    <text class="bit" x="145" y="43">Type</text>
+    <text class="small" x="145" y="66">12 bits</text>
+    <text class="bit-off" x="100" y="11">1</text>
+
+    <!-- Motor/Bank (4 bits = 0.5 bytes ~ 30px) -->
+    <rect class="field-addr" x="190" y="24" width="30" height="30" rx="2"/>
+    <text class="bit" x="205" y="43">M/B</text>
+    <text class="small" x="205" y="66">4b</text>
+
+    <!-- Data (4 bytes) -->
+    <rect class="field-data" x="220" y="24" width="240" height="30" rx="2"/>
+    <text class="bit" x="340" y="43">Data (32)</text>
+    <text class="small" x="340" y="66">32 bits</text>
+    <text class="bit" x="220" y="18">3</text>
+    <text class="bit-off" x="460" y="11">6</text>
+
+    <!-- Checksum (1 byte) -->
+    <rect class="field-crc" x="460" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="490" y="43">Chksum</text>
+    <text class="small" x="490" y="66">8 bits</text>
+    <text class="bit" x="490" y="18">7</text>
+
+    <!-- Reply frame -->
+    <rect class="frame" x="0" y="76" width="530" height="34" rx="3"/>
+    <text class="smallL" x="4" y="90">REPLY:</text>
+
+    <!-- SPI_Status (1 byte) -->
+    <rect class="field-stat" x="40" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="93">SPI_Stat</text>
+    <text class="small" x="70" y="120">8 bits</text>
+    <text class="bit" x="70" y="72">0</text>
+
+    <!-- TMCL_Status (1 byte) -->
+    <rect class="field-stat" x="100" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="130" y="93">TMCL_St</text>
+    <text class="small" x="130" y="120">8 bits</text>
+    <text class="bit" x="130" y="72">1</text>
+
+    <!-- Operation (1 byte) -->
+    <rect class="field-cmd" x="160" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="190" y="93">Operation</text>
+    <text class="small" x="190" y="120">8 bits</text>
+    <text class="bit" x="190" y="72">2</text>
+
+    <!-- Data (4 bytes) -->
+    <rect class="field-data" x="220" y="78" width="240" height="30" rx="2"/>
+    <text class="bit" x="340" y="97">Data (32)</text>
+    <text class="small" x="340" y="120">32 bits</text>
+    <text class="bit-off" x="220" y="65">3</text>
+    <text class="bit-off" x="460" y="65">6</text>
+
+    <!-- Checksum (1 byte) -->
+    <rect class="field-crc" x="460" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="490" y="97">Chksum</text>
+    <text class="small" x="490" y="120">8 bits</text>
+    <text class="bit" x="490" y="72">7</text>
+
+    <!-- Note -->
+    <text class="smallL" x="0" y="138">&#9432; Reply delayed (comes with next command). Status 0xFF=OK</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 4. UART TMCL (72-bit / 9-byte)                               -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 500)">
+    <text class="title" x="0" y="14">4. UART TMCL (72-bit / 9-byte)</text>
+
+    <!-- Command frame -->
+    <rect class="frame" x="0" y="22" width="590" height="34" rx="3"/>
+    <text class="smallL" x="4" y="36">CMD:</text>
+
+    <!-- Sync+Addr (1 byte) -->
+    <rect class="field-sync" x="40" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="43">Sync+Addr</text>
+    <text class="small" x="70" y="66">8 bits</text>
+    <text class="bit" x="70" y="18">0</text>
+
+    <!-- Command (1 byte) -->
+    <rect class="field-cmd" x="100" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="130" y="43">Command</text>
+    <text class="small" x="130" y="66">8 bits</text>
+    <text class="bit" x="130" y="18">1</text>
+
+    <!-- Type+Motor (2 bytes) -->
+    <rect class="field-cmd" x="160" y="24" width="120" height="30" rx="2"/>
+    <text class="bit" x="220" y="43">Type+Motor</text>
+    <text class="small" x="220" y="66">16 bits</text>
+    <text class="bit" x="160" y="18">2</text>
+    <text class="bit-off" x="272" y="11">3</text>
+
+    <!-- Data (4 bytes) -->
+    <rect class="field-data" x="280" y="24" width="240" height="30" rx="2"/>
+    <text class="bit" x="400" y="43">Data (32)</text>
+    <text class="small" x="400" y="66">32 bits</text>
+    <text class="bit-off" x="288" y="18">4</text>
+    <text class="bit-off" x="520" y="11">7</text>
+
+    <!-- Checksum (1 byte) -->
+    <rect class="field-crc" x="520" y="24" width="60" height="30" rx="2"/>
+    <text class="bit" x="550" y="43">Chksum</text>
+    <text class="small" x="550" y="66">8 bits</text>
+    <text class="bit" x="550" y="18">8</text>
+
+    <!-- Reply frame -->
+    <rect class="frame" x="0" y="76" width="590" height="34" rx="3"/>
+    <text class="smallL" x="4" y="90">REPLY:</text>
+
+    <!-- HostAddr (1 byte) -->
+    <rect class="field-addr" x="40" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="70" y="97">HostAddr</text>
+    <text class="small" x="70" y="120">8 bits</text>
+    <text class="bit" x="70" y="72">0</text>
+
+    <!-- Sync+Addr (1 byte) -->
+    <rect class="field-sync" x="100" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="130" y="97">Sync+Addr</text>
+    <text class="small" x="130" y="120">8 bits</text>
+    <text class="bit" x="130" y="72">1</text>
+
+    <!-- TMCL_Status (1 byte) -->
+    <rect class="field-stat" x="160" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="190" y="97">TMCL_St</text>
+    <text class="small" x="190" y="120">8 bits</text>
+    <text class="bit" x="190" y="72">2</text>
+
+    <!-- Operation (1 byte) -->
+    <rect class="field-cmd" x="220" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="250" y="97">Operation</text>
+    <text class="small" x="250" y="120">8 bits</text>
+    <text class="bit" x="250" y="72">3</text>
+
+    <!-- Data (4 bytes) -->
+    <rect class="field-data" x="280" y="78" width="240" height="30" rx="2"/>
+    <text class="bit" x="400" y="97">Data (32)</text>
+    <text class="small" x="400" y="120">32 bits</text>
+    <text class="bit-off" x="280" y="65">4</text>
+    <text class="bit-off" x="520" y="65">7</text>
+
+    <!-- Checksum (1 byte) -->
+    <rect class="field-crc" x="520" y="78" width="60" height="30" rx="2"/>
+    <text class="bit" x="550" y="97">Chksum</text>
+    <text class="small" x="550" y="120">8 bits</text>
+    <text class="bit" x="550" y="72">8</text>
+
+    <!-- Note -->
+    <text class="smallL" x="0" y="138">&#9432; Immediate reply. Checksum over first 8 bytes</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- Legend                                                        -->
+  <!-- ============================================================ -->
+  <g transform="translate(610, 42)">
+    <text class="title" x="0" y="0">Legend</text>
+
+    <rect class="field-sync" x="0" y="8" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="18">Sync</text>
+
+    <rect class="field-addr" x="0" y="26" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="36">Address</text>
+
+    <rect class="field-cmd" x="0" y="44" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="54">Cmd / Op</text>
+
+    <rect class="field-data" x="0" y="62" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="72">Data / Value</text>
+
+    <rect class="field-crc" x="0" y="80" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="90">CRC / Checksum</text>
+
+    <rect class="field-stat" x="0" y="98" width="16" height="12" rx="2"/>
+    <text class="legend" x="22" y="108">Status</text>
+
+    <text class="smallL" x="0" y="128">1 byte = 60 px</text>
+  </g>
+
+</svg>
