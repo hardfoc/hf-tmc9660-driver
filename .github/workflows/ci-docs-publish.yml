@@ -22,7 +22,7 @@ concurrency:
 jobs:
   docs:
     # Branch of hardfoc/hf-general-ci-tools#38 until it is released; then @v1.
-    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-mkdocs-publish.yml@docs/hardfoc-mkdocs-theme
+    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-mkdocs-publish.yml@v1
     permissions:
       contents: write  # the publish job pushes gh-pages; pull requests never publish
     with:
