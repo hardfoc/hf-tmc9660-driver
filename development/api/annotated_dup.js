@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "anonymous_namespace{tmcl_timing.cpp}", "namespaceanonymous__namespace_02tmcl__timing_8cpp_03.html", [
+      [ "Summary", "structanonymous__namespace_02tmcl__timing_8cpp_03_1_1Summary.html", "structanonymous__namespace_02tmcl__timing_8cpp_03_1_1Summary" ]
+    ] ],
     [ "tmc9660", "namespacetmc9660.html", [
       [ "diagnostics", "namespacetmc9660_1_1diagnostics.html", [
         [ "MotorSnapshot", "structtmc9660_1_1diagnostics_1_1MotorSnapshot.html", "structtmc9660_1_1diagnostics_1_1MotorSnapshot" ],
@@ -55,6 +58,8 @@ var annotated_dup =
       [ "TMC9660Bootloader", "classtmc9660_1_1TMC9660Bootloader.html", "classtmc9660_1_1TMC9660Bootloader" ],
       [ "TMCLFrame", "structtmc9660_1_1TMCLFrame.html", "structtmc9660_1_1TMCLFrame" ],
       [ "TMCLReply", "structtmc9660_1_1TMCLReply.html", "structtmc9660_1_1TMCLReply" ],
+      [ "TmclSpiStats", "structtmc9660_1_1TmclSpiStats.html", "structtmc9660_1_1TmclSpiStats" ],
+      [ "TmclSpiTiming", "structtmc9660_1_1TmclSpiTiming.html", "structtmc9660_1_1TmclSpiTiming" ],
       [ "UartCommInterface", "classtmc9660_1_1UartCommInterface.html", "classtmc9660_1_1UartCommInterface" ],
       [ "UARTConfig", "structtmc9660_1_1UARTConfig.html", "structtmc9660_1_1UARTConfig" ]
     ] ],

@@ -1,5 +1,7 @@
 var tmc9660__comm__interface_8hpp =
 [
+    [ "tmc9660::TmclSpiTiming", "structtmc9660_1_1TmclSpiTiming.html", "structtmc9660_1_1TmclSpiTiming" ],
+    [ "tmc9660::TmclSpiStats", "structtmc9660_1_1TmclSpiStats.html", "structtmc9660_1_1TmclSpiStats" ],
     [ "tmc9660::TMCLReply", "structtmc9660_1_1TMCLReply.html", "structtmc9660_1_1TMCLReply" ],
     [ "tmc9660::TMCLFrame", "structtmc9660_1_1TMCLFrame.html", "structtmc9660_1_1TMCLFrame" ],
     [ "tmc9660::CommInterface< Derived >", "classtmc9660_1_1CommInterface.html", "classtmc9660_1_1CommInterface" ],
@@ -28,5 +30,12 @@ var tmc9660__comm__interface_8hpp =
       [ "FAULTN", "tmc9660__comm__interface_8hpp.html#a6c99d37edc8b04530ba5fb2c40923ed7a8a08cd30efd24033555d0244cfce27a7", null ],
       [ "WAKE", "tmc9660__comm__interface_8hpp.html#a6c99d37edc8b04530ba5fb2c40923ed7ab275d6bfcd179f9ffb5011008e30cb48", null ]
     ] ],
-    [ "tmclChecksum", "tmc9660__comm__interface_8hpp.html#a2fc16e5feffbef089c5c9660c62615d5", null ]
+    [ "TmclSpiRxClass", "tmc9660__comm__interface_8hpp.html#ac8dcc6495c83d8931b328c37df2faf77", [
+      [ "NOT_READY", "tmc9660__comm__interface_8hpp.html#ac8dcc6495c83d8931b328c37df2faf77a9455b42e74acb2ec1c7292e54d28aff2", null ],
+      [ "VALID", "tmc9660__comm__interface_8hpp.html#ac8dcc6495c83d8931b328c37df2faf77ac9f1a6384b1c466d4612f513bd8e13ea", null ],
+      [ "STALE", "tmc9660__comm__interface_8hpp.html#ac8dcc6495c83d8931b328c37df2faf77a4d855a061b3066dc14a3b12ed26b5456", null ]
+    ] ],
+    [ "classifyTmclSpiReply", "tmc9660__comm__interface_8hpp.html#aa7e5cc6548ae14d784a97f6183c3f3fe", null ],
+    [ "tmclChecksum", "tmc9660__comm__interface_8hpp.html#a2fc16e5feffbef089c5c9660c62615d5", null ],
+    [ "tmclReplyEchoesOpcode", "tmc9660__comm__interface_8hpp.html#a02eb812709acadc0354dceecd9deef39", null ]
 ];

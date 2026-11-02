@@ -9,7 +9,8 @@ var searchData=
   ['tmc9660_3a_3aregister_5fmode_3a_3aramdebug_6',['RAMDebug',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html',1,'tmc9660::register_mode']]],
   ['tmc9660_3a_3aregister_5fmode_3a_3asys_5fctrl_7',['SYS_CTRL',['../namespacetmc9660_1_1register__mode_1_1SYS__CTRL.html',1,'tmc9660::register_mode']]],
   ['tmc9660_3a_3atmcl_8',['tmcl',['../namespacetmc9660_1_1tmcl.html',1,'tmc9660']]],
-  ['tmc9660_3a_3aunits_9',['units',['../namespacetmc9660_1_1units.html',1,'tmc9660']]],
-  ['tmc9660_3a_3aunits_3a_3adetail_10',['detail',['../namespacetmc9660_1_1units_1_1detail.html',1,'tmc9660::units']]],
-  ['tmc9660_5ftestconfig_11',['TMC9660_TestConfig',['../namespaceTMC9660__TestConfig.html',1,'']]]
+  ['tmc9660_3a_3atmcl_3a_3adetail_9',['detail',['../namespacetmc9660_1_1tmcl_1_1detail.html',1,'tmc9660::tmcl']]],
+  ['tmc9660_3a_3aunits_10',['units',['../namespacetmc9660_1_1units.html',1,'tmc9660']]],
+  ['tmc9660_3a_3aunits_3a_3adetail_11',['detail',['../namespacetmc9660_1_1units_1_1detail.html',1,'tmc9660::units']]],
+  ['tmc9660_5ftestconfig_12',['TMC9660_TestConfig',['../namespaceTMC9660__TestConfig.html',1,'']]]
 ];

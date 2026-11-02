@@ -108,18 +108,18 @@ $(function(){initNavTree('structtmc9660_1_1TMC9660_1_1DeviceCapabilities.html','
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:abce84656c97ecc816400d859a3c8d632" id="r_abce84656c97ecc816400d859a3c8d632"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abce84656c97ecc816400d859a3c8d632">spiEncoder</a> = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td></tr>
+<tr class="memitem:abce84656c97ecc816400d859a3c8d632" id="r_abce84656c97ecc816400d859a3c8d632"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abce84656c97ecc816400d859a3c8d632">spiEncoder</a> = true</td></tr>
 <tr class="memdesc:abce84656c97ecc816400d859a3c8d632"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI encoder feedback subsystem (NRs 181–201). Auto = bootCfg.spiEnc.enable.  <br /></td></tr>
 <tr class="separator:abce84656c97ecc816400d859a3c8d632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafd0a9d380c776dd8cc08cf2dabc1e1c" id="r_aafd0a9d380c776dd8cc08cf2dabc1e1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafd0a9d380c776dd8cc08cf2dabc1e1c">stepDir</a> = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td></tr>
+<tr class="memitem:aafd0a9d380c776dd8cc08cf2dabc1e1c" id="r_aafd0a9d380c776dd8cc08cf2dabc1e1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafd0a9d380c776dd8cc08cf2dabc1e1c">stepDir</a> = true</td></tr>
 <tr class="memdesc:aafd0a9d380c776dd8cc08cf2dabc1e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step/Dir input subsystem (NRs 205–209). Auto = bootCfg.stepDir.enable.  <br /></td></tr>
 <tr class="separator:aafd0a9d380c776dd8cc08cf2dabc1e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7ad35c0e13a467cba1874827f52505d" id="r_ae7ad35c0e13a467cba1874827f52505d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7ad35c0e13a467cba1874827f52505d">y2Phase</a> = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td></tr>
+<tr class="memitem:ae7ad35c0e13a467cba1874827f52505d" id="r_ae7ad35c0e13a467cba1874827f52505d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7ad35c0e13a467cba1874827f52505d">y2Phase</a> = true</td></tr>
 <tr class="memdesc:ae7ad35c0e13a467cba1874827f52505d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y2 power-stage half-bridge wired on board. Caller-set; not bootloader-derived.  <br /></td></tr>
 <tr class="separator:ae7ad35c0e13a467cba1874827f52505d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename CommType&gt;<br />
 struct tmc9660::TMC9660&lt; CommType &gt;::DeviceCapabilities</div><p>Per-device feature topology — declares which optional subsystems are physically wired and bootloader-enabled on <b>this</b> <a class="el" href="classtmc9660_1_1TMC9660.html" title="Main class representing a TMC9660 motor driver in Parameter Mode.">TMC9660</a> instance. </p>
 <p>Two of the three flags are auto-populated from <code><a class="el" href="structtmc9660_1_1BootloaderConfig.html" title="Complete bootloader configuration structure.">BootloaderConfig</a></code> if one was passed to the constructor: <code>spiEncoder</code> mirrors <code>bootCfg.spiEnc.enable</code>, and <code>stepDir</code> mirrors <code>bootCfg.stepDir.enable</code>. The third flag (<code>y2Phase</code>) is <b>board topology</b> — there's no bootloader switch for it; the caller must set it (default = true for backward compatibility).</p>
 <p>When a feature is <code>false</code>, the corresponding API surface (e.g. all <code><a class="el" href="structtmc9660_1_1TMC9660_1_1StepDir.html" title="Subsystem for controlling the STEP/DIR pulse input interface.">StepDir</a>::*</code> methods, <code>FeedbackSense::configureAuto(SpiEncoderConfig)</code>, Y2 arms inside <code><a class="el" href="structtmc9660_1_1TMC9660_1_1GateDriver.html#ac6f8ddc1dc83b220c21ccd4c2da178b6" title="Auto-configure complete power stage based on physical properties.">GateDriver::configurePowerStageProtection</a></code>) returns <code>false</code> early and emits a single ERROR-level log line via the CRTP <code>comm.logDebug()</code> hook. This converts otherwise-confusing chip-level <code>REPLY_CMD_NOT_AVAILABLE</code> (0x06) responses into actionable host-side diagnostics that point at the bootloader / board cause.</p>
@@ -131,10 +131,10 @@ struct tmc9660::TMC9660&lt; CommType &gt;::DeviceCapabilities</div><p>Per-device
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::DeviceCapabilities::spiEncoder = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::DeviceCapabilities::spiEncoder = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -149,10 +149,10 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::DeviceCapabilities::stepDir = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::DeviceCapabilities::stepDir = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -167,10 +167,10 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::DeviceCapabilities::y2Phase = <a class="el" href="classtmc9660_1_1CommInterface.html">true</a></td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::DeviceCapabilities::y2Phase = true</td>
         </tr>
       </table>
 </div><div class="memdoc">

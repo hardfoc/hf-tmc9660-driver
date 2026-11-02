@@ -109,19 +109,19 @@ $(function(){initNavTree('structtmc9660_1_1BootloaderCommandUART.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a085f9fc5aed572737da7966e7b61dc96" id="r_a085f9fc5aed572737da7966e7b61dc96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a085f9fc5aed572737da7966e7b61dc96">toBuffer</a> (std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">out</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a085f9fc5aed572737da7966e7b61dc96" id="r_a085f9fc5aed572737da7966e7b61dc96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a085f9fc5aed572737da7966e7b61dc96">toBuffer</a> (std::array&lt; uint8_t, 8 &gt; &amp;out) const noexcept</td></tr>
 <tr class="memdesc:a085f9fc5aed572737da7966e7b61dc96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize to 8-byte buffer for UART transmission.  <br /></td></tr>
 <tr class="separator:a085f9fc5aed572737da7966e7b61dc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aad5e33d8521dedd4090210e6431ddca5" id="r_aad5e33d8521dedd4090210e6431ddca5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad5e33d8521dedd4090210e6431ddca5">deviceAddr</a></td></tr>
+<tr class="memitem:aad5e33d8521dedd4090210e6431ddca5" id="r_aad5e33d8521dedd4090210e6431ddca5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad5e33d8521dedd4090210e6431ddca5">deviceAddr</a></td></tr>
 <tr class="memdesc:aad5e33d8521dedd4090210e6431ddca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Device address.  <br /></td></tr>
 <tr class="separator:aad5e33d8521dedd4090210e6431ddca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46a2b5e5fe591105fe0307f1308d90c8" id="r_a46a2b5e5fe591105fe0307f1308d90c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46a2b5e5fe591105fe0307f1308d90c8">command</a></td></tr>
+<tr class="memitem:a46a2b5e5fe591105fe0307f1308d90c8" id="r_a46a2b5e5fe591105fe0307f1308d90c8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46a2b5e5fe591105fe0307f1308d90c8">command</a></td></tr>
 <tr class="memdesc:a46a2b5e5fe591105fe0307f1308d90c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command byte.  <br /></td></tr>
 <tr class="separator:a46a2b5e5fe591105fe0307f1308d90c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0d44746ea82213a9f15441384b5fc79" id="r_ab0d44746ea82213a9f15441384b5fc79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d44746ea82213a9f15441384b5fc79">value</a></td></tr>
+<tr class="memitem:ab0d44746ea82213a9f15441384b5fc79" id="r_ab0d44746ea82213a9f15441384b5fc79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d44746ea82213a9f15441384b5fc79">value</a></td></tr>
 <tr class="memdesc:ab0d44746ea82213a9f15441384b5fc79"><td class="mdescLeft">&#160;</td><td class="mdescRight">32-bit data value  <br /></td></tr>
 <tr class="separator:ab0d44746ea82213a9f15441384b5fc79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -140,9 +140,9 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a> tmc9660::BootloaderCommandUART::toBuffer </td>
+          <td class="memname">void tmc9660::BootloaderCommandUART::toBuffer </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -165,7 +165,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> tmc9660::BootloaderCommandUART::command</td>
+          <td class="memname">uint8_t tmc9660::BootloaderCommandUART::command</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -181,7 +181,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> tmc9660::BootloaderCommandUART::deviceAddr</td>
+          <td class="memname">uint8_t tmc9660::BootloaderCommandUART::deviceAddr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -197,7 +197,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> tmc9660::BootloaderCommandUART::value</td>
+          <td class="memname">uint32_t tmc9660::BootloaderCommandUART::value</td>
         </tr>
       </table>
 </div><div class="memdoc">

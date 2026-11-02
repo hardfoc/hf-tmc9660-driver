@@ -227,6 +227,15 @@ var group__TMC9660__Core =
         [ "TMC9660", "structtmc9660_1_1TMC9660_1_1GateDriver.html#a7a162b5b230edf1d03327269e36ce893", null ],
         [ "driver", "structtmc9660_1_1TMC9660_1_1GateDriver.html#ace391c1c0444fab8ae7ecd178c0cebb4", null ]
       ] ],
+      [ "GlobalParameterAccess", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html", [
+        [ "GlobalParameterAccess", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#a1e17271f84e569efbffc615d5fc378eb", null ],
+        [ "GlobalParameterAccess", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#a3a809cf7d8a183688ee08f37b11be894", null ],
+        [ "ok", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#aa7503639a266c58c72dd93d6aa0bf62f", null ],
+        [ "bank", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#aa7a7a6c9fb00fd820a7a76c3a1abc269", null ],
+        [ "id", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#a76a9a6087ba5d2271f839545c5ed865e", null ],
+        [ "status", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#a2883104b8980caf82f3366492004d736", null ],
+        [ "value", "structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#a9b0238a35a8b0077f7b24611e020ec98", null ]
+      ] ],
       [ "Globals", "structtmc9660_1_1TMC9660_1_1Globals.html", [
         [ "Globals", "structtmc9660_1_1TMC9660_1_1Globals.html#acf8d4ea3460901b0d10f5f4053eba0b0", null ],
         [ "configureHeartbeat", "structtmc9660_1_1TMC9660_1_1Globals.html#a732d6e911b42b770237f8f7ad71cff01", null ],
@@ -272,11 +281,13 @@ var group__TMC9660__Core =
       [ "Heartbeat", "structtmc9660_1_1TMC9660_1_1Heartbeat.html", [
         [ "HeartbeatConfig", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig.html", [
           [ "enable", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig.html#a473696d031b4ee09098b2aa5c1dc814d", null ],
+          [ "interface", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig.html#a51f76b63e9e3a2d1dff04b82f3f1f5f4", null ],
           [ "timeoutMs", "structtmc9660_1_1TMC9660_1_1Heartbeat_1_1HeartbeatConfig.html#ac2ce35bb9180665da3ae852e0b511456", null ]
         ] ],
         [ "Heartbeat", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#abf4e755e926380f63d2a3a85448fe1db", null ],
         [ "configure", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#a763fe59a9fcf699686004209525da06b", null ],
         [ "configureAuto", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#aad7d6b10fa5d5e0e8bfbb8f36dd5e52e", null ],
+        [ "transportInterface", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#ab49f1ef996020b24e9c6663503df6e8c", null ],
         [ "TMC9660", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#a7a162b5b230edf1d03327269e36ce893", null ],
         [ "driver", "structtmc9660_1_1TMC9660_1_1Heartbeat.html#a36da6f48b08cbe679f56c8cfffa9cf1f", null ]
       ] ],
@@ -305,6 +316,13 @@ var group__TMC9660__Core =
         [ "storeToFlash", "structtmc9660_1_1TMC9660_1_1NvmStorage.html#a2c413c9cfdd6d548e957df7ae2f4f665", null ],
         [ "TMC9660", "structtmc9660_1_1TMC9660_1_1NvmStorage.html#a7a162b5b230edf1d03327269e36ce893", null ],
         [ "driver", "structtmc9660_1_1TMC9660_1_1NvmStorage.html#a843b471836cff4c203521f518090b3b1", null ]
+      ] ],
+      [ "ParameterAccess", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html", [
+        [ "ok", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html#abb6e6ac0f0e90aeaea6f15be25f9a149", null ],
+        [ "id", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html#ac8acfaede992eb43069a0ee57b5534b0", null ],
+        [ "motor", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html#aa290ff4dddaa772f05544ae0a167ed50", null ],
+        [ "status", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html#a5de968287de62527bc9f7f0cb4029a60", null ],
+        [ "value", "structtmc9660_1_1TMC9660_1_1ParameterAccess.html#a4b9738bf8f50ef3171b66cb303f25d00", null ]
       ] ],
       [ "PositionControl", "structtmc9660_1_1TMC9660_1_1PositionControl.html", [
         [ "PositionConfig", "structtmc9660_1_1TMC9660_1_1PositionControl_1_1PositionConfig.html", [
@@ -410,13 +428,76 @@ var group__TMC9660__Core =
         [ "driver", "structtmc9660_1_1TMC9660_1_1Protection.html#a72f58800eed6c3ceae95f4b90f79897b", null ]
       ] ],
       [ "RamDebug", "structtmc9660_1_1TMC9660_1_1RamDebug.html", [
+        [ "CaptureConfig", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html", [
+          [ "channelCount", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#adb1b3781c237db256a4808166f27cbe2", null ],
+          [ "channels", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#a6ae1bacc0aa6090d4e2822e2804c11f0", null ],
+          [ "prescaler", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#accc7e998cfd913f02110273a9efd06fa", null ],
+          [ "pretriggerSamplesPerChannel", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#a3fe870903d30e662e960dd5911ea4cb6", null ],
+          [ "samplesPerChannel", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#a29c0b7f264746a4feebef6c9d6722854", null ],
+          [ "trigger", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#a2600d8683fb0ae9a19912aac03c9cf8b", null ]
+        ] ],
+        [ "Channel", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html", [
+          [ "address", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#ac03db70bd382cbc0e52b9c57305a5dc4", null ],
+          [ "axis", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a6d1432614fa3325143ecaf41cca8d1b6", null ],
+          [ "global", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a6ace0011a8086cd3bdfa8b53c83818b2", null ],
+          [ "motorOrBank", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a5aca6f0a6623854af9de93a905536459", null ],
+          [ "number", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a822eee2ea621633c71ece61664c78c0e", null ],
+          [ "type", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a1740731b4eb06e1684e68856ce304a60", null ]
+        ] ],
+        [ "Trigger", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html", [
+          [ "mask", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#ad4d1d14f302a3eee37c1d890a644d4a8", null ],
+          [ "shift", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#abd1ed85837f7d4f5e82913fb4f22c5a4", null ],
+          [ "source", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#a58a250068c21f50c022e76f5a2bfbb9c", null ],
+          [ "threshold", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#aae803f38fad36a94612ccc05a4fb52cb", null ],
+          [ "type", "structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#a21949e6aa2043ea3fe0e9bb18ecc80ef", null ]
+        ] ],
+        [ "ChannelType", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a6528d37e0701494770d0c4df3263db9d", [
+          [ "DISABLED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a6528d37e0701494770d0c4df3263db9da055c1a591abb0e8cd86dc969727bcc0b", null ],
+          [ "AXIS_PARAMETER", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a6528d37e0701494770d0c4df3263db9daac0b8d4f1bf33fcef3950439d335fc8e", null ],
+          [ "GLOBAL_PARAMETER", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a6528d37e0701494770d0c4df3263db9da5c52f8fe85e85e90cf92067f571cbea4", null ]
+        ] ],
+        [ "Info", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8f", [
+          [ "MAX_CHANNELS", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fa7dd85ea849c243c38ddd4ac7cf57eec1", null ],
+          [ "BUFFER_SIZE", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fa8fd0fdafa3d0511f0d32d52893d3d774", null ],
+          [ "FREQUENCY", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fa1e3e433edd76f91457ea26d0ae88ec2f", null ],
+          [ "CAPTURED_SAMPLES", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fa959e38dde5c4ca0668a1e9d7aedf641a", null ],
+          [ "TRIGGER_PRESCALER", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fabb0e2e7e53627a0f5d2d78515076de05", null ]
+        ] ],
+        [ "TriggerType", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684e", [
+          [ "UNCONDITIONAL", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea01edf6954e324295426e6cb130a8036d", null ],
+          [ "RISING_EDGE_SIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684eaeaa0fc808919897eabfde4839ed22e7e", null ],
+          [ "FALLING_EDGE_SIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea17d1f1e8a56b8a824299602673c44371", null ],
+          [ "DUAL_EDGE_SIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea46f814c1ea1f00b6beb6dd7906333669", null ],
+          [ "RISING_EDGE_UNSIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea1c5c1dd1d35ee034ab00688469d54e8a", null ],
+          [ "FALLING_EDGE_UNSIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea141fe24ee490cbc51c97108824b12005", null ],
+          [ "DUAL_EDGE_UNSIGNED", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684eaefd3a4bd1671a97c380352323badfac6", null ]
+        ] ],
         [ "RamDebug", "structtmc9660_1_1TMC9660_1_1RamDebug.html#aa9ed2b575572b34c8b6bb92e4d7d289f", null ],
+        [ "addChannel", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a74eaba69334cca794bb0bb74a91bbfca", null ],
+        [ "cmd", "structtmc9660_1_1TMC9660_1_1RamDebug.html#ac1655a2cdf8c7f0671b201133b850f8e", null ],
+        [ "configure", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a716091d819a2041bd4f40a3b4c593d64", null ],
+        [ "enableTrigger", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a3b97ef4d2bd1f97badf794976ac4d656", null ],
+        [ "getChannelAddress", "structtmc9660_1_1TMC9660_1_1RamDebug.html#af923e2db3d52c2e63449ad2baeac1020", null ],
+        [ "getChannelType", "structtmc9660_1_1TMC9660_1_1RamDebug.html#afe37cdd8a128099084342dc0ab76af8e", null ],
+        [ "getInfo", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a5b11be1bce0e495fcfca953fb920d392", null ],
+        [ "getPretriggerCount", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a1226c396bf1920f6676e4241b47109ff", null ],
+        [ "getState", "structtmc9660_1_1TMC9660_1_1RamDebug.html#aaffd4bffb47c295e5b4b4371ca1b5a7e", null ],
         [ "getStatus", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a789cf67b6a273ec1fa4fcbc100ab69e3", null ],
         [ "init", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a35d9df8ac1facde131f2d2f9f70a8000", null ],
         [ "readData", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a52d47d96ab727095a937ac6c8ab02cdd", null ],
+        [ "readSample", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a1f359d26655a38a69a4c4b1b418e4cd9", null ],
+        [ "readSamples", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a9f2a77866fae0b542a9aaa254275feb7", null ],
+        [ "reset", "structtmc9660_1_1TMC9660_1_1RamDebug.html#aca126de8707d9185f27dcf801cb1963c", null ],
+        [ "setPrescaler", "structtmc9660_1_1TMC9660_1_1RamDebug.html#af74e24eb2855be40abe83be0d85e1e74", null ],
+        [ "setPretriggerCount", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a8cabf6eb981b28151a827b0f0415f572", null ],
+        [ "setSampleCount", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a3f41fa28f442b8a693a63a4339986268", null ],
+        [ "setTriggerChannel", "structtmc9660_1_1TMC9660_1_1RamDebug.html#ab1b84613426eee6b139e96cf461ce832", null ],
+        [ "setTriggerMaskShift", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a67c37fc6db5d74c04a36043c74d15757", null ],
+        [ "start", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a046a67308b6b2aab8a4b955fe68df4d3", null ],
         [ "startCapture", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a1dcd72f92dfc18405960159de3d16e41", null ],
         [ "TMC9660", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a7a162b5b230edf1d03327269e36ce893", null ],
-        [ "driver", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a620a70b2a9f24c62ed7181263c821a46", null ]
+        [ "driver", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a620a70b2a9f24c62ed7181263c821a46", null ],
+        [ "kMaxChannels", "structtmc9660_1_1TMC9660_1_1RamDebug.html#a2e84a138024ce84d49f544be0bc68c7f", null ]
       ] ],
       [ "Ramp", "structtmc9660_1_1TMC9660_1_1Ramp.html", [
         [ "RampConfig", "structtmc9660_1_1TMC9660_1_1Ramp_1_1RampConfig.html", [
@@ -696,17 +777,25 @@ var group__TMC9660__Core =
       [ "GpioSet", "classtmc9660_1_1TMC9660.html#a3541ba54c6196e7347be378e0c5b5823", null ],
       [ "GpioSetActive", "classtmc9660_1_1TMC9660.html#a987296986afe6d965a558a2ec5ccd6f5", null ],
       [ "GpioSetInactive", "classtmc9660_1_1TMC9660.html#ad93a2b83e8f39620423f3882a5345324", null ],
-      [ "readGlobal", "classtmc9660_1_1TMC9660.html#a5e4a912375243fb0ac2f1ba8e2bd8e12", null ],
+      [ "readGlobal", "classtmc9660_1_1TMC9660.html#acb30437092eb0ae0fa2cbd6f9b61603e", null ],
+      [ "readGlobal", "classtmc9660_1_1TMC9660.html#a75a24d7820ba3cd718e90d042191fc30", null ],
       [ "readGlobal", "classtmc9660_1_1TMC9660.html#a918fb3344573e7a1d9d1e69488fe489c", null ],
       [ "readGlobalParameter", "classtmc9660_1_1TMC9660.html#a951940fa660af6651fb587c3e5855b99", null ],
+      [ "readGlobalParameters", "classtmc9660_1_1TMC9660.html#ad7f718ead508cb8d7058df7cd70a5d37", null ],
       [ "readParameter", "classtmc9660_1_1TMC9660.html#aa7d5ffca1e329b72e979eb68750ad05f", null ],
+      [ "readParameters", "classtmc9660_1_1TMC9660.html#aa04136cd945d162e73a5a151549071a0", null ],
+      [ "runBatch", "classtmc9660_1_1TMC9660.html#adecd1927107ae0dcd8bd820bb3284ed6", null ],
       [ "sendCommand", "classtmc9660_1_1TMC9660.html#a26a1790eb8bf3cd08e6542370fbdfd3b", null ],
+      [ "sendCommandBatch", "classtmc9660_1_1TMC9660.html#a7d72c09d25d19769f3ad95ab87200ab1", null ],
       [ "setCapabilities", "classtmc9660_1_1TMC9660.html#a9d8ff1f8c04fd4535608759791e68632", null ],
       [ "tmclAddress", "classtmc9660_1_1TMC9660.html#addf93b1debce71807a2f8b818b6138db", null ],
-      [ "writeGlobal", "classtmc9660_1_1TMC9660.html#a04ac29956aad5bb868d2cafb5cf29ccc", null ],
+      [ "writeGlobal", "classtmc9660_1_1TMC9660.html#a5f24e3a5c54df6d722f169ec5b50c075", null ],
+      [ "writeGlobal", "classtmc9660_1_1TMC9660.html#af9bdf2595b1a328d7e09f3ee59575e37", null ],
       [ "writeGlobal", "classtmc9660_1_1TMC9660.html#abf6ea1ef01a7a16eb88dbbd5574d0684", null ],
       [ "writeGlobalParameter", "classtmc9660_1_1TMC9660.html#ae84c6b5fbda594a78e2ec2599aa1267f", null ],
+      [ "writeGlobalParameters", "classtmc9660_1_1TMC9660.html#af8e6c0b5b5e4498ccf5c3366ec8f1534", null ],
       [ "writeParameter", "classtmc9660_1_1TMC9660.html#abaa1e652c9bd5c7a820bbd742926e29d", null ],
+      [ "writeParameters", "classtmc9660_1_1TMC9660.html#ad405c44ee57d663f922545d3e81ad99b", null ],
       [ "address_", "classtmc9660_1_1TMC9660.html#a7599b5615d81f6be3c0a296c0bfb5b92", null ],
       [ "bootCfg_", "classtmc9660_1_1TMC9660.html#a265e5aee5860fe3865c1dab7801f9ff6", null ],
       [ "bootloader_", "classtmc9660_1_1TMC9660.html#a580d0691b35067dc25b1c30c76741d74", null ],

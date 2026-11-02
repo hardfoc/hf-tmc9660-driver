@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="/hf-tmc9660-driver/development/assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="/hf-tmc9660-driver/development/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li:not(:nth-child(11)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(1) > ul > li:nth-child(1) > ul > li:nth-child(11) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(1) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(1) > ul > li:nth-child(1) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(1) > ul > li:nth-child(1) > ul > li:nth-child(11) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(1) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(1) > ul.nav-list > li.nav-list-item:nth-child(1) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(1) > ul.nav-list > li.nav-list-item:nth-child(1) > ul.nav-list > li.nav-list-item:nth-child(11) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="/hf-tmc9660-driver/development/assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="/hf-tmc9660-driver/development/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>⏱️ Timing and Throughput | HardFOC TMC9660 Driver - development</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="⏱️ Timing and Throughput" />
+<meta name="author" content="N3b3x" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Cost of one TMCL access over SPI, how to configure it, and pipelined batches" />
+<meta property="og:description" content="Cost of one TMCL access over SPI, how to configure it, and pipelined batches" />
+<link rel="canonical" href="https://n3b3x.github.io/hf-tmc9660-driver/development/docs/timing_and_throughput/" />
+<meta property="og:url" content="https://n3b3x.github.io/hf-tmc9660-driver/development/docs/timing_and_throughput/" />
+<meta property="og:site_name" content="HardFOC TMC9660 Driver - development" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="⏱️ Timing and Throughput" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"N3b3x","url":"https://github.com/n3b3x"},"description":"Cost of one TMCL access over SPI, how to configure it, and pipelined batches","headline":"⏱️ Timing and Throughput","url":"https://n3b3x.github.io/hf-tmc9660-driver/development/docs/timing_and_throughput/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- =============================================================================
+     Custom Head Content for HardFOC Driver Documentation
+     =============================================================================
+     This file is included in the <head> section of every page.
+     It loads custom CSS and JavaScript for enhanced functionality.
+     ============================================================================= -->
+
+<!-- Custom CSS for enhanced styling and fixes -->
+<link rel="stylesheet" href="/hf-tmc9660-driver/development/assets/css/custom.css">
+
+<!-- Custom JavaScript for interactive features -->
+<script src="/hf-tmc9660-driver/development/assets/js/custom.js" defer></script>
+
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <header class="side-bar">
+  <div class="site-header">
+    <a href="/hf-tmc9660-driver/development/" class="site-title lh-tight">
+  HardFOC TMC9660 Driver - development
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="HardFOC TMC9660 Driver submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/hf-tmc9660-driver/development/" class="nav-list-link">HardFOC TMC9660 Driver</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="📚 Documentation submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="/hf-tmc9660-driver/development/docs/" class="nav-list-link">📚 Documentation</a><ul class="nav-list"><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/installation/" class="nav-list-link">🛠️ Installation</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/quickstart/" class="nav-list-link">⚡ Quick Start</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/hardware_setup/" class="nav-list-link">🔌 Hardware Setup</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/platform_integration/" class="nav-list-link">🔧 Platform Integration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/configuration/" class="nav-list-link">⚙️ Configuration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/api_reference/" class="nav-list-link">📖 API Reference</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/examples/" class="nav-list-link">💡 Examples</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_bootloader/" class="nav-list-link">🚀 Bootloader Initialization</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/units_and_diagnostics/" class="nav-list-link">📐 Units & Diagnostics</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_protocols/" class="nav-list-link">📡 Communication Protocols</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/timing_and_throughput/" class="nav-list-link">⏱️ Timing and Throughput</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/examples/esp32/" class="nav-list-link">🔧 ESP32-C6 TMC9660 Comprehensive Test Suite</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/troubleshooting/" class="nav-list-link">🐛 Troubleshooting</a></li></ul></li></ul></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/cmake_integration.html" class="nav-list-link">CMake Integration — TMC9660 Driver</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/CHANGELOG.html" class="nav-list-link">Changelog</a></li></ul>
+  
+</nav>
+
+
+<div class="d-md-block d-none site-footer">
+  
+  
+    This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  
+  </div>
+</header>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC TMC9660 Driver - development" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search HardFOC TMC9660 Driver - development</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="/hf-tmc9660-driver/development/api/index.html" class="site-button"
+          
+        >
+          📖 API Reference
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/n3b3x/hf-tmc9660-driver" class="site-button"
+          
+        >
+          📚 GitHub Repository
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/n3b3x/hf-tmc9660-driver/issues" class="site-button"
+          
+        >
+          🐛 Report Issues
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/n3b3x/hf-tmc9660-driver/stargazers" class="site-button"
+          
+        >
+          ⭐ Star on GitHub
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="/hf-tmc9660-driver/development/">HardFOC TMC9660 Driver</a></li>
+    <li class="breadcrumb-nav-list-item"><a href="/hf-tmc9660-driver/development/docs/">📚 Documentation</a></li>
+    <li class="breadcrumb-nav-list-item"><span>⏱️ Timing and Throughput</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <h1 id="timing-and-throughput">
+  
+  
+    <a href="#timing-and-throughput" class="anchor-heading" aria-labelledby="timing-and-throughput"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Timing and Throughput
+  
+  
+</h1>
+    
+
+<p>This page explains what one TMCL parameter access costs over SPI, which settings change it,
+and how pipelined batches cut the cost. It separates <strong>what the vendor specifies</strong>, <strong>what is
+derived</strong> from that, and <strong>what still has to be measured</strong> on hardware.</p>
+<h2 id="what-the-chip-specifies">
+  
+  
+    <a href="#what-the-chip-specifies" class="anchor-heading" aria-labelledby="what-the-chip-specifies"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> What the chip specifies
+  
+  
+</h2>
+    
+
+<p>From the TMC9660 Parameter Mode Reference Manual (Rev. 0, “Serial-Peripheral Interface”,
+Tables 3–5) and the TMC9660 datasheet (“SPI Peripheral — Electrical Characteristics”). Both
+PDFs are in <a href="datasheet/"><code class="language-plaintext highlighter-rouge">docs/datasheet/</code></a>.</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Fact</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A 64-bit request’s reply is clocked out during the <strong>next</strong> datagram</td>
+      <td>Reference manual, SPI section</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">SPI_STATUS_NOT_READY</code> (0xF0): the chip is busy, the reply in this datagram is not the reply you want, <strong>and the command in this datagram was ignored</strong>. Re-send the datagram until the status goes away</td>
+      <td>Reference manual, SPI section and Table 5</td>
+    </tr>
+    <tr>
+      <td>fSCK ≤ 10 MHz, SPI mode 3</td>
+      <td>Datasheet, SPI peripheral</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CS_</code> high time tCSH ≥ 4 × <code class="language-plaintext highlighter-rouge">T_CLK</code> (about 100 ns)</td>
+      <td>Datasheet, SPI peripheral</td>
+    </tr>
+    <tr>
+      <td>Minimum request processing time / turnaround</td>
+      <td><strong>Not specified</strong></td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>So the protocol has a ready indication (NOT_READY) and no documented minimum delay. Releases
+up to 1.0.0 nevertheless waited a fixed <strong>1000 µs</strong> between the request and the reply-request
+datagram, and ignored NOT_READY on the request datagram. That second point also explains the
+old “<code class="language-plaintext highlighter-rouge">REPLY_INVALID_CMD</code> on back-to-back transfers” symptom (see
+<a href="/hf-tmc9660-driver/development/docs/special_feature_protocols/">Communication Protocols</a>): a request that arrived while the
+chip was still busy was dropped, and the reply-request then returned the reply to the
+previous reply-request (status 2, invalid command).</p>
+<h2 id="what-the-driver-does-now">
+  
+  
+    <a href="#what-the-driver-does-now" class="anchor-heading" aria-labelledby="what-the-driver-does-now"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> What the driver does now
+  
+  
+</h2>
+    
+
+<p><code class="language-plaintext highlighter-rouge">SpiCommInterface::transferTMCL()</code> (one access):</p>
+
+<ol>
+  <li>Send the request. If the answer is NOT_READY, the request was ignored: back off and send it
+again.</li>
+  <li>Wait <code class="language-plaintext highlighter-rouge">TmclSpiTiming::frameGapUs</code> (default <strong>0 µs</strong>).</li>
+  <li>Send the reply-request <code class="language-plaintext highlighter-rouge">FF 00 00 00 00 00 00 FF</code>. While the answer is NOT_READY, has status
+0x00, a bad checksum, or (with <code class="language-plaintext highlighter-rouge">verifyReplyOpcode</code>) does not echo the request’s opcode,
+back off and send it again. A well-formed reply that echoes 0xFF means the real reply was
+lost, and the access fails at once instead of returning the wrong frame.</li>
+</ol>
+
+<p>The back-off starts at <code class="language-plaintext highlighter-rouge">pollIntervalUs</code> (20 µs) and doubles up to <code class="language-plaintext highlighter-rouge">pollIntervalMaxUs</code>
+(200 µs), for at most <code class="language-plaintext highlighter-rouge">maxPolls</code> (60) re-sends: about <strong>11.5 ms</strong> worst case. That bound is
+for thread context. Lower <code class="language-plaintext highlighter-rouge">maxPolls</code> in a high-priority control task.</p>
+
+<p><code class="language-plaintext highlighter-rouge">SpiCommInterface::transferTMCLBatch()</code> and the driver helpers <code class="language-plaintext highlighter-rouge">readParameters()</code>,
+<code class="language-plaintext highlighter-rouge">writeParameters()</code>, <code class="language-plaintext highlighter-rouge">readGlobalParameters()</code> and <code class="language-plaintext highlighter-rouge">writeGlobalParameters()</code> <strong>pipeline</strong>:
+datagram <em>k</em> carries request <em>k</em> and clocks out the reply to request <em>k</em> − 1, and a final
+reply-request collects the last reply. N accesses cost N + 1 datagrams.</p>
+
+<ul>
+  <li>The reply carried by the first datagram belongs to whatever ran before and is discarded.</li>
+  <li>NOT_READY means “this datagram was ignored”: it is re-sent, nothing is skipped or doubled.</li>
+  <li>A stale reply (0x00, bad checksum, wrong echo) leaves it unknown whether the request in that
+datagram ran. The previous element is re-issued as a single access and the pipeline restarts
+at the current element, which may then run twice. Batches therefore accept only idempotent
+requests (SAP, GAP, SGP, GGP, RAMDebug reads). <code class="language-plaintext highlighter-rouge">TmclSpiStats::recoveries</code> counts this.</li>
+</ul>
+<h2 id="configuring-it">
+  
+  
+    <a href="#configuring-it" class="anchor-heading" aria-labelledby="configuring-it"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Configuring it
+  
+  
+</h2>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="n">tmc9660</span><span class="o">::</span><span class="n">TmclSpiTiming</span> <span class="n">t</span><span class="p">{};</span>      <span class="c1">// datasheet defaults: no gap, 20→200 µs back-off, 60 polls</span>
+<span class="n">t</span><span class="p">.</span><span class="n">frameGapUs</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>               <span class="c1">// only if a measurement shows the chip needs it</span>
+<span class="n">t</span><span class="p">.</span><span class="n">maxPolls</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>                  <span class="c1">// e.g. in a 1 kHz control task: fail fast, mark the sample stale</span>
+<span class="n">comm</span><span class="p">.</span><span class="n">setTmclTiming</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+
+<span class="n">comm</span><span class="p">.</span><span class="n">setTmclTiming</span><span class="p">(</span><span class="n">tmc9660</span><span class="o">::</span><span class="n">TmclSpiTiming</span><span class="o">::</span><span class="n">legacy</span><span class="p">());</span> <span class="c1">// behaviour of releases up to 1.0.0</span>
+
+<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">comm</span><span class="p">.</span><span class="n">tmclStats</span><span class="p">();</span> <span class="c1">// frames, notReady, staleReplies, recoveries, failures</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+
+<p>The older <code class="language-plaintext highlighter-rouge">setSpiRetryMaxCount()</code> / <code class="language-plaintext highlighter-rouge">setSpiRetryInterval()</code> still work. They set <code class="language-plaintext highlighter-rouge">maxPolls</code>, and
+a fixed interval (no back-off).</p>
+
+<p>Batched reads:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">using</span> <span class="n">Drv</span> <span class="o">=</span> <span class="n">tmc9660</span><span class="o">::</span><span class="n">TMC9660</span><span class="o">&lt;</span><span class="n">MySpi</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">Drv</span><span class="o">::</span><span class="n">ParameterAccess</span> <span class="n">rd</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="n">tmcl</span><span class="o">::</span><span class="n">Parameters</span><span class="o">::</span><span class="n">ACTUAL_VELOCITY</span><span class="p">},</span>
+                             <span class="p">{</span><span class="n">tmcl</span><span class="o">::</span><span class="n">Parameters</span><span class="o">::</span><span class="n">ACTUAL_POSITION</span><span class="p">},</span>
+                             <span class="p">{</span><span class="n">tmcl</span><span class="o">::</span><span class="n">Parameters</span><span class="o">::</span><span class="n">GENERAL_STATUS_FLAGS</span><span class="p">}};</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">driver</span><span class="p">.</span><span class="n">readParameters</span><span class="p">(</span><span class="n">rd</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* rd[i].value, rd[i].status */</span> <span class="p">}</span>
+
+<span class="n">Drv</span><span class="o">::</span><span class="n">GlobalParameterAccess</span> <span class="n">g</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="n">tmcl</span><span class="o">::</span><span class="n">GlobalParamBank0</span><span class="o">::</span><span class="n">MAIN_LOOPS</span><span class="p">}</span> <span class="p">};</span> <span class="c1">// bank 0 from the type</span>
+<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">driver</span><span class="p">.</span><span class="n">readGlobalParameters</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+
+<p>Defining <code class="language-plaintext highlighter-rouge">TMC9660_DISABLE_DEBUG_LOGGING</code> also removes the per-access parameter-name lookup and
+string formatting in <code class="language-plaintext highlighter-rouge">sendCommand()</code>. Batches never run that code.</p>
+<h2 id="cost-per-access-before-and-after">
+  
+  
+    <a href="#cost-per-access-before-and-after" class="anchor-heading" aria-labelledby="cost-per-access-before-and-after"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Cost per access: before and after
+  
+  
+</h2>
+    
+
+<p>Notation: T_f = one 64-bit datagram including the host driver’s per-transaction overhead,
+T_p = the chip’s processing time for a request (not specified, to be measured).</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Formula</th>
+      <th style="text-align: right">10 MHz, T_f ≈ 20 µs</th>
+      <th style="text-align: right">1 MHz, T_f ≈ 80 µs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Before (1.0.0 + hf-core handler: 1000 µs gap, 200 µs post-delay)</td>
+      <td>2·T_f + 1000 + 200</td>
+      <td style="text-align: right">≈ 1.24 ms</td>
+      <td style="text-align: right">≈ 1.36 ms</td>
+    </tr>
+    <tr>
+      <td>Before, 6 accesses</td>
+      <td>6 × above</td>
+      <td style="text-align: right">≈ 7.4 ms</td>
+      <td style="text-align: right">≈ 8.2 ms</td>
+    </tr>
+    <tr>
+      <td>After, single, chip keeps up (T_p ≤ T_f)</td>
+      <td>2·T_f</td>
+      <td style="text-align: right">≈ 40 µs</td>
+      <td style="text-align: right">≈ 160 µs</td>
+    </tr>
+    <tr>
+      <td>After, pipelined batch of 6 (T_p ≤ T_f)</td>
+      <td>7·T_f</td>
+      <td style="text-align: right">≈ 140 µs</td>
+      <td style="text-align: right">≈ 560 µs</td>
+    </tr>
+    <tr>
+      <td>After, pipelined batch of 8 (T_p ≤ T_f)</td>
+      <td>9·T_f</td>
+      <td style="text-align: right">≈ 180 µs</td>
+      <td style="text-align: right">≈ 720 µs</td>
+    </tr>
+    <tr>
+      <td>After, single, T_p = 50 µs (one or two polls)</td>
+      <td>≈ 3·T_f + 20</td>
+      <td style="text-align: right">≈ 80 µs</td>
+      <td style="text-align: right">(T_p &lt; T_f)</td>
+    </tr>
+    <tr>
+      <td>After, batch of 6, T_p = 50 µs, no gap</td>
+      <td>≈ 6·(2·T_f + 20) + T_f</td>
+      <td style="text-align: right">≈ 380 µs</td>
+      <td style="text-align: right">(T_p &lt; T_f)</td>
+    </tr>
+    <tr>
+      <td>After, batch of 6, T_p = 50 µs, <code class="language-plaintext highlighter-rouge">frameGapUs = 30</code></td>
+      <td>≈ 6·(T_f + 30) + T_f</td>
+      <td style="text-align: right">≈ 320 µs</td>
+      <td style="text-align: right">(T_p &lt; T_f)</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p><strong>Every number in this table is derived, not measured.</strong> T_f ≈ 20 µs at 10 MHz assumes 6.4 µs
+of clocking plus about 10–15 µs of ESP-IDF transaction overhead. The “before” row matches the
+Vortex observability design’s estimate (scenario A, 1.24 ms). The host unit tests check the
+datagram counts and waits of each formula on a mock chip with a virtual clock, which is not a
+timing measurement.</p>
+<h2 id="measuring-it">
+  
+  
+    <a href="#measuring-it" class="anchor-heading" aria-labelledby="measuring-it"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Measuring it
+  
+  
+</h2>
+    
+
+<p>The ESP32 example <a href="/hf-tmc9660-driver/development/examples/esp32/main/tmcl_timing.cpp"><code class="language-plaintext highlighter-rouge">tmcl_timing</code></a> measures it on
+hardware:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nb">cd </span>examples/esp32
+./scripts/build_app.sh tmcl_timing Release
+./scripts/flash_app.sh flash_monitor tmcl_timing Release
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+
+<p>For the legacy profile and for frame gaps of 1000, 500, 250, 100, 50, 25, 10 and 0 µs (all with
+NOT_READY polling), it prints single-read and pipelined batch-of-6 and batch-of-8 latency
+(min / p50 / p99 / max and a histogram), the transport counters, value mismatches against known
+patterns in bank-2 user variables 0–7, and G0:12 <code class="language-plaintext highlighter-rouge">MAIN_LOOPS</code>. A profile is usable when
+<code class="language-plaintext highlighter-rouge">mismatch</code> and <code class="language-plaintext highlighter-rouge">fail</code> are both 0. Repeat with the motor in open-loop and FOC under load before
+picking a default for a control loop. Firmware-serviced SPI replies have been seen to stall for
+milliseconds under FOC load on the bench.</p>
+
+          
+
+          
+            
+          
+        </main>
+        
+<hr>
+<footer>
+  
+
+  <!-- =============================================================================
+     Custom Footer Content for HardFOC Driver Documentation
+     =============================================================================
+     This footer is displayed at the bottom of every page.
+     ============================================================================= -->
+
+<footer class="site-footer">
+  <div class="site-footer-credits">
+    <p>Built with ❤️ using <a href="https://just-the-docs.github.io/just-the-docs/">Just the Docs</a></p>
+    <p>
+      <a href="https://github.com/n3b3x/hf-tmc9660-driver/development/blob/main/LICENSE">GPL v3 License</a> • 
+      <a href="https://github.com/n3b3x/hf-tmc9660-driver/development">View on GitHub</a>
+    </p>
+  </div>
+</footer>
+
+
+
+  <div class="d-md-none mt-4 fs-2">
+    
+    
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+    
+  </div>
+</footer>
+
+      </div>
+    </div>
+    
+      
+<button id="search-button" class="search-button btn-reset" aria-label="Focus on search">
+  <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+</button>
+
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

@@ -176,7 +176,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
       </button><a href="/hf-tmc9660-driver/development/" class="nav-list-link">HardFOC TMC9660 Driver</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="📚 Documentation submenu" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
-      </button><a href="/hf-tmc9660-driver/development/docs/" class="nav-list-link">📚 Documentation</a><ul class="nav-list"><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/installation/" class="nav-list-link">🛠️ Installation</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/quickstart/" class="nav-list-link">⚡ Quick Start</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/hardware_setup/" class="nav-list-link">🔌 Hardware Setup</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/platform_integration/" class="nav-list-link">🔧 Platform Integration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/configuration/" class="nav-list-link">⚙️ Configuration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/api_reference/" class="nav-list-link">📖 API Reference</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/examples/" class="nav-list-link">💡 Examples</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_bootloader/" class="nav-list-link">🚀 Bootloader Initialization</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/units_and_diagnostics/" class="nav-list-link">📐 Units & Diagnostics</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_protocols/" class="nav-list-link">📡 Communication Protocols</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/examples/esp32/" class="nav-list-link">🔧 ESP32-C6 TMC9660 Comprehensive Test Suite</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/troubleshooting/" class="nav-list-link">🐛 Troubleshooting</a></li></ul></li></ul></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/cmake_integration.html" class="nav-list-link">CMake Integration — TMC9660 Driver</a></li></ul>
+      </button><a href="/hf-tmc9660-driver/development/docs/" class="nav-list-link">📚 Documentation</a><ul class="nav-list"><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/installation/" class="nav-list-link">🛠️ Installation</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/quickstart/" class="nav-list-link">⚡ Quick Start</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/hardware_setup/" class="nav-list-link">🔌 Hardware Setup</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/platform_integration/" class="nav-list-link">🔧 Platform Integration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/configuration/" class="nav-list-link">⚙️ Configuration</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/api_reference/" class="nav-list-link">📖 API Reference</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/examples/" class="nav-list-link">💡 Examples</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_bootloader/" class="nav-list-link">🚀 Bootloader Initialization</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/units_and_diagnostics/" class="nav-list-link">📐 Units & Diagnostics</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/special_feature_protocols/" class="nav-list-link">📡 Communication Protocols</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/timing_and_throughput/" class="nav-list-link">⏱️ Timing and Throughput</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/examples/esp32/" class="nav-list-link">🔧 ESP32-C6 TMC9660 Comprehensive Test Suite</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/troubleshooting/" class="nav-list-link">🐛 Troubleshooting</a></li></ul></li></ul></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/docs/cmake_integration.html" class="nav-list-link">CMake Integration — TMC9660 Driver</a></li><li class="nav-list-item"><a href="/hf-tmc9660-driver/development/CHANGELOG.html" class="nav-list-link">Changelog</a></li></ul>
   
 </nav>
 
@@ -388,8 +388,30 @@
       <td><code class="language-plaintext highlighter-rouge">bool sendCommand(tmcl::Op opcode, uint16_t type = 0, uint8_t motor = 0, uint32_t value = 0, uint32_t* reply = nullptr)</code></td>
       <td><a href="../inc/tmc9660.hpp#L334"><code class="language-plaintext highlighter-rouge">inc/tmc9660.hpp#L334</code></a></td>
     </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readGlobal()</code> / <code class="language-plaintext highlighter-rouge">writeGlobal()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool readGlobal(BankEnum id, uint32_t&amp; value)</code> — bank deduced from <code class="language-plaintext highlighter-rouge">GlobalParamBank0/2/3</code>; the overloads taking <code class="language-plaintext highlighter-rouge">tmcl::Parameters</code> are deleted</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readParameters()</code> / <code class="language-plaintext highlighter-rouge">writeParameters()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool readParameters(std::span&lt;ParameterAccess&gt; items)</code> — pipelined GAP/SAP batch</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">readGlobalParameters()</code> / <code class="language-plaintext highlighter-rouge">writeGlobalParameters()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool readGlobalParameters(std::span&lt;GlobalParameterAccess&gt; items)</code> — pipelined GGP/SGP batch, bank from the enum type</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sendCommandBatch()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool sendCommandBatch(std::span&lt;const TMCLFrame&gt; rq, std::span&lt;TMCLReply&gt; rp, size_t* completed = nullptr)</code></td>
+      <td>See source</td>
+    </tr>
   </tbody>
 </table></div>
+
+<p>See <a href="/hf-tmc9660-driver/development/docs/timing_and_throughput/">Timing and Throughput</a> for the cost of each access and the batch rules.</p>
 <h3 id="enums">
   
   
@@ -824,8 +846,28 @@ change.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">spiTransfer()</code></td>
-      <td><code class="language-plaintext highlighter-rouge">bool spiTransfer(std::array&lt;uint8_t,8&gt;&amp; tx, std::array&lt;uint8_t,8&gt;&amp; rx)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">spiTransferTMCL()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool spiTransferTMCL(std::array&lt;uint8_t,8&gt;&amp; tx, std::array&lt;uint8_t,8&gt;&amp; rx)</code> (implemented by the platform)</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">transferTMCL()</code></td>
+      <td>One access: request, NOT_READY-polled reply-request</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">transferTMCLBatch()</code></td>
+      <td>N accesses in N + 1 datagrams (idempotent requests only)</td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">setTmclTiming()</code> / <code class="language-plaintext highlighter-rouge">tmclTiming()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">TmclSpiTiming</code>: <code class="language-plaintext highlighter-rouge">frameGapUs</code>, <code class="language-plaintext highlighter-rouge">pollIntervalUs</code>, <code class="language-plaintext highlighter-rouge">pollIntervalMaxUs</code>, <code class="language-plaintext highlighter-rouge">maxPolls</code>, <code class="language-plaintext highlighter-rouge">verifyReplyOpcode</code>; <code class="language-plaintext highlighter-rouge">TmclSpiTiming::legacy()</code></td>
+      <td>See source</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tmclStats()</code> / <code class="language-plaintext highlighter-rouge">resetTmclStats()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">TmclSpiStats</code>: frames, NOT_READY re-sends, stale replies, recoveries, failures</td>
       <td>See source</td>
     </tr>
   </tbody>

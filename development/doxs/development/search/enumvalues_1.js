@@ -9,10 +9,11 @@ var searchData=
   ['br38400_6',['BR38400',['../namespacetmc9660_1_1bootcfg.html#acc006f70a14856afce87fd4c75373c77a0928fb419f40b15f0a6565f70cf5ab87',1,'tmc9660::bootcfg']]],
   ['br57600_7',['BR57600',['../namespacetmc9660_1_1bootcfg.html#acc006f70a14856afce87fd4c75373c77a653049e4fae8f106a35422954515c84b',1,'tmc9660::bootcfg']]],
   ['br9600_8',['BR9600',['../namespacetmc9660_1_1bootcfg.html#acc006f70a14856afce87fd4c75373c77ad8da8c47935c7b92d0fcfb3449ee8563',1,'tmc9660::bootcfg']]],
-  ['burn_5fprocedure_5ffailed_9',['BURN_PROCEDURE_FAILED',['../namespacetmc9660.html#a0957dd1bf437919e2b822331c9cdcb43a3bde6cdf2c72aff8bc01ad6d7291a56a',1,'tmc9660']]],
-  ['busy_10',['BUSY',['../group__TMC9660__BootloaderProtocol.html#gga9cbaf21724b4f9793c31bb96da5a98d7a802706a9238e2928077f97736854bad4',1,'tmc9660']]],
-  ['bw_5f0u55_11',['BW_0U55',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974ac889919671036bede4a376928bddf217',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
-  ['bw_5f0u75_12',['BW_0U75',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a7e78221f4a0380b314353799b654c510',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
-  ['bw_5f1u00_13',['BW_1U00',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a42b5c424131ca1a3a017a56149723a18',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
-  ['bw_5f1u35_14',['BW_1U35',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a6ece41dad47dde1c44044e4bfadcb16c',1,'tmc9660::register_mode::ADC::CSA_SETUP']]]
+  ['buffer_5fsize_9',['BUFFER_SIZE',['../structtmc9660_1_1TMC9660_1_1RamDebug.html#a5535094f27e780dc6848417cf8dcfb8fa8fd0fdafa3d0511f0d32d52893d3d774',1,'tmc9660::TMC9660::RamDebug']]],
+  ['burn_5fprocedure_5ffailed_10',['BURN_PROCEDURE_FAILED',['../namespacetmc9660.html#a0957dd1bf437919e2b822331c9cdcb43a3bde6cdf2c72aff8bc01ad6d7291a56a',1,'tmc9660']]],
+  ['busy_11',['BUSY',['../group__TMC9660__BootloaderProtocol.html#gga9cbaf21724b4f9793c31bb96da5a98d7a802706a9238e2928077f97736854bad4',1,'tmc9660']]],
+  ['bw_5f0u55_12',['BW_0U55',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974ac889919671036bede4a376928bddf217',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
+  ['bw_5f0u75_13',['BW_0U75',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a7e78221f4a0380b314353799b654c510',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
+  ['bw_5f1u00_14',['BW_1U00',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a42b5c424131ca1a3a017a56149723a18',1,'tmc9660::register_mode::ADC::CSA_SETUP']]],
+  ['bw_5f1u35_15',['BW_1U35',['../structtmc9660_1_1register__mode_1_1ADC_1_1CSA__SETUP.html#a1d7c06c5a33dce6fe053005fa8e8b974a6ece41dad47dde1c44044e4bfadcb16c',1,'tmc9660::register_mode::ADC::CSA_SETUP']]]
 ];

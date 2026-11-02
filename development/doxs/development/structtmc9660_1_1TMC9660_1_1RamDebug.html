@@ -95,7 +95,10 @@ $(function(){initNavTree('structtmc9660_1_1TMC9660_1_1RamDebug.html',''); initRe
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -109,25 +112,129 @@ $(function(){initNavTree('structtmc9660_1_1TMC9660_1_1RamDebug.html',''); initRe
 
 <p><code>#include &lt;<a class="el" href="tmc9660_8hpp_source.html">tmc9660.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html">CaptureConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full capture configuration for <a class="el" href="#a716091d819a2041bd4f40a3b4c593d64" title="Reset and configure a capture without arming it.">configure()</a>.  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">Channel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One capture or trigger source.  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html">Trigger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html" title="Trigger setup (types 5, 6 and 7).">Trigger</a> setup (types 5, 6 and 7).  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6528d37e0701494770d0c4df3263db9d" id="r_a6528d37e0701494770d0c4df3263db9d"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6528d37e0701494770d0c4df3263db9d">ChannelType</a> : uint8_t { <a class="el" href="#a6528d37e0701494770d0c4df3263db9da055c1a591abb0e8cd86dc969727bcc0b">DISABLED</a> = 0
+, <a class="el" href="#a6528d37e0701494770d0c4df3263db9daac0b8d4f1bf33fcef3950439d335fc8e">AXIS_PARAMETER</a> = 1
+, <a class="el" href="#a6528d37e0701494770d0c4df3263db9da5c52f8fe85e85e90cf92067f571cbea4">GLOBAL_PARAMETER</a> = 3
+ }</td></tr>
+<tr class="memdesc:a6528d37e0701494770d0c4df3263db9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capture/trigger channel source (MOTOR/BANK field of types 4 and 5, Table 16).  <a href="#a6528d37e0701494770d0c4df3263db9d">More...</a><br /></td></tr>
+<tr class="separator:a6528d37e0701494770d0c4df3263db9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7882c843176b929351831e9f56c5684e" id="r_a7882c843176b929351831e9f56c5684e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7882c843176b929351831e9f56c5684e">TriggerType</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#a7882c843176b929351831e9f56c5684ea01edf6954e324295426e6cb130a8036d">UNCONDITIONAL</a> = 0
+, <a class="el" href="#a7882c843176b929351831e9f56c5684eaeaa0fc808919897eabfde4839ed22e7e">RISING_EDGE_SIGNED</a> = 1
+, <a class="el" href="#a7882c843176b929351831e9f56c5684ea17d1f1e8a56b8a824299602673c44371">FALLING_EDGE_SIGNED</a> = 2
+, <a class="el" href="#a7882c843176b929351831e9f56c5684ea46f814c1ea1f00b6beb6dd7906333669">DUAL_EDGE_SIGNED</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="#a7882c843176b929351831e9f56c5684ea1c5c1dd1d35ee034ab00688469d54e8a">RISING_EDGE_UNSIGNED</a> = 4
+, <a class="el" href="#a7882c843176b929351831e9f56c5684ea141fe24ee490cbc51c97108824b12005">FALLING_EDGE_UNSIGNED</a> = 5
+, <a class="el" href="#a7882c843176b929351831e9f56c5684eaefd3a4bd1671a97c380352323badfac6">DUAL_EDGE_UNSIGNED</a> = 6
+<br />
+ }</td></tr>
+<tr class="memdesc:a7882c843176b929351831e9f56c5684e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html" title="Trigger setup (types 5, 6 and 7).">Trigger</a> condition (MOTOR/BANK field of type 7, Table 16).  <a href="#a7882c843176b929351831e9f56c5684e">More...</a><br /></td></tr>
+<tr class="separator:a7882c843176b929351831e9f56c5684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5535094f27e780dc6848417cf8dcfb8f" id="r_a5535094f27e780dc6848417cf8dcfb8f"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5535094f27e780dc6848417cf8dcfb8f">Info</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#a5535094f27e780dc6848417cf8dcfb8fa7dd85ea849c243c38ddd4ac7cf57eec1">MAX_CHANNELS</a> = 0
+, <a class="el" href="#a5535094f27e780dc6848417cf8dcfb8fa8fd0fdafa3d0511f0d32d52893d3d774">BUFFER_SIZE</a> = 1
+, <a class="el" href="#a5535094f27e780dc6848417cf8dcfb8fa1e3e433edd76f91457ea26d0ae88ec2f">FREQUENCY</a> = 2
+, <a class="el" href="#a5535094f27e780dc6848417cf8dcfb8fa959e38dde5c4ca0668a1e9d7aedf641a">CAPTURED_SAMPLES</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="#a5535094f27e780dc6848417cf8dcfb8fabb0e2e7e53627a0f5d2d78515076de05">TRIGGER_PRESCALER</a> = 4
+<br />
+ }</td></tr>
+<tr class="memdesc:a5535094f27e780dc6848417cf8dcfb8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selector for GET_INFO (VALUE field of type 10, Table 16).  <a href="#a5535094f27e780dc6848417cf8dcfb8f">More...</a><br /></td></tr>
+<tr class="separator:a5535094f27e780dc6848417cf8dcfb8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a35d9df8ac1facde131f2d2f9f70a8000" id="r_a35d9df8ac1facde131f2d2f9f70a8000"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35d9df8ac1facde131f2d2f9f70a8000">init</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">sample_count</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a35d9df8ac1facde131f2d2f9f70a8000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize and configure the RAMDebug feature (data logging).  <br /></td></tr>
+<tr class="memitem:aca126de8707d9185f27dcf801cb1963c" id="r_aca126de8707d9185f27dcf801cb1963c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca126de8707d9185f27dcf801cb1963c">reset</a> () noexcept</td></tr>
+<tr class="memdesc:aca126de8707d9185f27dcf801cb1963c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 0: reset RAMDebug and enter IDLE.  <br /></td></tr>
+<tr class="separator:aca126de8707d9185f27dcf801cb1963c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f41fa28f442b8a693a63a4339986268" id="r_a3f41fa28f442b8a693a63a4339986268"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f41fa28f442b8a693a63a4339986268">setSampleCount</a> (uint32_t totalSamples) noexcept</td></tr>
+<tr class="memdesc:a3f41fa28f442b8a693a63a4339986268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 1: total number of samples to collect (all channels).  <br /></td></tr>
+<tr class="separator:a3f41fa28f442b8a693a63a4339986268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74e24eb2855be40abe83be0d85e1e74" id="r_af74e24eb2855be40abe83be0d85e1e74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af74e24eb2855be40abe83be0d85e1e74">setPrescaler</a> (uint32_t prescaler) noexcept</td></tr>
+<tr class="memdesc:af74e24eb2855be40abe83be0d85e1e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 3: sampling divider (f = f_RAMDebug / (prescaler + 1)).  <br /></td></tr>
+<tr class="separator:af74e24eb2855be40abe83be0d85e1e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74eaba69334cca794bb0bb74a91bbfca" id="r_a74eaba69334cca794bb0bb74a91bbfca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74eaba69334cca794bb0bb74a91bbfca">addChannel</a> (const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">Channel</a> &amp;channel) noexcept</td></tr>
+<tr class="memdesc:a74eaba69334cca794bb0bb74a91bbfca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 4: append a capture channel (channel number = call order). State must be IDLE.  <br /></td></tr>
+<tr class="separator:a74eaba69334cca794bb0bb74a91bbfca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b84613426eee6b139e96cf461ce832" id="r_ab1b84613426eee6b139e96cf461ce832"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1b84613426eee6b139e96cf461ce832">setTriggerChannel</a> (const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">Channel</a> &amp;channel) noexcept</td></tr>
+<tr class="memdesc:ab1b84613426eee6b139e96cf461ce832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 5: trigger source.  <br /></td></tr>
+<tr class="separator:ab1b84613426eee6b139e96cf461ce832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c37fc6db5d74c04a36043c74d15757" id="r_a67c37fc6db5d74c04a36043c74d15757"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67c37fc6db5d74c04a36043c74d15757">setTriggerMaskShift</a> (uint32_t mask, uint8_t shift) noexcept</td></tr>
+<tr class="memdesc:a67c37fc6db5d74c04a36043c74d15757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 6: trigger mask (VALUE) and shift (MOTOR/BANK).  <br /></td></tr>
+<tr class="separator:a67c37fc6db5d74c04a36043c74d15757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b97ef4d2bd1f97badf794976ac4d656" id="r_a3b97ef4d2bd1f97badf794976ac4d656"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b97ef4d2bd1f97badf794976ac4d656">enableTrigger</a> (<a class="el" href="#a7882c843176b929351831e9f56c5684e">TriggerType</a> type, uint32_t threshold) noexcept</td></tr>
+<tr class="memdesc:a3b97ef4d2bd1f97badf794976ac4d656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 7: arm the trigger, which starts the measurement.  <br /></td></tr>
+<tr class="separator:a3b97ef4d2bd1f97badf794976ac4d656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaffd4bffb47c295e5b4b4371ca1b5a7e" id="r_aaffd4bffb47c295e5b4b4371ca1b5a7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaffd4bffb47c295e5b4b4371ca1b5a7e">getState</a> (<a class="el" href="namespacetmc9660_1_1tmcl.html#a2474e45458f71eeed1aca70b1172be1e">tmc9660::tmcl::RamDebugState</a> &amp;state) noexcept</td></tr>
+<tr class="memdesc:aaffd4bffb47c295e5b4b4371ca1b5a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 8: current state (Table 17).  <br /></td></tr>
+<tr class="separator:aaffd4bffb47c295e5b4b4371ca1b5a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f359d26655a38a69a4c4b1b418e4cd9" id="r_a1f359d26655a38a69a4c4b1b418e4cd9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f359d26655a38a69a4c4b1b418e4cd9">readSample</a> (uint32_t index, uint32_t &amp;value) noexcept</td></tr>
+<tr class="memdesc:a1f359d26655a38a69a4c4b1b418e4cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 9: one sample. Samples are interleaved by channel: index i is channel i % channels, sample i / channels. The index travels in VALUE (the 4-bit MOTOR/BANK field cannot hold up to 4096 indices; matches PyTrinamic's RAMDebug.get_samples — verify against datasheet, whose table lists MOTOR/BANK).  <br /></td></tr>
+<tr class="separator:a1f359d26655a38a69a4c4b1b418e4cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2a77866fae0b542a9aaa254275feb7" id="r_a9f2a77866fae0b542a9aaa254275feb7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f2a77866fae0b542a9aaa254275feb7">readSamples</a> (uint32_t first, std::span&lt; uint32_t &gt; out, size_t *read=nullptr) noexcept</td></tr>
+<tr class="memdesc:a9f2a77866fae0b542a9aaa254275feb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 9, pipelined: read <code>out.size()</code> consecutive samples starting at <code>first</code>.  <br /></td></tr>
+<tr class="separator:a9f2a77866fae0b542a9aaa254275feb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b11be1bce0e495fcfca953fb920d392" id="r_a5b11be1bce0e495fcfca953fb920d392"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b11be1bce0e495fcfca953fb920d392">getInfo</a> (<a class="el" href="#a5535094f27e780dc6848417cf8dcfb8f">Info</a> kind, uint32_t &amp;value) noexcept</td></tr>
+<tr class="memdesc:a5b11be1bce0e495fcfca953fb920d392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 10: general information.  <br /></td></tr>
+<tr class="separator:a5b11be1bce0e495fcfca953fb920d392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe37cdd8a128099084342dc0ab76af8e" id="r_afe37cdd8a128099084342dc0ab76af8e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe37cdd8a128099084342dc0ab76af8e">getChannelType</a> (uint8_t index, uint32_t &amp;value) noexcept</td></tr>
+<tr class="memdesc:afe37cdd8a128099084342dc0ab76af8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 11: channel type of configured channel <code>index</code> (index in MOTOR/BANK).  <br /></td></tr>
+<tr class="separator:afe37cdd8a128099084342dc0ab76af8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af923e2db3d52c2e63449ad2baeac1020" id="r_af923e2db3d52c2e63449ad2baeac1020"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af923e2db3d52c2e63449ad2baeac1020">getChannelAddress</a> (uint8_t index, uint32_t &amp;value) noexcept</td></tr>
+<tr class="memdesc:af923e2db3d52c2e63449ad2baeac1020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 12: channel address of configured channel <code>index</code> (index in MOTOR/BANK).  <br /></td></tr>
+<tr class="separator:af923e2db3d52c2e63449ad2baeac1020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cabf6eb981b28151a827b0f0415f572" id="r_a8cabf6eb981b28151a827b0f0415f572"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cabf6eb981b28151a827b0f0415f572">setPretriggerCount</a> (uint32_t totalSamples) noexcept</td></tr>
+<tr class="memdesc:a8cabf6eb981b28151a827b0f0415f572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 13: total pretrigger samples (all channels).  <br /></td></tr>
+<tr class="separator:a8cabf6eb981b28151a827b0f0415f572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1226c396bf1920f6676e4241b47109ff" id="r_a1226c396bf1920f6676e4241b47109ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1226c396bf1920f6676e4241b47109ff">getPretriggerCount</a> (uint32_t &amp;totalSamples) noexcept</td></tr>
+<tr class="memdesc:a1226c396bf1920f6676e4241b47109ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type 14: total pretrigger samples (all channels).  <br /></td></tr>
+<tr class="separator:a1226c396bf1920f6676e4241b47109ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a716091d819a2041bd4f40a3b4c593d64" id="r_a716091d819a2041bd4f40a3b4c593d64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a716091d819a2041bd4f40a3b4c593d64">configure</a> (const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html">CaptureConfig</a> &amp;config) noexcept</td></tr>
+<tr class="memdesc:a716091d819a2041bd4f40a3b4c593d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset and configure a capture without arming it.  <br /></td></tr>
+<tr class="separator:a716091d819a2041bd4f40a3b4c593d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a046a67308b6b2aab8a4b955fe68df4d3" id="r_a046a67308b6b2aab8a4b955fe68df4d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a046a67308b6b2aab8a4b955fe68df4d3">start</a> (const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html">Trigger</a> &amp;trigger) noexcept</td></tr>
+<tr class="memdesc:a046a67308b6b2aab8a4b955fe68df4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arm the trigger configured by <a class="el" href="#a716091d819a2041bd4f40a3b4c593d64" title="Reset and configure a capture without arming it.">configure()</a> (type 7).  <br /></td></tr>
+<tr class="separator:a046a67308b6b2aab8a4b955fe68df4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35d9df8ac1facde131f2d2f9f70a8000" id="r_a35d9df8ac1facde131f2d2f9f70a8000"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35d9df8ac1facde131f2d2f9f70a8000">init</a> (uint32_t sample_count) noexcept</td></tr>
+<tr class="memdesc:a35d9df8ac1facde131f2d2f9f70a8000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset and set the total sample count (types 0 and 1).  <br /></td></tr>
 <tr class="separator:a35d9df8ac1facde131f2d2f9f70a8000"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dcd72f92dfc18405960159de3d16e41" id="r_a1dcd72f92dfc18405960159de3d16e41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dcd72f92dfc18405960159de3d16e41">startCapture</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a1dcd72f92dfc18405960159de3d16e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start capturing data using RAMDebug.  <br /></td></tr>
+<tr class="memitem:a1dcd72f92dfc18405960159de3d16e41" id="r_a1dcd72f92dfc18405960159de3d16e41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dcd72f92dfc18405960159de3d16e41">startCapture</a> () noexcept</td></tr>
+<tr class="memdesc:a1dcd72f92dfc18405960159de3d16e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start an unconditional capture (type 7, UNCONDITIONAL). Earlier releases sent type 6 (SET_TRIGGER_MASK_SHIFT) here, which never started a capture.  <br /></td></tr>
 <tr class="separator:a1dcd72f92dfc18405960159de3d16e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d47d96ab727095a937ac6c8ab02cdd" id="r_a52d47d96ab727095a937ac6c8ab02cdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52d47d96ab727095a937ac6c8ab02cdd">readData</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> index, <a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">data</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a52d47d96ab727095a937ac6c8ab02cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a captured sample from RAMDebug buffer.  <br /></td></tr>
+<tr class="memitem:a52d47d96ab727095a937ac6c8ab02cdd" id="r_a52d47d96ab727095a937ac6c8ab02cdd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52d47d96ab727095a937ac6c8ab02cdd">readData</a> (uint32_t index, uint32_t &amp;data) noexcept</td></tr>
+<tr class="memdesc:a52d47d96ab727095a937ac6c8ab02cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read one sample (type 9). Earlier releases sent opcode ReadMem instead.  <br /></td></tr>
 <tr class="separator:a52d47d96ab727095a937ac6c8ab02cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a789cf67b6a273ec1fa4fcbc100ab69e3" id="r_a789cf67b6a273ec1fa4fcbc100ab69e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a789cf67b6a273ec1fa4fcbc100ab69e3">getStatus</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">is_running</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a789cf67b6a273ec1fa4fcbc100ab69e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current state of the RAM debug engine.  <br /></td></tr>
+<tr class="memitem:a789cf67b6a273ec1fa4fcbc100ab69e3" id="r_a789cf67b6a273ec1fa4fcbc100ab69e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a789cf67b6a273ec1fa4fcbc100ab69e3">getStatus</a> (bool &amp;is_running) noexcept</td></tr>
+<tr class="memdesc:a789cf67b6a273ec1fa4fcbc100ab69e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True while PRETRIGGER, TRIGGER or CAPTURE; false in IDLE and COMPLETE. Earlier releases reported COMPLETE (3) as running.  <br /></td></tr>
 <tr class="separator:a789cf67b6a273ec1fa4fcbc100ab69e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a2e84a138024ce84d49f544be0bc68c7f" id="r_a2e84a138024ce84d49f544be0bc68c7f"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e84a138024ce84d49f544be0bc68c7f">kMaxChannels</a> = 4</td></tr>
+<tr class="memdesc:a2e84a138024ce84d49f544be0bc68c7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of capture channels (reference manual: "up to four channels").  <br /></td></tr>
+<tr class="separator:a2e84a138024ce84d49f544be0bc68c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aa9ed2b575572b34c8b6bb92e4d7d289f" id="r_aa9ed2b575572b34c8b6bb92e4d7d289f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9ed2b575572b34c8b6bb92e4d7d289f">RamDebug</a> (<a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">parent</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:aa9ed2b575572b34c8b6bb92e4d7d289f" id="r_aa9ed2b575572b34c8b6bb92e4d7d289f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9ed2b575572b34c8b6bb92e4d7d289f">RamDebug</a> (<a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;parent) noexcept</td></tr>
 <tr class="separator:aa9ed2b575572b34c8b6bb92e4d7d289f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1655a2cdf8c7f0671b201133b850f8e" id="r_ac1655a2cdf8c7f0671b201133b850f8e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1655a2cdf8c7f0671b201133b850f8e">cmd</a> (<a class="el" href="namespacetmc9660_1_1tmcl.html#a879af027e0e592d603adee357202d557">tmc9660::tmcl::RamDebugType</a> type, uint8_t motor, uint32_t value, uint32_t *reply=nullptr) noexcept</td></tr>
+<tr class="separator:ac1655a2cdf8c7f0671b201133b850f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -136,26 +243,134 @@ Private Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a7a162b5b230edf1d03327269e36ce893" id="r_a7a162b5b230edf1d03327269e36ce893"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a162b5b230edf1d03327269e36ce893">TMC9660</a></td></tr>
+<tr class="memitem:a7a162b5b230edf1d03327269e36ce893" id="r_a7a162b5b230edf1d03327269e36ce893"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a162b5b230edf1d03327269e36ce893">TMC9660</a></td></tr>
 <tr class="separator:a7a162b5b230edf1d03327269e36ce893"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename CommType&gt;<br />
 struct tmc9660::TMC9660&lt; CommType &gt;::RamDebug</div><p>Subsystem for debug and data logging features. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a6528d37e0701494770d0c4df3263db9d" name="a6528d37e0701494770d0c4df3263db9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6528d37e0701494770d0c4df3263db9d">&#9670;&#160;</a></span>ChannelType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a6528d37e0701494770d0c4df3263db9d">tmc9660::TMC9660::RamDebug::ChannelType</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Capture/trigger channel source (MOTOR/BANK field of types 4 and 5, Table 16). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6528d37e0701494770d0c4df3263db9da055c1a591abb0e8cd86dc969727bcc0b" name="a6528d37e0701494770d0c4df3263db9da055c1a591abb0e8cd86dc969727bcc0b"></a>DISABLED&#160;</td><td class="fielddoc"><p><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html" title="One capture or trigger source.">Channel</a> off. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6528d37e0701494770d0c4df3263db9daac0b8d4f1bf33fcef3950439d335fc8e" name="a6528d37e0701494770d0c4df3263db9daac0b8d4f1bf33fcef3950439d335fc8e"></a>AXIS_PARAMETER&#160;</td><td class="fielddoc"><p>Axis parameter (GAP number) of one motor. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6528d37e0701494770d0c4df3263db9da5c52f8fe85e85e90cf92067f571cbea4" name="a6528d37e0701494770d0c4df3263db9da5c52f8fe85e85e90cf92067f571cbea4"></a>GLOBAL_PARAMETER&#160;</td><td class="fielddoc"><p>Global parameter of one bank. (verify against datasheet: the <a class="el" href="classtmc9660_1_1TMC9660.html" title="Main class representing a TMC9660 motor driver in Parameter Mode.">TMC9660</a> manual lists 3; generic PyTrinamic code uses 8.) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a5535094f27e780dc6848417cf8dcfb8f" name="a5535094f27e780dc6848417cf8dcfb8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5535094f27e780dc6848417cf8dcfb8f">&#9670;&#160;</a></span>Info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a5535094f27e780dc6848417cf8dcfb8f">tmc9660::TMC9660::RamDebug::Info</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Selector for GET_INFO (VALUE field of type 10, Table 16). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5535094f27e780dc6848417cf8dcfb8fa7dd85ea849c243c38ddd4ac7cf57eec1" name="a5535094f27e780dc6848417cf8dcfb8fa7dd85ea849c243c38ddd4ac7cf57eec1"></a>MAX_CHANNELS&#160;</td><td class="fielddoc"><p>Number of channels. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5535094f27e780dc6848417cf8dcfb8fa8fd0fdafa3d0511f0d32d52893d3d774" name="a5535094f27e780dc6848417cf8dcfb8fa8fd0fdafa3d0511f0d32d52893d3d774"></a>BUFFER_SIZE&#160;</td><td class="fielddoc"><p>Buffer size in samples. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5535094f27e780dc6848417cf8dcfb8fa1e3e433edd76f91457ea26d0ae88ec2f" name="a5535094f27e780dc6848417cf8dcfb8fa1e3e433edd76f91457ea26d0ae88ec2f"></a>FREQUENCY&#160;</td><td class="fielddoc"><p>RAMDebug base frequency [Hz] (≤ 25 kHz, Table 15). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5535094f27e780dc6848417cf8dcfb8fa959e38dde5c4ca0668a1e9d7aedf641a" name="a5535094f27e780dc6848417cf8dcfb8fa959e38dde5c4ca0668a1e9d7aedf641a"></a>CAPTURED_SAMPLES&#160;</td><td class="fielddoc"><p>Samples captured so far. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5535094f27e780dc6848417cf8dcfb8fabb0e2e7e53627a0f5d2d78515076de05" name="a5535094f27e780dc6848417cf8dcfb8fabb0e2e7e53627a0f5d2d78515076de05"></a>TRIGGER_PRESCALER&#160;</td><td class="fielddoc"><p>Prescaler value at the trigger event. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a7882c843176b929351831e9f56c5684e" name="a7882c843176b929351831e9f56c5684e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7882c843176b929351831e9f56c5684e">&#9670;&#160;</a></span>TriggerType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a7882c843176b929351831e9f56c5684e">tmc9660::TMC9660::RamDebug::TriggerType</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html" title="Trigger setup (types 5, 6 and 7).">Trigger</a> condition (MOTOR/BANK field of type 7, Table 16). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684ea01edf6954e324295426e6cb130a8036d" name="a7882c843176b929351831e9f56c5684ea01edf6954e324295426e6cb130a8036d"></a>UNCONDITIONAL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684eaeaa0fc808919897eabfde4839ed22e7e" name="a7882c843176b929351831e9f56c5684eaeaa0fc808919897eabfde4839ed22e7e"></a>RISING_EDGE_SIGNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684ea17d1f1e8a56b8a824299602673c44371" name="a7882c843176b929351831e9f56c5684ea17d1f1e8a56b8a824299602673c44371"></a>FALLING_EDGE_SIGNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684ea46f814c1ea1f00b6beb6dd7906333669" name="a7882c843176b929351831e9f56c5684ea46f814c1ea1f00b6beb6dd7906333669"></a>DUAL_EDGE_SIGNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684ea1c5c1dd1d35ee034ab00688469d54e8a" name="a7882c843176b929351831e9f56c5684ea1c5c1dd1d35ee034ab00688469d54e8a"></a>RISING_EDGE_UNSIGNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684ea141fe24ee490cbc51c97108824b12005" name="a7882c843176b929351831e9f56c5684ea141fe24ee490cbc51c97108824b12005"></a>FALLING_EDGE_UNSIGNED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7882c843176b929351831e9f56c5684eaefd3a4bd1671a97c380352323badfac6" name="a7882c843176b929351831e9f56c5684eaefd3a4bd1671a97c380352323badfac6"></a>DUAL_EDGE_UNSIGNED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa9ed2b575572b34c8b6bb92e4d7d289f" name="aa9ed2b575572b34c8b6bb92e4d7d289f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9ed2b575572b34c8b6bb92e4d7d289f">&#9670;&#160;</a></span>RamDebug()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::RamDebug::RamDebug </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::RamDebug::RamDebug </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
           <td></td>
@@ -171,21 +386,21 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a789cf67b6a273ec1fa4fcbc100ab69e3" name="a789cf67b6a273ec1fa4fcbc100ab69e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a789cf67b6a273ec1fa4fcbc100ab69e3">&#9670;&#160;</a></span>getStatus()</h2>
+<a id="a74eaba69334cca794bb0bb74a91bbfca" name="a74eaba69334cca794bb0bb74a91bbfca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74eaba69334cca794bb0bb74a91bbfca">&#9670;&#160;</a></span>addChannel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::RamDebug::getStatus </td>
+          <td class="memname">bool TMC9660::RamDebug::addChannel </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>is_running</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">Channel</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>channel</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -196,14 +411,297 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </table>
 </div><div class="memdoc">
 
-<p>Get the current state of the RAM debug engine. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">is_running</td><td>Will be set to true if capture is ongoing, false if stopped or idle. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the status was retrieved successfully. </dd></dl>
+<p>Type 4: append a capture channel (channel number = call order). State must be IDLE. </p>
+
+</div>
+</div>
+<a id="ac1655a2cdf8c7f0671b201133b850f8e" name="ac1655a2cdf8c7f0671b201133b850f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1655a2cdf8c7f0671b201133b850f8e">&#9670;&#160;</a></span>cmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::cmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacetmc9660_1_1tmcl.html#a879af027e0e592d603adee357202d557">tmc9660::tmcl::RamDebugType</a></td>          <td class="paramname"><span class="paramname"><em>type</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>motor</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *</td>          <td class="paramname"><span class="paramname"><em>reply</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a716091d819a2041bd4f40a3b4c593d64" name="a716091d819a2041bd4f40a3b4c593d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716091d819a2041bd4f40a3b4c593d64">&#9670;&#160;</a></span>configure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::configure </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html">CaptureConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset and configure a capture without arming it. </p>
+<p>Sends, in the vendor order (PyTrinamic RAMDebug.start_measurement): reset (0), sample count (1), prescaler (3), channels (4), pretrigger count (13), and for a conditional trigger mask/shift (6) and trigger channel (5). Arm with <a class="el" href="#a046a67308b6b2aab8a4b955fe68df4d3" title="Arm the trigger configured by configure() (type 7).">start()</a>. </p><dl class="section return"><dt>Returns</dt><dd>false on an invalid config (no channels, too many channels, zero samples, pretrigger &gt; samples, shift &gt; 15) or a TMCL error. </dd></dl>
+
+</div>
+</div>
+<a id="a3b97ef4d2bd1f97badf794976ac4d656" name="a3b97ef4d2bd1f97badf794976ac4d656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b97ef4d2bd1f97badf794976ac4d656">&#9670;&#160;</a></span>enableTrigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::enableTrigger </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7882c843176b929351831e9f56c5684e">TriggerType</a></td>          <td class="paramname"><span class="paramname"><em>type</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>threshold</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 7: arm the trigger, which starts the measurement. </p>
+
+</div>
+</div>
+<a id="af923e2db3d52c2e63449ad2baeac1020" name="af923e2db3d52c2e63449ad2baeac1020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af923e2db3d52c2e63449ad2baeac1020">&#9670;&#160;</a></span>getChannelAddress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getChannelAddress </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 12: channel address of configured channel <code>index</code> (index in MOTOR/BANK). </p>
+
+</div>
+</div>
+<a id="afe37cdd8a128099084342dc0ab76af8e" name="afe37cdd8a128099084342dc0ab76af8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe37cdd8a128099084342dc0ab76af8e">&#9670;&#160;</a></span>getChannelType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getChannelType </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 11: channel type of configured channel <code>index</code> (index in MOTOR/BANK). </p>
+
+</div>
+</div>
+<a id="a5b11be1bce0e495fcfca953fb920d392" name="a5b11be1bce0e495fcfca953fb920d392"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b11be1bce0e495fcfca953fb920d392">&#9670;&#160;</a></span>getInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a5535094f27e780dc6848417cf8dcfb8f">Info</a></td>          <td class="paramname"><span class="paramname"><em>kind</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 10: general information. </p>
+
+</div>
+</div>
+<a id="a1226c396bf1920f6676e4241b47109ff" name="a1226c396bf1920f6676e4241b47109ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1226c396bf1920f6676e4241b47109ff">&#9670;&#160;</a></span>getPretriggerCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getPretriggerCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>totalSamples</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 14: total pretrigger samples (all channels). </p>
+
+</div>
+</div>
+<a id="aaffd4bffb47c295e5b4b4371ca1b5a7e" name="aaffd4bffb47c295e5b4b4371ca1b5a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaffd4bffb47c295e5b4b4371ca1b5a7e">&#9670;&#160;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacetmc9660_1_1tmcl.html#a2474e45458f71eeed1aca70b1172be1e">tmc9660::tmcl::RamDebugState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 8: current state (Table 17). </p>
+
+</div>
+</div>
+<a id="a789cf67b6a273ec1fa4fcbc100ab69e3" name="a789cf67b6a273ec1fa4fcbc100ab69e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a789cf67b6a273ec1fa4fcbc100ab69e3">&#9670;&#160;</a></span>getStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::getStatus </td>
+          <td>(</td>
+          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>is_running</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True while PRETRIGGER, TRIGGER or CAPTURE; false in IDLE and COMPLETE. Earlier releases reported COMPLETE (3) as running. </p>
 
 </div>
 </div>
@@ -213,15 +711,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::RamDebug::init </td>
+          <td class="memname">bool TMC9660::RamDebug::init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>sample_count</em></span></td><td>)</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>sample_count</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -232,14 +730,7 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize and configure the RAMDebug feature (data logging). </p>
-<p>This sends a command to initialize the RAM debug system and reset any previous configurations. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sample_count</td><td>Number of samples to collect in the buffer. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the RAM debug was initialized properly. </dd></dl>
+<p>Reset and set the total sample count (types 0 and 1). </p>
 
 </div>
 </div>
@@ -249,20 +740,20 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::RamDebug::readData </td>
+          <td class="memname">bool TMC9660::RamDebug::readData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -272,31 +763,101 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </table>
 </div><div class="memdoc">
 
-<p>Read a captured sample from RAMDebug buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">index</td><td>Sample index to read (0-based). </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">data</td><td>Variable to store the 32-bit sample data. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the data was read successfully. </dd></dl>
+<p>Read one sample (type 9). Earlier releases sent opcode ReadMem instead. </p>
 
 </div>
 </div>
-<a id="a1dcd72f92dfc18405960159de3d16e41" name="a1dcd72f92dfc18405960159de3d16e41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dcd72f92dfc18405960159de3d16e41">&#9670;&#160;</a></span>startCapture()</h2>
+<a id="a1f359d26655a38a69a4c4b1b418e4cd9" name="a1f359d26655a38a69a4c4b1b418e4cd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f359d26655a38a69a4c4b1b418e4cd9">&#9670;&#160;</a></span>readSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::RamDebug::startCapture </td>
+          <td class="memname">bool TMC9660::RamDebug::readSample </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 9: one sample. Samples are interleaved by channel: index i is channel i % channels, sample i / channels. The index travels in VALUE (the 4-bit MOTOR/BANK field cannot hold up to 4096 indices; matches PyTrinamic's RAMDebug.get_samples — verify against datasheet, whose table lists MOTOR/BANK). </p>
+
+</div>
+</div>
+<a id="a9f2a77866fae0b542a9aaa254275feb7" name="a9f2a77866fae0b542a9aaa254275feb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2a77866fae0b542a9aaa254275feb7">&#9670;&#160;</a></span>readSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::readSamples </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>first</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; uint32_t &gt;</td>          <td class="paramname"><span class="paramname"><em>out</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *</td>          <td class="paramname"><span class="paramname"><em>read</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 9, pipelined: read <code>out.size()</code> consecutive samples starting at <code>first</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">read</td><td>Samples actually read (stops at the first non-OK reply, which the chip returns past the captured count). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if all requested samples were read. </dd></dl>
+
+</div>
+</div>
+<a id="aca126de8707d9185f27dcf801cb1963c" name="aca126de8707d9185f27dcf801cb1963c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca126de8707d9185f27dcf801cb1963c">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::reset </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -309,8 +870,215 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </table>
 </div><div class="memdoc">
 
-<p>Start capturing data using RAMDebug. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if the capture started successfully. </dd></dl>
+<p>Type 0: reset RAMDebug and enter IDLE. </p>
+
+</div>
+</div>
+<a id="af74e24eb2855be40abe83be0d85e1e74" name="af74e24eb2855be40abe83be0d85e1e74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74e24eb2855be40abe83be0d85e1e74">&#9670;&#160;</a></span>setPrescaler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::setPrescaler </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>prescaler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 3: sampling divider (f = f_RAMDebug / (prescaler + 1)). </p>
+
+</div>
+</div>
+<a id="a8cabf6eb981b28151a827b0f0415f572" name="a8cabf6eb981b28151a827b0f0415f572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cabf6eb981b28151a827b0f0415f572">&#9670;&#160;</a></span>setPretriggerCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::setPretriggerCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>totalSamples</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 13: total pretrigger samples (all channels). </p>
+
+</div>
+</div>
+<a id="a3f41fa28f442b8a693a63a4339986268" name="a3f41fa28f442b8a693a63a4339986268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f41fa28f442b8a693a63a4339986268">&#9670;&#160;</a></span>setSampleCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::setSampleCount </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>totalSamples</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 1: total number of samples to collect (all channels). </p>
+
+</div>
+</div>
+<a id="ab1b84613426eee6b139e96cf461ce832" name="ab1b84613426eee6b139e96cf461ce832"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b84613426eee6b139e96cf461ce832">&#9670;&#160;</a></span>setTriggerChannel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::setTriggerChannel </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">Channel</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>channel</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 5: trigger source. </p>
+
+</div>
+</div>
+<a id="a67c37fc6db5d74c04a36043c74d15757" name="a67c37fc6db5d74c04a36043c74d15757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67c37fc6db5d74c04a36043c74d15757">&#9670;&#160;</a></span>setTriggerMaskShift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::setTriggerMaskShift </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>mask</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>shift</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type 6: trigger mask (VALUE) and shift (MOTOR/BANK). </p>
+<p>The shift travels in the 4-bit MOTOR/BANK field of the frame, so only 0…15 can be encoded; larger shifts are rejected (verify against datasheet whether the firmware reads more bits). </p>
+
+</div>
+</div>
+<a id="a046a67308b6b2aab8a4b955fe68df4d3" name="a046a67308b6b2aab8a4b955fe68df4d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a046a67308b6b2aab8a4b955fe68df4d3">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::start </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html">Trigger</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>trigger</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arm the trigger configured by <a class="el" href="#a716091d819a2041bd4f40a3b4c593d64" title="Reset and configure a capture without arming it.">configure()</a> (type 7). </p>
+
+</div>
+</div>
+<a id="a1dcd72f92dfc18405960159de3d16e41" name="a1dcd72f92dfc18405960159de3d16e41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dcd72f92dfc18405960159de3d16e41">&#9670;&#160;</a></span>startCapture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TMC9660::RamDebug::startCapture </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start an unconditional capture (type 7, UNCONDITIONAL). Earlier releases sent type 6 (SET_TRIGGER_MASK_SHIFT) here, which never started a capture. </p>
 
 </div>
 </div>
@@ -321,13 +1089,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">friend</a> <a class="el" href="classtmc9660_1_1CommInterface.html">class</a> <a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a></td>
+          <td class="memname">friend class <a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a></td>
         </tr>
       </table>
   </td>
@@ -346,13 +1114,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a>&amp; <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::RamDebug::driver</td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a>&amp; <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::RamDebug::driver</td>
         </tr>
       </table>
   </td>
@@ -361,6 +1129,32 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e84a138024ce84d49f544be0bc68c7f" name="a2e84a138024ce84d49f544be0bc68c7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e84a138024ce84d49f544be0bc68c7f">&#9670;&#160;</a></span>kMaxChannels</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CommType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::RamDebug::kMaxChannels = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of capture channels (reference manual: "up to four channels"). </p>
 
 </div>
 </div>

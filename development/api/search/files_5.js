@@ -13,5 +13,6 @@ var searchData=
   ['tmc9660_5fparam_5fmode_5ftmcl_2ehpp_10',['tmc9660_param_mode_tmcl.hpp',['../tmc9660__param__mode__tmcl_8hpp.html',1,'']]],
   ['tmc9660_5framdebug_2ehpp_11',['tmc9660_ramDebug.hpp',['../tmc9660__ramDebug_8hpp.html',1,'']]],
   ['tmc9660_5fsys_5fctrl_2ehpp_12',['tmc9660_sys_ctrl.hpp',['../tmc9660__sys__ctrl_8hpp.html',1,'']]],
-  ['tmc9660_5funits_2ehpp_13',['tmc9660_units.hpp',['../tmc9660__units_8hpp.html',1,'']]]
+  ['tmc9660_5funits_2ehpp_13',['tmc9660_units.hpp',['../tmc9660__units_8hpp.html',1,'']]],
+  ['tmcl_5ftiming_2ecpp_14',['tmcl_timing.cpp',['../tmcl__timing_8cpp.html',1,'']]]
 ];

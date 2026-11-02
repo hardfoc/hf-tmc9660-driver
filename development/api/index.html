@@ -107,6 +107,7 @@ $(function(){initNavTree('index.html',''); initResizable(); });
 <li>Quick Start</li>
 <li>Installation</li>
 <li>API Reference</li>
+<li>Timing and Throughput</li>
 <li>Examples</li>
 <li>Documentation</li>
 <li>References</li>
@@ -161,7 +162,7 @@ $(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line"><span class="comment">// 4. Configure and start motor</span></div>
 <div class="line">driver.motorConfig.setType(tmc9660::tmcl::MotorType::BLDC_MOTOR, 7); <span class="comment">// 7 pole pairs</span></div>
 <div class="line">driver.focControl.setTargetVelocity(1000);</div>
-<div class="ttc" id="aclasstmc9660_1_1SpiCommInterface_html"><div class="ttname"><a href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a></div><div class="ttdoc">CRTP-based SPI implementation of TMC9660CommInterface.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:881</div></div>
+<div class="ttc" id="aclasstmc9660_1_1SpiCommInterface_html"><div class="ttname"><a href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a></div><div class="ttdoc">CRTP-based SPI implementation of TMC9660CommInterface.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:1016</div></div>
 <div class="ttc" id="aclasstmc9660_1_1TMC9660_html"><div class="ttname"><a href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a></div><div class="ttdoc">Main class representing a TMC9660 motor driver in Parameter Mode.</div><div class="ttdef"><b>Definition</b> tmc9660.hpp:126</div></div>
 <div class="ttc" id="aclasstmc9660_1_1TMC9660_html_a08f6d00384458a6833df71c1f856f48ca505a83f220c02df2f85c3810cd9ceb38"><div class="ttname"><a href="classtmc9660_1_1TMC9660.html#a08f6d00384458a6833df71c1f856f48ca505a83f220c02df2f85c3810cd9ceb38">tmc9660::TMC9660::BootloaderInitResult::Success</a></div><div class="ttdeci">@ Success</div><div class="ttdoc">Successfully initialized the bootloader.</div></div>
 <div class="ttc" id="anamespacetmc9660_1_1bootcfg_html_aa0dcb8bfb71ebc85f5c97a0bd9f53134a83f499a540b1323009c200d6f8cc9396"><div class="ttname"><a href="namespacetmc9660_1_1bootcfg.html#aa0dcb8bfb71ebc85f5c97a0bd9f53134a83f499a540b1323009c200d6f8cc9396">tmc9660::bootcfg::BootMode::Parameter</a></div><div class="ttdeci">@ Parameter</div><div class="ttdoc">Parameter mode - TMCL command-based motor control (recommended)</div></div>
@@ -210,18 +211,30 @@ $(function(){initNavTree('index.html',''); initResizable(); });
 </table>
 <p>For complete API documentation, see docs/api_reference.md and docs/units_and_diagnostics.md.</p>
 <h1><a class="anchor" id="autotoc_md42"></a>
+⏱️ Timing and Throughput</h1>
+<p>One TMCL access over SPI is two 64-bit datagrams: the request, then a reply-request that clocks out its reply. The vendor documents no processing time, only a NOT_READY (0xF0) status meaning "busy, this datagram was ignored, send it again". The driver therefore polls that status with a short back-off instead of waiting a fixed 1000 µs as releases up to 1.0.0 did, and <code>readParameters()</code> / <code>readGlobalParameters()</code> (and the write forms) pipeline N accesses into N + 1 datagrams.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Derived cost at 10 MHz SPI (T_f ≈ 20 µs per datagram)   </th><th class="markdownTableHeadRight">Up to 1.0.0 + hf-core handler   </th><th class="markdownTableHeadRight">Now    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">One access (chip keeps up)   </td><td class="markdownTableBodyRight">≈ 1.24 ms   </td><td class="markdownTableBodyRight">≈ 40 µs    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Six accesses   </td><td class="markdownTableBodyRight">≈ 7.4 ms   </td><td class="markdownTableBodyRight">≈ 140 µs (pipelined)   </td></tr>
+</table>
+<p>These figures are derived, not measured. The <code>tmcl_timing</code> ESP32 example measures them on hardware. Configuration (<code>TmclSpiTiming</code>), the batch rules and the full table are in docs/timing_and_throughput.md.</p>
+<h1><a class="anchor" id="autotoc_md43"></a>
 📊 Examples</h1>
 <p>For ESP32 examples, see the <a href="examples/esp32/">examples/esp32</a> directory.</p>
 <p>Detailed example walkthroughs are available in docs/examples.md.</p>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md44"></a>
 📚 Documentation</h1>
 <p>For complete documentation, see the docs directory.</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Special Features</h2>
 <ul>
 <li><b>Bootloader Initialization</b> - Critical bootloader setup guide (must be called before motor control)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 🔗 References</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -239,10 +252,10 @@ Special Features</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">C++20 language reference   </td><td class="markdownTableBodyNone"><a href="https://en.cppreference.com/w/cpp/20">https://en.cppreference.com/w/cpp/20</a>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md46"></a>
+<h1><a class="anchor" id="autotoc_md47"></a>
 🤝 Contributing</h1>
 <p>Pull requests and suggestions are welcome! Please follow the existing code style and include tests for new features.</p>
-<h1><a class="anchor" id="autotoc_md47"></a>
+<h1><a class="anchor" id="autotoc_md48"></a>
 📄 License</h1>
 <p>This project is licensed under the <b>GNU General Public License v3.0</b>. See the [LICENSE](LICENSE) file for details. </p>
 </div></div><!-- PageDoc -->

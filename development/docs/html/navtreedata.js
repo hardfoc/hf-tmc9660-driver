@@ -31,13 +31,14 @@ var NAVTREE =
     [ "🚀 Quick Start", "index.html#autotoc_md39", null ],
     [ "🔧 Installation", "index.html#autotoc_md40", null ],
     [ "📖 API Reference", "index.html#autotoc_md41", null ],
-    [ "📊 Examples", "index.html#autotoc_md42", null ],
-    [ "📚 Documentation", "index.html#autotoc_md43", [
-      [ "Special Features", "index.html#autotoc_md44", null ]
+    [ "⏱️ Timing and Throughput", "index.html#autotoc_md42", null ],
+    [ "📊 Examples", "index.html#autotoc_md43", null ],
+    [ "📚 Documentation", "index.html#autotoc_md44", [
+      [ "Special Features", "index.html#autotoc_md45", null ]
     ] ],
-    [ "🔗 References", "index.html#autotoc_md45", null ],
-    [ "🤝 Contributing", "index.html#autotoc_md46", null ],
-    [ "📄 License", "index.html#autotoc_md47", null ],
+    [ "🔗 References", "index.html#autotoc_md46", null ],
+    [ "🤝 Contributing", "index.html#autotoc_md47", null ],
+    [ "📄 License", "index.html#autotoc_md48", null ],
     [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -45,9 +46,11 @@ var NAVTREE =
         [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", null ],
         [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
         [ "Enumerations", "namespacemembers_enum.html", null ]
       ] ]
     ] ],
+    [ "Concepts", "concepts.html", "concepts" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -77,20 +80,21 @@ var NAVTREEINDEX =
 [
 "TestFramework_8h.html",
 "bootloader__config_8hpp.html#ad4c22ebdaf811c052a10a2e19efbe72ea313677ceab546a36b6a7da1431ee145a",
-"classtmc9660_1_1TMC9660.html#aabd3bfb51cb0409d988e54fc44ddc8b3",
-"globals.html",
-"namespacetmc9660_1_1bootcfg.html#a21f05428f8cb9c28a1abf4a2d891d6f4ac9402b0e8096317886aac1d0d8485907",
-"namespacetmc9660_1_1tmcl.html#a2bb01ac564c237e3029b8cad6234a9a8a756045a8d37de34ca27188466b2c0c8b",
-"namespacetmc9660_1_1units.html#a6183950de91726fe0899c2feba83ca7caafbf0897a5a83fdd873dfb032ec695d3",
-"structtmc9660_1_1ABN2Config.html#a735662204257f8a75f939d0093d2df00",
-"structtmc9660_1_1SPIEncConfig.html",
-"structtmc9660_1_1TMC9660_1_1GateDriver_1_1PowerStageProfile.html#aa84dd16ba413e6284e1afd0c1c5b7ce6",
-"structtmc9660_1_1TMC9660_1_1Script.html#a3f8ae8c6ad3566d6b36cc0052955948e",
-"structtmc9660_1_1UARTConfig.html#aef2e885154bc380094320312c4e87646",
-"structtmc9660_1_1register__mode_1_1ADC_1_1SRC__CONFIG.html#a778c9f7b3e6db16e43408534cc820552a2c2624a5059934a947d6e25fe8332ade",
-"tmc9660__comm__interface_8hpp.html#a362c0b121b0e91437836f3b91a0a0a92",
+"classtmc9660_1_1TMC9660.html#a5f24e3a5c54df6d722f169ec5b50c075",
+"functions_vars.html",
+"namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9",
+"namespacetmc9660_1_1register__mode_1_1RAMDebug.html#aa66fbc01a39f2b424a65fc4fd7dea260a0a1fff4fa33130e93e27a583242e078c",
+"namespacetmc9660_1_1tmcl.html#ac86d27120f6d1ddde749ceb3451f4957",
+"structTMC9660__TestConfig_1_1Temperature.html#aa40711c27040755e72dc824a4ac0f711",
+"structtmc9660_1_1I2CConfig.html#a8b549c6e05acbd9124edb36bead6c881",
+"structtmc9660_1_1TMC9660_1_1FeedbackSense_1_1AbnConfig.html#a493c8cde7ec50ea1524b4d7a1026c40b",
+"structtmc9660_1_1TMC9660_1_1PositionControl_1_1PositionConfig.html#a9d43356b4019de8572e55e879117f0eb",
+"structtmc9660_1_1TMC9660_1_1TorqueFluxControl.html#aca46057b8250464c1eccc3cdb9e0a538",
+"structtmc9660_1_1diagnostics_1_1MotorSnapshot.html#ae070b1e4134cdcfc8369548622c4b523",
+"structtmc9660_1_1register__mode_1_1ADC_1_1STATUS__FLAGS.html#abe0d64f44378a323a057d7804ccbf97c",
+"tmc9660__param__mode__tmcl_8hpp.html#a0e513fc222acb4c7cf6017bf32c3e611",
 "tmc9660__param__mode__tmcl_8hpp.html#a68d3e9033492bc347004797cbfd1f7d8",
-"tmc9660__param__mode__tmcl_8hpp.html#abb4477f1678bf0aafd923b58aba1f4b3"
+"tmc9660__param__mode__tmcl_8hpp.html#adba590d9f9c92f4b0db5bb72634bdc63"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

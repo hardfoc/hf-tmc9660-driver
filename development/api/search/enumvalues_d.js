@@ -14,11 +14,13 @@ var searchData=
   ['readsample_11',['ReadSample',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a3b604a638af4a71aff2dac76d827b314ad4a02b9a9dccfd4be6e5addccc14c786',1,'tmc9660::register_mode::RAMDebug']]],
   ['register_12',['Register',['../namespacetmc9660_1_1bootcfg.html#aa0dcb8bfb71ebc85f5c97a0bd9f53134a0ba7583639a274c434bbe6ef797115a4',1,'tmc9660::bootcfg']]],
   ['reserved_13',['RESERVED',['../group__TMC9660__BootloaderProtocol.html#gga59bad2e9f988290ca3c01c8b3b535caea83c7f2aa8c3ac10ed8beb75cad162827',1,'tmc9660']]],
-  ['risingedges_14',['RisingEdgeS',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aad28c1ded46a3bacc1df77deb2095627',1,'tmc9660::register_mode::RAMDebug']]],
-  ['risingedgeu_15',['RisingEdgeU',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aaa19345c20b0972b66ad656ae0b848e5',1,'tmc9660::register_mode::RAMDebug']]],
-  ['rpm_16',['Rpm',['../namespacetmc9660_1_1units.html#a6183950de91726fe0899c2feba83ca7cabfbb9bf22207805b46664fc3576f1701',1,'tmc9660::units']]],
-  ['rpmpersec_17',['RpmPerSec',['../namespacetmc9660_1_1units.html#a4e078185cb5bf4ed41eddf2e0082d9d6ac3c8308c268e3771f33e335401cd2a63',1,'tmc9660::units']]],
-  ['rps_18',['Rps',['../namespacetmc9660_1_1units.html#a6183950de91726fe0899c2feba83ca7caea66222b9c652f48ffeafe4872f662fe',1,'tmc9660::units']]],
-  ['rpspersec_19',['RpsPerSec',['../namespacetmc9660_1_1units.html#a4e078185cb5bf4ed41eddf2e0082d9d6a20b1b437ec1fc896854cd0db8514cc62',1,'tmc9660::units']]],
-  ['rst_20',['RST',['../namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7afbe78d395b48369284faffb0ce9d5c0f',1,'tmc9660']]]
+  ['rising_5fedge_5fsigned_14',['RISING_EDGE_SIGNED',['../structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684eaeaa0fc808919897eabfde4839ed22e7e',1,'tmc9660::TMC9660::RamDebug']]],
+  ['rising_5fedge_5funsigned_15',['RISING_EDGE_UNSIGNED',['../structtmc9660_1_1TMC9660_1_1RamDebug.html#a7882c843176b929351831e9f56c5684ea1c5c1dd1d35ee034ab00688469d54e8a',1,'tmc9660::TMC9660::RamDebug']]],
+  ['risingedges_16',['RisingEdgeS',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aad28c1ded46a3bacc1df77deb2095627',1,'tmc9660::register_mode::RAMDebug']]],
+  ['risingedgeu_17',['RisingEdgeU',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aaa19345c20b0972b66ad656ae0b848e5',1,'tmc9660::register_mode::RAMDebug']]],
+  ['rpm_18',['Rpm',['../namespacetmc9660_1_1units.html#a6183950de91726fe0899c2feba83ca7cabfbb9bf22207805b46664fc3576f1701',1,'tmc9660::units']]],
+  ['rpmpersec_19',['RpmPerSec',['../namespacetmc9660_1_1units.html#a4e078185cb5bf4ed41eddf2e0082d9d6ac3c8308c268e3771f33e335401cd2a63',1,'tmc9660::units']]],
+  ['rps_20',['Rps',['../namespacetmc9660_1_1units.html#a6183950de91726fe0899c2feba83ca7caea66222b9c652f48ffeafe4872f662fe',1,'tmc9660::units']]],
+  ['rpspersec_21',['RpsPerSec',['../namespacetmc9660_1_1units.html#a4e078185cb5bf4ed41eddf2e0082d9d6a20b1b437ec1fc896854cd0db8514cc62',1,'tmc9660::units']]],
+  ['rst_22',['RST',['../namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7afbe78d395b48369284faffb0ce9d5c0f',1,'tmc9660']]]
 ];

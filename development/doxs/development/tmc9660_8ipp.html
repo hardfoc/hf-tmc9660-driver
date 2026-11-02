@@ -97,7 +97,8 @@ $(function(){initNavTree('tmc9660_8ipp.html',''); initResizable(); });
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">tmc9660.ipp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -112,21 +113,31 @@ $(function(){initNavTree('tmc9660_8ipp.html',''); initResizable(); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacedetail" id="r_namespacedetail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedetail.html">detail</a></td></tr>
+<tr class="memdesc:namespacedetail"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a global parameter value using TMCL SGP command. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a91cb1298befd249d523078b636c77ce2" id="r_a91cb1298befd249d523078b636c77ce2"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="classtmc9660_1_1CommInterface.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91cb1298befd249d523078b636c77ce2">TMC9660_IMPL</a></td></tr>
+<tr class="memitem:a91cb1298befd249d523078b636c77ce2" id="r_a91cb1298befd249d523078b636c77ce2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91cb1298befd249d523078b636c77ce2">TMC9660_IMPL</a></td></tr>
 <tr class="separator:a91cb1298befd249d523078b636c77ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5225d603ff487aed35f572cd94cb713b" id="r_a5225d603ff487aed35f572cd94cb713b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5225d603ff487aed35f572cd94cb713b">calculateBootstrapCurrent_mA</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">float</a> <a class="el" href="classtmc9660_1_1CommInterface.html">gateCharge_nC</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">float</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pwmFreq_Hz</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a9fd6aea92de57ae4426fc3fb97e0a16b" id="r_a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedetail.html#a9fd6aea92de57ae4426fc3fb97e0a16b">detail::impliedGlobalBank</a> (const std::variant&lt; uint8_t, <a class="el" href="namespacetmc9660_1_1tmcl.html#aa2ec9e126f5220bb4f43740d9db18052">tmc9660::tmcl::GlobalParamBank0</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#aedbe16bb9f3a44665534abf03fd5e65b">tmc9660::tmcl::GlobalParamBank2</a>, <a class="el" href="namespacetmc9660_1_1tmcl.html#a9e6cd6c6f87c8446516e25c86ef077f3">tmc9660::tmcl::GlobalParamBank3</a> &gt; &amp;id) noexcept</td></tr>
+<tr class="memdesc:a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bank that <code>id</code> implies (0/2/3 for a bank enum, 0xFF for a raw number: any bank allowed).  <br /></td></tr>
+<tr class="separator:a9fd6aea92de57ae4426fc3fb97e0a16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5225d603ff487aed35f572cd94cb713b" id="r_a5225d603ff487aed35f572cd94cb713b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5225d603ff487aed35f572cd94cb713b">calculateBootstrapCurrent_mA</a> (float gateCharge_nC, float pwmFreq_Hz) noexcept</td></tr>
 <tr class="memdesc:a5225d603ff487aed35f572cd94cb713b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the bootstrap supply current a three-phase power stage needs.  <br /></td></tr>
 <tr class="separator:a5225d603ff487aed35f572cd94cb713b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0" id="r_afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &gt; </td></tr>
-<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacedetail.html#afd08c9a02e141a69e59f9516a95362f0">detail::tmc9660_require_step_dir</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">Driver</a> &amp;driver, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">where</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0" id="r_afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplParams" colspan="2">template&lt;typename Driver &gt; </td></tr>
+<tr class="memitem:afd08c9a02e141a69e59f9516a95362f0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacedetail.html#afd08c9a02e141a69e59f9516a95362f0">detail::tmc9660_require_step_dir</a> (Driver &amp;driver, const char *where) noexcept</td></tr>
 <tr class="separator:afd08c9a02e141a69e59f9516a95362f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a88909a306ff06541521f64480069480b" id="r_a88909a306ff06541521f64480069480b"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedetail.html#a88909a306ff06541521f64480069480b">detail::kBatchChunk</a> = 16</td></tr>
+<tr class="memdesc:a88909a306ff06541521f64480069480b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frames per pipelined chunk; bounds stack use of the batch helpers (2 × 16 × ~24 B).  <br /></td></tr>
+<tr class="separator:a88909a306ff06541521f64480069480b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Template implementation of TMC9660 motor driver methods. </p>
@@ -139,7 +150,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#<a class="el" href="classtmc9660_1_1CommInterface.html">define</a> TMC9660_IMPL</td>
+          <td class="memname">#define TMC9660_IMPL</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,14 +168,14 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">float</a> calculateBootstrapCurrent_mA </td>
+          <td class="memname">float calculateBootstrapCurrent_mA </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">float</a></td>          <td class="paramname"><span class="paramname"><em>gateCharge_nC</em>, </span></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>gateCharge_nC</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">float</a></td>          <td class="paramname"><span class="paramname"><em>pwmFreq_Hz</em></span>&#160;)</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>pwmFreq_Hz</em></span>&#160;)</td>
         </tr>
       </table>
   </td>

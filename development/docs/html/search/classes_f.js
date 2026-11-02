@@ -16,5 +16,6 @@ var searchData=
   ['stepdirconfig_13',['StepDirConfig',['../structtmc9660_1_1StepDirConfig.html',1,'tmc9660']]],
   ['stopevents_14',['StopEvents',['../structtmc9660_1_1TMC9660_1_1StopEvents.html',1,'tmc9660::TMC9660']]],
   ['stopeventsconfig_15',['StopEventsConfig',['../structtmc9660_1_1TMC9660_1_1StopEvents_1_1StopEventsConfig.html',1,'tmc9660::TMC9660::StopEvents']]],
-  ['supplyvoltage_16',['SupplyVoltage',['../structTMC9660__TestConfig_1_1SupplyVoltage.html',1,'TMC9660_TestConfig']]]
+  ['summary_16',['Summary',['../structanonymous__namespace_02tmcl__timing_8cpp_03_1_1Summary.html',1,'anonymous_namespace{tmcl_timing.cpp}']]],
+  ['supplyvoltage_17',['SupplyVoltage',['../structTMC9660__TestConfig_1_1SupplyVoltage.html',1,'TMC9660_TestConfig']]]
 ];

@@ -7,5 +7,6 @@ var dir_7751913d9073a449937b5bcfd50bf3a6 =
     [ "esp32_tmc9660_test_config.hpp", "esp32__tmc9660__test__config_8hpp.html", "esp32__tmc9660__test__config_8hpp" ],
     [ "stepper_comprehensive_test.cpp", "stepper__comprehensive__test_8cpp.html", "stepper__comprehensive__test_8cpp" ],
     [ "telemetry_comprehensive_test.cpp", "telemetry__comprehensive__test_8cpp.html", "telemetry__comprehensive__test_8cpp" ],
-    [ "TestFramework.h", "TestFramework_8h.html", "TestFramework_8h" ]
+    [ "TestFramework.h", "TestFramework_8h.html", "TestFramework_8h" ],
+    [ "tmcl_timing.cpp", "tmcl__timing_8cpp.html", "tmcl__timing_8cpp" ]
 ];

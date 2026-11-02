@@ -96,7 +96,9 @@ $(function(){initNavTree('classtmc9660_1_1SpiCommInterface.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classtmc9660_1_1SpiCommInterface-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">tmc9660::SpiCommInterface&lt; Derived &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -118,148 +120,173 @@ Inheritance diagram for tmc9660::SpiCommInterface&lt; Derived &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8174aac237ee3139acda9574acef926d" id="r_a8174aac237ee3139acda9574acef926d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8174aac237ee3139acda9574acef926d">SpiCommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">rst_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">drv_en_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">wake_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">faultn_active_level</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a8174aac237ee3139acda9574acef926d" id="r_a8174aac237ee3139acda9574acef926d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8174aac237ee3139acda9574acef926d">SpiCommInterface</a> (bool rst_active_level, bool drv_en_active_level, bool wake_active_level, bool faultn_active_level) noexcept</td></tr>
 <tr class="memdesc:a8174aac237ee3139acda9574acef926d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct SPI communication interface with pin active level configuration.  <br /></td></tr>
 <tr class="separator:a8174aac237ee3139acda9574acef926d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3487906a07a8bc769918808efead522f" id="r_a3487906a07a8bc769918808efead522f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3487906a07a8bc769918808efead522f">mode</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a3487906a07a8bc769918808efead522f" id="r_a3487906a07a8bc769918808efead522f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3487906a07a8bc769918808efead522f">mode</a> () const noexcept</td></tr>
 <tr class="memdesc:a3487906a07a8bc769918808efead522f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get communication mode (always SPI for this interface)  <br /></td></tr>
 <tr class="separator:a3487906a07a8bc769918808efead522f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dcc084ff38eb325f60923d1d745cfbf" id="r_a2dcc084ff38eb325f60923d1d745cfbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2dcc084ff38eb325f60923d1d745cfbf">spiTransferTMCL</a> (std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">tx</a>, std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">rx</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a2dcc084ff38eb325f60923d1d745cfbf" id="r_a2dcc084ff38eb325f60923d1d745cfbf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2dcc084ff38eb325f60923d1d745cfbf">spiTransferTMCL</a> (std::array&lt; uint8_t, 8 &gt; &amp;tx, std::array&lt; uint8_t, 8 &gt; &amp;rx) noexcept</td></tr>
 <tr class="memdesc:a2dcc084ff38eb325f60923d1d745cfbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-level SPI transfer for TMCL parameter mode communication.  <br /></td></tr>
 <tr class="separator:a2dcc084ff38eb325f60923d1d745cfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a054da31a2d2cc5ec3fb15732636414a6" id="r_a054da31a2d2cc5ec3fb15732636414a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a054da31a2d2cc5ec3fb15732636414a6">spiTransferBootloader</a> (std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 5 &gt; &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">tx</a>, std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 5 &gt; &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">rx</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a054da31a2d2cc5ec3fb15732636414a6" id="r_a054da31a2d2cc5ec3fb15732636414a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a054da31a2d2cc5ec3fb15732636414a6">spiTransferBootloader</a> (std::array&lt; uint8_t, 5 &gt; &amp;tx, std::array&lt; uint8_t, 5 &gt; &amp;rx) noexcept</td></tr>
 <tr class="memdesc:a054da31a2d2cc5ec3fb15732636414a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-level SPI transfer for bootloader communication.  <br /></td></tr>
 <tr class="separator:a054da31a2d2cc5ec3fb15732636414a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ec17f6eb5be8fb71aac120c0a246503" id="r_a9ec17f6eb5be8fb71aac120c0a246503"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ec17f6eb5be8fb71aac120c0a246503">gpioSet</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> <a class="el" href="classtmc9660_1_1CommInterface.html">signal</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a9ec17f6eb5be8fb71aac120c0a246503" id="r_a9ec17f6eb5be8fb71aac120c0a246503"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ec17f6eb5be8fb71aac120c0a246503">gpioSet</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> signal) noexcept</td></tr>
 <tr class="memdesc:a9ec17f6eb5be8fb71aac120c0a246503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set GPIO pin signal state for SPI interface.  <br /></td></tr>
 <tr class="separator:a9ec17f6eb5be8fb71aac120c0a246503"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af672da6054925cacc5b37048cdd365b9" id="r_af672da6054925cacc5b37048cdd365b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af672da6054925cacc5b37048cdd365b9">gpioRead</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">signal</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:af672da6054925cacc5b37048cdd365b9" id="r_af672da6054925cacc5b37048cdd365b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af672da6054925cacc5b37048cdd365b9">gpioRead</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> &amp;signal) noexcept</td></tr>
 <tr class="memdesc:af672da6054925cacc5b37048cdd365b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read GPIO pin signal state for SPI interface.  <br /></td></tr>
 <tr class="separator:af672da6054925cacc5b37048cdd365b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bfcfb6e669db97e2d12bd3b5b944a0c" id="r_a6bfcfb6e669db97e2d12bd3b5b944a0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">tx</a>, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">reply</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">first_reply</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">second_command</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a6bfcfb6e669db97e2d12bd3b5b944a0c" id="r_a6bfcfb6e669db97e2d12bd3b5b944a0c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL</a> (const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;tx, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;reply, uint8_t, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *first_reply, const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *second_command) noexcept</td></tr>
 <tr class="memdesc:a6bfcfb6e669db97e2d12bd3b5b944a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange one TMCL datagram over SPI using the two-transaction reply protocol.  <br /></td></tr>
 <tr class="separator:a6bfcfb6e669db97e2d12bd3b5b944a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5d294786ad71e0995d6b927839502b6" id="r_af5d294786ad71e0995d6b927839502b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5d294786ad71e0995d6b927839502b6">transferTMCLBatch</a> (std::span&lt; const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &gt; requests, std::span&lt; <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &gt; replies, uint8_t, size_t *completed=nullptr) noexcept</td></tr>
+<tr class="memdesc:af5d294786ad71e0995d6b927839502b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pipelined batch: <code>requests.size()</code> TMCL accesses in N + 1 SPI datagrams.  <br /></td></tr>
+<tr class="separator:af5d294786ad71e0995d6b927839502b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classtmc9660_1_1CommInterface"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classtmc9660_1_1CommInterface')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classtmc9660_1_1CommInterface.html">tmc9660::CommInterface&lt; Derived &gt;</a></td></tr>
-<tr class="memitem:a62df32975d1a83698253b196f305f3f2 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a62df32975d1a83698253b196f305f3f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a62df32975d1a83698253b196f305f3f2">CommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">rst_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">drv_en_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">wake_active_level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">faultn_active_level</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a62df32975d1a83698253b196f305f3f2 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a62df32975d1a83698253b196f305f3f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a62df32975d1a83698253b196f305f3f2">CommInterface</a> (bool rst_active_level, bool drv_en_active_level, bool wake_active_level, bool faultn_active_level) noexcept</td></tr>
 <tr class="memdesc:a62df32975d1a83698253b196f305f3f2 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct communication interface with pin active level configuration.  <br /></td></tr>
 <tr class="separator:a62df32975d1a83698253b196f305f3f2 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee31a2d12cd45cb76e99f19b301eef3e inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aee31a2d12cd45cb76e99f19b301eef3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e">mode</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:aee31a2d12cd45cb76e99f19b301eef3e inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aee31a2d12cd45cb76e99f19b301eef3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e">mode</a> () const noexcept</td></tr>
 <tr class="memdesc:aee31a2d12cd45cb76e99f19b301eef3e inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the underlying communication mode used by this interface.  <br /></td></tr>
 <tr class="separator:aee31a2d12cd45cb76e99f19b301eef3e inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a4f28c5ca1491ca429bf737b16f5053 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a8a4f28c5ca1491ca429bf737b16f5053"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a8a4f28c5ca1491ca429bf737b16f5053">transferTMCL</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">tx</a>, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">reply</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> address, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">first_reply</a>=<a class="el" href="classtmc9660_1_1CommInterface.html">nullptr</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">second_command</a>=<a class="el" href="classtmc9660_1_1CommInterface.html">nullptr</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a8a4f28c5ca1491ca429bf737b16f5053 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a8a4f28c5ca1491ca429bf737b16f5053"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a8a4f28c5ca1491ca429bf737b16f5053">transferTMCL</a> (const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;tx, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;reply, uint8_t address, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *first_reply=nullptr, const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *second_command=nullptr) noexcept</td></tr>
 <tr class="memdesc:a8a4f28c5ca1491ca429bf737b16f5053 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a full duplex TMCL transfer for parameter mode communication.  <br /></td></tr>
 <tr class="separator:a8a4f28c5ca1491ca429bf737b16f5053 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4bc9c5c9fb503a452300b96dc5585e8 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_af4bc9c5c9fb503a452300b96dc5585e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#af4bc9c5c9fb503a452300b96dc5585e8">gpioSet</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> <a class="el" href="classtmc9660_1_1CommInterface.html">signal</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:af4bc9c5c9fb503a452300b96dc5585e8 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_af4bc9c5c9fb503a452300b96dc5585e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#af4bc9c5c9fb503a452300b96dc5585e8">gpioSet</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> signal) noexcept</td></tr>
 <tr class="memdesc:af4bc9c5c9fb503a452300b96dc5585e8 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set GPIO pin signal state (output control).  <br /></td></tr>
 <tr class="separator:af4bc9c5c9fb503a452300b96dc5585e8 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921eeab4184268bc64fbf747b8afedcc inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a921eeab4184268bc64fbf747b8afedcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a921eeab4184268bc64fbf747b8afedcc">gpioRead</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">signal</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a921eeab4184268bc64fbf747b8afedcc inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a921eeab4184268bc64fbf747b8afedcc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a921eeab4184268bc64fbf747b8afedcc">gpioRead</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> &amp;signal) noexcept</td></tr>
 <tr class="memdesc:a921eeab4184268bc64fbf747b8afedcc inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read GPIO pin signal state (input state).  <br /></td></tr>
 <tr class="separator:a921eeab4184268bc64fbf747b8afedcc inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21441dc2cf2945b0450bb7988ffd3284 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a21441dc2cf2945b0450bb7988ffd3284"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a21441dc2cf2945b0450bb7988ffd3284">signalToGpioLevel</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> <a class="el" href="classtmc9660_1_1CommInterface.html">signal</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a21441dc2cf2945b0450bb7988ffd3284 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a21441dc2cf2945b0450bb7988ffd3284"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a21441dc2cf2945b0450bb7988ffd3284">signalToGpioLevel</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, <a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a> signal) const noexcept</td></tr>
 <tr class="memdesc:a21441dc2cf2945b0450bb7988ffd3284 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert signal state to physical GPIO level.  <br /></td></tr>
 <tr class="separator:a21441dc2cf2945b0450bb7988ffd3284 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a266532d1fd3ce59fedd9ba725983d303 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a266532d1fd3ce59fedd9ba725983d303"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a266532d1fd3ce59fedd9ba725983d303">gpioLevelToSignal</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">gpio_level</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a266532d1fd3ce59fedd9ba725983d303 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a266532d1fd3ce59fedd9ba725983d303"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetmc9660.html#a9b1b51512d1c9277255dbdc89eff53c9">GpioSignal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a266532d1fd3ce59fedd9ba725983d303">gpioLevelToSignal</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, bool gpio_level) const noexcept</td></tr>
 <tr class="memdesc:a266532d1fd3ce59fedd9ba725983d303 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert physical GPIO level to signal state.  <br /></td></tr>
 <tr class="separator:a266532d1fd3ce59fedd9ba725983d303 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58ad01e7757b9af0fe3c929bc5d577c7 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a58ad01e7757b9af0fe3c929bc5d577c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a58ad01e7757b9af0fe3c929bc5d577c7">gpioSetActive</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a58ad01e7757b9af0fe3c929bc5d577c7 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a58ad01e7757b9af0fe3c929bc5d577c7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a58ad01e7757b9af0fe3c929bc5d577c7">gpioSetActive</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin) noexcept</td></tr>
 <tr class="memdesc:a58ad01e7757b9af0fe3c929bc5d577c7 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set GPIO pin to active state (convenience method).  <br /></td></tr>
 <tr class="separator:a58ad01e7757b9af0fe3c929bc5d577c7 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa226476b93f630568efdfe1d25afbb97 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aa226476b93f630568efdfe1d25afbb97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aa226476b93f630568efdfe1d25afbb97">gpioSetInactive</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:aa226476b93f630568efdfe1d25afbb97 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aa226476b93f630568efdfe1d25afbb97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aa226476b93f630568efdfe1d25afbb97">gpioSetInactive</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin) noexcept</td></tr>
 <tr class="memdesc:aa226476b93f630568efdfe1d25afbb97 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set GPIO pin to inactive state (convenience method).  <br /></td></tr>
 <tr class="separator:aa226476b93f630568efdfe1d25afbb97 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b30d35bf9b154dda748fbf963e85ab9 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a0b30d35bf9b154dda748fbf963e85ab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a0b30d35bf9b154dda748fbf963e85ab9">set_pin_active_level</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">active_level</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a0b30d35bf9b154dda748fbf963e85ab9 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a0b30d35bf9b154dda748fbf963e85ab9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a0b30d35bf9b154dda748fbf963e85ab9">set_pin_active_level</a> (<a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a> pin, bool active_level) noexcept</td></tr>
 <tr class="memdesc:a0b30d35bf9b154dda748fbf963e85ab9 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the active level for a specific pin.  <br /></td></tr>
 <tr class="separator:a0b30d35bf9b154dda748fbf963e85ab9 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f5fdcbfdee344ebdba755694384b49d inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a6f5fdcbfdee344ebdba755694384b49d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a6f5fdcbfdee344ebdba755694384b49d">setSpiRetryMaxCount</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">max_retries</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a6f5fdcbfdee344ebdba755694384b49d inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set maximum number of retries for SPI_STATUS_NOT_READY responses.  <br /></td></tr>
+<tr class="memitem:a1417eda8d0c749889428de23cd77c517 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a1417eda8d0c749889428de23cd77c517"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a1417eda8d0c749889428de23cd77c517">setTmclTiming</a> (const <a class="el" href="structtmc9660_1_1TmclSpiTiming.html">TmclSpiTiming</a> &amp;timing) noexcept</td></tr>
+<tr class="memdesc:a1417eda8d0c749889428de23cd77c517 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the SPI TMCL handshake timing (gap, poll back-off, poll budget, echo check).  <br /></td></tr>
+<tr class="separator:a1417eda8d0c749889428de23cd77c517 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38049c42b7f5b93c71a8f1901f6ad799 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a38049c42b7f5b93c71a8f1901f6ad799"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structtmc9660_1_1TmclSpiTiming.html">TmclSpiTiming</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a38049c42b7f5b93c71a8f1901f6ad799">tmclTiming</a> () const noexcept</td></tr>
+<tr class="memdesc:a38049c42b7f5b93c71a8f1901f6ad799 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current SPI TMCL handshake timing.  <br /></td></tr>
+<tr class="separator:a38049c42b7f5b93c71a8f1901f6ad799 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97b6ff979d049c0b01cc80fed3269dad inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a97b6ff979d049c0b01cc80fed3269dad"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structtmc9660_1_1TmclSpiStats.html">TmclSpiStats</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a97b6ff979d049c0b01cc80fed3269dad">tmclStats</a> () const noexcept</td></tr>
+<tr class="memdesc:a97b6ff979d049c0b01cc80fed3269dad inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport counters since construction or the last <a class="el" href="classtmc9660_1_1CommInterface.html#ad6cd3c690582388be4b59edc9f9ef880">resetTmclStats()</a>.  <br /></td></tr>
+<tr class="separator:a97b6ff979d049c0b01cc80fed3269dad inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6cd3c690582388be4b59edc9f9ef880 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_ad6cd3c690582388be4b59edc9f9ef880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ad6cd3c690582388be4b59edc9f9ef880">resetTmclStats</a> () noexcept</td></tr>
+<tr class="memdesc:ad6cd3c690582388be4b59edc9f9ef880 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the transport counters.  <br /></td></tr>
+<tr class="separator:ad6cd3c690582388be4b59edc9f9ef880 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f5fdcbfdee344ebdba755694384b49d inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a6f5fdcbfdee344ebdba755694384b49d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a6f5fdcbfdee344ebdba755694384b49d">setSpiRetryMaxCount</a> (uint8_t max_retries) noexcept</td></tr>
+<tr class="memdesc:a6f5fdcbfdee344ebdba755694384b49d inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the maximum number of re-sends while the reply is not ready.  <br /></td></tr>
 <tr class="separator:a6f5fdcbfdee344ebdba755694384b49d inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a965e2e596ad52dc68e38b85b2ec6c5ba inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a965e2e596ad52dc68e38b85b2ec6c5ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a965e2e596ad52dc68e38b85b2ec6c5ba">getSpiRetryMaxCount</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a965e2e596ad52dc68e38b85b2ec6c5ba inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current maximum retry count for SPI_STATUS_NOT_READY.  <br /></td></tr>
+<tr class="memitem:a965e2e596ad52dc68e38b85b2ec6c5ba inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a965e2e596ad52dc68e38b85b2ec6c5ba"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a965e2e596ad52dc68e38b85b2ec6c5ba">getSpiRetryMaxCount</a> () const noexcept</td></tr>
+<tr class="memdesc:a965e2e596ad52dc68e38b85b2ec6c5ba inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current re-send budget (<a class="el" href="structtmc9660_1_1TmclSpiTiming.html#ab409a1d9c6f3c1752644f5fc2da1b024">TmclSpiTiming::maxPolls</a>, saturated to 255).  <br /></td></tr>
 <tr class="separator:a965e2e596ad52dc68e38b85b2ec6c5ba inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64198acf0b936dce4eda6de0d4d885c6 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a64198acf0b936dce4eda6de0d4d885c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a64198acf0b936dce4eda6de0d4d885c6">setSpiRetryInterval</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">interval_us</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a64198acf0b936dce4eda6de0d4d885c6 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set delay interval between retry attempts for SPI_STATUS_NOT_READY.  <br /></td></tr>
+<tr class="memitem:a64198acf0b936dce4eda6de0d4d885c6 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a64198acf0b936dce4eda6de0d4d885c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a64198acf0b936dce4eda6de0d4d885c6">setSpiRetryInterval</a> (uint32_t interval_us) noexcept</td></tr>
+<tr class="memdesc:a64198acf0b936dce4eda6de0d4d885c6 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a fixed wait between re-sends while the reply is not ready.  <br /></td></tr>
 <tr class="separator:a64198acf0b936dce4eda6de0d4d885c6 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a724c8695616a965174c30bf2c7ad383c inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a724c8695616a965174c30bf2c7ad383c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a724c8695616a965174c30bf2c7ad383c">getSpiRetryInterval</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
-<tr class="memdesc:a724c8695616a965174c30bf2c7ad383c inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current retry interval for SPI_STATUS_NOT_READY.  <br /></td></tr>
+<tr class="memitem:a724c8695616a965174c30bf2c7ad383c inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a724c8695616a965174c30bf2c7ad383c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a724c8695616a965174c30bf2c7ad383c">getSpiRetryInterval</a> () const noexcept</td></tr>
+<tr class="memdesc:a724c8695616a965174c30bf2c7ad383c inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">First re-send wait (<a class="el" href="structtmc9660_1_1TmclSpiTiming.html#ae2d153d27648677e93216b3e7349039f">TmclSpiTiming::pollIntervalUs</a>).  <br /></td></tr>
 <tr class="separator:a724c8695616a965174c30bf2c7ad383c inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebd04981482ccfbd8f0ad8aef63cd063 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aebd04981482ccfbd8f0ad8aef63cd063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aebd04981482ccfbd8f0ad8aef63cd063">delayMs</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">ms</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:aebd04981482ccfbd8f0ad8aef63cd063 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_aebd04981482ccfbd8f0ad8aef63cd063"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#aebd04981482ccfbd8f0ad8aef63cd063">delayMs</a> (uint32_t ms) noexcept</td></tr>
 <tr class="memdesc:aebd04981482ccfbd8f0ad8aef63cd063 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delay execution for specified milliseconds.  <br /></td></tr>
 <tr class="separator:aebd04981482ccfbd8f0ad8aef63cd063 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f128d65e0a2f25b7100781376a56e95 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a9f128d65e0a2f25b7100781376a56e95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a9f128d65e0a2f25b7100781376a56e95">delayUs</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">us</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a9f128d65e0a2f25b7100781376a56e95 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a9f128d65e0a2f25b7100781376a56e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a9f128d65e0a2f25b7100781376a56e95">delayUs</a> (uint32_t us) noexcept</td></tr>
 <tr class="memdesc:a9f128d65e0a2f25b7100781376a56e95 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delay execution for specified microseconds.  <br /></td></tr>
 <tr class="separator:a9f128d65e0a2f25b7100781376a56e95 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19353276e3e4543d826a15cd6a714947 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a19353276e3e4543d826a15cd6a714947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a19353276e3e4543d826a15cd6a714947">logDebug</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">int</a> <a class="el" href="classtmc9660_1_1CommInterface.html">level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *tag, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">format</a>,...) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a19353276e3e4543d826a15cd6a714947 inherit pub_methods_classtmc9660_1_1CommInterface" id="r_a19353276e3e4543d826a15cd6a714947"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a19353276e3e4543d826a15cd6a714947">logDebug</a> (int level, const char *tag, const char *format,...) noexcept</td></tr>
 <tr class="memdesc:a19353276e3e4543d826a15cd6a714947 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public debug logging wrapper for external classes.  <br /></td></tr>
 <tr class="separator:a19353276e3e4543d826a15cd6a714947 inherit pub_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a927f1278b21c5e35b904118b5e0fcba9" id="r_a927f1278b21c5e35b904118b5e0fcba9"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a927f1278b21c5e35b904118b5e0fcba9">kReplyRequestOpcode</a> = 0xFFU</td></tr>
+<tr class="memdesc:a927f1278b21c5e35b904118b5e0fcba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opcode of the reply-request datagram (<code>FF 00 00 00 00 00 00 FF</code>); see <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a>.  <br /></td></tr>
+<tr class="separator:a927f1278b21c5e35b904118b5e0fcba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9808bf570e6071b68d4476905c927497" id="r_a9808bf570e6071b68d4476905c927497"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9808bf570e6071b68d4476905c927497">~SpiCommInterface</a> ()=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:a9808bf570e6071b68d4476905c927497" id="r_a9808bf570e6071b68d4476905c927497"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9808bf570e6071b68d4476905c927497">~SpiCommInterface</a> ()=default</td></tr>
 <tr class="memdesc:a9808bf570e6071b68d4476905c927497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protected destructor.  <br /></td></tr>
 <tr class="separator:a9808bf570e6071b68d4476905c927497"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921f3951acbf7bd8c3ab5c95f37d1d5d" id="r_a921f3951acbf7bd8c3ab5c95f37d1d5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921f3951acbf7bd8c3ab5c95f37d1d5d">SpiCommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">delete</a></td></tr>
+<tr class="memitem:a921f3951acbf7bd8c3ab5c95f37d1d5d" id="r_a921f3951acbf7bd8c3ab5c95f37d1d5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a921f3951acbf7bd8c3ab5c95f37d1d5d">SpiCommInterface</a> (const <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;)=delete</td></tr>
 <tr class="separator:a921f3951acbf7bd8c3ab5c95f37d1d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a170072e9d0e424a25a0f96d76332c201" id="r_a170072e9d0e424a25a0f96d76332c201"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a170072e9d0e424a25a0f96d76332c201">operator=</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">delete</a></td></tr>
+<tr class="memitem:a170072e9d0e424a25a0f96d76332c201" id="r_a170072e9d0e424a25a0f96d76332c201"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a170072e9d0e424a25a0f96d76332c201">operator=</a> (const <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;)=delete</td></tr>
 <tr class="separator:a170072e9d0e424a25a0f96d76332c201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add6d3798f0c2732b2eaebb9c39d85eb4" id="r_add6d3798f0c2732b2eaebb9c39d85eb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add6d3798f0c2732b2eaebb9c39d85eb4">SpiCommInterface</a> (<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:add6d3798f0c2732b2eaebb9c39d85eb4" id="r_add6d3798f0c2732b2eaebb9c39d85eb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add6d3798f0c2732b2eaebb9c39d85eb4">SpiCommInterface</a> (<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:add6d3798f0c2732b2eaebb9c39d85eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9664652d430ba1aeb1ad5e269f133e81" id="r_a9664652d430ba1aeb1ad5e269f133e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9664652d430ba1aeb1ad5e269f133e81">operator=</a> (<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:a9664652d430ba1aeb1ad5e269f133e81" id="r_a9664652d430ba1aeb1ad5e269f133e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9664652d430ba1aeb1ad5e269f133e81">operator=</a> (<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:a9664652d430ba1aeb1ad5e269f133e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classtmc9660_1_1CommInterface"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classtmc9660_1_1CommInterface')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classtmc9660_1_1CommInterface.html">tmc9660::CommInterface&lt; Derived &gt;</a></td></tr>
-<tr class="memitem:ab4078bf95d362bc604c6541a9b2dc347 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_ab4078bf95d362bc604c6541a9b2dc347"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347">debugLog</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">int</a> <a class="el" href="classtmc9660_1_1CommInterface.html">level</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *tag, <a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *<a class="el" href="classtmc9660_1_1CommInterface.html">format</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">va_list</a> <a class="el" href="classtmc9660_1_1CommInterface.html">args</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:ab4078bf95d362bc604c6541a9b2dc347 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_ab4078bf95d362bc604c6541a9b2dc347"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347">debugLog</a> (int level, const char *tag, const char *format, va_list args) noexcept</td></tr>
 <tr class="memdesc:ab4078bf95d362bc604c6541a9b2dc347 inherit pro_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug logging function for detailed debugging information.  <br /></td></tr>
 <tr class="separator:ab4078bf95d362bc604c6541a9b2dc347 inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a343f57177cf19dd33422efc344f81e3b inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a343f57177cf19dd33422efc344f81e3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a343f57177cf19dd33422efc344f81e3b">~CommInterface</a> ()=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:a343f57177cf19dd33422efc344f81e3b inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a343f57177cf19dd33422efc344f81e3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a343f57177cf19dd33422efc344f81e3b">~CommInterface</a> ()=default</td></tr>
 <tr class="memdesc:a343f57177cf19dd33422efc344f81e3b inherit pro_methods_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protected destructor.  <br /></td></tr>
 <tr class="separator:a343f57177cf19dd33422efc344f81e3b inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49ba762c13fc545a82955b2cf1899bd9 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a49ba762c13fc545a82955b2cf1899bd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a49ba762c13fc545a82955b2cf1899bd9">CommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">delete</a></td></tr>
+<tr class="memitem:a49ba762c13fc545a82955b2cf1899bd9 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a49ba762c13fc545a82955b2cf1899bd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a49ba762c13fc545a82955b2cf1899bd9">CommInterface</a> (const <a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;)=delete</td></tr>
 <tr class="separator:a49ba762c13fc545a82955b2cf1899bd9 inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad169b586f91b77ed8653f78fb2db2615 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_ad169b586f91b77ed8653f78fb2db2615"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ad169b586f91b77ed8653f78fb2db2615">operator=</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">delete</a></td></tr>
+<tr class="memitem:ad169b586f91b77ed8653f78fb2db2615 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_ad169b586f91b77ed8653f78fb2db2615"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ad169b586f91b77ed8653f78fb2db2615">operator=</a> (const <a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;)=delete</td></tr>
 <tr class="separator:ad169b586f91b77ed8653f78fb2db2615 inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d122a708ab01e15f0f2d42bf43c8733 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a8d122a708ab01e15f0f2d42bf43c8733"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a8d122a708ab01e15f0f2d42bf43c8733">CommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:a8d122a708ab01e15f0f2d42bf43c8733 inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a8d122a708ab01e15f0f2d42bf43c8733"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a8d122a708ab01e15f0f2d42bf43c8733">CommInterface</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:a8d122a708ab01e15f0f2d42bf43c8733 inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87ecfdf46af01674e6931cadacb4955c inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a87ecfdf46af01674e6931cadacb4955c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a87ecfdf46af01674e6931cadacb4955c">operator=</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&amp;)=<a class="el" href="classtmc9660_1_1CommInterface.html">default</a></td></tr>
+<tr class="memitem:a87ecfdf46af01674e6931cadacb4955c inherit pro_methods_classtmc9660_1_1CommInterface" id="r_a87ecfdf46af01674e6931cadacb4955c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a87ecfdf46af01674e6931cadacb4955c">operator=</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">CommInterface</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:a87ecfdf46af01674e6931cadacb4955c inherit pro_methods_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af1fad6294963767da924d72a2e41b5ea" id="r_af1fad6294963767da924d72a2e41b5ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1fad6294963767da924d72a2e41b5ea">sendFrame</a> (std::array&lt; uint8_t, 8 &gt; &amp;tx, std::array&lt; uint8_t, 8 &gt; &amp;rx) noexcept</td></tr>
+<tr class="memdesc:af1fad6294963767da924d72a2e41b5ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">One datagram, counted.  <br /></td></tr>
+<tr class="separator:af1fad6294963767da924d72a2e41b5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac074148259bec8f5c76d148348bdac07" id="r_ac074148259bec8f5c76d148348bdac07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac074148259bec8f5c76d148348bdac07">sendUntilAccepted</a> (std::array&lt; uint8_t, 8 &gt; &amp;tx, std::array&lt; uint8_t, 8 &gt; &amp;rx) noexcept</td></tr>
+<tr class="memdesc:ac074148259bec8f5c76d148348bdac07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send <code>tx</code> and re-send it while the chip answers NOT_READY (which means it ignored <code>tx</code>).  <br /></td></tr>
+<tr class="separator:ac074148259bec8f5c76d148348bdac07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e95b9ecbd7b59c0432cd1e4daf2a38b" id="r_a4e95b9ecbd7b59c0432cd1e4daf2a38b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e95b9ecbd7b59c0432cd1e4daf2a38b">exchangeSingle</a> (const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;tx, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;reply, <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *first_reply, const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *second_command) noexcept</td></tr>
+<tr class="memdesc:a4e95b9ecbd7b59c0432cd1e4daf2a38b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Body of <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a> without the access counter (also used for batch recovery).  <br /></td></tr>
+<tr class="separator:a4e95b9ecbd7b59c0432cd1e4daf2a38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classtmc9660_1_1CommInterface"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classtmc9660_1_1CommInterface')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classtmc9660_1_1CommInterface.html">tmc9660::CommInterface&lt; Derived &gt;</a></td></tr>
-<tr class="memitem:acd50e69fd62ba685cc7f96a2d158b7a5 inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_acd50e69fd62ba685cc7f96a2d158b7a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#acd50e69fd62ba685cc7f96a2d158b7a5">pinActiveLevels_</a> [4]</td></tr>
+<tr class="memitem:acd50e69fd62ba685cc7f96a2d158b7a5 inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_acd50e69fd62ba685cc7f96a2d158b7a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#acd50e69fd62ba685cc7f96a2d158b7a5">pinActiveLevels_</a> [4]</td></tr>
 <tr class="memdesc:acd50e69fd62ba685cc7f96a2d158b7a5 inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin active level configuration storage.  <br /></td></tr>
 <tr class="separator:acd50e69fd62ba685cc7f96a2d158b7a5 inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a204b98135f94ca969816431e0a844ad0 inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_a204b98135f94ca969816431e0a844ad0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a204b98135f94ca969816431e0a844ad0">spiRetryMaxCount_</a> = 50</td></tr>
-<tr class="memdesc:a204b98135f94ca969816431e0a844ad0 inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of retries for SPI_STATUS_NOT_READY responses.  <br /></td></tr>
-<tr class="separator:a204b98135f94ca969816431e0a844ad0 inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e3912e0443ea5bc8e50c0ba9f947c4c inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_a8e3912e0443ea5bc8e50c0ba9f947c4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a8e3912e0443ea5bc8e50c0ba9f947c4c">spiRetryIntervalUs_</a> = 200</td></tr>
-<tr class="memdesc:a8e3912e0443ea5bc8e50c0ba9f947c4c inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delay interval in microseconds between retry attempts.  <br /></td></tr>
-<tr class="separator:a8e3912e0443ea5bc8e50c0ba9f947c4c inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20efa369bdc8bedfa3964beb581efcd inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_ae20efa369bdc8bedfa3964beb581efcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtmc9660_1_1TmclSpiTiming.html">TmclSpiTiming</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#ae20efa369bdc8bedfa3964beb581efcd">tmclTiming_</a> {}</td></tr>
+<tr class="memdesc:ae20efa369bdc8bedfa3964beb581efcd inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI handshake timing.  <br /></td></tr>
+<tr class="separator:ae20efa369bdc8bedfa3964beb581efcd inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a7f1543f35eaac647d2ef0fcac5aaaa inherit pro_attribs_classtmc9660_1_1CommInterface" id="r_a2a7f1543f35eaac647d2ef0fcac5aaaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtmc9660_1_1TmclSpiStats.html">TmclSpiStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtmc9660_1_1CommInterface.html#a2a7f1543f35eaac647d2ef0fcac5aaaa">tmclStats_</a> {}</td></tr>
+<tr class="memdesc:a2a7f1543f35eaac647d2ef0fcac5aaaa inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport counters (see <a class="el" href="classtmc9660_1_1CommInterface.html#a97b6ff979d049c0b01cc80fed3269dad">tmclStats()</a>).  <br /></td></tr>
+<tr class="separator:a2a7f1543f35eaac647d2ef0fcac5aaaa inherit pro_attribs_classtmc9660_1_1CommInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Derived&gt;<br />
 class tmc9660::SpiCommInterface&lt; Derived &gt;</div><p>CRTP-based SPI implementation of TMC9660CommInterface. </p>
 <p>Uses a 4-wire SPI bus (mode 3) to exchange 64-bit datagrams (8 bytes). Data is sent MSB-first, big-endian. Replies match the previous command; initial reply uses FIRST_CMD status.</p>
 <p>This template class uses CRTP for compile-time polymorphism, providing zero runtime overhead.</p>
-<p>Example usage: </p><div class="fragment"><div class="line"><span class="keyword">class </span><a class="code hl_class" href="classtmc9660_1_1CommInterface.html">MySPI</a> : <span class="keyword">public</span> <a class="code hl_class" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt;MySPI&gt; {</div>
+<p>Example usage: </p><div class="fragment"><div class="line"><span class="keyword">class </span>MySPI : <span class="keyword">public</span> <a class="code hl_class" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt;MySPI&gt; {</div>
 <div class="line"><span class="keyword">public</span>:</div>
-<div class="line">  <a class="code hl_enumeration" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e">mode</a>() <a class="code hl_class" href="classtmc9660_1_1CommInterface.html">const</a> <a class="code hl_class" href="classtmc9660_1_1CommInterface.html">noexcept</a> { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14a33dc5312b091968f5a120c2484d40df8">CommMode::SPI</a>; }</div>
+<div class="line">  <a class="code hl_enumeration" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a> mode() const noexcept { <span class="keywordflow">return</span> CommMode::SPI; }</div>
 <div class="line">  <span class="keywordtype">bool</span> spiTransferTMCL(...) { ... }</div>
 <div class="line">  <span class="keywordtype">bool</span> spiTransferBootloader(...) { ... }</div>
-<div class="line">  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#af4bc9c5c9fb503a452300b96dc5585e8">gpioSet</a>(...) { ... }</div>
-<div class="line">  <span class="keywordtype">bool</span> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#a921eeab4184268bc64fbf747b8afedcc">gpioRead</a>(...) { ... }</div>
-<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347">debugLog</a>(...) { ... }</div>
-<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#aebd04981482ccfbd8f0ad8aef63cd063">delayMs</a>(...) { ... }</div>
-<div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classtmc9660_1_1CommInterface.html#a9f128d65e0a2f25b7100781376a56e95">delayUs</a>(...) { ... }</div>
+<div class="line">  <span class="keywordtype">bool</span> gpioSet(...) { ... }</div>
+<div class="line">  <span class="keywordtype">bool</span> gpioRead(...) { ... }</div>
+<div class="line">  <span class="keywordtype">void</span> debugLog(...) { ... }</div>
+<div class="line">  <span class="keywordtype">void</span> delayMs(...) { ... }</div>
+<div class="line">  <span class="keywordtype">void</span> delayUs(...) { ... }</div>
 <div class="line">};</div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html">tmc9660::CommInterface</a></div><div class="ttdoc">SPI status codes as per TMC9660 Parameter Mode.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:552</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_a921eeab4184268bc64fbf747b8afedcc"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#a921eeab4184268bc64fbf747b8afedcc">tmc9660::CommInterface::gpioRead</a></div><div class="ttdeci">bool gpioRead(TMC9660CtrlPin pin, GpioSignal &amp;signal) noexcept</div><div class="ttdoc">Read GPIO pin signal state (input state).</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:626</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_a9f128d65e0a2f25b7100781376a56e95"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#a9f128d65e0a2f25b7100781376a56e95">tmc9660::CommInterface::delayUs</a></div><div class="ttdeci">void delayUs(uint32_t us) noexcept</div><div class="ttdoc">Delay execution for specified microseconds.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:802</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_ab4078bf95d362bc604c6541a9b2dc347"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#ab4078bf95d362bc604c6541a9b2dc347">tmc9660::CommInterface::debugLog</a></div><div class="ttdeci">void debugLog(int level, const char *tag, const char *format, va_list args) noexcept</div><div class="ttdoc">Debug logging function for detailed debugging information.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:779</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_aebd04981482ccfbd8f0ad8aef63cd063"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#aebd04981482ccfbd8f0ad8aef63cd063">tmc9660::CommInterface::delayMs</a></div><div class="ttdeci">void delayMs(uint32_t ms) noexcept</div><div class="ttdoc">Delay execution for specified milliseconds.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:790</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_aee31a2d12cd45cb76e99f19b301eef3e"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e">tmc9660::CommInterface::mode</a></div><div class="ttdeci">CommMode mode() const noexcept</div><div class="ttdoc">Get the underlying communication mode used by this interface.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:574</div></div>
-<div class="ttc" id="aclasstmc9660_1_1CommInterface_html_af4bc9c5c9fb503a452300b96dc5585e8"><div class="ttname"><a href="classtmc9660_1_1CommInterface.html#af4bc9c5c9fb503a452300b96dc5585e8">tmc9660::CommInterface::gpioSet</a></div><div class="ttdeci">bool gpioSet(TMC9660CtrlPin pin, GpioSignal signal) noexcept</div><div class="ttdoc">Set GPIO pin signal state (output control).</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:611</div></div>
-<div class="ttc" id="aclasstmc9660_1_1SpiCommInterface_html"><div class="ttname"><a href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a></div><div class="ttdoc">CRTP-based SPI implementation of TMC9660CommInterface.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:881</div></div>
-<div class="ttc" id="anamespacetmc9660_html_a8b383411946ce7705569a4708d8bac14"><div class="ttname"><a href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">tmc9660::CommMode</a></div><div class="ttdeci">CommMode</div><div class="ttdoc">Supported physical communication modes for TMC9660.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:138</div></div>
-<div class="ttc" id="anamespacetmc9660_html_a8b383411946ce7705569a4708d8bac14a33dc5312b091968f5a120c2484d40df8"><div class="ttname"><a href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14a33dc5312b091968f5a120c2484d40df8">tmc9660::CommMode::SPI</a></div><div class="ttdeci">@ SPI</div><div class="ttdoc">SPI (Serial Peripheral Interface) mode - 4-wire synchronous communication.</div></div>
+<div class="ttc" id="aclasstmc9660_1_1SpiCommInterface_html"><div class="ttname"><a href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a></div><div class="ttdoc">CRTP-based SPI implementation of TMC9660CommInterface.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:1016</div></div>
+<div class="ttc" id="anamespacetmc9660_html_a8b383411946ce7705569a4708d8bac14"><div class="ttname"><a href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">tmc9660::CommMode</a></div><div class="ttdeci">CommMode</div><div class="ttdoc">Supported physical communication modes for TMC9660.</div><div class="ttdef"><b>Definition</b> tmc9660_comm_interface.hpp:139</div></div>
 </div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Derived</td><td>The derived class type (CRTP pattern) </td></tr>
@@ -273,30 +300,30 @@ class tmc9660::SpiCommInterface&lt; Derived &gt;</div><p>CRTP-based SPI implemen
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::SpiCommInterface </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::SpiCommInterface </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>rst_active_level</em>, </span></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>rst_active_level</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>drv_en_active_level</em>, </span></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>drv_en_active_level</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>wake_active_level</em>, </span></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>wake_active_level</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>faultn_active_level</em></span>&#160;)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>faultn_active_level</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -325,13 +352,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::~<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::~<a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -355,15 +382,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::SpiCommInterface </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::SpiCommInterface </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; Derived &gt; &amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -382,15 +409,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::SpiCommInterface </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::SpiCommInterface </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; Derived &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -404,19 +431,62 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4e95b9ecbd7b59c0432cd1e4daf2a38b" name="a4e95b9ecbd7b59c0432cd1e4daf2a38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e95b9ecbd7b59c0432cd1e4daf2a38b">&#9670;&#160;</a></span>exchangeSingle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::exchangeSingle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>reply</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> *</td>          <td class="paramname"><span class="paramname"><em>first_reply</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *</td>          <td class="paramname"><span class="paramname"><em>second_command</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Body of <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a> without the access counter (also used for batch recovery). </p>
+
+</div>
+</div>
 <a id="af672da6054925cacc5b37048cdd365b9" name="af672da6054925cacc5b37048cdd365b9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af672da6054925cacc5b37048cdd365b9">&#9670;&#160;</a></span>gpioRead()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::gpioRead </td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::gpioRead </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
@@ -451,13 +521,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::gpioSet </td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::gpioSet </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacetmc9660.html#a6c99d37edc8b04530ba5fb2c40923ed7">TMC9660CtrlPin</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
@@ -492,13 +562,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::mode </td>
+          <td class="memname"><a class="el" href="namespacetmc9660.html#a8b383411946ce7705569a4708d8bac14">CommMode</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::mode </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -522,15 +592,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp; <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;<a class="el" href="classtmc9660_1_1CommInterface.html#a62df32975d1a83698253b196f305f3f2">::operator</a>= </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp; <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; Derived &gt; &amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -549,15 +619,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp; <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;<a class="el" href="classtmc9660_1_1CommInterface.html#a62df32975d1a83698253b196f305f3f2">::operator</a>= </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a> &amp; <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classtmc9660_1_1SpiCommInterface.html">SpiCommInterface</a>&lt; Derived &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -570,26 +640,92 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 
 </div>
 </div>
+<a id="af1fad6294963767da924d72a2e41b5ea" name="af1fad6294963767da924d72a2e41b5ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1fad6294963767da924d72a2e41b5ea">&#9670;&#160;</a></span>sendFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::sendFrame </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>One datagram, counted. </p>
+
+</div>
+</div>
+<a id="ac074148259bec8f5c76d148348bdac07" name="ac074148259bec8f5c76d148348bdac07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac074148259bec8f5c76d148348bdac07">&#9670;&#160;</a></span>sendUntilAccepted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::sendUntilAccepted </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Send <code>tx</code> and re-send it while the chip answers NOT_READY (which means it ignored <code>tx</code>). </p>
+
+</div>
+</div>
 <a id="a054da31a2d2cc5ec3fb15732636414a6" name="a054da31a2d2cc5ec3fb15732636414a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a054da31a2d2cc5ec3fb15732636414a6">&#9670;&#160;</a></span>spiTransferBootloader()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::spiTransferBootloader </td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::spiTransferBootloader </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 5 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+          <td class="paramtype">std::array&lt; uint8_t, 5 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 5 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
+          <td class="paramtype">std::array&lt; uint8_t, 5 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -622,20 +758,20 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::spiTransferTMCL </td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::spiTransferTMCL </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a>, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
+          <td class="paramtype">std::array&lt; uint8_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rx</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -664,15 +800,15 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt; </div>
+template&lt;typename Derived &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">Derived</a> &gt;::transferTMCL </td>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::transferTMCL </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>tx</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -682,7 +818,7 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname">, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname">, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -692,7 +828,7 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *</td>          <td class="paramname"><span class="paramname"><em>second_command</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> *</td>          <td class="paramname"><span class="paramname"><em>second_command</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -705,23 +841,110 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <p>Exchange one TMCL datagram over SPI using the two-transaction reply protocol. </p>
 <p>Parameter-mode SPI is pipelined: the reply to a command is not clocked out during that command's own transaction, but during the <em>next</em> one. A single logical request therefore costs two 8-byte transactions:</p>
 <ol type="1">
-<li><b>Transaction 1</b> clocks out <code>tx</code>. The bytes received back belong to whatever command preceded it, and are surfaced through <code>first_reply</code>.</li>
+<li><b>Transaction 1</b> clocks out <code>tx</code>. The bytes received back belong to whatever command preceded it, and are surfaced through <code>first_reply</code>. If they carry <code>NOT_READY</code>, the chip ignored <code>tx</code> (reference manual, SPI section), so <code>tx</code> is re-sent; this cannot duplicate a write because the ignored copy was never executed.</li>
 <li><b>Transaction 2</b> clocks a <em>reply-request</em> frame to shift out the reply to <code>tx</code>. Unless <code>second_command</code> is supplied this is opcode <code>0xFF</code> with all other fields zero (wire bytes <code>FF 00 .. 00 FF</code>), matching ADI's <code>tmc9660_param_sendCommand_SPI</code>.</li>
 </ol>
-<p>The two transactions are separated by a fixed gap so the on-chip TMCL parser can latch transaction 1 before transaction 2 begins shifting. When <code>Derived</code> exposes <code><a class="el" href="classtmc9660_1_1CommInterface.html#a62df32975d1a83698253b196f305f3f2" title="Construct communication interface with pin active level configuration.">hostSpiTransferTMCLPair()</a></code> that primitive is used so the gap is honoured inside a single bus reservation (required on shared buses); otherwise the gap is a plain delay between two independent transfers.</p>
-<p>Transaction 2 is retried while the slave reports a not-yet-ready reply — see <a class="el" href="classtmc9660_1_1CommInterface.html#a6f5fdcbfdee344ebdba755694384b49d">setSpiRetryMaxCount()</a> and <a class="el" href="classtmc9660_1_1CommInterface.html#a64198acf0b936dce4eda6de0d4d885c6">setSpiRetryInterval()</a> for the bound. Only the reply-request frame is re-sent, never <code>tx</code>, so retries cannot duplicate a write.</p>
+<p>Between the two transactions the driver waits <a class="el" href="structtmc9660_1_1TmclSpiTiming.html#ac56d13643075cd79894bdf96167e066b">TmclSpiTiming::frameGapUs</a> (default 0 µs: the vendor documents no processing time, only the NOT_READY handshake). Transaction 2 is then re-sent with a doubling back-off while the reply is NOT_READY or not yet valid (status 0x00, bad checksum, or — with <a class="el" href="structtmc9660_1_1TmclSpiTiming.html#afdea8edfcd57360fb346707a43ad548c">TmclSpiTiming::verifyReplyOpcode</a> — an opcode echo that does not match <code>tx</code>), at most <a class="el" href="structtmc9660_1_1TmclSpiTiming.html#ab409a1d9c6f3c1752644f5fc2da1b024">TmclSpiTiming::maxPolls</a> times.</p>
+<p>When <code>Derived</code> exposes <code>hostSpiTransferTMCLPair()</code> that primitive clocks both transactions inside a single bus reservation (required on shared buses where a peer may re-program the SPI mode between the frames) and receives the gap as an argument.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tx</td><td>TMCL command frame to transmit. </td></tr>
     <tr><td class="paramname">reply</td><td>Receives the reply to <code>tx</code> (parsed with <code>tx</code> opcode/type context, so multi-frame replies such as GetVersion decode correctly). </td></tr>
     <tr><td class="paramname">first_reply</td><td>Optional out-param capturing the reply carried by transaction 1, i.e. the answer to the <em>previous</em> command. Pass <code>nullptr</code> to drop it. </td></tr>
-    <tr><td class="paramname">second_command</td><td>Optional frame to use in place of the <code>0xFF</code> reply-request, letting a caller pipeline the next command into transaction 2. </td></tr>
+    <tr><td class="paramname">second_command</td><td>Optional frame to use in place of the <code>0xFF</code> reply-request, letting a caller pipeline the next command into transaction 2. Prefer <a class="el" href="#af5d294786ad71e0995d6b927839502b6">transferTMCLBatch()</a>, which also collects that command's reply. A transaction 2 that comes back with a stale (not NOT_READY) reply is re-sent, so <code>second_command</code> must be idempotent. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if a well-formed reply to <code>tx</code> was parsed; false on bus error, on checksum failure, or when the reply was still not ready after the retry budget.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a well-formed reply to <code>tx</code> was parsed; false on bus error, or when the reply was still not ready or not valid after the poll budget.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Do not substitute an all-zero frame for the <code>0xFF</code> reply-request. The chip parses opcode 0 as a real (invalid) command and queues a checksum-error reply while the requested reply is being shifted out, which corrupts the value bytes. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The <code>address</code> parameter is UART-only and is ignored here. </dd></dl>
+
+</div>
+</div>
+<a id="af5d294786ad71e0995d6b927839502b6" name="af5d294786ad71e0995d6b927839502b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5d294786ad71e0995d6b927839502b6">&#9670;&#160;</a></span>transferTMCLBatch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::transferTMCLBatch </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const <a class="el" href="structtmc9660_1_1TMCLFrame.html">TMCLFrame</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>requests</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; <a class="el" href="structtmc9660_1_1TMCLReply.html">TMCLReply</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>replies</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *</td>          <td class="paramname"><span class="paramname"><em>completed</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pipelined batch: <code>requests.size()</code> TMCL accesses in N + 1 SPI datagrams. </p>
+<p>Datagram <em>k</em> carries request <em>k</em> and clocks out the reply to request <em>k</em> − 1; the last datagram is the reply-request <code>0xFF</code> that clocks out the reply to request N − 1. Compared with N calls of <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a> this saves N − 1 datagrams and N − 1 handshakes. Correctness rules:</p>
+<ul>
+<li><b>First element:</b> the reply carried by datagram 0 belongs to whatever preceded the batch and is discarded.</li>
+<li><b>Last element:</b> its reply is collected with the trailing reply-request datagram.</li>
+<li><b>NOT_READY:</b> the datagram just sent was ignored by the chip and is re-sent after the back-off; no request is skipped or duplicated.</li>
+<li><b>Stale reply</b> (status 0x00, bad checksum, wrong opcode echo): it is not known whether the request in that datagram was executed. The previous request is re-issued as a single <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a> and the pipeline restarts at the current request, which may therefore execute twice. Only pass <b>idempotent</b> requests (SAP/GAP/SGP/GGP, RamDebug reads). <a class="el" href="structtmc9660_1_1TmclSpiStats.html#a2a620f557205fd1e2290145f1bfdaad4">TmclSpiStats::recoveries</a> counts these events.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">requests</td><td>Frames to send, in order. </td></tr>
+    <tr><td class="paramname">replies</td><td>Receives one reply per request (same index). Must be at least as long as <code>requests</code>. </td></tr>
+    <tr><td class="paramname">address</td><td>UART-only module address; ignored here (signature parity). </td></tr>
+    <tr><td class="paramname">completed</td><td>Optional: number of leading elements whose reply is valid when the function returns (equals <code>requests.size()</code> on success). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if every request got a well-formed reply. Each reply still carries its own TMCL status; check <a class="el" href="structtmc9660_1_1TMCLReply.html#a1cd846b235016be8ecb3105a100b332a">TMCLReply::isOK()</a> per element. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a927f1278b21c5e35b904118b5e0fcba9" name="a927f1278b21c5e35b904118b5e0fcba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a927f1278b21c5e35b904118b5e0fcba9">&#9670;&#160;</a></span>kReplyRequestOpcode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Derived &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t <a class="el" href="classtmc9660_1_1SpiCommInterface.html">tmc9660::SpiCommInterface</a>&lt; Derived &gt;::kReplyRequestOpcode = 0xFFU</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Opcode of the reply-request datagram (<code>FF 00 00 00 00 00 00 FF</code>); see <a class="el" href="#a6bfcfb6e669db97e2d12bd3b5b944a0c">transferTMCL()</a>. </p>
 
 </div>
 </div>

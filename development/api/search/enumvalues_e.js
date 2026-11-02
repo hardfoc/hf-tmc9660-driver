@@ -37,5 +37,6 @@ var searchData=
   ['spi_5fmem_5fpartitions_34',['SPI_MEM_PARTITIONS',['../group__TMC9660__BootloaderProtocol.html#ggaf4e8a4c74acf7f0c687427b7fc2698f2a9069906fe5830eeb949e95fd3ed8a0ec',1,'tmc9660']]],
   ['spi_5fmem_5fsize_35',['SPI_MEM_SIZE',['../group__TMC9660__BootloaderProtocol.html#ggaf4e8a4c74acf7f0c687427b7fc2698f2a7ff94d3b9aca70d727bfbc9956fcc4c0',1,'tmc9660']]],
   ['spiflash_36',['SPIFlash',['../namespacetmc9660_1_1bootcfg.html#af33448052f9be0f1a91cdf623057f19fa8a09478d4bdbc078c110e47a0ae8b3dc',1,'tmc9660::bootcfg']]],
-  ['success_37',['Success',['../classtmc9660_1_1TMC9660.html#a08f6d00384458a6833df71c1f856f48ca505a83f220c02df2f85c3810cd9ceb38',1,'tmc9660::TMC9660']]]
+  ['stale_37',['STALE',['../namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77a4d855a061b3066dc14a3b12ed26b5456',1,'tmc9660']]],
+  ['success_38',['Success',['../classtmc9660_1_1TMC9660.html#a08f6d00384458a6833df71c1f856f48ca505a83f220c02df2f85c3810cd9ceb38',1,'tmc9660::TMC9660']]]
 ];

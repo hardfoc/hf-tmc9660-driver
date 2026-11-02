@@ -18,12 +18,16 @@ var classtmc9660_1_1CommInterface =
     [ "mode", "classtmc9660_1_1CommInterface.html#aee31a2d12cd45cb76e99f19b301eef3e", null ],
     [ "operator=", "classtmc9660_1_1CommInterface.html#a87ecfdf46af01674e6931cadacb4955c", null ],
     [ "operator=", "classtmc9660_1_1CommInterface.html#ad169b586f91b77ed8653f78fb2db2615", null ],
+    [ "resetTmclStats", "classtmc9660_1_1CommInterface.html#ad6cd3c690582388be4b59edc9f9ef880", null ],
     [ "set_pin_active_level", "classtmc9660_1_1CommInterface.html#a0b30d35bf9b154dda748fbf963e85ab9", null ],
     [ "setSpiRetryInterval", "classtmc9660_1_1CommInterface.html#a64198acf0b936dce4eda6de0d4d885c6", null ],
     [ "setSpiRetryMaxCount", "classtmc9660_1_1CommInterface.html#a6f5fdcbfdee344ebdba755694384b49d", null ],
+    [ "setTmclTiming", "classtmc9660_1_1CommInterface.html#a1417eda8d0c749889428de23cd77c517", null ],
     [ "signalToGpioLevel", "classtmc9660_1_1CommInterface.html#a21441dc2cf2945b0450bb7988ffd3284", null ],
+    [ "tmclStats", "classtmc9660_1_1CommInterface.html#a97b6ff979d049c0b01cc80fed3269dad", null ],
+    [ "tmclTiming", "classtmc9660_1_1CommInterface.html#a38049c42b7f5b93c71a8f1901f6ad799", null ],
     [ "transferTMCL", "classtmc9660_1_1CommInterface.html#a8a4f28c5ca1491ca429bf737b16f5053", null ],
     [ "pinActiveLevels_", "classtmc9660_1_1CommInterface.html#acd50e69fd62ba685cc7f96a2d158b7a5", null ],
-    [ "spiRetryIntervalUs_", "classtmc9660_1_1CommInterface.html#a8e3912e0443ea5bc8e50c0ba9f947c4c", null ],
-    [ "spiRetryMaxCount_", "classtmc9660_1_1CommInterface.html#a204b98135f94ca969816431e0a844ad0", null ]
+    [ "tmclStats_", "classtmc9660_1_1CommInterface.html#a2a7f1543f35eaac647d2ef0fcac5aaaa", null ],
+    [ "tmclTiming_", "classtmc9660_1_1CommInterface.html#ae20efa369bdc8bedfa3964beb581efcd", null ]
 ];

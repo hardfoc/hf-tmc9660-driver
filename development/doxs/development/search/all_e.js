@@ -10,7 +10,9 @@ var searchData=
   ['noconfig_7',['NoConfig',['../classtmc9660_1_1TMC9660.html#a08f6d00384458a6833df71c1f856f48ca6a0fed8678de5ff8c7dbd469e3173155',1,'tmc9660::TMC9660']]],
   ['none_8',['None',['../namespacetmc9660_1_1bootcfg.html#ae85e58d8436fa28e598307e080f1a1ada6adf97f83acf6453d4a6a4b1070f3754',1,'tmc9660::bootcfg']]],
   ['noop_9',['noOp',['../classtmc9660_1_1TMC9660Bootloader.html#a32fe26c3adaecf82cd5a1798c13cc077',1,'tmc9660::TMC9660Bootloader']]],
-  ['not_5fready_10',['NOT_READY',['../namespacetmc9660.html#aa6ed72b377a8d74c2505b89b77b8a505a9455b42e74acb2ec1c7292e54d28aff2',1,'tmc9660']]],
-  ['notrigger_11',['NoTrigger',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aedd9ae8b1aea4323e3ce2ce4fa9b391c',1,'tmc9660::register_mode::RAMDebug']]],
-  ['nvmstorage_12',['NvmStorage',['../structtmc9660_1_1TMC9660_1_1NvmStorage.html',1,'tmc9660::TMC9660&lt; CommType &gt;::NvmStorage'],['../structtmc9660_1_1TMC9660_1_1NvmStorage.html#ae358b32952904325e3ff5aed2d6a4cd2',1,'tmc9660::TMC9660::NvmStorage::NvmStorage()']]]
+  ['not_5fready_10',['NOT_READY',['../namespacetmc9660.html#aa6ed72b377a8d74c2505b89b77b8a505a9455b42e74acb2ec1c7292e54d28aff2',1,'tmc9660::NOT_READY'],['../namespacetmc9660.html#ac8dcc6495c83d8931b328c37df2faf77a9455b42e74acb2ec1c7292e54d28aff2',1,'tmc9660::NOT_READY']]],
+  ['notready_11',['notReady',['../structtmc9660_1_1TmclSpiStats.html#a57ad72ea5ec7ae46095f35d84711b72b',1,'tmc9660::TmclSpiStats']]],
+  ['notrigger_12',['NoTrigger',['../namespacetmc9660_1_1register__mode_1_1RAMDebug.html#a51ee3d23180e00bf54bb48c31ceadd11aedd9ae8b1aea4323e3ce2ce4fa9b391c',1,'tmc9660::register_mode::RAMDebug']]],
+  ['number_13',['number',['../structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#a822eee2ea621633c71ece61664c78c0e',1,'tmc9660::TMC9660::RamDebug::Channel']]],
+  ['nvmstorage_14',['NvmStorage',['../structtmc9660_1_1TMC9660_1_1NvmStorage.html',1,'tmc9660::TMC9660&lt; CommType &gt;::NvmStorage'],['../structtmc9660_1_1TMC9660_1_1NvmStorage.html#ae358b32952904325e3ff5aed2d6a4cd2',1,'tmc9660::TMC9660::NvmStorage::NvmStorage()']]]
 ];

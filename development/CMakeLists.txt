@@ -27,6 +27,13 @@ if(HF_TMC9660_ENABLE_WARNINGS)
   target_compile_options(${HF_TMC9660_TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
+# ── Host unit tests (mock transports; no hardware) ───────────────────────────
+option(HF_TMC9660_BUILD_TESTS "Build the host unit tests in tests/" OFF)
+if(HF_TMC9660_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
+
 # ── CMake package export ─────────────────────────────────────────────────────
 include(CMakePackageConfigHelpers)
 

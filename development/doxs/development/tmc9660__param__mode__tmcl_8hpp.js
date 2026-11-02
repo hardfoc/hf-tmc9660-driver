@@ -1,5 +1,6 @@
 var tmc9660__param__mode__tmcl_8hpp =
 [
+    [ "tmc9660::tmcl::IsGlobalParamBank", "concepttmc9660_1_1tmcl_1_1IsGlobalParamBank.html", null ],
     [ "ABN_INIT_METHOD_LIST", "tmc9660__param__mode__tmcl_8hpp.html#a0d8b13473f477600506aa4e44c54fe30", null ],
     [ "ABN_INIT_STATE_LIST", "tmc9660__param__mode__tmcl_8hpp.html#ab6c1f3c0f1a1bf529137bbeaa4169ea8", null ],
     [ "ABN_N_CHANNEL_FILTERING_LIST", "tmc9660__param__mode__tmcl_8hpp.html#a28a70c999e5ff2b797e6ded366f5c8c6", null ],
@@ -94,6 +95,7 @@ var tmc9660__param__mode__tmcl_8hpp =
     [ "VGS_SHORT_ENABLE_LIST", "tmc9660__param__mode__tmcl_8hpp.html#a69b2d2e57f3710df1ea09c2872b2b33c", null ],
     [ "VGS_SHORT_PROTECTION_LIST", "tmc9660__param__mode__tmcl_8hpp.html#a0e513fc222acb4c7cf6017bf32c3e611", null ],
     [ "WAIT_CONDITION_LIST", "tmc9660__param__mode__tmcl_8hpp.html#aa139c5985570cd2f3ee0c354c7e64409", null ],
+    [ "X", "tmc9660__param__mode__tmcl_8hpp.html#a68d3e9033492bc347004797cbfd1f7d8", null ],
     [ "X", "tmc9660__param__mode__tmcl_8hpp.html#a68d3e9033492bc347004797cbfd1f7d8", null ],
     [ "X", "tmc9660__param__mode__tmcl_8hpp.html#a68d3e9033492bc347004797cbfd1f7d8", null ],
     [ "X", "tmc9660__param__mode__tmcl_8hpp.html#a68d3e9033492bc347004797cbfd1f7d8", null ],
@@ -564,6 +566,7 @@ var tmc9660__param__mode__tmcl_8hpp =
     [ "WaitCondition", "tmc9660__param__mode__tmcl_8hpp.html#a0ed0ab63e883b00e78847ddb7a434f2c", [
       [ "X", "tmc9660__param__mode__tmcl_8hpp.html#a0ed0ab63e883b00e78847ddb7a434f2ca756045a8d37de34ca27188466b2c0c8b", null ]
     ] ],
+    [ "axisParameterIdsUnique", "tmc9660__param__mode__tmcl_8hpp.html#aa0e74828f5a2a575e810c6baca071566", null ],
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#ac4df8c1518fd40f53996d62ab6737a0a", null ],
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a718dd635aceec70e0d9c5a9feb974a70", null ],
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a343174b566bb80c493b89d467dd82451", null ],
@@ -657,5 +660,14 @@ var tmc9660__param__mode__tmcl_8hpp =
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a47e1d93c300fb240cb0ebf81a1cac7fc", null ],
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a4fd7ec22614d09db18685c804e5e1739", null ],
     [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#aa8e23397e3e5353ffad3cbad2d8f5314", null ],
-    [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a78527cf131f93f229d4a0de9aa9522a8", null ]
+    [ "to_string", "tmc9660__param__mode__tmcl_8hpp.html#a78527cf131f93f229d4a0de9aa9522a8", null ],
+    [ "kAxisParameterIds", "tmc9660__param__mode__tmcl_8hpp.html#ac6c1f2809df3a0f17dde3529aedaf695", null ],
+    [ "kGlobalBankOf", "tmc9660__param__mode__tmcl_8hpp.html#a8979c1d70bda1ceefcb04a2b94b74ded", null ],
+    [ "kGlobalBankOf< GlobalParamBank0 >", "tmc9660__param__mode__tmcl_8hpp.html#a735d8ad14b64d9f4ae7fbb508c566aed", null ],
+    [ "kGlobalBankOf< GlobalParamBank2 >", "tmc9660__param__mode__tmcl_8hpp.html#ab2d26c73b6120b344f93016f7948f250", null ],
+    [ "kGlobalBankOf< GlobalParamBank3 >", "tmc9660__param__mode__tmcl_8hpp.html#a530ec7038d299c0b94585c93d03b95d6", null ],
+    [ "kIsGlobalParamBank", "tmc9660__param__mode__tmcl_8hpp.html#add5a85080c9f6d4fe2e6d96051a05aef", null ],
+    [ "kIsGlobalParamBank< GlobalParamBank0 >", "tmc9660__param__mode__tmcl_8hpp.html#a3f1e6cec10e3846e2fbad766f50275c7", null ],
+    [ "kIsGlobalParamBank< GlobalParamBank2 >", "tmc9660__param__mode__tmcl_8hpp.html#a6939535ea3d20a4d3f83ec83820cd47d", null ],
+    [ "kIsGlobalParamBank< GlobalParamBank3 >", "tmc9660__param__mode__tmcl_8hpp.html#aad88e12089c4d539d66f3d06ebf4806d", null ]
 ];

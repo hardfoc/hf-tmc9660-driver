@@ -133,6 +133,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1DeviceCapabilities.html">tmc9660::TMC9660&lt; CommType &gt;::DeviceCapabilities</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-device feature topology — declares which optional subsystems are physically wired and bootloader-enabled on <b>this</b> <a class="el" href="classtmc9660_1_1TMC9660.html" title="Main class representing a TMC9660 motor driver in Parameter Mode.">TMC9660</a> instance.  <a href="structtmc9660_1_1TMC9660_1_1DeviceCapabilities.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1ParameterAccess.html">tmc9660::TMC9660&lt; CommType &gt;::ParameterAccess</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One element of a batched axis-parameter access (SAP/GAP).  <a href="structtmc9660_1_1TMC9660_1_1ParameterAccess.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html">tmc9660::TMC9660&lt; CommType &gt;::GlobalParameterAccess</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One element of a batched global-parameter access (SGP/GGP).  <a href="structtmc9660_1_1TMC9660_1_1GlobalParameterAccess.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1MotorConfig.html">tmc9660::TMC9660&lt; CommType &gt;::MotorConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Motor configuration and control subsystem.  <a href="structtmc9660_1_1TMC9660_1_1MotorConfig.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,6 +235,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug.html">tmc9660::TMC9660&lt; CommType &gt;::RamDebug</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subsystem for debug and data logging features.  <a href="structtmc9660_1_1TMC9660_1_1RamDebug.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html">tmc9660::TMC9660&lt; CommType &gt;::RamDebug::Channel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">One capture or trigger source.  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Channel.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html">tmc9660::TMC9660&lt; CommType &gt;::RamDebug::Trigger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html" title="Trigger setup (types 5, 6 and 7).">Trigger</a> setup (types 5, 6 and 7).  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1Trigger.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html">tmc9660::TMC9660&lt; CommType &gt;::RamDebug::CaptureConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full capture configuration for <a class="el" href="structtmc9660_1_1TMC9660_1_1RamDebug.html#a716091d819a2041bd4f40a3b4c593d64" title="Reset and configure a capture without arming it.">configure()</a>.  <a href="structtmc9660_1_1TMC9660_1_1RamDebug_1_1CaptureConfig.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtmc9660_1_1TMC9660_1_1NvmStorage.html">tmc9660::TMC9660&lt; CommType &gt;::NvmStorage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subsystem for storing and recalling parameters from nonvolatile flash.  <a href="structtmc9660_1_1TMC9660_1_1NvmStorage.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -258,12 +273,12 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a10b4495a25bf5b385f7e838170ca02f3" id="r_a10b4495a25bf5b385f7e838170ca02f3"><td class="memItemLeft" align="right" valign="top">#<a class="el" href="classtmc9660_1_1CommInterface.html">define</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10b4495a25bf5b385f7e838170ca02f3">TMC9660_HEADER_INCLUDED</a></td></tr>
+<tr class="memitem:a10b4495a25bf5b385f7e838170ca02f3" id="r_a10b4495a25bf5b385f7e838170ca02f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10b4495a25bf5b385f7e838170ca02f3">TMC9660_HEADER_INCLUDED</a></td></tr>
 <tr class="separator:a10b4495a25bf5b385f7e838170ca02f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afe6288498ba889316abc4d5262cfb30d" id="r_afe6288498ba889316abc4d5262cfb30d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">const</a> <a class="el" href="classtmc9660_1_1CommInterface.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#afe6288498ba889316abc4d5262cfb30d">tmc9660::GetDriverVersion</a> () <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:afe6288498ba889316abc4d5262cfb30d" id="r_afe6288498ba889316abc4d5262cfb30d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetmc9660.html#afe6288498ba889316abc4d5262cfb30d">tmc9660::GetDriverVersion</a> () noexcept</td></tr>
 <tr class="memdesc:afe6288498ba889316abc4d5262cfb30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classtmc9660_1_1TMC9660.html" title="Main class representing a TMC9660 motor driver in Parameter Mode.">TMC9660</a> driver version string (namespace-level).  <br /></td></tr>
 <tr class="separator:afe6288498ba889316abc4d5262cfb30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -278,7 +293,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#<a class="el" href="classtmc9660_1_1CommInterface.html">define</a> TMC9660_HEADER_INCLUDED</td>
+          <td class="memname">#define TMC9660_HEADER_INCLUDED</td>
         </tr>
       </table>
 </div><div class="memdoc">

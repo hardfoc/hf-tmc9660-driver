@@ -111,22 +111,22 @@ $(function(){initNavTree('structtmc9660_1_1TMC9660_1_1GPIO.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a045e7f26fc473a26c3953490ae395d84" id="r_a045e7f26fc473a26c3953490ae395d84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a045e7f26fc473a26c3953490ae395d84">setMode</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">output</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pullEnable</a>=<a class="el" href="classtmc9660_1_1CommInterface.html">false</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pullUp</a>=<a class="el" href="classtmc9660_1_1CommInterface.html">true</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a045e7f26fc473a26c3953490ae395d84" id="r_a045e7f26fc473a26c3953490ae395d84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a045e7f26fc473a26c3953490ae395d84">setMode</a> (uint8_t pin, bool output, bool pullEnable=false, bool pullUp=true) noexcept</td></tr>
 <tr class="memdesc:a045e7f26fc473a26c3953490ae395d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure a <a class="el" href="structtmc9660_1_1TMC9660_1_1GPIO.html" title="Subsystem for configuring general-purpose IOs (GPIOs).">GPIO</a> pin as input or output.  <br /></td></tr>
 <tr class="separator:a045e7f26fc473a26c3953490ae395d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6cbf2d0d03924dad5c22dfd51c2925b" id="r_ad6cbf2d0d03924dad5c22dfd51c2925b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6cbf2d0d03924dad5c22dfd51c2925b">writePin</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> value) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:ad6cbf2d0d03924dad5c22dfd51c2925b" id="r_ad6cbf2d0d03924dad5c22dfd51c2925b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6cbf2d0d03924dad5c22dfd51c2925b">writePin</a> (uint8_t pin, bool value) noexcept</td></tr>
 <tr class="memdesc:ad6cbf2d0d03924dad5c22dfd51c2925b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a digital value to a configured output pin.  <br /></td></tr>
 <tr class="separator:ad6cbf2d0d03924dad5c22dfd51c2925b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2089d239cc409300d4052b9fcce6e0c" id="r_af2089d239cc409300d4052b9fcce6e0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2089d239cc409300d4052b9fcce6e0c">readDigital</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> &amp;value) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:af2089d239cc409300d4052b9fcce6e0c" id="r_af2089d239cc409300d4052b9fcce6e0c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2089d239cc409300d4052b9fcce6e0c">readDigital</a> (uint8_t pin, bool &amp;value) noexcept</td></tr>
 <tr class="memdesc:af2089d239cc409300d4052b9fcce6e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a digital input pin.  <br /></td></tr>
 <tr class="separator:af2089d239cc409300d4052b9fcce6e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05ac26bbc4bbf77ba05afdd5a0e01786" id="r_a05ac26bbc4bbf77ba05afdd5a0e01786"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05ac26bbc4bbf77ba05afdd5a0e01786">readAnalog</a> (<a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a> <a class="el" href="classtmc9660_1_1CommInterface.html">pin</a>, <a class="el" href="classtmc9660_1_1CommInterface.html">uint16_t</a> &amp;value) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a05ac26bbc4bbf77ba05afdd5a0e01786" id="r_a05ac26bbc4bbf77ba05afdd5a0e01786"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05ac26bbc4bbf77ba05afdd5a0e01786">readAnalog</a> (uint8_t pin, uint16_t &amp;value) noexcept</td></tr>
 <tr class="memdesc:a05ac26bbc4bbf77ba05afdd5a0e01786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an analog input (e.g. external temperature or potentiometer).  <br /></td></tr>
 <tr class="separator:a05ac26bbc4bbf77ba05afdd5a0e01786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a38a72f62e2eeab07675155cf049c1164" id="r_a38a72f62e2eeab07675155cf049c1164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38a72f62e2eeab07675155cf049c1164">GPIO</a> (<a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;<a class="el" href="classtmc9660_1_1CommInterface.html">parent</a>) <a class="el" href="classtmc9660_1_1CommInterface.html">noexcept</a></td></tr>
+<tr class="memitem:a38a72f62e2eeab07675155cf049c1164" id="r_a38a72f62e2eeab07675155cf049c1164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38a72f62e2eeab07675155cf049c1164">GPIO</a> (<a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;parent) noexcept</td></tr>
 <tr class="separator:a38a72f62e2eeab07675155cf049c1164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -136,11 +136,11 @@ Private Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a7a162b5b230edf1d03327269e36ce893" id="r_a7a162b5b230edf1d03327269e36ce893"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtmc9660_1_1CommInterface.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a162b5b230edf1d03327269e36ce893">TMC9660</a></td></tr>
+<tr class="memitem:a7a162b5b230edf1d03327269e36ce893" id="r_a7a162b5b230edf1d03327269e36ce893"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a162b5b230edf1d03327269e36ce893">TMC9660</a></td></tr>
 <tr class="separator:a7a162b5b230edf1d03327269e36ce893"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a>&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename CommType&gt;<br />
 struct tmc9660::TMC9660&lt; CommType &gt;::GPIO</div><p>Subsystem for configuring general-purpose IOs (GPIOs). </p>
 <p>Pins can be configured as digital inputs, digital outputs, or analog inputs. The input pull-up/down resistors and output state can also be controlled.</p>
 <p>Refer to the <a class="el" href="structtmc9660_1_1TMC9660_1_1GPIO.html" title="Subsystem for configuring general-purpose IOs (GPIOs).">GPIO</a> section and TMCL commands SIO / GIO (Table 18). See datasheet page 19. </p>
@@ -151,13 +151,13 @@ struct tmc9660::TMC9660&lt; CommType &gt;::GPIO</div><p>Subsystem for configurin
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::GPIO::GPIO </td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::GPIO::GPIO </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parent</em></span></td><td>)</td>
           <td></td>
@@ -179,20 +179,20 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::GPIO::readAnalog </td>
+          <td class="memname">bool TMC9660::GPIO::readAnalog </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint16_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+          <td class="paramtype">uint16_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -223,20 +223,20 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::GPIO::readDigital </td>
+          <td class="memname">bool TMC9660::GPIO::readDigital </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -264,30 +264,30 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::GPIO::setMode </td>
+          <td class="memname">bool TMC9660::GPIO::setMode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>output</em>, </span></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>output</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>pullEnable</em><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="classtmc9660_1_1CommInterface.html">false</a></span>, </span></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>pullEnable</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>pullUp</em><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="classtmc9660_1_1CommInterface.html">true</a></span></span>&#160;)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>pullUp</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -317,20 +317,20 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a> TMC9660::GPIO::writePin </td>
+          <td class="memname">bool TMC9660::GPIO::writePin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>pin</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classtmc9660_1_1CommInterface.html">bool</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -359,13 +359,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1CommInterface.html">friend</a> <a class="el" href="classtmc9660_1_1CommInterface.html">class</a> <a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a></td>
+          <td class="memname">friend class <a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a></td>
         </tr>
       </table>
   </td>
@@ -384,13 +384,13 @@ template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="classtmc9660_1_1CommInterface.html">typename</a> <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt; </div>
+template&lt;typename CommType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a>&amp; <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; <a class="el" href="classtmc9660_1_1CommInterface.html">CommType</a> &gt;::GPIO::driver</td>
+          <td class="memname"><a class="el" href="classtmc9660_1_1TMC9660.html">TMC9660</a>&amp; <a class="el" href="classtmc9660_1_1TMC9660.html">tmc9660::TMC9660</a>&lt; CommType &gt;::GPIO::driver</td>
         </tr>
       </table>
   </td>
