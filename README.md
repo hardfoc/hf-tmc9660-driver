@@ -1,166 +1,100 @@
----
-layout: default
-title: "HardFOC TMC9660 Driver"
-description: "C++20 hardware-agnostic driver for Trinamic TMC9660 motor controller with FOC control, telemetry, and TMCL scripting"
-nav_order: 1
-permalink: /
----
+# TMC9660 Driver
 
-# HF-TMC9660 Driver
-**C++20 hardware-agnostic driver for Trinamic TMC9660 motor controller with FOC control, telemetry, and TMCL scripting**
+A C++20 driver for the Analog Devices (Trinamic) TMC9660 smart motor controller: boot, configure and run BLDC,
+stepper and DC motors with on-chip field-oriented control, from any MCU with SPI or UART.
 
-[![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![CI](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml/badge.svg?branch=main)](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://hardfoc.github.io/hf-tmc9660-driver/)
+[![Host tests](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/ci-host-tests.yml/badge.svg?branch=main)](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/ci-host-tests.yml)
+[![ESP32 examples](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml/badge.svg?branch=main)](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/esp32-examples-build-ci.yml)
+[![Docs](https://github.com/hardfoc/hf-tmc9660-driver/actions/workflows/ci-docs-publish.yml/badge.svg?branch=main)](https://hardfoc.github.io/hf-tmc9660-driver/)
+[![License: GPL-3.0](https://img.shields.io/github/license/hardfoc/hf-tmc9660-driver)](LICENSE)
 
-## 📚 Table of Contents
-1. [Overview](#-overview)
-2. [Features](#-features)
-3. [Quick Start](#-quick-start)
-4. [Installation](#-installation)
-5. [API Reference](#-api-reference)
-6. [Timing and Throughput](docs/timing_and_throughput.md)
-7. [Examples](#-examples)
-8. [Documentation](#-documentation)
-9. [References](#-references)
-10. [Contributing](#-contributing)
-11. [License](#-license)
+**Documentation: <https://hardfoc.github.io/hf-tmc9660-driver/>**
 
-## 📦 Overview
+<!-- figure: driver-layers -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/driver-layers.dark.svg">
+  <img src="docs/diagrams/driver-layers.svg"
+    alt="Layer diagram: the application calls the hardware-agnostic TMC9660 driver and its subsystems, which
+    use the SPI or UART communication interface, which calls the platform port you write, which drives
+    the SPI bus and four control pins of the TMC9660.">
+</picture>
+<!-- /figure -->
 
-> **📖 [📚🌐 Live Complete Documentation](https://hardfoc.github.io/hf-tmc9660-driver/)** - 
-> Interactive guides, examples, and step-by-step tutorials
+## In 30 seconds
 
-**HF-TMC9660** is a portable C++20 driver for the **Trinamic TMC9660** motor controller IC. The TMC9660 is a sophisticated motor driver supporting BLDC, stepper, and DC motors with advanced Field-Oriented Control (FOC), comprehensive telemetry, and TMCL scripting capabilities. The driver provides hardware-agnostic communication interfaces, allowing it to run on any platform (ESP32, STM32, etc.) with SPI or UART.
+Write a small port class for your MCU (SPI transfer, four GPIOs, a delay;
+[Porting](https://hardfoc.github.io/hf-tmc9660-driver/latest/porting/)), then:
 
-The driver exposes the full parameter mode interface, providing access to all 300+ TMC9660 parameters through an intuitive C++ API. It supports bootloader initialization, motor configuration, sensor integration (Hall sensors, encoders), FOC control loops, real-time telemetry, and protection systems.
-
-![TMC9660 Field-Oriented Control (FOC) signal flow](docs/assets/tmc9660-foc.svg)
-
-## ✨ Features
-
-- ✅ **Multiple Motor Types**: BLDC/PMSM, Stepper, and DC motor support
-- ✅ **FOC Control**: Advanced Field-Oriented Control with torque, velocity, and position loops
-- ✅ **Sensor Integration**: Hall sensors, incremental encoders, SPI encoders
-- ✅ **Comprehensive Telemetry**: Real-time temperature, current, voltage, and position monitoring
-- ✅ **Protection Systems**: Overcurrent, overtemperature, overvoltage protection
-- ✅ **TMCL Scripting**: Execute custom scripts on device microcontroller
-- ✅ **Hardware Agnostic**: SPI or UART interface for platform independence
-- ✅ **Modern C++20**: Type-safe API with RAII principles
-- ✅ **Parameter Mode**: Full access to 300+ TMC9660 parameters
-- ✅ **Bring-up diagnostics**: Optional compile-time raw SPI TMCL frame logging (`TMC9660_LOG_TMCL_RAW_FRAMES`, off by default)
-
-## 🚀 Quick Start
-
+<!-- generated: quickstart-code -->
 ```cpp
-#include "inc/tmc9660.hpp"
+#include "tmc9660.hpp"
 
-// 1. Implement the communication interface (see platform_integration.md)
-class MySPI : public tmc9660::SpiCommInterface {
-    // ... implement required methods
-};
+int spin_bldc_at_1000_rpm(MySpi& spi) {
+  tmc9660::TMC9660<MySpi> driver(spi);
 
-// 2. Create driver instance
-MySPI spi;
-tmc9660::TMC9660 driver(spi);
+  tmc9660::BootloaderConfig cfg{};                          // 1. boot into parameter mode
+  cfg.boot.boot_mode = tmc9660::bootcfg::BootMode::Parameter;
+  cfg.boot.start_motor_control = true;
+  if (driver.bootloaderInit(&cfg) != tmc9660::TMC9660<MySpi>::BootloaderInitResult::Success) {
+    return -1;                                              // wiring, power or SPI mode
+  }
 
-// 3. CRITICAL: Initialize bootloader for Parameter Mode
-tmc9660::BootloaderConfig cfg{};
-cfg.boot.boot_mode = tmc9660::bootcfg::BootMode::Parameter;
-cfg.boot.start_motor_control = true;
+  driver.motorConfig.setType(tmc9660::tmcl::MotorType::BLDC_MOTOR, 7);  // 2. motor: 7 pole pairs
+  driver.motorConfig.setPWMFrequency(25000);
 
-if (driver.bootloaderInit(&cfg) != tmc9660::TMC9660::BootloaderInitResult::Success) {
-    // Handle error
-    return;
+  const auto ctx = driver.getMotorContext();                // 3. unit conversions from the chip
+  driver.velocityControl.setTargetVelocityRpm(1000.0, ctx); // 4. spin
+  return 0;
 }
+```
+<!-- /generated -->
 
-// 4. Configure and start motor
-driver.motorConfig.setType(tmc9660::tmcl::MotorType::BLDC_MOTOR, 7); // 7 pole pairs
-driver.focControl.setTargetVelocity(1000);
+## What it does
+
+- Boots the chip into parameter mode (`bootloaderInit()`), including clock, interface and encoder settings.
+- Exposes the chip as subsystems: `motorConfig`, `feedbackSense`, `torqueFluxControl`, `velocityControl`,
+  `positionControl`, `ramp`, `telemetry`, `protection`, `diagnostics` and more.
+- Converts RPM, degrees and amperes to the chip's internal units with the motor's real settings.
+- Talks SPI the way the datasheet specifies: NOT_READY polling, no fixed delays, pipelined batches (N reads in
+  N + 1 datagrams).
+- No heap, no exceptions, no RTOS, no virtual calls (the port is a CRTP class).
+
+## Install
+
+```bash
+git submodule add https://github.com/hardfoc/hf-tmc9660-driver.git external/hf-tmc9660-driver
 ```
 
-For detailed setup, see [Installation](docs/installation.md) and [Quick Start Guide](docs/quickstart.md).
+```cmake
+add_subdirectory(external/hf-tmc9660-driver)
+target_link_libraries(my_app PRIVATE hf_tmc9660)
+```
 
-## 🔧 Installation
+ESP-IDF: use the component wrapper in [`examples/esp32/components/hf_tmc9660`](examples/esp32/components/hf_tmc9660/CMakeLists.txt).
+Details: [Installation](https://hardfoc.github.io/hf-tmc9660-driver/latest/installation/).
 
-1. **Clone or copy** the driver files into your project
-2. **Implement the communication interface** for your platform (see [Platform Integration](docs/platform_integration.md))
-3. **Include the header** in your code:
-   ```cpp
-   #include "inc/tmc9660.hpp"
-   ```
-4. Compile with a **C++20** or newer compiler
+## Documentation
 
-For detailed installation instructions, see [docs/installation.md](docs/installation.md).
+| | |
+| --- | --- |
+| [Quickstart](https://hardfoc.github.io/hf-tmc9660-driver/latest/quickstart/) | Wire it, write the port, spin a motor |
+| [Hardware](https://hardfoc.github.io/hf-tmc9660-driver/latest/hardware/) | Pins, bus settings, errata, evaluation kits |
+| [API guide](https://hardfoc.github.io/hf-tmc9660-driver/latest/api-guide/) | Configure, command, read, handle errors |
+| [Timing and throughput](https://hardfoc.github.io/hf-tmc9660-driver/latest/timing/) | What one access costs and how to tune it |
+| [Examples](https://hardfoc.github.io/hf-tmc9660-driver/latest/examples/) | ESP32 test applications |
+| [API reference](https://hardfoc.github.io/hf-tmc9660-driver/latest/api/) | Doxygen, every class and member |
 
-## 📖 API Reference
+The pages are in [`docs/`](docs/index.md); the datasheets are in [`docs/datasheet/`](docs/datasheet/).
 
-| Method | Description |
-|--------|-------------|
-| `bootloaderInit()` | Initialize bootloader for Parameter Mode (CRITICAL) |
-| `motorConfig.setType()` | Set motor type and pole pairs |
-| `getMotorContext()` | Read live `MotorContext` (motor type, PP, sensor, CPR) |
-| `velocityControl.setTargetVelocityRpm(rpm, ctx)` | Unit-aware velocity command |
-| `positionControl.setTargetPositionDegMech(deg, ctx)` | Unit-aware position command |
-| `torqueFluxControl.setOpenloopVoltage()` | Open-loop voltage magnitude (preferred for unloaded startup) |
-| `torqueFluxControl.setOpenloopCurrent()` | Open-loop d-axis current magnitude |
-| `ramp.configureAuto(Ramp::buildRampConfig(...))` | Trapezoidal profile from engineering units |
-| `diagnostics.summary()` / `diagnostics.snapshot()` | POD health/state dumps |
-| `telemetry.getTemperature()` | Read motor temperature |
-| `telemetry.getCurrent()` | Read motor current |
+## Tests
 
-For complete API documentation, see [docs/api_reference.md](docs/api_reference.md)
-and [docs/units_and_diagnostics.md](docs/units_and_diagnostics.md).
+```bash
+cmake -S . -B build-host -DHF_TMC9660_BUILD_TESTS=ON && cmake --build build-host && ctest --test-dir build-host
+```
 
-## ⏱️ Timing and Throughput
+The host tests run the driver against a model of the chip; the code on the documentation site is compiled by the
+same build.
 
-One TMCL access over SPI is two 64-bit datagrams: the request, then a reply-request that
-clocks out its reply. The vendor documents no processing time, only a NOT_READY (0xF0) status
-meaning "busy, this datagram was ignored, send it again". The driver therefore polls that
-status with a short back-off instead of waiting a fixed 1000 µs as releases up to 1.0.0 did,
-and `readParameters()` / `readGlobalParameters()` (and the write forms) pipeline N accesses
-into N + 1 datagrams.
+## License
 
-| Derived cost at 10 MHz SPI (T_f ≈ 20 µs per datagram) | Up to 1.0.0 + hf-core handler | Now |
-|---|---:|---:|
-| One access (chip keeps up) | ≈ 1.24 ms | ≈ 40 µs |
-| Six accesses | ≈ 7.4 ms | ≈ 140 µs (pipelined) |
-
-These figures are derived, not measured. The `tmcl_timing` ESP32 example measures them on
-hardware. Configuration (`TmclSpiTiming`), the batch rules and the full table are in
-[docs/timing_and_throughput.md](docs/timing_and_throughput.md).
-
-## 📊 Examples
-
-For ESP32 examples, see the [examples/esp32](examples/esp32/) directory.
-
-Detailed example walkthroughs are available in [docs/examples.md](docs/examples.md).
-
-## 📚 Documentation
-
-For complete documentation, see the [docs directory](docs/index.md).
-
-### Special Features
-
-- **[Bootloader Initialization](docs/special_feature_bootloader.md)** - Critical bootloader setup guide (must be called before motor control)
-
-## 🔗 References
-
-| Resource | Link |
-|----------|------|
-| Trinamic TMC9660 product page | <https://www.analog.com/en/products/tmc9660.html> |
-| TMC9660 datasheet (ADI/Trinamic) | <https://www.analog.com/media/en/technical-documentation/data-sheets/tmc9660_datasheet.pdf> |
-| TMC9660 parameter mode reference | <https://www.analog.com/media/en/technical-documentation/user-guides/tmc9660_parameter_mode.pdf> |
-| TMCL-IDE & docs | <https://www.analog.com/en/resources/technical-articles/trinamic-motion-control-language-tmcl.html> |
-| ESP-IDF SPI / UART | <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/peripherals/index.html> |
-| C++20 language reference | <https://en.cppreference.com/w/cpp/20> |
-
-## 🤝 Contributing
-
-Pull requests and suggestions are welcome! Please follow the existing code style and include tests for new features.
-
-## 📄 License
-
-This project is licensed under the **GNU General Public License v3.0**.
-See the [LICENSE](LICENSE) file for details.
+GPL-3.0. See [LICENSE](LICENSE).
