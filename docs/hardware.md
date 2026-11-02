@@ -1,160 +1,106 @@
----
-layout: default
-title: "🔌 Hardware Setup"
-description: "Hardware wiring and connection guide for TMC9660 driver"
-nav_order: 3
-parent: "📚 Documentation"
-permalink: /docs/hardware_setup/
----
+# Hardware
 
-# Hardware Setup
+What to connect between your MCU and a TMC9660, with which bus settings, and the board-level traps to avoid.
 
-![TMC9660 Field-Oriented Control (FOC) signal flow](assets/tmc9660-foc.svg)
+All values here come from the [TMC9660 datasheet](datasheet/tmc9660.pdf) (Rev. 0) and the
+[parameter-mode reference manual](datasheet/tmc9660-parameter-mode-reference-manual.pdf). When they disagree with a
+board's schematic, the schematic wins for pin numbers and active levels.
 
-This guide covers the hardware connections and requirements for the TMC9660 motor controller.
+![Typical MCU wiring for the TMC9660 in SPI mode: SPI bus and four control pins from the MCU, three motor phases
+out](assets/tmc9660-wiring.svg){ .hf-plate }
 
-## Pin Connections
+## Host interface pins
 
-### SPI Communication Interface
+The bootloader listens on both interfaces after power-up and answers on the one that sends it a valid command.
 
-```
-MCU                    TMC9660
-──────────────────     ───────────────────────────────
-MOSI (GPIO7)      ───────> SPI MOSI
-MISO (GPIO2)      <─────── SPI MISO
-SCLK (GPIO6)      ───────> SPI SCLK
-CS   (GPIO18)     ───────> SPI CS
-```
+| Signal | TMC9660 pin | Direction | Notes |
+| --- | --- | --- | --- |
+| SPI0_MISO | 1 (GPIO9) | out | Does not go high-Z when CS is released (see the erratum below) |
+| SPI0_MOSI | 2 (GPIO10) | in | |
+| SPI0_SCK | 3 (GPIO11) | in | |
+| SPI0_CS0 | 4 (GPIO12) | in | Active low; hold it low for the whole datagram |
+| UART_TX | 62 (GPIO6) | out | Alternative to SPI |
+| UART_RX | 63 (GPIO7) | in | Alternative to SPI |
 
-### Control Pins
+The bootloader can move these functions to other pins and store the choice in OTP; see
+[Configuration and bootstrapping](datasheet/tmc9660-configuration-and-bootstrapping.pdf).
 
-```
-MCU                    TMC9660
-──────────────────     ───────────────────────────────
-RST  (GPIO22)     ───────> RST     (Reset, active HIGH)
-DRV_EN (GPIO20)   ───────> DRV_EN  (Driver Enable, active HIGH)
-FAULTN (GPIO19)   <─────── FAULTN  (Fault Output, active LOW, open-drain)
-WAKE (GPIO21)     ───────> WAKE    (Wake Input, active LOW)
-```
+## Control pins
 
-### UART Communication Interface (Alternative)
+The driver addresses these pins by name (`tmc9660::TMC9660CtrlPin`) and by state (`GpioSignal::ACTIVE` /
+`INACTIVE`). Your port maps a state to a GPIO level with the active levels you pass to its constructor, so the
+same driver code works with inverted or level-shifted signals.
 
-```
-MCU                    TMC9660
-──────────────────     ───────────────────────────────
-TX   (GPIO5)      ───────> UART RX (GPIO6 on TMC9660)
-RX   (GPIO4)      <─────── UART TX (GPIO7 on TMC9660)
-```
+| Pin | Direction (chip) | What it does | Driver use |
+| --- | --- | --- | --- |
+| RST | in | Holds the chip in reset while active | Pulsed by `bootloaderInit()` to enter the bootloader |
+| DRV_EN | in | Enables the gate-driver outputs | Set active before commanding motion |
+| WAKE | in | Wakes the chip from hibernation | Kept active during operation |
+| FAULTN | out, open drain | Busy during bootstrapping, or a severe fault | Read by `bootloaderInit()` and by your fault handling |
 
-### Power and Ground
+FAULTN needs a pull-up to the MCU's I/O voltage. RST and DRV_EN have internal pull-downs.
 
-```
-MCU                    TMC9660
-──────────────────     ───────────────────────────────
-GND              ───────> GND (Common ground)
-3.3V / 5V        ───────> VCC (if needed for level shifting)
-```
+## Bus settings
 
-## Pin Functions
+| Setting | SPI | UART |
+| --- | --- | --- |
+| Mode / format | Mode 3 (CPOL = 1, CPHA = 1), MSB first | 8 data bits, no parity, 1 stop bit |
+| Speed | Up to 10 MHz (f<sub>SCK</sub>); start at 1 MHz for bring-up | Fixed rates or auto-baud (bootloader setting) |
+| Frame | 8 bytes (64 bits) in parameter mode, 5 bytes in the bootloader | 9 bytes in parameter mode, 8 in the bootloader |
+| Chip select | Low for the whole frame; high time t<sub>CSH</sub> at least 4 core clocks (about 100 ns) | n/a |
+| Reply | Clocked out during the **next** datagram | Follows each request |
 
-### Control Pins (Output from Host)
+The SPI reply arrives one datagram late, and a busy chip answers `NOT_READY` (0xF0) and ignores that datagram.
+The driver handles both; [Timing and throughput](timing.md) explains how and what it costs.
 
-- **RST (Pin 22)**: External System Reset Input
-  - Device remains in reset while this pin is in its active state
-  - Has internal pull-down resistor
-  - Active level depends on board implementation
-
-- **DRV_EN (Pin 21)**: Driver Enable Input
-  - Enables the motor driver outputs
-  - Has internal pull-down resistor
-  - Active level depends on board implementation
-
-- **WAKE (Pin 19)**: Wake Input
-  - Drive to active state to enable power-up and exit from hibernation mode
-  - When not shorted to VSA, external pull-down resistor recommended
-  - Active level depends on board implementation
-
-### Status Pins (Input to Host)
-
-- **FAULTN (Pin 20)**: FAULT Output Signal (open drain)
-  - Indicates busy state during bootstrapping or severe error
-  - Active level depends on board implementation
-  - Use `gpioRead(TMC9660CtrlPin::FAULTN, signal)` to check fault status
-
-## Electrical Specifications
-
-### SPI Interface
-
-- **Speed**: Up to 4 MHz
-- **Data Size**: 8 bytes per transaction
-- **Mode**: SPI Mode 0 or 3 (CPOL=0, CPHA=0 or CPOL=1, CPHA=1)
-- **CS Polarity**: Active LOW
-
-### UART Interface
-
-- **Baud Rate**: 9600 to 1000000 baud, or autobaud
-- **Data Format**: 8 data bits, 1 stop bit, no parity
-- **Frame Size**: 9 bytes per transaction
-
-## Power Requirements
-
-- **Motor Supply (VM)**: 12V to 48V (depends on motor)
-- **Logic Supply (VCC)**: 3.3V or 5V
-- **Common Ground**: Must be connected between MCU and TMC9660
-
-## Motor Connections
-
-### BLDC Motor (3-Phase)
-
-- **U, V, W**: Three-phase motor connections
-- **Hall Sensors**: Connect to Hall connector (GPIO2, 3, 4)
-- **ABN Encoder**: Connect to Encoder connector (GPIO8, 13, 14)
-
-### Stepper Motor
-
-- **Step/Direction**: External step/direction interface
-- **Reference Switches**: Left (GPIO2), Right (GPIO3), Home (GPIO4)
-- **ABN Encoder**: Connect to Encoder connector (GPIO8, 13, 14)
-
-## Typical Application Circuit
-
-![TMC9660 wiring](assets/tmc9660-wiring.svg)
-
-```
-┌─────────────────────┐         ┌─────────────────────┐
-│  MCU (ESP32/STM32) │         │   TMC9660 Board    │
-│                     │         │                     │
-│  SPI Interface:     │         │                     │
-│  • MOSI      ──────┼─────────┼─> SPI MOSI          │
-│  • MISO      <──────┼─────────┼─< SPI MISO          │
-│  • SCLK      ───────┼─────────┼─> SPI SCLK          │
-│  • CS        ───────┼─────────┼─> SPI CS            │
-│                     │         │                     │
-│  Control Pins:      │         │                     │
-│  • RST       ───────┼─────────┼─> RST               │
-│  • DRV_EN    ───────┼─────────┼─> DRV_EN            │
-│  • FAULTN    <───────┼─────────┼─< FAULTN            │
-│  • WAKE      ───────┼─────────┼─> WAKE              │
-│                     │         │                     │
-│  GND         ───────┼─────────┼─> GND               │
-│                     │         │                     │
-│                     │         │  Motor:             │
-│                     │         │  • U, V, W (BLDC)   │
-│                     │         │  • Step/Dir (Stepper)│
-└─────────────────────┘         └─────────────────────┘
+```mermaid
+sequenceDiagram
+    participant H as Host (driver)
+    participant C as TMC9660
+    H->>C: datagram 1: request (GAP velocity)
+    C-->>H: reply to the previous datagram (discarded)
+    H->>C: datagram 2: reply-request FF 00 00 00 00 00 00 FF
+    C-->>H: NOT_READY 0xF0 (busy, datagram ignored)
+    H->>C: datagram 2 again, after a back-off
+    C-->>H: reply to datagram 1: status 100, velocity
 ```
 
-## Setup Steps
+## Power
 
-1. **Power Off**: Ensure both MCU and TMC9660 are powered off
-2. **Connect SPI Interface**: Wire MOSI, MISO, SCLK, CS
-3. **Connect Control Pins**: Wire RST, DRV_EN, FAULTN, WAKE
-4. **Connect Ground**: Common ground connection
-5. **Connect Motor**: Wire motor and sensors (if applicable)
-6. **Power On**: Power MCU first, then TMC9660
+| Supply | Range | Notes |
+| --- | --- | --- |
+| VS (motor and gate driver) | 7.7 V to 70 V | Size the bulk capacitance for your motor current |
+| VSA (core and buck) | 7.7 V to 80 V | Often tied to VS |
+| VCC_IO (logic I/O) | 2.5 V to 5 V | Match your MCU's I/O voltage; sets the GPIO and DRV_EN levels |
 
-## Next Steps
+Connect the MCU ground to the TMC9660 ground. Power the MCU before the motor supply so the control pins are
+driven when the chip comes up.
 
-- **[Quick Start](quickstart.md)** - Get a minimal example running
-- **[Platform Integration](platform_integration.md)** - Implement the communication interface
+## Errata that affect the host
 
+!!! danger "SPI MISO stays driven after CS goes high (datasheet erratum 2)"
+    The TMC9660 does not release MISO when its chip select is de-asserted. On a bus shared with other SPI devices
+    it corrupts their replies. Either give the TMC9660 its own SPI bus, hold it in reset while you talk to the
+    other devices, or add a switch on MISO gated by CS (the datasheet shows an ADG719).
+
+## Evaluation kits
+
+The [ESP32 examples](examples.md) run on an ESP32-C6 DevKit with either kit:
+
+| Kit | Motor | Feedback | Document |
+| --- | --- | --- | --- |
+| TMC9660-3PH-EVKIT | 3-phase BLDC | Hall, ABN encoder | [User guide](datasheet/tmc9660-3ph-eval-kit-ug.pdf) |
+| TMC9660-STP-EVKIT | 2-phase stepper | ABN encoder, reference switches | (Analog Devices website) |
+
+The ESP32 pin assignment used by the examples lives in
+[`esp32_tmc9660_test_config.hpp`](../examples/esp32/main/esp32_tmc9660_test_config.hpp).
+
+## Reference documents
+
+| Document | What it is for |
+| --- | --- |
+| [TMC9660 datasheet](datasheet/tmc9660.pdf) | Pins, electrical limits, errata |
+| [Parameter-mode reference](datasheet/tmc9660-parameter-mode-reference-manual.pdf) | TMCL commands and every parameter the driver uses |
+| [Register-mode reference](datasheet/tmc9660-register-mode-reference-manual.pdf) | Registers behind `inc/register_mode/` |
+| [Configuration and bootstrapping](datasheet/tmc9660-configuration-and-bootstrapping.pdf) | Bootloader commands, OTP, pin remapping |
+| [TMCL reference (2015)](datasheet/TMCL_reference_2015.pdf) | Background on the TMCL protocol |

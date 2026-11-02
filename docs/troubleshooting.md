@@ -1,15 +1,9 @@
----
-layout: default
-title: "🐛 Troubleshooting"
-description: "Common issues and solutions for the TMC9660 driver"
-nav_order: 10
-parent: "📚 Documentation"
-permalink: /docs/troubleshooting/
----
-
 # Troubleshooting
 
-Common issues and solutions for the TMC9660 driver.
+Symptoms you may see while bringing up a TMC9660, their causes and the fix for each.
+
+Start with `comm().tmclStats()` and the log of a failing call: they tell transport problems (no reply, stale
+replies) apart from configuration problems (the chip answers but rejects the value).
 
 ## Datasheet-vs-driver math errata
 
@@ -106,7 +100,7 @@ Other mitigations:
 
 4. **Verify Power Supply**
    - Ensure stable power to TMC9660
-   - Check voltage levels (12V-48V for motor supply)
+   - Check the motor supply is within 7.7 V to 70 V
 
 ## No Reply from Device
 
@@ -118,16 +112,20 @@ Communication timeouts, no response to commands
 1. **SPI Issues**
    - Verify MOSI/MISO not swapped
    - Check CS pin polarity (active LOW)
-   - Confirm SPI mode (Mode 0 or 3)
-   - Reduce clock speed
-   - For TMCL, add a deterministic post-transfer delay (~150 µs is enough on a 1 MHz SPI link) inside `spiTransferTMCL`. Back-to-back SPI transfers without pacing make the chip return `SPI_STATUS=OK` (0xFF) but `TMCL_STATUS=REPLY_INVALID_CMD` (0x02) on the second of the two TMCL transactions; see [Communication Protocols](special_feature_protocols.md).
+   - Confirm SPI mode 3 (CPOL = 1, CPHA = 1)
+   - Reduce the clock to 1 MHz while bringing up
+   - Do not add delays in `spiTransferTMCL()`: the driver polls NOT_READY itself. `REPLY_INVALID_CMD` on back-to-back
+     transfers was a bug of releases up to 1.0.0 ([Communication
+     protocols](protocols.md#spi-tmcl-reply_invalid_cmd-on-back-to-back-transfers))
+   - On a shared SPI bus, the TMC9660 keeps driving MISO after CS goes high ([Hardware](hardware.md#errata-that-affect-the-host))
 
 2. **UART Issues**
    - Verify TX/RX pins not swapped
    - Check baud rate matches configuration
    - Ensure GPIO pins match bootloader config
    - Try autobaud mode
-   - For TMCL, confirm the UART adapter reads a **full 9-byte reply** per transaction; partial reads produce checksum and status errors (see [Platform Integration](platform_integration.md))
+   - For TMCL, confirm the UART adapter reads a **full 9-byte reply** per transaction; partial reads produce checksum
+     and status errors (see [Platform Integration](porting.md))
 
 3. **Check Connections**
    - Verify all connections are secure
@@ -155,7 +153,7 @@ Motor configured but not rotating
    
    // Verify commutation mode
    driver.motorConfig.setCommutationMode(
-       tmc9660::tmcl::CommutationMode::FOC_HALL);
+       tmc9660::tmcl::CommutationMode::FOC_HALL_SENSOR);
    ```
 
 3. **Check Current Limits**
@@ -167,7 +165,7 @@ Motor configured but not rotating
 4. **Verify Target Values**
    ```cpp
    // Set target velocity or torque
-   driver.focControl.setTargetVelocity(1000);
+   driver.velocityControl.setTargetVelocityRpm(1000.0, driver.getMotorContext());
    ```
 
 ## Communication Errors
@@ -217,7 +215,7 @@ Hall sensors or encoder not working
    ```cpp
    // Must match sensor type
    driver.motorConfig.setCommutationMode(
-       tmc9660::tmcl::CommutationMode::FOC_HALL); // or FOC_ENCODER
+       tmc9660::tmcl::CommutationMode::FOC_HALL_SENSOR); // or FOC_ENCODER
    ```
 
 ## Protection Faults
@@ -268,8 +266,8 @@ Overcurrent, undervoltage, or overtemperature faults
 
 ## Getting Help
 
-- Check the [Bootloader Initialization](special_feature_bootloader.md) guide
-- Review [Platform Integration](platform_integration.md) for interface issues
+- Check the [Bootloader Initialization](bootloader.md) guide
+- Review [Platform Integration](porting.md) for interface issues
 - See [Examples](examples.md) for working code
-- Consult the [API Reference](api_reference.md) for method details
+- Consult the [API Reference](api-guide.md) for method details
 

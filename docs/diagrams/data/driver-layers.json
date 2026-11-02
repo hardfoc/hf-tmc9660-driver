@@ -1,0 +1,39 @@
+{
+  "subsystems": [
+    "motorConfig",
+    "currentSensing",
+    "gateDriver",
+    "feedbackSense",
+    "torqueFluxControl",
+    "velocityControl",
+    "positionControl",
+    "ramp",
+    "stepDir",
+    "referenceSearch",
+    "brake",
+    "iit",
+    "telemetry",
+    "diagnostics",
+    "stopEvents",
+    "protection",
+    "script",
+    "ramDebug",
+    "nvmStorage",
+    "heartbeat",
+    "globals",
+    "gpio",
+    "power"
+  ],
+  "port_hooks": [
+    "spiTransferTMCL",
+    "spiTransferBootloader",
+    "gpioSet",
+    "gpioRead",
+    "delayUs",
+    "delayMs"
+  ],
+  "sources": [
+    "inc/tmc9660.hpp:TMC9660 members",
+    "inc/tmc9660_comm_interface.hpp:SpiCommInterface"
+  ]
+}

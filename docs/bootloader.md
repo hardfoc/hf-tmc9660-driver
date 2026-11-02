@@ -1,15 +1,6 @@
----
-layout: default
-title: "🚀 Bootloader Initialization"
-description: "Critical bootloader setup guide for TMC9660"
-nav_order: 8
-parent: "📚 Documentation"
-permalink: /docs/special_feature_bootloader/
----
+# Bootloader
 
-# Bootloader Initialization
-
-The TMC9660 bootloader initialization is **CRITICAL** and must be completed successfully before any motor control operations. This guide covers the essential bootloader setup.
+What `bootloaderInit()` does, which `BootloaderConfig` fields matter, and why nothing else works until it succeeds.
 
 ## Why Bootloader Initialization is Required
 
@@ -53,7 +44,7 @@ if (result != tmc9660::TMC9660::BootloaderInitResult::Success) {
 
 **When `START_MOTOR_CONTROL = 1` is written, the bootloader EXITS IMMEDIATELY!**
 
-### ❌ WRONG: Writing START_MOTOR_CONTROL early
+### WRONG: Writing START_MOTOR_CONTROL early
 
 ```cpp
 // WRONG! Bootloader exits after this write
@@ -62,9 +53,10 @@ cfg.boot.start_motor_control = true;  // Written first
 // ❌ These configs fail because bootloader already exited!
 ```
 
-### ✅ CORRECT: Writing START_MOTOR_CONTROL last
+### CORRECT: Writing START_MOTOR_CONTROL last
 
-The `bootloaderInit()` method automatically writes `START_MOTOR_CONTROL = 1` **LAST**, after all other configurations. This is the correct order.
+The `bootloaderInit()` method automatically writes `START_MOTOR_CONTROL = 1` **LAST**, after all other configurations.
+This is the correct order.
 
 ## Initialization Sequence
 
@@ -223,6 +215,6 @@ When `START_MOTOR_CONTROL = 1` is written at runtime:
 ## Next Steps
 
 - **[Troubleshooting](troubleshooting.md)** - Common issues and solutions
-- **[Platform Integration](platform_integration.md)** - Communication interface setup
+- **[Platform Integration](porting.md)** - Communication interface setup
 - **[Quick Start](quickstart.md)** - Minimal working example
 
